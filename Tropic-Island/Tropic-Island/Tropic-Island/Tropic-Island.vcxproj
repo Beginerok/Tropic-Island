@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1CB2117F-430B-48D6-8972-4A2ED48A6988}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>TropicIsland</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\User\Desktop\nottoch\Tropic-Island\Tropic-Island\game3;C:\Users\User\Desktop\nottoch\Tropic-Island\Tropic-Island\game3\game\game;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\User\Desktop\nottoch\Tropic-Island\Tropic-Island\game3\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>advapi32.lib;kernel32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\game3\game\game\keyboard.cpp" />
+    <ClCompile Include="..\..\game3\game\game\Logic.cpp" />
+    <ClCompile Include="..\..\game3\game\game\main.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\c.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Coor.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Drum.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\FileReader.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Game.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\keyboard_.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Math.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Scene.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Scene1.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Scene2.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Snd.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Vector3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\game3\game\game\keyboard.h" />
+    <ClInclude Include="..\..\game3\game\game\Logic.h" />
+    <ClInclude Include="..\..\game3\game\game\Project.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\c.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Coor.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Drum.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\FileReader.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Game.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\keyboard_.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Math.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Scene.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Scene1.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Scene2.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Snd.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\typedefs.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

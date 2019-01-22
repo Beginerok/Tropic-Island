@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: nginx/1.8.0
+Date: Sat, 08 Sep 2018 14:03:33 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=15
+Set-Cookie: egetlucky2uCoz=; path=/; expires=Thu, 08-Sep-2016 14:03:34 GMT; domain=.getlucky2.ucoz.net;
+Set-Cookie: egetlucky2uzll=1536415414; path=/; expires=Sun, 08-Sep-2019 14:03:34 GMT; domain=.getlucky2.ucoz.net;
+Cache-Control: no-cache
+Cache-Control: no-store
+Pragma: no-cache
+Vary: host
+Last-Modified: Sun, 24 Apr 2005 04:29:37 GMT
+Cache-Control: private
+
