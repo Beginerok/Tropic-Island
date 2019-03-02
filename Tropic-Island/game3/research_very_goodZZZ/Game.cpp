@@ -104,7 +104,6 @@ int__ Game::Execute()
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
 	Scene1_->LoadDrum();
-	Scene1_->SetVerteces();
 	
     draw_screen();
 #ifdef _WINDOWS_2

@@ -11,6 +11,7 @@ int *Logic::GetRandom()
 void Logic::SetRandom()
 {
 	int min = 3, max = 54;
+	srand(time(0));
 	for (int i = 0; i<countF; i++)
 		random[i] = min + rand() % (max - min + 1);
 };

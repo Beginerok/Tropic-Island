@@ -2,6 +2,7 @@
 #define _LOGIC_H_
 #include <cmath>
 #include <cstdlib>
+#include <time.h>
 #ifdef _POSIX_SOURCE
     #include <stdlib.h>
 #endif // _UNIX_

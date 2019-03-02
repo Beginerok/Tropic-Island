@@ -38,7 +38,6 @@ public:
 	void__ LoadDrum();
 	void__ ShowDrum(int__ countdrums,float__*rotate_,int__ counttextureondrums,int__**drum,int__ credits,int__ win,int__ totalbet,const char__*line,int__ bet,bool__*lines,int__**ms,bool__*buttons);
 	void__ EnableTexture(int__ n,int__ m);
-	void__ SetVerteces();
 	void__ EnablePolygonFrontUp(float__ leftup,float__ leftdown,float__ rightdown,float__ rightup);
 	void__ EnablePolygonFrontMiddle(float__ leftup,float__ leftdown,float__ rightdown,float__ rightup);
 	void__ EnablePolygonFrontDown(float__ leftup,float__ leftdown,float__ rightdown,float__ rightup);
@@ -47,12 +46,12 @@ public:
 	void__ EnablePolygonBackDown(float__ leftup,float__ leftdown,float__ rightdown,float__ rightup);
 	void__ Rotate(/*bool__*buttons*/);
 	void__ StartRotate();
-	int__ GetRandom(int__ max);
-	int__ *GetRandomMassive(int__ max);
+	int__ GetRandom();
+	int__ *GetRandomMassive();
 
 
-	//int__ GetMassive(int__ number);//02.03.2019
-	//void__ SetMassive(int__ number, int__ value);
+	int__ GetMassive(int__ number);//02.03.2019
+	void__ SetMassive(int__ number, int__ value);
 	
 	~Scene1();
 	int__ err;
