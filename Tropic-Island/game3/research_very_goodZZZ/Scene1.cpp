@@ -390,17 +390,20 @@ int__ Scene1::FindTexture(std::string name)
 	int__ result = -1;
 	for(int__ i=0;i<CountTexture;i++)
 	{
-		if(strcmp(image->Name[i].c_str(),name.c_str())==0)
-		/*
+		if (strcmp(image->Name[i].c_str(), name.c_str()) == 0)
+		{
+			/*
 		int__ bb=0;
 		for(int__ j=0;j<name.length() && j<image->Name[i].length();j++)
 		{
 			if(name[j] == image->Name[i][j])
-				bb++;	
+				bb++;
 		}
 		if(name.length() == image->Name[i].length() && bb == name.length())
-		*/
-				result = image->number[i];
+			*/
+			result = image->number[i];
+			break;
+		}
 	}
 	return result;
 }
@@ -766,7 +769,7 @@ void__ Scene1::ShowDrum(int__ countdrums,float__*rotate_,int__ counttextureondru
 		for(int__ j=0;j<counttextureondrums;j++)
         {
 			//random = GetRandom(max_);
-			glBindTexture(GL_TEXTURE_2D,image->IndexTexture[FindTexture(vectordrum[randommassive[i*j+j]])]);
+			glBindTexture(GL_TEXTURE_2D,image->IndexTexture[FindTexture(vectordrum[/*GetMassive(i*j+j)*/randommassive[i*j+j]])]);
 			EnableTexture(i,j);
         }
         glPopMatrix();
@@ -775,6 +778,16 @@ void__ Scene1::ShowDrum(int__ countdrums,float__*rotate_,int__ counttextureondru
 	//glDisable(GL_BLEND);
 	//glDisable(GL_ALPHA_TEST);
 }
+/*
+int__ Scene1::GetMassive(int__ number)
+{
+	return randommassive[number];
+}
+void__ Scene1::SetMassive(int__ number, int__ value)
+{
+	randommassive[number] = value;
+}
+*/
 int__ Scene1::GetRandom(int max)
 {
 	return ((int__)((float__)rand() / RAND_MAX*(max_ - min_) + min_));
@@ -784,6 +797,7 @@ int__ Scene1::GetRandom(int max)
     return dist(gen) % max;
 	*/
 }
+//#include <iostream>
 int__*Scene1::GetRandomMassive(int max)
 {
 	for(int__ i=0;i<30;i++)
@@ -791,7 +805,39 @@ int__*Scene1::GetRandomMassive(int max)
 		randommassive[i] = GetRandom(max);
 		//std::cout<<randommassive[i]<<"|";
 	}
-	//std::cout<<std::endl;
+	/*
+	SetMassive(0,min_);//GetRandom(max);
+	SetMassive(1,max_);//GetRandom(max);
+	SetMassive(2,max_);//GetRandom(max);
+	SetMassive(3,max_);//GetRandom(max);
+	SetMassive(4,max_);//GetRandom(max);
+	SetMassive(5,min_);//GetRandom(max);
+	SetMassive(6, max_);//GetRandom(max);
+	SetMassive(7, max_);//GetRandom(max);
+	SetMassive(8,max_);//GetRandom(max);
+	SetMassive(9,max_);//GetRandom(max);
+	SetMassive(10,max_);//GetRandom(max);
+	SetMassive(11,max_);//GetRandom(max);
+	SetMassive(12,max_);//GetRandom(max);
+	SetMassive(13,max_);//GetRandom(max);
+	SetMassive(14,max_);//GetRandom(max);
+	SetMassive(15,min_);//GetRandom(max);
+	SetMassive(16,max_);//GetRandom(max);
+	SetMassive(17,max_);//GetRandom(max);
+	SetMassive(18,max_);//GetRandom(max);
+	SetMassive(19,max_);//GetRandom(max);
+	SetMassive(20,min_);//GetRandom(max);
+	SetMassive(21,max_);//GetRandom(max);
+	SetMassive(22,max_);//GetRandom(max);
+	SetMassive(23,max_);//GetRandom(max);
+	SetMassive(24,max_);//GetRandom(max);
+	SetMassive(25,min_);//GetRandom(max);
+	SetMassive(26,max_);//GetRandom(max);
+	SetMassive(27,max_);//GetRandom(max);
+	SetMassive(28,max_);//GetRandom(max);
+	SetMassive(29,max_);//GetRandom(max);
+	*/
+							//std::cout<<std::endl;
 	return randommassive;
 }
 void__ Scene1::SetVerteces()
@@ -1430,11 +1476,8 @@ void__ Scene1::StartRotate()
 			continue;
 		startrotate[i] = true;
 		rotate[i] = 0.0f;
-		//if(!start){
-			srand(time(0));
-			GetRandomMassive(max_);
-			//start = true;
-		//}
+		srand(time(0));
+		GetRandomMassive(max_);
 	}
 }
 Scene1::~Scene1()

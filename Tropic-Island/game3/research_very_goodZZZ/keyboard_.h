@@ -2,7 +2,7 @@
 #define keyboard_H
 #include "typedefs.h"
 #ifdef _WINDOWS_2
-    #include <keyboard.h>
+    #include "keyboard.h"
 #else
     #include<SDL2/SDL.h>
 #endif

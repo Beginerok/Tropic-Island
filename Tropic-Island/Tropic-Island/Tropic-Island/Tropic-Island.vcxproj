@@ -15,6 +15,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>TropicIsland</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -22,6 +23,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -41,8 +43,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\User\Desktop\nottoch\Tropic-Island\Tropic-Island\game3;C:\Users\User\Desktop\nottoch\Tropic-Island\Tropic-Island\game3\game\game;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\User\Desktop\nottoch\Tropic-Island\Tropic-Island\game3\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\game3;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\game3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -70,15 +72,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\game3\game\game\keyboard.cpp" />
-    <ClCompile Include="..\..\game3\game\game\Logic.cpp" />
-    <ClCompile Include="..\..\game3\game\game\main.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\c.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Coor.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Drum.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\FileReader.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Game.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\keyboard.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\keyboard_.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Logic.cpp" />
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\main.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Math.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Scene.cpp" />
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Scene1.cpp" />
@@ -87,16 +89,16 @@
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\game3\game\game\keyboard.h" />
-    <ClInclude Include="..\..\game3\game\game\Logic.h" />
-    <ClInclude Include="..\..\game3\game\game\Project.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\c.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Coor.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Drum.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\FileReader.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Game.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\keyboard.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\keyboard_.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Logic.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Math.h" />
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Project.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Scene.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Scene1.h" />
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Scene2.h" />

@@ -49,6 +49,11 @@ public:
 	void__ StartRotate();
 	int__ GetRandom(int__ max);
 	int__ *GetRandomMassive(int__ max);
+
+
+	//int__ GetMassive(int__ number);//02.03.2019
+	//void__ SetMassive(int__ number, int__ value);
+	
 	~Scene1();
 	int__ err;
 #ifdef _WINDOWS_2

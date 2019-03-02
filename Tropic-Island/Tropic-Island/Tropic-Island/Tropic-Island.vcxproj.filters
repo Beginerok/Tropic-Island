@@ -48,16 +48,16 @@
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Vector3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\game3\game\game\keyboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\game3\game\game\Logic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\game3\game\game\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\game3\research_very_goodZZZ\Scene1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\Logic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\game3\research_very_goodZZZ\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,19 +92,19 @@
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Snd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\game3\game\game\keyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\game3\game\game\Logic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\game3\game\game\Project.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\game3\research_very_goodZZZ\typedefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\game3\research_very_goodZZZ\Scene1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Logic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\game3\research_very_goodZZZ\Project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -42,9 +42,14 @@ void FileReader::FileReader__(const char__ *filename,const char__ *state)
 	{
 		ext_=true;
 		file=fopen(filename,state);
-		open_=true;
+		if (file == NULL) {
+			printf("not found file: %s", filename);
+			char c;
+			scanf("%c", &c);
+		}
+		open_ = true;
 		char__ ch;
-		while((ch=fgetc(file))!=-1)
+		while((ch=fgetc(file))!=EOF)
 		{
 	        if(ch==10)
 				strokoffile++;
@@ -56,7 +61,9 @@ void FileReader::FileReader__(const char__ *filename,const char__ *state)
 	else
 	{
         #ifdef _WINDOWS_2
-            life=open(filename,_A_ARCH);
+            life=open(filename,_A_RDONLY/*_A_ARCH*/);
+			if (life == -1)
+				printf("Open failed on input file: %s",filename);
 		#else
 		    life=open(filename,O_RDONLY);
 		#endif // _WINDOWS_2
