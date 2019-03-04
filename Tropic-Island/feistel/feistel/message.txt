@@ -1,4 +1,4 @@
-Business process, activities that produce a specific service or product for customers
+BusinessBusiness process, activities that produce a specific service or product for customers
 Business process modeling, activity of representing processes of an enterprise in order 
 Manufacturing process management, a collection of technologies and methods used to define.
 Process architecture, structural design of processes, applies to fields such as computers.

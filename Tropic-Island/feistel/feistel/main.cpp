@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <fstream>  
+//#include <io.h> 
 //#include <stdlib.h>   
 typedef unsigned long long uint64_t;
 typedef unsigned int uint32_t;
@@ -12,6 +12,11 @@ typedef unsigned int uint32_t;
 #define RKEY(r)((ROR(K,r*3,size64*8))&F32)
 const uint64_t K = 0x96EA704CFB1CF672;//base key to forming of round keys
 uint32_t RK[N];//massive round keys
+#define CBC 1
+#define CFB 0
+#if CBC == 1 && CFB ==0
+	const uint64_t IV = 0x96EA704CFB1CF672;
+#endif
 void createRoundKeys(bool print)
 {
 	for (int i = 0; i < N; i++)
@@ -112,25 +117,30 @@ void main()
 	}
 	
 	std::vector<uint64_t> *msg = new std::vector<uint64_t>(),
-		*plaintext = new std::vector<uint64_t>();//plain text
+		*plaintext = new std::vector<uint64_t>(),*cipherback = new std::vector<uint64_t>();//plain text
 
 	unsigned long long id;
 	
-	char ch;
+	int ch;
 	int countbyte = 0;
-	while ((ch = fgetc(fp)) != -1)
+	std::cout << "Message:\n";
+	int countpb1 = 0,ct1=0, countpb2 = 0,ct2=0;
+	while ((ch = fgetc(fp)) != EOF)
 	{
-		if (countbyte % 8 == 0 && countbyte!=0)
+		if (countbyte % N == 0 && countbyte!=0)
 		{
 			countbyte = 0;
-			std::cout << str;
 			memcpy(&id, str, N);
+			std::cout << str << std::endl;
 			msg->push_back(id);
+			countpb1++;
 			for (int i = 0; i<N; i++)
 				str[i] = '\0';
 		}
 		str[countbyte] = ch;
+		std::cout << str[countbyte];
 		countbyte++;
+		ct1++;
 	}
 	memcpy(&id, str, N);
 	msg->push_back(id);
@@ -138,8 +148,9 @@ void main()
 	//uint64_t msg = 0xFFAADD11CCBB2299;//plain text
 
 	fclose(fp);
-	int ii=0;
-	if ((fencrypted = fopen("cryptmessage.txt", "w")) == NULL) {
+	printf("\nCountPB1=%i\n", countpb1);
+	printf("\nCt1=%i\n", ct1);
+	if ((fencrypted = fopen("cryptmessage.txt", "wb")) == NULL) {
 		//printf("Cannot open file.\n");
 		std::cout << "Cannot open file.\n";
 		exit(1);
@@ -149,24 +160,89 @@ void main()
 		std::cout << "Cannot open file.\n";
 		exit(1);
 	}
-	for (std::vector<uint64_t>::iterator it = msg->begin() ; it != msg->end(); ++it)
+#if CBC == 1 && CFB == 0
+	uint64_t iv = IV;
+#endif
+
+	int ii = 0;
+	uint64_t cipher;
+	for (std::vector<uint64_t>::iterator it = msg->begin(); it != msg->end(); ++it)
 	{
-		std::cout << "msg:\n" << std::hex << *it<< std::endl;
+		//std::cout << "msg:\n" << std::hex << *it << std::endl;
 		//std::cout << "msg:\n" << std::hex << msg << std::endl;
 		//uint64_t cipher = encrypt(msg, true);//change on true second parameter when debug, ciphertext
-		uint64_t cipher = encrypt(msg->at(ii), false);//change on true second parameter when debug, ciphertext
-		
-		std::cout << "encrypt:\n" << cipher << std::endl;
+#if CBC == 0 && CFB == 0
+		cipher = encrypt(msg->at(ii), false);
+#endif
+#if CBC == 1 && CFB ==0
+		cipher = encrypt(msg->at(ii) ^ iv, false);//change on true second parameter when debug, ciphertext
+		iv = cipher;
+#endif
+#if CBC == 0 && CFB == 1
+#endif
+		//std::cout << "encrypt:\n" << cipher << std::endl;
 		memcpy(str, &cipher, N);
-		fwrite(str, N,1, fencrypted);
+		//fwrite(str, N, 1, fencrypted);
+		int i = -1;
+		while (++i < N/*strlen(str)*/)
+		{
+			fputc(str[i], fencrypted);
+		}
+		ii++;
+	}
+	fclose(fencrypted);
+#if CBC == 1 && CFB ==0
+	iv = IV;
+#endif
+	if ((fencrypted = fopen("cryptmessage.txt", "rb")) == NULL) {
+		//printf("Cannot open file.\n");
+		std::cout << "Cannot open file.\n";
+		exit(1);
+	}
+	countbyte = 0;
+	ii = 0;
+	
+	while (!feof(fencrypted))
+	{
+		(ch = fgetc(fencrypted));// != -1/*EOF*/
+		if (countbyte % N == 0 && countbyte != 0)
+		{
+			countbyte = 0;
+			memcpy(&id, str, N);
+			cipherback->push_back(id);
+			plaintext->push_back(decrypt(id, false));
+#if CBC == 1 && CFB ==0
+			plaintext->at(ii/*plaintext->size()-1*/) ^= iv;
+			iv = cipherback->at(ii);//plaintext->at(ii/*plaintext->size() - 1*/);
+#endif
+			countpb2++;
+			ii++;
+		}
+		str[countbyte] = ch;
+		std::cout << str[countbyte];
+		countbyte++;
+		ct2++;		
+	}
+	std::cout << "\nCountPB2=" << countpb2 << "\n";
+	printf("\nCt2=%i\n", ct2);
+	ii = 0;
+	for (std::vector<uint64_t>::iterator it = plaintext->begin(); it != plaintext->end(); ++it)
+	{
+
 		//msg = decrypt(cipher, true);//change on true second parameter when debug,plain text
-		plaintext->push_back(decrypt(cipher, false));//change on true second parameter when debug,plain text
+		
+		//plaintext->push_back(decrypt(cipher, false));//change on true second parameter when debug,plain text
 
 		memcpy(str, &plaintext->at(ii), N);
-		fwrite(str,N,1, fdecrypted);
+		int i = -1;
+		while (++i < N/*strlen(str)*/)
+		{
+			fputc(str[i], fdecrypted);
+		}
+		//fwrite(str,N,1, fdecrypted);
 
 		//std::cout << "decrypt:\n" << msg<< std::endl;
-		std::cout << "decrypt:\n" <<plaintext->at(ii)<< "\n--------------------------\n" << std::endl;
+		std::cout << "decrypt:\n" <<str/*plaintext->at(ii)*/<< "\n--------------------------\n" << std::endl;
 		ii++;
 	}
 	fclose(fencrypted);
