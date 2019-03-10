@@ -12,9 +12,9 @@ typedef unsigned int uint32_t;
 #define RKEY(r)((ROR(K,r*3,size64*8))&F32)
 const uint64_t K = 0x96EA704CFB1CF672;//base key to forming of round keys
 uint32_t RK[N];//massive round keys
-#define CBC 1
-#define CFB 0
-#if CBC == 1 && CFB ==0
+#define CBC 0
+#define CFB 1
+#if CBC == 1 || CFB ==1
 	const uint64_t IV = 0x96EA704CFB1CF672;
 #endif
 void createRoundKeys(bool print)
@@ -160,7 +160,7 @@ void main()
 		std::cout << "Cannot open file.\n";
 		exit(1);
 	}
-#if CBC == 1 && CFB == 0
+#if CBC == 1 || CFB == 1
 	uint64_t iv = IV;
 #endif
 
@@ -179,6 +179,9 @@ void main()
 		iv = cipher;
 #endif
 #if CBC == 0 && CFB == 1
+		cipher = encrypt(iv, false);
+		cipher ^= msg->at(ii);
+		iv = cipher;
 #endif
 		//std::cout << "encrypt:\n" << cipher << std::endl;
 		memcpy(str, &cipher, N);
@@ -191,7 +194,7 @@ void main()
 		ii++;
 	}
 	fclose(fencrypted);
-#if CBC == 1 && CFB ==0
+#if CBC == 1 || CFB ==1
 	iv = IV;
 #endif
 	if ((fencrypted = fopen("cryptmessage.txt", "rb")) == NULL) {
@@ -209,11 +212,18 @@ void main()
 		{
 			countbyte = 0;
 			memcpy(&id, str, N);
+#if CBC == 0 && CFB == 0
+			plaintext->push_back(decrypt(id, false));
+#endif
+#if CBC == 1 && CFB ==0
 			cipherback->push_back(id);
 			plaintext->push_back(decrypt(id, false));
-#if CBC == 1 && CFB ==0
 			plaintext->at(ii/*plaintext->size()-1*/) ^= iv;
 			iv = cipherback->at(ii);//plaintext->at(ii/*plaintext->size() - 1*/);
+#endif
+#if CBC == 0 && CFB == 1
+			plaintext->push_back(encrypt(iv, false) ^ id);
+			iv = id;
 #endif
 			countpb2++;
 			ii++;
