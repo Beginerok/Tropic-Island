@@ -1,0 +1,5 @@
+R0=2 sR=10000 R=10000
+vectorpair.size() =9999
+vectorpairfind.size() =9999
+Find 0 matches
+M= 2 p=614657
