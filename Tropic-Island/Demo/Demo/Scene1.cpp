@@ -733,10 +733,12 @@ void Scene1::LoadDrum()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	max_ = vectordrum.size() - 1, min_ = 0;
+	srand(time(NULL));
 	for (int i = 0; i<30; i++)
 	{
-		randommassive[i] = GetRandom();
+		SetMassive(i,GetRandom());
 	}
+	GetRandomMassive();
 }
 void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum,
 	int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms, bool*buttons*/)
@@ -808,36 +810,36 @@ int*Scene1::GetRandomMassive()
 		//std::cout<<randommassive[i]<<"|";
 	}
 
-	SetMassive(0, min_ + 1);//GetRandom(max);
-	SetMassive(1, max_);//GetRandom(max);
-	SetMassive(2, max_);//GetRandom(max);
-	SetMassive(3, max_);//GetRandom(max);
-	SetMassive(4, max_);//GetRandom(max);
+	SetMassive(0, min_);//GetRandom(max);
+	SetMassive(1, max_ - 5);//GetRandom(max);
+	SetMassive(2, max_ - 5);//GetRandom(max);
+	SetMassive(3, max_ - 5);//GetRandom(max);
+	SetMassive(4, max_ - 5);//GetRandom(max);
 	SetMassive(5, min_);//GetRandom(max);
-	SetMassive(6, max_);//GetRandom(max);
-	SetMassive(7, max_);//GetRandom(max);
-	SetMassive(8, max_);//GetRandom(max);
-	SetMassive(9, max_);//GetRandom(max);
-	SetMassive(10, max_);//GetRandom(max);
-	SetMassive(11, max_);//GetRandom(max);
-	SetMassive(12, max_);//GetRandom(max);
-	SetMassive(13, max_);//GetRandom(max);
-	SetMassive(14, max_);//GetRandom(max);
+	SetMassive(6, max_ - 5);//GetRandom(max);
+	SetMassive(7, max_ - 5);//GetRandom(max);
+	SetMassive(8, max_ - 5);//GetRandom(max);
+	SetMassive(9, max_ - 5);//GetRandom(max);
+	SetMassive(10, min_);//GetRandom(max);
+	SetMassive(11, max_ - 5);//GetRandom(max);
+	SetMassive(12, max_ - 5);//GetRandom(max);
+	SetMassive(13, max_ - 5);//GetRandom(max);
+	SetMassive(14, max_ - 5);//GetRandom(max);
 	SetMassive(15, min_);//GetRandom(max);
-	SetMassive(16, max_);//GetRandom(max);
-	SetMassive(17, max_);//GetRandom(max);
-	SetMassive(18, max_);//GetRandom(max);
-	SetMassive(19, max_);//GetRandom(max);
+	SetMassive(16, max_ - 5);//GetRandom(max);
+	SetMassive(17, max_ - 5);//GetRandom(max);
+	SetMassive(18, max_ - 5);//GetRandom(max);
+	SetMassive(19, max_ - 5);//GetRandom(max);
 	SetMassive(20, min_);//GetRandom(max);
-	SetMassive(21, max_);//GetRandom(max);
-	SetMassive(22, max_);//GetRandom(max);
-	SetMassive(23, max_);//GetRandom(max);
-	SetMassive(24, max_);//GetRandom(max);
+	SetMassive(21, max_ - 5);//GetRandom(max);
+	SetMassive(22, max_ - 5);//GetRandom(max);
+	SetMassive(23, max_ - 5);//GetRandom(max);
+	SetMassive(24, max_ - 5);//GetRandom(max);
 	SetMassive(25, min_);//GetRandom(max);
-	SetMassive(26, max_);//GetRandom(max);
-	SetMassive(27, max_);//GetRandom(max);
-	SetMassive(28, max_);//GetRandom(max);
-	SetMassive(29, max_);//GetRandom(max);
+	SetMassive(26, max_ - 5);//GetRandom(max);
+	SetMassive(27, max_ - 5);//GetRandom(max);
+	SetMassive(28, max_ - 5);//GetRandom(max);
+	SetMassive(29, max_ - 5);//GetRandom(max);
 
 						 //std::cout<<std::endl;
 	return randommassive;

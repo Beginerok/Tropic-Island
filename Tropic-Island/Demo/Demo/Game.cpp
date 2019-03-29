@@ -51,16 +51,14 @@ void Game::draw_screen()
 				Math_->GetLines(), Math_->GetMS(), Math_->keyboard_->GetF()*/);
 		glDisable(GL_TEXTURE_2D);
 #ifdef _WINDOWS_2
-		//Math_->keyboard_->keyboard__->Show();
 		Window_->Show();
 #else
 		SDL_GL_SwapWindow(window);
 #endif
 #ifndef _WINDOWS_2
-		Math_->Update(&run, bonus, Logic_, event_);
+		SDL_PollEvent(&event_);
 #else
 		Window_->Update();
-		//Math_->Update(&run, bonus, Logic_);
 #endif
 		loading = false;
 	}
@@ -68,20 +66,22 @@ void Game::draw_screen()
 }
 int Game::Execute()
 {
-	//Math_ = new Math();
-	Window_ = new Window();
-	bool fullscreen = false;/* Math_->Init()*/;
+
 #ifdef _WINDOWS_2
-	if (!/*Math_->keyboard_->keyboard__*/Window_->CreateWindow_(L"Tropic Island",1024/* Math_->GetResolution().x*/,768/* Math_->GetResolution().y*/, 32, fullscreen))
+	Window_ = new Window();
+#endif
+	bool fullscreen = false;;
+#ifdef _WINDOWS_2
+	if (!Window_->CreateWindow_(L"Tropic Island",1024,768, 32, fullscreen))
 		return 0;
 #else
 	SDL_GLContext context;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Tropic Island", 0, 0, 1024/*Math_->GetResolution().x*/,768/* Math_->GetResolution().y*/, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Tropic Island", 0, 0, 1024,768, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	context = SDL_GL_CreateContext(window);
 	SDL_GL_SetSwapInterval(1);
 #endif
-	setup_opengl(1024/*Math_->GetResolution().x*/,768/*Math_->GetResolution().y*/);
+	setup_opengl(1024,768);
 
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
@@ -89,7 +89,7 @@ int Game::Execute()
 
 	draw_screen();
 #ifdef _WINDOWS_2
-	/*Math_->keyboard_->keyboard__*/Window_->KillWindow();
+	Window_->KillWindow();
 #else
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);

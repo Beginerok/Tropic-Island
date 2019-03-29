@@ -1,7 +1,15 @@
 #pragma once
-#define _WINDOWS_2
+//#define _WINDOWS_2
 #ifdef _WINDOWS_2
 #include <Windows.h>
+#else
+#include <Windows.h>
+#define SDL_MAIN_HANDLED
+
+#include <SDL\SDL.h>
+#pragma comment(lib,"ILU.lib")
+#pragma comment(lib,"DevIl.lib")
+#pragma comment(lib,"SDL2.lib")
 #endif
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -62,10 +70,11 @@ public:
 	~Scene1();
 	int err;
 #ifdef _WINDOWS_2
-	char*strError;
-	//or wchar_t*strError;
+	 char*strError;
+	//or  wchar_t*strError;
 #else
-	const char*strError;
+	//or const char*strError;
+	wchar_t*strError;
 #endif
 	// Ширина изображения
 	int width;

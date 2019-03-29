@@ -24,18 +24,18 @@ GLvoid Window::KillWindow()
 	{
 		if (!wglMakeCurrent(0, 0))
 		{
-			MessageBox(0, "Release failed 1", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+			MessageBox(0, L"Release failed 1", L"SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 		}
 		if (!wglDeleteContext(hrc))
 		{
-			MessageBox(0, "Release failed 2", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+			MessageBox(0, L"Release failed 2", L"SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 		}
 	}
 	if (hdc && !ReleaseDC(hwnd, hdc))
 	{
-		MessageBox(0, "Release failed 3", "SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
+		MessageBox(0, L"Release failed 3", L"SHUTDOWN ERROR", MB_OK | MB_ICONINFORMATION);
 	}
-	if (!UnregisterClass("My Window", hinstance))
+	if (!UnregisterClass(L"My Window", hinstance))
 	{
 	}
 	return;
@@ -53,10 +53,10 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	wc->hCursor = LoadCursor(0, IDC_ARROW);
 	wc->hbrBackground = 0;
 	wc->lpszMenuName = 0;
-	wc->lpszClassName = "My Window";
+	wc->lpszClassName = L"My Window";
 	if (!RegisterClass(wc))
 	{
-		MessageBox(0, "Failed reg crea", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"Failed reg crea", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 	fullscreen = fullscreenflag;
@@ -71,11 +71,11 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		dmscreensettings->dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
 		if (ChangeDisplaySettings(dmscreensettings, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL)
 		{
-			if (MessageBox(0, "Not support fulscreen", "HINT", MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
+			if (MessageBox(0, L"Not support fulscreen", L"HINT", MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
 				fullscreen = false;
 			else
 			{
-				MessageBox(0, "Prog close", "ERROR", MB_OK | MB_ICONSTOP);
+				MessageBox(0, L"Prog close", L"ERROR", MB_OK | MB_ICONSTOP);
 				return false;
 			}
 		}
@@ -104,10 +104,10 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		menuheight = 40;
 		menuwidth = 20;
 	}
-	if (!(hwnd = CreateWindowEx(dwexstyle, "My Window",(char*) title, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle, 0, 0, windowrect->right - windowrect->left + menuwidth, windowrect->bottom - windowrect->top + menuheight, 0, 0, hinstance, 0)))
+	if (!(hwnd = CreateWindowEx(dwexstyle, L"My Window", title, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle, 0, 0, windowrect->right - windowrect->left + menuwidth, windowrect->bottom - windowrect->top + menuheight, 0, 0, hinstance, 0)))
 	{
 		KillWindow();
-		MessageBox(0, "Create w error", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"Create w error", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 	GLuint pixelformat;
@@ -141,31 +141,31 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	if (!(hdc = GetDC(hwnd)))
 	{
 		KillWindow();
-		MessageBox(0, "can't create dc", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"can't create dc", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 	if (!(pixelformat = ChoosePixelFormat(hdc, pfd)))
 	{
 		KillWindow();
-		MessageBox(0, "can't pixelf", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0,L"can't pixelf", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 	if (!SetPixelFormat(hdc, pixelformat, pfd))
 	{
 		KillWindow();
-		MessageBox(0, "can't setpixel", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"can't setpixel", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 	if (!(hrc = wglCreateContext(hdc)))
 	{
 		KillWindow();
-		MessageBox(0, "can't context","ERROR", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"can't context",L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 	if (!wglMakeCurrent(hdc, hrc))
 	{
 		KillWindow();
-		MessageBox(0, "can't context cur", "ERROR", MB_OK | MB_ICONEXCLAMATION);
+		MessageBox(0, L"can't context cur", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
 	ShowWindow(hwnd, SW_SHOW);
