@@ -1,9 +1,10 @@
 APP=Demo
 CPP=g++
+SRC=Game.cpp Scene1.cpp main.cpp 
 FLAGS=-I. -IIL -lGL -lSDL2 -lcurl -lssl -lIL -lILU -lGLU -lm
 
 $(APP):
-	$(CPP) Game.cpp Scene1.cpp main.cpp  $(FLAGS) -o $(APP)
+	$(CPP) $(SRC) $(FLAGS) -o $(APP) 
 
 clean:
 	rm $(APP)
