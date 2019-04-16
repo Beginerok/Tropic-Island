@@ -40,7 +40,7 @@ void Scene1::LoadImage(const ILstring path)
 	// Если код не равен нулю ошибка была
 	if (err != IL_NO_ERROR) {
 		// Получение строки с ошибкой
-		strError = iluErrorString(err);
+		strError = (wchar_t *)iluErrorString(err);
 		// Выдаем сообщение об ошибке
 #ifdef _WINDOWS_2
 		MessageBox(NULL, NULL, "Ошибка при загрузке il!", MB_OK);

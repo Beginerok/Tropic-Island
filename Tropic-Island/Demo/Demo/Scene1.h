@@ -3,10 +3,9 @@
 #ifdef _WINDOWS_2
 #include <Windows.h>
 #else
-#include <Windows.h>
-#define SDL_MAIN_HANDLED
-
-#include <SDL\SDL.h>
+//#include <Windows.h> // <-- wtf? :D
+#define SDL_MAIN_HANDLED 
+#include "SDL/SDL.h"
 #pragma comment(lib,"ILU.lib")
 #pragma comment(lib,"DevIl.lib")
 #pragma comment(lib,"SDL2.lib")
