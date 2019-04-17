@@ -3,10 +3,12 @@ CPP=g++
 SRC=Game.cpp Scene1.cpp main.cpp
 FLAGS=-I. -IIL -lGL -lSDL2 -lcurl -lssl -lIL -lILU -lGLU -lm
 
+all:$(APP)
+
 run:clean all
 	./$(APP)
 
-all:$(APP)
+
 
 $(APP):
 	$(CPP) $(SRC) $(FLAGS) -o $(APP)

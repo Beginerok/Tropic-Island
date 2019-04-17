@@ -37,7 +37,7 @@ void Game::draw_screen()
 		/*
 		float*rotate_;
 		*/
-		int counttextureondrums = 6; //-1 Correcting table
+		int counttextureondrums = 6;
 		/*
 		int**drum;
 		int credits;

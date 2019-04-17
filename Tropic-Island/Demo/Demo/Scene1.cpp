@@ -776,11 +776,18 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		{
 			//random = GetRandom(max_);
             
-			glBindTexture(GL_TEXTURE_2D,image->IndexTexture[FindTexture(vectordrum[GetMassive((i*j) + j)/*randommassive[i*j+j]*/])]);
-			int dd = image->IndexTexture[FindTexture(vectordrum[GetMassive((i*j) + j)/*randommassive[i*j+j]*/])];
+			glBindTexture(GL_TEXTURE_2D,image->IndexTexture[FindTexture(vectordrum[GetMassive((j>0)?i*j + j:i)/*randommassive[i*j+j]*/])]);
+			int dd = image->IndexTexture[FindTexture(vectordrum[GetMassive(i*j + j)/*randommassive[i*j+j]*/])];
+			
+			int tt = GetMassive(i*j + j);
+            int gg = (j > 0)?i*j+j:i;
 
-			dd = image->IndexTexture[FindTexture(vectordrum[GetMassive((i*j) + j)/*randommassive[i*j+j]*/])];
-            printf("|%d|",dd);
+
+
+
+
+			//dd = image->IndexTexture[FindTexture(vectordrum[GetMassive((i*j) + j)/*randommassive[i*j+j]*/])];
+            printf("|%d|tt=%d gg=%d| (i=%d j=%d)",dd,tt,gg,i,j);
             EnableTexture(i, j,dd);
 		}
 		glPopMatrix();
@@ -817,6 +824,7 @@ int*Scene1::GetRandomMassive()
 	for (int i = 0; i<30; i++)
 	{
 		randommassive[i] = GetRandom();
+        printf("+++++ %d\n",randommassive[i]);
 		//std::cout<<randommassive[i]<<"|";
 	}
 /*
@@ -970,6 +978,7 @@ void Scene1::EnableTexture(int n, int m,int x)
     
     if(n == 0)
     {
+
         if(m == 0){
         xl = -0.8f;
         xr = -0.48f;
@@ -1011,6 +1020,8 @@ void Scene1::EnableTexture(int n, int m,int x)
 	//front middle
     if(n == 1)
     {
+
+
         if(m == 0){
         xl = -0.8f;
         xr = -0.48f;
