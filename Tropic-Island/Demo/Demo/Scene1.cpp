@@ -40,7 +40,7 @@ void Scene1::LoadImage(const ILstring path)
 	// Если код не равен нулю ошибка была
 	if (err != IL_NO_ERROR) {
 		// Получение строки с ошибкой
-		strError = iluErrorString(err);
+		strError = (wchar_t *)iluErrorString(err);
 		// Выдаем сообщение об ошибке
 #ifdef _WINDOWS_2
 		MessageBox(NULL, NULL, "Ошибка при загрузке il!", MB_OK);
@@ -773,7 +773,7 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		for (int j = 0; j<counttextureondrums; j++)
 		{
 			//random = GetRandom(max_);
-			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive(i*j + j)/*randommassive[i*j+j]*/])]);
+			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive((j>0)?i*j + j:i)/*randommassive[i*j+j]*/])]);
 			EnableTexture(i, j);
 		}
 		glPopMatrix();
@@ -956,201 +956,250 @@ void Scene1::EnablePolygonBackDown(float xleft, float xright, float ydown, float
 }
 void Scene1::EnableTexture(int n, int m)
 {
-
-	//front up
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
+    if(n == 0)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+    }
 	//front up
 
 	//front middle
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
+    if(n == 1)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+    }
 	//front middle
 
 	//front down
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
+    if(n == 2)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+    }
 	//front down
 
 	//back up
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
+    if(n == 3)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+    }
 	//back up
-
 
 	//back middle
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
+    if(n == 4)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+    }
 	//back middle
 
 	//back down
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
+    if(n == 5)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        };
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+    }
 
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
 
 	//back down
 	/*
