@@ -25,14 +25,19 @@ void Game::draw_screen()
 {
 	while (run)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_COLOR_MATERIAL);
+        glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDepthMask (GL_TRUE);
+        glClearColor(1.0f,0.0f,0.0f,1.0f);
+        glClearDepth(1.0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /*| GL_COLOR_MATERIAL*/);
+
 		glEnable(GL_TEXTURE_2D);
 		
 		int countdrums = 5;
 		/*
 		float*rotate_;
 		*/
-		int counttextureondrums = 6;
+		int counttextureondrums = 6; //-1 Correcting table
 		/*
 		int**drum;
 		int credits;
@@ -45,6 +50,7 @@ void Game::draw_screen()
 		bool*buttons;
 		*/
 		//Scene1_->ShowWelcome(loading);
+        
 		Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums/*,drum,credits,win,totalbet,line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
@@ -54,6 +60,7 @@ void Game::draw_screen()
 		Window_->Show();
 #else
 		SDL_GL_SwapWindow(window);
+
 #endif
 #ifndef _WINDOWS_2
 		SDL_PollEvent(&event_);
@@ -78,6 +85,7 @@ int Game::Execute()
 	SDL_GLContext context;
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("Tropic Island", 0, 0, 1024,768, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    
 	context = SDL_GL_CreateContext(window);
 	SDL_GL_SetSwapInterval(1);
 #endif

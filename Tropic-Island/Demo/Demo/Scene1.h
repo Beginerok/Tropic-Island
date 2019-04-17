@@ -3,7 +3,7 @@
 #ifdef _WINDOWS_2
 #include <Windows.h>
 #else
-//#include <Windows.h> // <-- wtf? :D
+//#include <Windows.h> // <-- WTF? :D
 #define SDL_MAIN_HANDLED 
 #include "SDL/SDL.h"
 #pragma comment(lib,"ILU.lib")
@@ -50,7 +50,7 @@ public:
 	int FindTexture(std::string name);
 	void LoadDrum();
 	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms, bool*buttons*/);
-	void EnableTexture(int n, int m);
+	void EnableTexture(int n, int m,int x);
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontDown(float leftup, float leftdown, float rightdown, float rightup);

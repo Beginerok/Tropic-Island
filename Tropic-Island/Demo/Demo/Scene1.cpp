@@ -766,18 +766,28 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 	std::default_random_engine generator;
 	std::uniform_int_distribution<int>distribution(0, INT_MAX);
 	*/
-	for (int i = 0; i<countdrums; i++)
+    printf("-----------------\n");
+	for (int i = 0; i< countdrums; i++)
 	{
+
 		glPushMatrix();
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j<counttextureondrums; j++)
 		{
 			//random = GetRandom(max_);
-			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive(i*j + j)/*randommassive[i*j+j]*/])]);
-			EnableTexture(i, j);
+            
+			glBindTexture(GL_TEXTURE_2D,image->IndexTexture[FindTexture(vectordrum[GetMassive((i*j) + j)/*randommassive[i*j+j]*/])]);
+			int dd = image->IndexTexture[FindTexture(vectordrum[GetMassive((i*j) + j)/*randommassive[i*j+j]*/])];
+
+			dd = image->IndexTexture[FindTexture(vectordrum[GetMassive((i*j) + j)/*randommassive[i*j+j]*/])];
+            printf("|%d|",dd);
+            EnableTexture(i, j,dd);
 		}
 		glPopMatrix();
+
+        printf("\n");
 	}
+    printf("-----------------\n");
 	//glPopMatrix();
 	//glDisable(GL_BLEND);
 	//glDisable(GL_ALPHA_TEST);
@@ -806,10 +816,10 @@ int*Scene1::GetRandomMassive()
 {
 	for (int i = 0; i<30; i++)
 	{
-		//randommassive[i] = GetRandom();
+		randommassive[i] = GetRandom();
 		//std::cout<<randommassive[i]<<"|";
 	}
-
+/*
 	SetMassive(0, min_);//GetRandom(max);
 	SetMassive(1, max_ - 5);//GetRandom(max);
 	SetMassive(2, max_ - 5);//GetRandom(max);
@@ -840,7 +850,7 @@ int*Scene1::GetRandomMassive()
 	SetMassive(27, max_ - 5);//GetRandom(max);
 	SetMassive(28, max_ - 5);//GetRandom(max);
 	SetMassive(29, max_ - 5);//GetRandom(max);
-
+*/
 						 //std::cout<<std::endl;
 	return randommassive;
 }
@@ -954,204 +964,254 @@ void Scene1::EnablePolygonBackDown(float xleft, float xright, float ydown, float
 
 	glEnd();
 }
-void Scene1::EnableTexture(int n, int m)
+void Scene1::EnableTexture(int n, int m,int x)
 {
-
-	//front up
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonFrontUp(xl, xr, yd, yu);
+    printf(">>> %d %d >>> \n",n,m);
+    
+    if(n == 0)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonFrontUp(xl, xr, yd, yu);
+        }
+    }
 	//front up
 
 	//front middle
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonFrontMiddle(xl, xr, yd, yu);
-
+    if(n == 1)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        }
+    }
 	//front middle
 
 	//front down
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonFrontDown(xl, xr, yd, yu);
-
+    if(n == 2)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonFrontDown(xl, xr, yd, yu);
+        }
+    }
 	//front down
 
 	//back up
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = 0.3f;
-	yu = 0.9;
-	EnablePolygonBackUp(xl, xr, yd, yu);
+    if(n == 3)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = 0.3f;
+        yu = 0.9;
+        EnablePolygonBackUp(xl, xr, yd, yu);
+        }
+    }
 	//back up
 
 
 	//back middle
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.3f;
-	yu = 0.3;
-	EnablePolygonBackMiddle(xl, xr, yd, yu);
-
+    if(n == 4)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.3f;
+        yu = 0.3;
+        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        }
+    }
 	//back middle
 
 	//back down
-	xl = -0.8f;
-	xr = -0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
-	xl = -0.48f;
-	xr = -0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
-	xl = -0.16f;
-	xr = 0.16f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
-	xl = 0.16f;
-	xr = 0.48f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
-	xl = 0.48f;
-	xr = 0.8f;
-	yd = -0.9f;
-	yu = -0.3;
-	EnablePolygonBackDown(xl, xr, yd, yu);
-
+    if(n == 5)
+    {
+        if(m == 0){
+        xl = -0.8f;
+        xr = -0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+        if(m == 1){
+        xl = -0.48f;
+        xr = -0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+        if(m == 2){
+        xl = -0.16f;
+        xr = 0.16f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+        if(m == 3){
+        xl = 0.16f;
+        xr = 0.48f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        };
+        if(m == 4){
+        xl = 0.48f;
+        xr = 0.8f;
+        yd = -0.9f;
+        yu = -0.3;
+        EnablePolygonBackDown(xl, xr, yd, yu);
+        }
+    }
 	//back down
 	/*
 	float _width_=0.188f;
