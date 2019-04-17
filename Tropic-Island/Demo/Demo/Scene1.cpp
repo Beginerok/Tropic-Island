@@ -773,7 +773,7 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		for (int j = 0; j<counttextureondrums; j++)
 		{
 			//random = GetRandom(max_);
-			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive(i*j + j)/*randommassive[i*j+j]*/])]);
+			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive((j>0)?i*j + j:i)/*randommassive[i*j+j]*/])]);
 			EnableTexture(i, j);
 		}
 		glPopMatrix();
