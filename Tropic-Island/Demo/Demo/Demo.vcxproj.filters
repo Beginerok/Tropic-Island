@@ -24,18 +24,12 @@
     <ClCompile Include="Scene1.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Scene1.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

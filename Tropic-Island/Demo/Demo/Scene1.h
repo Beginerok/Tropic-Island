@@ -3,10 +3,12 @@
 #ifdef _WINDOWS_2
 #include <Windows.h>
 #else
-//#include <Windows.h> 
+#include <Windows.h> 
 #define SDL_MAIN_HANDLED
 
 #include "SDL/SDL.h"
+#pragma comment(lib,"OpenGL32.lib")
+#pragma comment(lib,"Glu32.lib")
 #pragma comment(lib,"ILU.lib")
 #pragma comment(lib,"DevIl.lib")
 #pragma comment(lib,"SDL2.lib")
@@ -100,6 +102,6 @@ public:
 	/*	volatile */int random, *randommassive;
 	int max_, min_;
 	bool start;
-
+	bool b;
 };
 

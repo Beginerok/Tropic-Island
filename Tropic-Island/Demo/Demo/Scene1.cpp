@@ -23,7 +23,7 @@ Scene1::Scene1(void)
 		startrotate[i] = false;
 	}
 	randommassive = new int[30];
-
+	b = true;
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -740,6 +740,7 @@ void Scene1::LoadDrum()
 	}
 	GetRandomMassive();
 }
+#include <iostream>
 void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum,
 	int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms, bool*buttons*/)
 {
@@ -766,6 +767,7 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 	std::default_random_engine generator;
 	std::uniform_int_distribution<int>distribution(0, INT_MAX);
 	*/
+	int k = -1;
 	for (int i = 0; i<countdrums; i++)
 	{
 		glPushMatrix();
@@ -773,14 +775,19 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		for (int j = 0; j<counttextureondrums; j++)
 		{
 			//random = GetRandom(max_);
-			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive((j>0)?i*j + j:i)/*randommassive[i*j+j]*/])]);
+			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive(++k/*(j>0)?i*j + j:i*/)/*randommassive[i*j+j]*/])]);
 			EnableTexture(i, j);
+			if(b)
+			std::cout << k<<" ";
 		}
 		glPopMatrix();
+		if(b)
+		std::cout << '\n';
 	}
 	//glPopMatrix();
 	//glDisable(GL_BLEND);
 	//glDisable(GL_ALPHA_TEST);
+	b = false;
 }
 
 int Scene1::GetMassive(int number)
@@ -809,39 +816,37 @@ int*Scene1::GetRandomMassive()
 		//randommassive[i] = GetRandom();
 		//std::cout<<randommassive[i]<<"|";
 	}
-
 	SetMassive(0, min_);//GetRandom(max);
-	SetMassive(1, max_ - 5);//GetRandom(max);
-	SetMassive(2, max_ - 5);//GetRandom(max);
-	SetMassive(3, max_ - 5);//GetRandom(max);
-	SetMassive(4, max_ - 5);//GetRandom(max);
-	SetMassive(5, min_);//GetRandom(max);
-	SetMassive(6, max_ - 5);//GetRandom(max);
-	SetMassive(7, max_ - 5);//GetRandom(max);
-	SetMassive(8, max_ - 5);//GetRandom(max);
-	SetMassive(9, max_ - 5);//GetRandom(max);
-	SetMassive(10, min_);//GetRandom(max);
-	SetMassive(11, max_ - 5);//GetRandom(max);
-	SetMassive(12, max_ - 5);//GetRandom(max);
-	SetMassive(13, max_ - 5);//GetRandom(max);
-	SetMassive(14, max_ - 5);//GetRandom(max);
-	SetMassive(15, min_);//GetRandom(max);
-	SetMassive(16, max_ - 5);//GetRandom(max);
-	SetMassive(17, max_ - 5);//GetRandom(max);
-	SetMassive(18, max_ - 5);//GetRandom(max);
-	SetMassive(19, max_ - 5);//GetRandom(max);
-	SetMassive(20, min_);//GetRandom(max);
-	SetMassive(21, max_ - 5);//GetRandom(max);
-	SetMassive(22, max_ - 5);//GetRandom(max);
-	SetMassive(23, max_ - 5);//GetRandom(max);
-	SetMassive(24, max_ - 5);//GetRandom(max);
-	SetMassive(25, min_);//GetRandom(max);
-	SetMassive(26, max_ - 5);//GetRandom(max);
-	SetMassive(27, max_ - 5);//GetRandom(max);
-	SetMassive(28, max_ - 5);//GetRandom(max);
-	SetMassive(29, max_ - 5);//GetRandom(max);
-
-						 //std::cout<<std::endl;
+	SetMassive(1, min_);//GetRandom(max);
+	SetMassive(2, min_);//GetRandom(max);
+	SetMassive(3, min_);//GetRandom(max);
+	SetMassive(4, min_);//GetRandom(max);
+	SetMassive(5, max_);//GetRandom(max);
+	SetMassive(6, max_);//GetRandom(max);
+	SetMassive(7, max_);//GetRandom(max);
+	SetMassive(8, max_);//GetRandom(max);
+	SetMassive(9, max_);//GetRandom(max);
+	SetMassive(10, max_);//GetRandom(max);
+	SetMassive(11, max_);//GetRandom(max);
+	SetMassive(12, max_);//GetRandom(max);
+	SetMassive(13, max_);//GetRandom(max);
+	SetMassive(14, max_);//GetRandom(max);
+	SetMassive(15, max_);//GetRandom(max);
+	SetMassive(16, max_);//GetRandom(max);
+	SetMassive(17, max_);//GetRandom(max);
+	SetMassive(18, max_);//GetRandom(max);
+	SetMassive(19, max_);//GetRandom(max);
+	SetMassive(20, max_);//GetRandom(max);
+	SetMassive(21, max_);//GetRandom(max);
+	SetMassive(22, max_);//GetRandom(max);
+	SetMassive(23, max_);//GetRandom(max);
+	SetMassive(24, max_);//GetRandom(max);
+	SetMassive(25, max_);//GetRandom(max);
+	SetMassive(26, max_);//GetRandom(max);
+	SetMassive(27, max_);//GetRandom(max);
+	SetMassive(28, max_);//GetRandom(max);
+	SetMassive(29, max_);//GetRandom(max);
+	//std::cout<<std::endl;
 	return randommassive;
 }
 void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float yup)
