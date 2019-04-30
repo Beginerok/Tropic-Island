@@ -3,7 +3,10 @@
 #ifdef _WINDOWS_2
 #include <Windows.h>
 #else
-#include <Windows.h> 
+	#ifdef POSIX
+	#else
+		#include <Windows.h>
+	#endif
 #define SDL_MAIN_HANDLED
 
 #include "SDL/SDL.h"
