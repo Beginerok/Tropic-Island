@@ -429,7 +429,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto1";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 1)
+	{
 		vectordrum.push_back("auto2");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto2.png"));
@@ -449,7 +451,8 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto2";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 1) {
+	if (iter == 2)
+	{
 
 		vectordrum.push_back("auto3");
 #ifndef _WINDOWS_2
@@ -469,7 +472,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto3";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 3)
+	{
 		vectordrum.push_back("auto4");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto4.png"));
@@ -489,7 +494,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto4";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 2)
+	if (iter == 4)
 	{
 		vectordrum.push_back("auto5");
 #ifndef _WINDOWS_2
@@ -509,7 +514,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto5";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 5)
+	{
 		vectordrum.push_back("auto6");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto6.png"));
@@ -529,7 +536,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto6";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 3)
+	if (iter == 6)
 	{
 		vectordrum.push_back("auto7");
 #ifndef _WINDOWS_2
@@ -549,7 +556,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto7";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 7)
+	{
 		vectordrum.push_back("auto8");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto8.png"));
@@ -569,7 +578,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto8";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 4)
+	if (iter == 8)
 	{
 		vectordrum.push_back("auto9");
 #ifndef _WINDOWS_2
@@ -589,7 +598,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto9";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 9)
+	{
 		vectordrum.push_back("auto10");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto10.png"));
@@ -609,7 +620,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto10";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 5)
+	if (iter == 10)
 	{
 		vectordrum.push_back("auto11");
 #ifndef _WINDOWS_2
@@ -629,7 +640,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto11";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 11)
+	{
 		vectordrum.push_back("auto12");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto12.png"));
@@ -649,7 +662,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto12";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 6)
+	if (iter == 12)
 	{
 		vectordrum.push_back("auto13");
 #ifndef _WINDOWS_2
@@ -669,7 +682,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto13";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 13)
+	{
 		vectordrum.push_back("auto14");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto14.jpg"));
@@ -689,7 +704,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto14";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 7)
+	if (iter == 14)
 	{
 		vectordrum.push_back("auto15");
 #ifndef _WINDOWS_2
@@ -709,7 +724,9 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "auto15";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	}
+	if (iter == 15)
+	{
 		vectordrum.push_back("moto");
 #ifndef _WINDOWS_2
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//moto.png"));
@@ -729,7 +746,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "moto";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	if (iter == 8)
+	if (iter == 16)
 	{
 		vectordrum.push_back("wild");
 #ifndef _WINDOWS_2
@@ -758,7 +775,7 @@ int Scene1::LoadDrum(int iter)
 		}
 		GetRandomMassive();
 	}
-	if (iter > 7)
+	if (iter > 15)
 		return 0;
 	else
 		return 1;
@@ -836,9 +853,10 @@ int*Scene1::GetRandomMassive()
 {
 	for (int i = 0; i<30; i++)
 	{
-		//randommassive[i] = GetRandom();
+		randommassive[i] = GetRandom();
 		//std::cout<<randommassive[i]<<"|";
 	}
+	/*
 	SetMassive(0, min_);//GetRandom(max);
 	SetMassive(1, min_);//GetRandom(max);
 	SetMassive(2, min_);//GetRandom(max);
@@ -869,6 +887,7 @@ int*Scene1::GetRandomMassive()
 	SetMassive(27, max_);//GetRandom(max);
 	SetMassive(28, max_);//GetRandom(max);
 	SetMassive(29, max_);//GetRandom(max);
+	*/
 	//std::cout<<std::endl;
 	return randommassive;
 }
