@@ -3,7 +3,7 @@
 #ifdef _WINDOWS_2
 #include <Windows.h>
 #else
-	#ifdef POSIX
+	#ifdef __unix__
 	#else
 		#include <Windows.h>
 	#endif
