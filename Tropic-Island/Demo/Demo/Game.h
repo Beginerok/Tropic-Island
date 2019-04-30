@@ -20,6 +20,7 @@ public:
 	SDL_Window*window;
 	SDL_Event event_;
 #endif
+	int iter;
 	~Game();
 };
 

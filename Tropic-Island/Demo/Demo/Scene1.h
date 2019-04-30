@@ -51,7 +51,7 @@ public:
 	void LoadWelcome();
 	void EnableTexture(float*texcoor, float*vercoor);
 	int FindTexture(std::string name);
-	void LoadDrum();
+	int LoadDrum(int iter);
 	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms, bool*buttons*/);
 	void EnableTexture(int n, int m);
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);

@@ -407,338 +407,361 @@ int Scene1::FindTexture(std::string name)
 	}
 	return result;
 }
-void Scene1::LoadDrum()
+int Scene1::LoadDrum(int iter)
 {
-	vectordrum.push_back("auto1");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto1.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto1.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto1";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto2");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto2.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto2.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto2";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto3");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto3.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto3.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto3";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto4");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto4.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto4.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto4";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto5");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto5.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto5.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto5";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto6");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto6.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto6.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto6";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto7");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto7.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto7.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto7";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto8");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto8.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto8.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto8";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto9");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto9.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto9.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto9";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto10");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto10.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto10.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto10";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto11");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto11.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto11.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto11";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto12");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto12.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto12.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto12";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto13");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto13.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto13.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto13";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto14");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto14.jpg"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto14.jpg"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto14";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("auto15");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//auto15.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto15.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "auto15";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("moto");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//moto.png"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\moto.png"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "moto";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectordrum.push_back("wild");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//drum//wild.jpg"));
-#else
-	LoadImage(reinterpret_cast<const ILstring>("content\\drum\\wild.jpg"));
-#endif
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "wild";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	max_ = vectordrum.size() - 1, min_ = 0;
-	srand(time(NULL));
-	for (int i = 0; i<30; i++)
+	if (iter == 0)
 	{
-		SetMassive(i,GetRandom());
+		vectordrum.push_back("auto1");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto1.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto1.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto1";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("auto2");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto2.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto2.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto2";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
-	GetRandomMassive();
+	if (iter == 1) {
+
+		vectordrum.push_back("auto3");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto3.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto3.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto3";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("auto4");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto4.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto4.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto4";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	}
+	if (iter == 2)
+	{
+		vectordrum.push_back("auto5");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto5.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto5.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto5";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("auto6");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto6.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto6.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto6";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	}
+	if (iter == 3)
+	{
+		vectordrum.push_back("auto7");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto7.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto7.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto7";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("auto8");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto8.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto8.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto8";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	}
+	if (iter == 4)
+	{
+		vectordrum.push_back("auto9");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto9.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto9.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto9";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("auto10");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto10.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto10.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto10";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	}
+	if (iter == 5)
+	{
+		vectordrum.push_back("auto11");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto11.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto11.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto11";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("auto12");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto12.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto12.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto12";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	}
+	if (iter == 6)
+	{
+		vectordrum.push_back("auto13");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto13.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto13.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto13";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("auto14");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto14.jpg"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto14.jpg"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto14";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	}
+	if (iter == 7)
+	{
+		vectordrum.push_back("auto15");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto15.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto15.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "auto15";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		vectordrum.push_back("moto");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//moto.png"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\moto.png"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "moto";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	}
+	if (iter == 8)
+	{
+		vectordrum.push_back("wild");
+#ifndef _WINDOWS_2
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//wild.jpg"));
+#else
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\wild.jpg"));
+#endif
+		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+		image->Name[CountIndexTexture - 1] = "wild";
+		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+		max_ = vectordrum.size() - 1, min_ = 0;
+		srand(time(NULL));
+		for (int i = 0; i < 30; i++)
+		{
+			SetMassive(i, GetRandom());
+		}
+		GetRandomMassive();
+	}
+	if (iter > 7)
+		return 0;
+	else
+		return 1;
 }
 #include <iostream>
 void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum,

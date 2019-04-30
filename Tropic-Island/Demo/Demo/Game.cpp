@@ -4,6 +4,7 @@ Game::Game()
 {
 	run = true;
 	loading = true;
+	iter = -1;
 }
 void Game::setup_opengl(int width, int height)
 {
@@ -48,11 +49,13 @@ void Game::draw_screen()
 		int**ms;
 		bool*buttons;
 		*/
-		//Scene1_->ShowWelcome(loading);
-		Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums/*,drum,credits,win,totalbet,line,bet,lines,ms,buttons*/
+		if(!loading)
+			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums/*,drum,credits,win,totalbet,line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
 				Math_->GetLines(), Math_->GetMS(), Math_->keyboard_->GetF()*/);
+		else
+			Scene1_->ShowWelcome(loading);
 		glDisable(GL_TEXTURE_2D);
 #ifdef _WINDOWS_2
 		Window_->Show();
@@ -64,7 +67,7 @@ void Game::draw_screen()
 #else
 		Window_->Update();
 #endif
-		loading = false;
+		loading = Scene1_->LoadDrum(++iter);
 	}
 	Exit();
 }
@@ -89,7 +92,7 @@ int Game::Execute()
 
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
-	Scene1_->LoadDrum();
+//	Scene1_->LoadDrum();
 
 	draw_screen();
 #ifdef _WINDOWS_2
