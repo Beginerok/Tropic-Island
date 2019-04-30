@@ -68,6 +68,8 @@ void Game::draw_screen()
 		Window_->Update();
 #endif
 		loading = Scene1_->LoadDrum(++iter);
+		if (iter > 17)
+			iter = 17;
 	}
 	Exit();
 }
