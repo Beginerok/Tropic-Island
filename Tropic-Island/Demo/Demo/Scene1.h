@@ -35,7 +35,6 @@
 #include <vector>
 #include <time.h>
 #include <random>
-//#include <chrono>
 struct Image
 {
 	float**TextureCoordinats;
@@ -55,7 +54,7 @@ public:
 	void EnableTexture(float*texcoor, float*vercoor);
 	int FindTexture(std::string name);
 	int LoadDrum(int iter);
-	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms, bool*buttons*/);
+	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms*/, bool*buttons);
 	void EnableTexture(int n, int m);
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
@@ -72,6 +71,9 @@ public:
 	int GetMassive(int number);//02.03.2019
 	void SetMassive(int number, int value);
 
+	void LoadButtons();
+	void ShowButtons();
+	void EnableTextureButtons(int i);
 	~Scene1();
 	int err;
 #ifdef _WINDOWS_2
@@ -88,23 +90,22 @@ public:
 	// Тип хранения данных
 	unsigned int type;
 	unsigned char*copyData;
-	static const int CountTexture = 30;
+	static const int CountTexture = 40;
 	Image *image;
 	int CountIndexTexture;
 	int AnimateBar;
 	std::string NameAnimateBar;
 
-//	std::vector<Vector3>listv;
-	//std::vector<Vector3>listt;
 	float xl, xr, yd, yu, z;
 	float*rotate;
 	bool*startrotate;
 	static const int CountDrum = 5;
 	std::vector<std::string>vectordrum;
 
+	std::vector<std::string>vectorbuttons;
+
 	/*	volatile */int random, *randommassive;
 	int max_, min_;
 	bool start;
-	bool b;
 };
 

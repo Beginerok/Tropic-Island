@@ -47,13 +47,16 @@ void Game::draw_screen()
 		int bet;
 		bool*lines;
 		int**ms;
-		bool*buttons;
 		*/
-		if(!loading)
+		//bool*buttons;
+		if (!loading) 
+		{
 			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums/*,drum,credits,win,totalbet,line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
-				Math_->GetLines(), Math_->GetMS(), Math_->keyboard_->GetF()*/);
+				Math_->GetLines(), Math_->GetMS()*/,keyboard_->GetF());
+			Scene1_->ShowButtons();
+		}
 		else
 			Scene1_->ShowWelcome(loading);
 		glDisable(GL_TEXTURE_2D);
@@ -64,6 +67,10 @@ void Game::draw_screen()
 #endif
 #ifndef _WINDOWS_2
 		SDL_PollEvent(&event_);
+		SDL_PumpEvents();
+		bool bonus = false;
+		keyboard_->Update(bonus,Logic_,event_);
+		run = !keyboard_->getdone();
 #else
 		Window_->Update();
 #endif
@@ -86,16 +93,17 @@ int Game::Execute()
 #else
 	SDL_GLContext context;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Tropic Island", 0, 0, 1024,768, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Tropic Island", 10, 10,700,500, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	context = SDL_GL_CreateContext(window);
 	SDL_GL_SetSwapInterval(1);
 #endif
-	setup_opengl(1024,768);
+	setup_opengl(700,500);
 
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
-//	Scene1_->LoadDrum();
-
+	Scene1_->LoadButtons();
+	keyboard_ = new keyboard();
+	Logic_ = new Logic();
 	draw_screen();
 #ifdef _WINDOWS_2
 	Window_->KillWindow();

@@ -149,10 +149,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Demo\Demo\Game.h" />
+    <ClInclude Include="..\..\Demo\Demo\keyboard.h" />
+    <ClInclude Include="..\..\Demo\Demo\Logic.h" />
     <ClInclude Include="..\..\Demo\Demo\Scene1.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Demo\Demo\Game.cpp" />
+    <ClCompile Include="..\..\Demo\Demo\keyboard.cpp" />
+    <ClCompile Include="..\..\Demo\Demo\Logic.cpp" />
     <ClCompile Include="..\..\Demo\Demo\main.cpp" />
     <ClCompile Include="..\..\Demo\Demo\Scene1.cpp" />
   </ItemGroup>

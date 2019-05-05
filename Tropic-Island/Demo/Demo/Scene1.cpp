@@ -12,7 +12,7 @@ Scene1::Scene1(void)
 		image->VertexCoordinats[i] = new float[4];
 		image->Name[i] = "";
 	}
-	image->IndexTexture = new unsigned int[CountTexture/*1*/];//02.03.2019
+	image->IndexTexture = new unsigned int[CountTexture];//02.03.2019
 	image->number = new int[CountTexture];
 	CountIndexTexture = 0;
 	AnimateBar = 0;
@@ -23,7 +23,6 @@ Scene1::Scene1(void)
 		startrotate[i] = false;
 	}
 	randommassive = new int[30];
-	b = true;
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -780,33 +779,20 @@ int Scene1::LoadDrum(int iter)
 	else
 		return 1;
 }
-#include <iostream>
 void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum,
-	int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms, bool*buttons*/)
+	int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms*/, bool*buttons)
 {
-	//glEnable(GL_ALPHA_TEST);
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-	//glAlphaFunc(GL_GREATER, 0.0f); 
-	/*
-	int numb = FindTexture("wild");
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[numb]);
-	EnableTexture(image->TextureCoordinats[numb], image->VertexCoordinats[numb]);
-	*/
-	//glPushMatrix();
-	//glRotatef(180,0,0,1);
-	/*29.03.2019
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
+	glAlphaFunc(GL_GREATER, 0.0f); 
+	//29.03.2019
 	if (buttons[2]) {
-		//start = false;
+		start = false;
 		StartRotate();
 	}
-	*/
-	Rotate(/*startrotate*/);
-	/*
-	std::default_random_engine generator;
-	std::uniform_int_distribution<int>distribution(0, INT_MAX);
-	*/
+	Rotate();
 	int k = -1;
 	for (int i = 0; i<countdrums; i++)
 	{
@@ -814,20 +800,14 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j<counttextureondrums; j++)
 		{
-			//random = GetRandom(max_);
-			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive(++k/*(j>0)?i*j + j:i*/)/*randommassive[i*j+j]*/])]);
+			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive(++k)])]);
 			EnableTexture(i, j);
-			if(b)
-			std::cout << k<<" ";
 		}
 		glPopMatrix();
-		if(b)
-		std::cout << '\n';
 	}
-	//glPopMatrix();
-	//glDisable(GL_BLEND);
-	//glDisable(GL_ALPHA_TEST);
-	b = false;
+	glPopMatrix();
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
 }
 
 int Scene1::GetMassive(int number)
@@ -839,16 +819,312 @@ void Scene1::SetMassive(int number, int value)
 	randommassive[number] = value;
 }
 
+void Scene1::LoadButtons()
+{
+	vectorbuttons.push_back("HELP");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//HELP.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\HELP.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "HELP";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("TAKE");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//TAKE.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\TAKE.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "TAKE";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("PLAY");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//PLAY.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\PLAY.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "PLAY";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("FLIP");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//FLIP.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\FLIP.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "FLIP";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("EXIT");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//EXIT.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\EXIT.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "EXIT";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("HELP_PRESS");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//HELP_PRESS.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\HELP_PRESS.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "HELP_PRESS";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("TAKE_PRESS");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//TAKE_PRESS.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\TAKE_PRESS.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "TAKE_PRESS";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("PLAY_PRESS");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//PLAY_PRESS.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\PLAY_PRESS.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "PLAY_PRESS";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorbuttons.push_back("FLIP_PRESS");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//FLIP_PRESS.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\FLIP_PRESS.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "FLIP_PRESS";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+
+	vectorbuttons.push_back("EXIT_PRESS");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//buttons//EXIT_PRESS.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\EXIT_PRESS.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "EXIT_PRESS";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+}
+void Scene1::ShowButtons()
+{
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
+	glAlphaFunc(GL_GREATER, 0.0f); 
+	for (int i = 0; i < vectorbuttons.size()/2; i++)
+	{
+		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectorbuttons[i])]);
+		EnableTextureButtons(i);
+	}
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
+}
+void Scene1::EnableTextureButtons(int i)
+{
+	if (i == 0)
+	{
+		glBegin(GL_POLYGON);//HELP
+
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.45f, -.6f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(-.45f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.65f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.65f, -.6f, 0.0f);
+
+		glEnd();//HELP
+	}
+	if (i == 1)
+	{
+		glBegin(GL_POLYGON);//TAKE
+
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.15f, -.6f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(-.15f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.35f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.35f, -.6f, 0.0f);
+
+		glEnd();//TAKE
+	}
+	if (i == 2)
+	{
+		glBegin(GL_POLYGON);//PLAY
+
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.15f, -.6f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(.15f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.05f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.05f, -.6f, 0.0f);
+
+		glEnd();//PLAY
+	}
+	if (i == 3)
+	{
+		glBegin(GL_POLYGON);//FLIP
+
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.45f, -.6f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(.45f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.25f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.25f, -.6f, 0.0f);
+
+		glEnd();//FLIP
+	}
+	if (i == 4)
+	{
+		glBegin(GL_POLYGON);//EXIT
+
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.75f, -.6f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(.75f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.55f, -.8f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.55f, -.6f, 0.0f);
+
+		glEnd();//EXIT
+	}
+}
 int Scene1::GetRandom()
 {
 	return ((int)((float)rand() / RAND_MAX*(max_ - min_) + min_));
-	/*
-	static default_random_engine gen;
-	static uniform_int_distribution<int> dist;
-	return dist(gen) % max;
-	*/
 }
-//#include <iostream>
 int*Scene1::GetRandomMassive()
 {
 	for (int i = 0; i<30; i++)
@@ -1246,118 +1522,13 @@ void Scene1::EnableTexture(int n, int m)
         EnablePolygonBackDown(xl, xr, yd, yu);
         }
     }
-
-
 	//back down
-	/*
-	float _width_=0.188f;
-	int k=5-n*2;
-	switch (m)
-	{
-	case 0:
-	{
-	glBegin(GL_POLYGON);
-	for(int i=1,j=3;i<10;i++,j++)
-	{
-	glTexCoord2f(listt[j].a[1],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*k,listv[i].a[1],listv[i].a[2]);
-	}
-	for(int i=9,j=11;i>0;i--,j--)
-	{
-	glTexCoord2f(listt[j].a[0],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*(k-2),listv[i].a[1],listv[i].a[2]);
-	}
-	glEnd();
-	break;
-	}
-	case 1:
-	{
-	glBegin(GL_POLYGON);
-	for(int i=9,j=3;i<18;i++,j++)
-	{
-	glTexCoord2f(listt[j].a[1],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*k,listv[i].a[1],listv[i].a[2]);
-	}
-	for(int i=17,j=11;i>8;i--,j--)
-	{
-	glTexCoord2f(listt[j].a[0],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*(k-2),listv[i].a[1],listv[i].a[2]);
-	}
-	glEnd();
-	break;
-	}
-	case 2:
-	{
-	glBegin(GL_POLYGON);
-	for(int i=17,j=0;i<20;i++,j++)
-	{
-	glTexCoord2f(listt[j].a[1],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*k,listv[i].a[1],listv[i].a[2]);
-	}
-	for(int i=19,j=2;i>16;i--,j--)
-	{
-	glTexCoord2f(listt[j].a[0],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*(k-2),listv[i].a[1],listv[i].a[2]);
-	}
-	glEnd();
-	break;
-	}
-	case 3:
-	{
-	glBegin(GL_POLYGON);
-	for(int i=19,j=3;i<28;i++,j++)
-	{
-	glTexCoord2f(listt[j].a[1],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*k,listv[i].a[1],listv[i].a[2]);
-	}
-	for(int i=27,j=11;i>18;i--,j--)
-	{
-	glTexCoord2f(listt[j].a[0],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*(k-2),listv[i].a[1],listv[i].a[2]);
-	}
-	glEnd();
-	break;
-	}
-	case 4:
-	{
-	glBegin(GL_POLYGON);
-	for(int i=27,j=3;i<36;i++,j++)
-	{
-	glTexCoord2f(listt[j].a[1],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*k,listv[i].a[1],listv[i].a[2]);
-	}
-	for(int i=35,j=11;i>26;i--,j--)
-	{
-	glTexCoord2f(listt[j].a[0],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*(k-2),listv[i].a[1],listv[i].a[2]);
-	}
-	glEnd();
-	break;
-	}
-	case 5:
-	{
-	glBegin(GL_POLYGON);
-	for(int i=35,j=0;i<(int)listv.size();i++,j++)
-	{
-	glTexCoord2f(listt[j].a[1],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*k,listv[i].a[1],listv[i].a[2]);
-	}
-	for(int i=(int)listv.size()-1,j=2;i>34;i--,j--)
-	{
-	glTexCoord2f(listt[j].a[0],listt[j].a[2]);
-	glVertex3f(listv[i].a[0]+_width_*(k-2),listv[i].a[1],listv[i].a[2]);
-	}
-	glEnd();
-	break;
-	}
-	}
-	*/
 }
-void Scene1::Rotate(/*bool*buttons*/)
+void Scene1::Rotate()
 {
 	for (int i = 0; i<CountDrum; i++)
 	{
-		if (/*buttons[2]*/startrotate[i])
+		if (startrotate[i])
 		{
 			if (rotate[i]<360.0f)
 				rotate[i] += 5.0f;

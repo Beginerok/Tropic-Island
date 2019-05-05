@@ -1,11 +1,12 @@
 #pragma once
 #include "Scene1.h"
 //#include "Window.h"
+#include "keyboard.h"
 class Game
 {
 public:
 	Scene1 *Scene1_;
-
+	keyboard *keyboard_;
 #ifdef _WINDOWS_2
 	Window *Window_;
 #endif
@@ -21,6 +22,7 @@ public:
 	SDL_Event event_;
 #endif
 	int iter;
+	Logic *Logic_;
 	~Game();
 };
 
