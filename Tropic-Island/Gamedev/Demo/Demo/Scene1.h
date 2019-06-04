@@ -9,7 +9,7 @@
 	#endif
 #define SDL_MAIN_HANDLED
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 #pragma comment(lib,"OpenGL32.lib")
 #pragma comment(lib,"Glu32.lib")
 #pragma comment(lib,"ILU.lib")
@@ -33,8 +33,9 @@
 //#include "Vector3.h"
 //#include "FileReader.h"
 #include <vector>
-#include <time.h>
-#include <random>
+//#include <time.h>
+//#include <random>
+//#include "Logic.h"
 struct Image
 {
 	float**TextureCoordinats;
@@ -54,7 +55,7 @@ public:
 	void EnableTexture(float*texcoor, float*vercoor);
 	int FindTexture(std::string name);
 	int LoadDrum(int iter);
-	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms*/, bool*buttons);
+	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum, /*int*DrumPosition, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms,*/ bool*buttons);
 	void EnableTexture(int n, int m);
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
@@ -64,12 +65,12 @@ public:
 	void EnablePolygonBackDown(float leftup, float leftdown, float rightdown, float rightup);
 	void Rotate(/*bool__*buttons*/);
 	void StartRotate();
-	int GetRandom();
-	int *GetRandomMassive();
+	//int GetRandom();
+	//int *GetRandomMassive();
 
 
-	int GetMassive(int number);//02.03.2019
-	void SetMassive(int number, int value);
+	//int GetMassive(int number);//02.03.2019
+	//void SetMassive(int number, int value);
 
 	void LoadButtons();
 	void ShowButtons();
@@ -104,8 +105,8 @@ public:
 
 	std::vector<std::string>vectorbuttons;
 
-	/*	volatile */int random, *randommassive;
-	int max_, min_;
+	//volatile int random, *randommassive;
+	//int max_, min_;
 	bool start;
 };
 

@@ -1,8 +1,11 @@
 #include "Logic.h"
 Logic::Logic()
 {
-	countF = 5;
-	random = new int[countF];
+	CountPosition = 30;
+	random = new int[CountPosition];
+	dbconn = new DataBaseConnection();
+	dbconn->Connect();
+	dbconn->Query();
 }
 int *Logic::GetRandom()
 {
@@ -10,11 +13,19 @@ int *Logic::GetRandom()
 };
 void Logic::SetRandom()
 {
-	int min = 3, max = 54;
+	int min = 0, max = 16;
 	srand(time(0));
-	for (int i = 0; i<countF; i++)
+	for (int i = 0; i<CountPosition; i++)
 		random[i] = min + rand() % (max - min + 1);
 };
+void Logic::SetDrum()
+{
+	dbconn->Query();
+}
+std::vector<std::string> Logic::GetDrum()
+{
+	return dbconn->vectordrum;
+}
 float Logic::GetCredits()
 {
 	return Credits;
@@ -41,5 +52,7 @@ void Logic::SetTotalBet(float totalbet)
 }
 Logic::~Logic()
 {
+	dbconn->Close();
 	delete[] random;
+	delete dbconn;
 }

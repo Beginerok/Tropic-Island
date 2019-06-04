@@ -51,10 +51,10 @@ void Game::draw_screen()
 		//bool*buttons;
 		if (!loading) 
 		{
-			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums/*,drum,credits,win,totalbet,line,bet,lines,ms,buttons*/
+			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums,Logic_->GetDrum(),/*Logic_->GetRandom(),credits,win,totalbet,line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
-				Math_->GetLines(), Math_->GetMS()*/,keyboard_->GetF());
+				Math_->GetLines(), Math_->GetMS()*/keyboard_->GetF());
 			Scene1_->ShowButtons();
 		}
 		else
@@ -104,6 +104,7 @@ int Game::Execute()
 	Scene1_->LoadButtons();
 	keyboard_ = new keyboard();
 	Logic_ = new Logic();
+	Logic_->SetRandom();
 	draw_screen();
 #ifdef _WINDOWS_2
 	Window_->KillWindow();

@@ -1,9 +1,9 @@
 #include "keyboard.h"
 keyboard::keyboard()
 {
-	countF=5;
-	F=new bool[countF];
-	for(int i=0;i<countF;i++)
+	CountButtons=5;
+	F=new bool[CountButtons];
+	for(int i=0;i<CountButtons;i++)
 		setF(false,i);
 	done = false;
 	SetBet_(8);
@@ -15,7 +15,7 @@ keyboard::keyboard()
 int keyboard::getAny()
 {
 	int retval=5;
-	for(int i=0;i<countF;i++)
+	for(int i=0;i<CountButtons;i++)
 		if(getF(i))
 			retval=i;
 	return retval;
@@ -23,7 +23,7 @@ int keyboard::getAny()
 bool keyboard::GetAny()
 {
 	bool retval = false;
-	for (int i = 0; i<countF; i++)
+	for (int i = 0; i<CountButtons; i++)
 		if (getF(i))
 			retval = true;
 	return retval;
@@ -81,18 +81,21 @@ bool*keyboard::GetF()
 		GetButtonDownCoords();
 #else
 		GetButtonDownCoords(event_);
+
 #endif
-		if(point.y >607 && point.y<683)
+		if(point.y >407 && point.y<444)
 		{
-			if(point.x >245 && point.x<345)
+			if(point.x >123 && point.x<190)
 				setF(true, 0);
-			if(point.x >352 && point.x<455)
+			if(point.x >228 && point.x<296)
 				setF(true, 1);
-			if(point.x >461 && point.x<561)
+			if (point.x > 330 && point.x < 401)
+			{
 				setF(true, 2);
-			if(point.x >569 && point.x<668)
+			}
+			if (point.x > 436 && point.x < 506)
 				setF(true, 3);
-			if(point.x >677 && point.x<777)
+			if(point.x >543 && point.x<608)
 				setF(true, 4);
 		}
 		return true;
@@ -111,17 +114,17 @@ bool*keyboard::GetF()
 			GetButtonDownCoords(event_);
 #endif
 			std::cout << point.x << " " << point.y<<std::endl;
-			if (point.y >437 && point.y<570)
+			if (point.y >407 && point.y<444)
 			{
-				if (point.x >65 && point.x<190)
-					setF(true, 1);
-				if (point.x >261 && point.x<381)
+				if (point.x >123 && point.x<190)
 					setF(true, 0);
-				if (point.x >436 && point.x<582)
+				if (point.x >228 && point.x<296)
+					setF(true, 1);
+				if (point.x >330 && point.x<401)
 					setF(true, 2);
-				if (point.x >632 && point.x<774)
+				if (point.x >436 && point.x<506)
 					setF(true, 3);
-				if (point.x >820 && point.x<961)
+				if (point.x >543 && point.x<608)
 					setF(true, 4);
 			}
 			return true;
@@ -163,21 +166,21 @@ bool*keyboard::GetF()
 #else
 		GetButtonDownCoords(event_);
 #endif
-		if(point.y >607 && point.y<683)
+		if (point.y >407 && point.y<444)
 		{
-			if(point.x >245 && point.x<345)
+			if (point.x >123 && point.x<190)
 				setF(false, 0);
-			if(point.x >352 && point.x<455)
+			if (point.x >228 && point.x<296)
 				setF(false, 1);
-			if(point.x >461 && point.x<561)
+			if (point.x >330 && point.x<401)
 				setF(false, 2);
-			if(point.x >569 && point.x<668)
+			if (point.x >436 && point.x<506)
 			{
-				if(getF(3))
+				if (getF(3))
 					SetBet_(GetBet_() + 1);
 				setF(false, 3);
 			}
-			if(point.x >677 && point.x<777)
+			if (point.x >543 && point.x<608)
 			{
 				setF(false, 4);
 				setdone(true);
@@ -190,7 +193,7 @@ bool*keyboard::GetF()
 #ifdef _WINDOWS_2
 		if (keyboard__->msg_->message == WM_RBUTTONUP || keyboard__->msg_->message == WM_LBUTTONUP && bonus && GetAny())
 #else
-    if(event_.type == SDL_MOUSEBUTTONUP && bonus&&!GetAny())
+    if(event_.type == SDL_MOUSEBUTTONUP && bonus&&!GetAny() && event_.key.repeat == 0)
 #endif
 		{
 #ifdef _WINDOWS_2			
@@ -198,31 +201,25 @@ bool*keyboard::GetF()
 #else
 			GetButtonDownCoords(event_);
 #endif
-			if (point.y > 437 && point.y < 570)
+			if (point.y >407 && point.y<444)
 			{
-					if (point.x > 65 && point.x < 190)
-						setF(false, 1);
-					if (point.x > 261 && point.x < 381)
-					{
-						setF(false, 0);
-						Logic_->SetRandom();
-					}
-					if (point.x > 436 && point.x < 582)
-					{
-						setF(false, 2);
-						Logic_->SetRandom();
-					}
-					if (point.x > 632 && point.x < 774)
-					{
-						setF(false, 3);
-						Logic_->SetRandom();
-					}
-
-					if (point.x > 820 && point.x < 961)
-					{
-						setF(false, 4);
-						Logic_->SetRandom();
-					}
+				if (point.x >123 && point.x<190)
+					setF(false, 0);
+				if (point.x >228 && point.x<296)
+					setF(false, 1);
+				if (point.x >330 && point.x<401)
+					setF(false, 2);
+				if (point.x >436 && point.x<506)
+				{
+					if (getF(3))
+						SetBet_(GetBet_() + 1);
+					setF(false, 3);
+				}
+				if (point.x >543 && point.x<608)
+				{
+					setF(false, 4);
+					setdone(true);
+				}
 			}
 			return true;
 		}
@@ -249,6 +246,7 @@ bool*keyboard::GetF()
 #else
 	point.x=event_.button.x;
 	point.y=event_.button.y;
+	std::cout << "Coordinats x:" << event_.button.x << "y:"<< event_.button.y << std::endl;
 #endif
 	return point;
 }
@@ -264,7 +262,7 @@ bool*keyboard::GetF()
 #ifdef _WINDOWS_2
 	if (keyboard__->msg_->message == WM_KEYDOWN && !bonus)
 #else
-    if(event_.type == SDL_KEYDOWN && !bonus)
+    if(event_.type == SDL_KEYDOWN && !bonus && event_.key.repeat == 0)
 #endif
 	{
 #ifdef _WINDOWS_2
@@ -331,7 +329,7 @@ bool*keyboard::GetF()
 #ifdef _WINDOWS_2
 		if (keyboard__->msg_->message == WM_KEYDOWN && bonus && !GetAny())
 #else
-        if(event_.type == SDL_KEYDOWN && bonus && !GetAny())
+        if(event_.type == SDL_KEYDOWN && bonus && !GetAny() && event_.key.repeat == 0)
 #endif
 		{
 #ifdef _WINDOWS_2
@@ -496,7 +494,6 @@ bool*keyboard::GetF()
 #endif
 			{
 				setF(false, 0);
-				Logic_->SetRandom();
 				break;
 			}
 #ifdef _WINDOWS_2
@@ -506,7 +503,8 @@ bool*keyboard::GetF()
 #endif
 			{
 				setF(false, 2);
-				Logic_->SetRandom();
+				//Logic_->SetRandom();
+				Logic_->SetDrum();
 				break;
 			}
 #ifdef _WINDOWS_2
@@ -516,7 +514,6 @@ bool*keyboard::GetF()
 #endif
 			{
 				setF(false, 3);
-				Logic_->SetRandom();
 				break;
 			}
 #ifdef _WINDOWS_2
@@ -526,7 +523,6 @@ bool*keyboard::GetF()
 #endif
 			{
 				setF(false, 4);
-				Logic_->SetRandom();
 				break;
 			}
 		}
@@ -580,7 +576,7 @@ void keyboard::SetBet_(int bet_)
 }
 int keyboard::GetCountF()
 {
-	return countF;
+	return CountButtons;
 }
 keyboard::~keyboard()
 {

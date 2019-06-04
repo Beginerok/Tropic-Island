@@ -71,11 +71,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Demo2\Demo2;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Demo2\Demo2\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -152,6 +154,7 @@
     <ClInclude Include="..\..\Demo\Demo\keyboard.h" />
     <ClInclude Include="..\..\Demo\Demo\Logic.h" />
     <ClInclude Include="..\..\Demo\Demo\Scene1.h" />
+    <ClInclude Include="DataBaseConnection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Demo\Demo\Game.cpp" />
@@ -159,6 +162,7 @@
     <ClCompile Include="..\..\Demo\Demo\Logic.cpp" />
     <ClCompile Include="..\..\Demo\Demo\main.cpp" />
     <ClCompile Include="..\..\Demo\Demo\Scene1.cpp" />
+    <ClCompile Include="DataBaseConnection.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

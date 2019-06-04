@@ -5,7 +5,7 @@
 	#include <SDL2/SDL.h>
 #else
 	#include <Windows.h>
-    #include <SDL/SDL.h>
+    #include <SDL2/SDL.h>
 #endif
 #include "Logic.h"
 #ifdef __unix__
@@ -59,7 +59,7 @@ public:
 protected:
     bool done;
     bool *F;
-    int countF;
+    int CountButtons;
     int bet;
     POINT point;
 };

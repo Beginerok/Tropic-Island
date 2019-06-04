@@ -22,7 +22,8 @@ Scene1::Scene1(void)
 		rotate[i] = 0.0f;
 		startrotate[i] = false;
 	}
-	randommassive = new int[30];
+	//randommassive = new int[30];
+	start = true;
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -765,7 +766,7 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "wild";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+		/*
 		max_ = vectordrum.size() - 1, min_ = 0;
 		srand(time(NULL));
 		for (int i = 0; i < 30; i++)
@@ -773,14 +774,15 @@ int Scene1::LoadDrum(int iter)
 			SetMassive(i, GetRandom());
 		}
 		GetRandomMassive();
+		*/
 	}
 	if (iter > 15)
 		return 0;
 	else
 		return 1;
 }
-void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums/*, int**drum,
-	int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms*/, bool*buttons)
+void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,/* int*DrumPosition,
+	int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms*/ bool*buttons)
 {
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -789,7 +791,6 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 	glAlphaFunc(GL_GREATER, 0.0f); 
 	//29.03.2019
 	if (buttons[2]) {
-		start = false;
 		StartRotate();
 	}
 	Rotate();
@@ -800,7 +801,8 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j<counttextureondrums; j++)
 		{
-			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[GetMassive(++k)])]);
+			//glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[DrumPosition[++k]/*GetMassive(++k)*/])]);
+			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(drum[++k])]);
 			EnableTexture(i, j);
 		}
 		glPopMatrix();
@@ -809,7 +811,7 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
-
+/*
 int Scene1::GetMassive(int number)
 {
 	return randommassive[number];
@@ -818,7 +820,7 @@ void Scene1::SetMassive(int number, int value)
 {
 	randommassive[number] = value;
 }
-
+*/
 void Scene1::LoadButtons()
 {
 	vectorbuttons.push_back("HELP");
@@ -1121,6 +1123,7 @@ void Scene1::EnableTextureButtons(int i)
 		glEnd();//EXIT
 	}
 }
+/*
 int Scene1::GetRandom()
 {
 	return ((int)((float)rand() / RAND_MAX*(max_ - min_) + min_));
@@ -1132,41 +1135,10 @@ int*Scene1::GetRandomMassive()
 		randommassive[i] = GetRandom();
 		//std::cout<<randommassive[i]<<"|";
 	}
-	/*
-	SetMassive(0, min_);//GetRandom(max);
-	SetMassive(1, min_);//GetRandom(max);
-	SetMassive(2, min_);//GetRandom(max);
-	SetMassive(3, min_);//GetRandom(max);
-	SetMassive(4, min_);//GetRandom(max);
-	SetMassive(5, max_);//GetRandom(max);
-	SetMassive(6, max_);//GetRandom(max);
-	SetMassive(7, max_);//GetRandom(max);
-	SetMassive(8, max_);//GetRandom(max);
-	SetMassive(9, max_);//GetRandom(max);
-	SetMassive(10, max_);//GetRandom(max);
-	SetMassive(11, max_);//GetRandom(max);
-	SetMassive(12, max_);//GetRandom(max);
-	SetMassive(13, max_);//GetRandom(max);
-	SetMassive(14, max_);//GetRandom(max);
-	SetMassive(15, max_);//GetRandom(max);
-	SetMassive(16, max_);//GetRandom(max);
-	SetMassive(17, max_);//GetRandom(max);
-	SetMassive(18, max_);//GetRandom(max);
-	SetMassive(19, max_);//GetRandom(max);
-	SetMassive(20, max_);//GetRandom(max);
-	SetMassive(21, max_);//GetRandom(max);
-	SetMassive(22, max_);//GetRandom(max);
-	SetMassive(23, max_);//GetRandom(max);
-	SetMassive(24, max_);//GetRandom(max);
-	SetMassive(25, max_);//GetRandom(max);
-	SetMassive(26, max_);//GetRandom(max);
-	SetMassive(27, max_);//GetRandom(max);
-	SetMassive(28, max_);//GetRandom(max);
-	SetMassive(29, max_);//GetRandom(max);
-	*/
 	//std::cout<<std::endl;
 	return randommassive;
 }
+*/
 void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float yup)
 {
 
@@ -1288,47 +1260,54 @@ void Scene1::EnableTexture(int n, int m)
         yu = 0.9;
         EnablePolygonFrontUp(xl, xr, yd, yu);
         }
-        if(m == 1){
-        xl = -0.48f;
-        xr = -0.16f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonFrontUp(xl, xr, yd, yu);
-        }
-        if(m == 2){
-        xl = -0.16f;
-        xr = 0.16f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonFrontUp(xl, xr, yd, yu);
-        }
-        if(m == 3){
-        xl = 0.16f;
-        xr = 0.48f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonFrontUp(xl, xr, yd, yu);
-        }
-        if(m == 4){
-        xl = 0.48f;
-        xr = 0.8f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonFrontUp(xl, xr, yd, yu);
-        }
+		if (m == 1) {
+			xl = -0.8f;
+			xr = -0.48f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+		}
+		if (m == 2) {
+			xl = -0.8f;
+			xr = -0.48f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonFrontDown(xl, xr, yd, yu);
+		}
+		if (m == 3) {
+			xl = -0.8f;
+			xr = -0.48f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonBackUp(xl, xr, yd, yu);
+		}
+		if (m == 4) {
+			xl = -0.8f;
+			xr = -0.48f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonBackMiddle(xl, xr, yd, yu);
+		}
+		if (m == 5) {
+			xl = -0.8f;
+			xr = -0.48f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonBackDown(xl, xr, yd, yu);
+		}
     }
 	//front up
 
 	//front middle
     if(n == 1)
     {
-        if(m == 0){
-        xl = -0.8f;
-        xr = -0.48f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonFrontMiddle(xl, xr, yd, yu);
-        }
+		if (m == 0) {
+			xl = -0.48f;
+			xr = -0.16f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonFrontUp(xl, xr, yd, yu);
+		}
         if(m == 1){
         xl = -0.48f;
         xr = -0.16f;
@@ -1336,47 +1315,54 @@ void Scene1::EnableTexture(int n, int m)
         yu = 0.3;
         EnablePolygonFrontMiddle(xl, xr, yd, yu);
         }
-        if(m == 2){
-        xl = -0.16f;
-        xr = 0.16f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonFrontMiddle(xl, xr, yd, yu);
-        }
-        if(m == 3){
-        xl = 0.16f;
-        xr = 0.48f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonFrontMiddle(xl, xr, yd, yu);
-        }
-        if(m == 4){
-        xl = 0.48f;
-        xr = 0.8f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonFrontMiddle(xl, xr, yd, yu);
-        }
+		if (m == 2) {
+			xl = -0.48f;
+			xr = -0.16f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonFrontDown(xl, xr, yd, yu);
+		}
+		if (m == 3) {
+			xl = -0.48f;
+			xr = -0.16f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonBackUp(xl, xr, yd, yu);
+		}
+		if (m == 4) {
+			xl = -0.48f;
+			xr = -0.16f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonBackMiddle(xl, xr, yd, yu);
+		}
+		if (m == 5) {
+			xl = -0.48f;
+			xr = -0.16f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonBackDown(xl, xr, yd, yu);
+		}
     }
 	//front middle
 
 	//front down
     if(n == 2)
     {
-        if(m == 0){
-        xl = -0.8f;
-        xr = -0.48f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonFrontDown(xl, xr, yd, yu);
-        }
-        if(m == 1){
-        xl = -0.48f;
-        xr = -0.16f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonFrontDown(xl, xr, yd, yu);
-        }
+		if (m == 0) {
+			xl = -0.16f;
+			xr = 0.16f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonFrontUp(xl, xr, yd, yu);
+		}
+		if (m == 1) {
+			xl = -0.16f;
+			xr = 0.16f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+		}
         if(m == 2){
         xl = -0.16f;
         xr = 0.16f;
@@ -1384,47 +1370,54 @@ void Scene1::EnableTexture(int n, int m)
         yu = -0.3;
         EnablePolygonFrontDown(xl, xr, yd, yu);
         }
-        if(m == 3){
-        xl = 0.16f;
-        xr = 0.48f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonFrontDown(xl, xr, yd, yu);
-        }
-        if(m == 4){
-        xl = 0.48f;
-        xr = 0.8f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonFrontDown(xl, xr, yd, yu);
-        }
+		if (m == 3) {
+			xl = -0.16f;
+			xr = 0.16f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonBackUp(xl, xr, yd, yu);
+		}
+		if (m == 4) {
+			xl = -0.16f;
+			xr = 0.16f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonBackMiddle(xl, xr, yd, yu);
+		}
+		if (m == 5) {
+			xl = -0.16f;
+			xr = 0.16f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonBackDown(xl, xr, yd, yu);
+		}
     }
 	//front down
 
 	//back up
     if(n == 3)
     {
-        if(m == 0){
-        xl = -0.8f;
-        xr = -0.48f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonBackUp(xl, xr, yd, yu);
-        }
-        if(m == 1){
-        xl = -0.48f;
-        xr = -0.16f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonBackUp(xl, xr, yd, yu);
-        }
-        if(m == 2){
-        xl = -0.16f;
-        xr = 0.16f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonBackUp(xl, xr, yd, yu);
-        }
+		if (m == 0) {
+			xl = 0.16f;
+			xr = 0.48f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonFrontUp(xl, xr, yd, yu);
+		}
+		if (m == 1) {
+			xl = 0.16f;
+			xr = 0.48f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+		}
+		if (m == 2) {
+			xl = 0.16f;
+			xr = 0.48f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonFrontDown(xl, xr, yd, yu);
+		}
         if(m == 3){
         xl = 0.16f;
         xr = 0.48f;
@@ -1432,47 +1425,54 @@ void Scene1::EnableTexture(int n, int m)
         yu = 0.9;
         EnablePolygonBackUp(xl, xr, yd, yu);
         }
-        if(m == 4){
-        xl = 0.48f;
-        xr = 0.8f;
-        yd = 0.3f;
-        yu = 0.9;
-        EnablePolygonBackUp(xl, xr, yd, yu);
-        }
+		if (m == 4) {
+			xl = 0.16f;
+			xr = 0.48f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonBackMiddle(xl, xr, yd, yu);
+		}
+		if (m == 5) {
+			xl = 0.16f;
+			xr = 0.48f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonBackDown(xl, xr, yd, yu);
+		}
     }
 	//back up
 
 	//back middle
     if(n == 4)
     {
-        if(m == 0){
-        xl = -0.8f;
-        xr = -0.48f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonBackMiddle(xl, xr, yd, yu);
-        }
-        if(m == 1){
-        xl = -0.48f;
-        xr = -0.16f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonBackMiddle(xl, xr, yd, yu);
-        }
-        if(m == 2){
-        xl = -0.16f;
-        xr = 0.16f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonBackMiddle(xl, xr, yd, yu);
-        }
-        if(m == 3){
-        xl = 0.16f;
-        xr = 0.48f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonBackMiddle(xl, xr, yd, yu);
-        }
+		if (m == 0) {
+			xl = 0.48f;
+			xr = 0.8f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonFrontUp(xl, xr, yd, yu);
+		}
+		if (m == 1) {
+			xl = 0.48f;
+			xr = 0.8f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+		}
+		if (m == 2) {
+			xl = 0.48f;
+			xr = 0.8f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonFrontDown(xl, xr, yd, yu);
+		}
+		if (m == 3) {
+			xl = 0.48f;
+			xr = 0.8f;
+			yd = 0.3f;
+			yu = 0.9;
+			EnablePolygonBackUp(xl, xr, yd, yu);
+		}
         if(m == 4){
         xl = 0.48f;
         xr = 0.8f;
@@ -1480,49 +1480,15 @@ void Scene1::EnableTexture(int n, int m)
         yu = 0.3;
         EnablePolygonBackMiddle(xl, xr, yd, yu);
         }
+		if (m == 5) {
+			xl = 0.48f;
+			xr = 0.8f;
+			yd = -0.9f;
+			yu = -0.3;
+			EnablePolygonBackDown(xl, xr, yd, yu);
+		}
     }
 	//back middle
-
-	//back down
-    if(n == 5)
-    {
-        if(m == 0){
-        xl = -0.8f;
-        xr = -0.48f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonBackDown(xl, xr, yd, yu);
-        }
-        if(m == 1){
-        xl = -0.48f;
-        xr = -0.16f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonBackDown(xl, xr, yd, yu);
-        }
-        if(m == 2){
-        xl = -0.16f;
-        xr = 0.16f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonBackDown(xl, xr, yd, yu);
-        }
-        if(m == 3){
-        xl = 0.16f;
-        xr = 0.48f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonBackDown(xl, xr, yd, yu);
-        };
-        if(m == 4){
-        xl = 0.48f;
-        xr = 0.8f;
-        yd = -0.9f;
-        yu = -0.3;
-        EnablePolygonBackDown(xl, xr, yd, yu);
-        }
-    }
-	//back down
 }
 void Scene1::Rotate()
 {
@@ -1533,7 +1499,10 @@ void Scene1::Rotate()
 			if (rotate[i]<360.0f)
 				rotate[i] += 5.0f;
 			else
+			{
 				startrotate[i] = false;
+				rotate[i] = 0.0f;
+			}
 		}
 	}
 }
@@ -1541,12 +1510,12 @@ void Scene1::StartRotate()
 {
 	for (int i = 0; i<CountDrum; i++)
 	{
-		if (startrotate[i])
+		if (startrotate[i] && rotate[i] != 0.0f)
 			continue;
 		startrotate[i] = true;
 		rotate[i] = 0.0f;
-		srand(time(0));
-		GetRandomMassive();
+		//srand(time(0));
+		//GetRandomMassive();
 	}
 }
 Scene1::~Scene1()
@@ -1565,5 +1534,5 @@ Scene1::~Scene1()
 	delete image;
 	delete rotate;
 	delete startrotate;
-	delete randommassive;
+	//delete randommassive;
 }
