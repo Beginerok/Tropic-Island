@@ -36,6 +36,8 @@
 //#include <time.h>
 //#include <random>
 //#include "Logic.h"
+#include <iostream>
+#include <fstream>
 struct Image
 {
 	float**TextureCoordinats;
@@ -55,7 +57,9 @@ public:
 	void EnableTexture(float*texcoor, float*vercoor);
 	int FindTexture(std::string name);
 	int LoadDrum(int iter);
-	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum, /*int*DrumPosition, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms,*/ bool*buttons);
+	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,
+		/*int*DrumPosition, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms,*/
+		bool*buttons,int pressbutton);
 	void EnableTexture(int n, int m);
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
@@ -75,6 +79,10 @@ public:
 	void LoadButtons();
 	void ShowButtons();
 	void EnableTextureButtons(int i);
+
+	void LoadNumbersAndWords();
+	void ShowNumbersAndWords();
+	void EnableTextureNumbersAndWords(int i);
 	~Scene1();
 	int err;
 #ifdef _WINDOWS_2
@@ -91,7 +99,7 @@ public:
 	// Тип хранения данных
 	unsigned int type;
 	unsigned char*copyData;
-	static const int CountTexture = 40;
+	static const int CountTexture = 53;//40
 	Image *image;
 	int CountIndexTexture;
 	int AnimateBar;
@@ -108,5 +116,8 @@ public:
 	//volatile int random, *randommassive;
 	//int max_, min_;
 	bool start;
+
+	std::vector<std::string>vectornumbersandwords;
+	std::ofstream flogout;// ("log.txt");
 };
 

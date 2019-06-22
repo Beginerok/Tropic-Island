@@ -54,8 +54,9 @@ void Game::draw_screen()
 			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums,Logic_->GetDrum(),/*Logic_->GetRandom(),credits,win,totalbet,line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
-				Math_->GetLines(), Math_->GetMS()*/keyboard_->GetF());
+				Math_->GetLines(), Math_->GetMS()*/keyboard_->GetF(),keyboard_->pressbutton);
 			Scene1_->ShowButtons();
+			Scene1_->ShowNumbersAndWords();
 		}
 		else
 			Scene1_->ShowWelcome(loading);
@@ -102,6 +103,9 @@ int Game::Execute()
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
 	Scene1_->LoadButtons();
+	//
+	Scene1_->LoadNumbersAndWords();
+	//
 	keyboard_ = new keyboard();
 	Logic_ = new Logic();
 	Logic_->SetRandom();

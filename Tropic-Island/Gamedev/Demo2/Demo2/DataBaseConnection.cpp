@@ -16,11 +16,11 @@ void DataBaseConnection::Connect()
 		//exit(1); //Если используется оконное приложение
 	}
 	// Подключаемся к серверу
-	if (!mysql_real_connect(conn, "192.168.0.27", "client", "client", "test", NULL, NULL, 0))
+	if (!mysql_real_connect(conn, "127.0.0.1", "client", "client", "test", NULL, NULL, 0))
 	{
 		// Если нет возможности установить соединение с сервером 
 		// базы данных выводим сообщение об ошибке
-		fprintf(stderr, "Error: can'tconnecttodatabase %s\n", mysql_error(conn));
+		fprintf(stderr, "Error: can't connect to database: %s\n", mysql_error(conn));
 	}
 	else
 	{
@@ -39,7 +39,7 @@ std::vector<std::string> DataBaseConnection::Query()
 		res = mysql_store_result(conn);
 		while (row = mysql_fetch_row(res))
 		{
-			printf("ID: %s,Position: %s, Image: %s\n", row[0], row[1], row[2]);
+			//printf("ID: %s,Position: %s, Image: %s\n", row[0], row[1], row[2]);
 			vectordrum.push_back(row[2]);
 		}
 	}

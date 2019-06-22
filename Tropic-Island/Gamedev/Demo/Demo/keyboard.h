@@ -55,6 +55,8 @@ public:
 #endif
 	bool*GetF();
 	bool GetAny();
+
+	int pressbutton;
     virtual ~keyboard();
 protected:
     bool done;

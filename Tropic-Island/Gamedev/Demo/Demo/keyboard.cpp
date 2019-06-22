@@ -7,10 +7,10 @@ keyboard::keyboard()
 		setF(false,i);
 	done = false;
 	SetBet_(8);
-
 #ifdef _WINDOWS_2
 	keyboard__=new Keyboard();
 #endif
+	pressbutton = 0;
 }
 int keyboard::getAny()
 {
@@ -83,7 +83,7 @@ bool*keyboard::GetF()
 		GetButtonDownCoords(event_);
 
 #endif
-		if(point.y >407 && point.y<444)
+		if(point.y >478 && point.y<496)
 		{
 			if(point.x >123 && point.x<190)
 				setF(true, 0);
@@ -92,6 +92,8 @@ bool*keyboard::GetF()
 			if (point.x > 330 && point.x < 401)
 			{
 				setF(true, 2);
+				pressbutton += 1;
+				std::cout << "press button:" << pressbutton << std::endl;
 			}
 			if (point.x > 436 && point.x < 506)
 				setF(true, 3);
@@ -114,15 +116,19 @@ bool*keyboard::GetF()
 			GetButtonDownCoords(event_);
 #endif
 			std::cout << point.x << " " << point.y<<std::endl;
-			if (point.y >407 && point.y<444)
+			if (point.y >478 && point.y<496)
 			{
 				if (point.x >123 && point.x<190)
 					setF(true, 0);
 				if (point.x >228 && point.x<296)
 					setF(true, 1);
-				if (point.x >330 && point.x<401)
+				if (point.x > 330 && point.x < 401)
+				{
 					setF(true, 2);
-				if (point.x >436 && point.x<506)
+					pressbutton += 1;
+					std::cout << "press button:" << pressbutton << std::endl;
+				}
+				if (point.x > 436 && point.x < 506)
 					setF(true, 3);
 				if (point.x >543 && point.x<608)
 					setF(true, 4);
@@ -166,24 +172,36 @@ bool*keyboard::GetF()
 #else
 		GetButtonDownCoords(event_);
 #endif
-		if (point.y >407 && point.y<444)
+		//if (point.y >478 && point.y<496)
 		{
-			if (point.x >123 && point.x<190)
+			//if (point.x >123 && point.x<190)
+			if(getF(0))
 				setF(false, 0);
-			if (point.x >228 && point.x<296)
+			//if (point.x >228 && point.x<296)
+			if (getF(1))
 				setF(false, 1);
-			if (point.x >330 && point.x<401)
+			//if (point.x >330 && point.x<401)
+			if (getF(2))
+			{
 				setF(false, 2);
-			if (point.x >436 && point.x<506)
+				pressbutton = 0;
+				std::cout << "press button:" << pressbutton << std::endl;
+			}
+			//if (point.x >436 && point.x<506)
 			{
 				if (getF(3))
+				{
 					SetBet_(GetBet_() + 1);
-				setF(false, 3);
+					setF(false, 3);
+				}
 			}
-			if (point.x >543 && point.x<608)
+			//if (point.x >543 && point.x<608)
 			{
-				setF(false, 4);
-				setdone(true);
+				if (getF(4))
+				{
+					setF(false, 4);
+					setdone(true);
+				}
 			}
 		}
 		return true;
@@ -201,24 +219,36 @@ bool*keyboard::GetF()
 #else
 			GetButtonDownCoords(event_);
 #endif
-			if (point.y >407 && point.y<444)
+			//if (point.y >478 && point.y<496)
 			{
-				if (point.x >123 && point.x<190)
+				//if (point.x >123 && point.x<190)
+				if (getF(0))
 					setF(false, 0);
-				if (point.x >228 && point.x<296)
+				//if (point.x >228 && point.x<296)
+				if (getF(1))
 					setF(false, 1);
-				if (point.x >330 && point.x<401)
+				//if (point.x >330 && point.x<401)
+				if (getF(2))
+				{
 					setF(false, 2);
-				if (point.x >436 && point.x<506)
+					pressbutton = 0;
+					std::cout << "press button:" << pressbutton << std::endl;
+				}
+				//if (point.x >436 && point.x<506)
 				{
 					if (getF(3))
+					{
 						SetBet_(GetBet_() + 1);
-					setF(false, 3);
+						setF(false, 3);
+					}
 				}
-				if (point.x >543 && point.x<608)
+				//if (point.x >543 && point.x<608)
 				{
-					setF(false, 4);
-					setdone(true);
+					if (getF(4))
+					{
+						setF(false, 4);
+						setdone(true);
+					}
 				}
 			}
 			return true;
@@ -246,7 +276,7 @@ bool*keyboard::GetF()
 #else
 	point.x=event_.button.x;
 	point.y=event_.button.y;
-	std::cout << "Coordinats x:" << event_.button.x << "y:"<< event_.button.y << std::endl;
+	//std::cout << "Coordinats x:" << event_.button.x << "y:"<< event_.button.y << std::endl;
 #endif
 	return point;
 }
@@ -299,6 +329,8 @@ bool*keyboard::GetF()
 #endif
             {
                 setF(true, 2);
+				pressbutton += 1;
+				std::cout << "press button:" << pressbutton << std::endl;
                 //setF(false, 2);
                 break;
             }
@@ -364,6 +396,8 @@ bool*keyboard::GetF()
 #endif
                 {
                     setF(true, 2);
+					pressbutton += 1;
+					std::cout << "press button:" << pressbutton << std::endl;
                     break;
                 }
 #ifdef _WINDOWS_2
@@ -437,6 +471,8 @@ bool*keyboard::GetF()
 #endif
             {
                 setF(false, 2);
+				pressbutton = 0;
+				std::cout << "press button:" << pressbutton << std::endl;
                 //setF(true, 2);
                 break;
             }
@@ -503,6 +539,8 @@ bool*keyboard::GetF()
 #endif
 			{
 				setF(false, 2);
+				pressbutton = 0;
+				std::cout << "press button:" << pressbutton << std::endl;
 				//Logic_->SetRandom();
 				Logic_->SetDrum();
 				break;
