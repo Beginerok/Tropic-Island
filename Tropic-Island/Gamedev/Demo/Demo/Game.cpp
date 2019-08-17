@@ -5,6 +5,7 @@ Game::Game()
 	run = true;
 	loading = true;
 	iter = -1;
+	bonus = false;
 }
 void Game::setup_opengl(int width, int height)
 {
@@ -51,29 +52,35 @@ void Game::draw_screen()
 		//bool*buttons;
 		if (!loading) 
 		{
-			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums,Logic_->GetDrum(),/*Logic_->GetRandom(),credits,win,totalbet,line,bet,lines,ms,buttons*/
+			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums, Logic_->GetDrum(),/*Logic_->GetRandom(),credits,win,totalbet,line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
-				Math_->GetLines(), Math_->GetMS()*/keyboard_->GetF(),keyboard_->pressbutton);
+				Math_->GetLines(), Math_->GetMS()*/
+#if WINAPI_==0
+				WindowsSDLApi_->GetF(),
+				WindowsSDLApi_->pressbutton
+#else
+				WindowsWinApi_->GetF(),
+				WindowsWinApi_->pressbutton
+#endif
+			);
+			
 			Scene1_->ShowButtons();
 			Scene1_->ShowNumbersAndWords();
 		}
 		else
 			Scene1_->ShowWelcome(loading);
 		glDisable(GL_TEXTURE_2D);
-#ifdef _WINDOWS_2
-		Window_->Show();
+#if WINAPI_== 1
+		WindowsWinApi_->keyboard__->Show();
+		WindowsWinApi_->Update(bonus, Logic_);
+		run = !WindowsWinApi_->getdone();
 #else
 		SDL_GL_SwapWindow(window);
-#endif
-#ifndef _WINDOWS_2
 		SDL_PollEvent(&event_);
 		SDL_PumpEvents();
-		bool bonus = false;
-		keyboard_->Update(bonus,Logic_,event_);
-		run = !keyboard_->getdone();
-#else
-		Window_->Update();
+		WindowsSDLApi_->Update(bonus,Logic_,event_);
+		run = !WindowsSDLApi_->getdone();
 #endif
 		loading = Scene1_->LoadDrum(++iter);
 		if (iter > 17)
@@ -83,13 +90,10 @@ void Game::draw_screen()
 }
 int Game::Execute()
 {
-
-#ifdef _WINDOWS_2
-	Window_ = new Window();
-#endif
-	bool fullscreen = false;;
-#ifdef _WINDOWS_2
-	if (!Window_->CreateWindow_(L"Tropic Island",1024,768, 32, fullscreen))
+	bool fullscreen = false;
+#if WINAPI_==1
+	WindowsWinApi_ = new WindowsWinApi();
+	if (!WindowsWinApi_->keyboard__->CreateWindow_(L"Tropic Island",700,500, 32, fullscreen))
 		return 0;
 #else
 	SDL_GLContext context;
@@ -106,12 +110,14 @@ int Game::Execute()
 	//
 	Scene1_->LoadNumbersAndWords();
 	//
-	keyboard_ = new keyboard();
+#if WINAPI_ == 0
+	WindowsSDLApi_ = new WindowsSDLApi();
+#endif
 	Logic_ = new Logic();
 	Logic_->SetRandom();
 	draw_screen();
-#ifdef _WINDOWS_2
-	Window_->KillWindow();
+#if WINAPI_==1
+	WindowsWinApi_->keyboard__->KillWindow();
 #else
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
