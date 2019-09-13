@@ -11,7 +11,8 @@
 <table>
 <tr><th>NickName</th><th>Password</th><th>email</th></tr>
 <c:forEach var="user" items="${users}">
- <tr><td>${user.nickname}</td>
+ <tr>
+    <td>${user.nickname}</td> 
     <td>${user.password}</td>
     <td>${user.email}</td>
     <td>

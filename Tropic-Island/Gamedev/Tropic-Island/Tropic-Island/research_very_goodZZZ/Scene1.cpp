@@ -25,6 +25,7 @@ Scene1::Scene1(void)
 	randommassive = new int__[30];
 	
 }
+#include <iostream>
 void__ Scene1::LoadImage(const ILstring path)
 {
 	ILenum ext;
@@ -43,6 +44,9 @@ void__ Scene1::LoadImage(const ILstring path)
     strError = iluErrorString(err);
         // Выдаем сообщение об ошибке
     #ifdef _WINDOWS_2
+
+	std::cout << "\nNot find file: ";
+	std::wcout << path << std::endl;
         MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
     #endif
         // выход из программы

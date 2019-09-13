@@ -18,6 +18,41 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\research_very_goodZZZ\c.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Coor.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Drum.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\FileReader.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Game.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\keyboard.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\keyboard_.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Logic.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\main.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Math.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Scene.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Scene1.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Scene2.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Snd.cpp" />
+    <ClCompile Include="..\research_very_goodZZZ\Vector3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\research_very_goodZZZ\c.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Coor.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Drum.h" />
+    <ClInclude Include="..\research_very_goodZZZ\FileReader.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Game.h" />
+    <ClInclude Include="..\research_very_goodZZZ\keyboard.h" />
+    <ClInclude Include="..\research_very_goodZZZ\keyboard_.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Logic.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Math.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Project.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Scene.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Scene1.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Scene2.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Snd.h" />
+    <ClInclude Include="..\research_very_goodZZZ\typedefs.h" />
+    <ClInclude Include="..\research_very_goodZZZ\Vector3.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{55103F47-D7A2-47AD-AA3F-1D4AD31FD4F3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -71,10 +106,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\game3;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Tropic-Island\Tropic-Island;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Tropic-Island\Tropic-Island\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Tropic-Island\Tropic-Island\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Tropic-Island\Tropic-Island;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Tropic-Island\Tropic-Island\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Tropic-Island\Tropic-Island\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,7 +128,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,41 +185,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\c.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Coor.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Drum.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\FileReader.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Game.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\keyboard.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\keyboard_.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Logic.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\main.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Math.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Scene.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Scene1.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Scene2.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Snd.cpp" />
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Vector3.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\c.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Coor.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Drum.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\FileReader.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Game.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\keyboard.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\keyboard_.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Logic.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Math.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Project.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Scene.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Scene1.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Scene2.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Snd.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\typedefs.h" />
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Vector3.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

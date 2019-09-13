@@ -34,10 +34,15 @@ Scene::Scene()
     NewTexture=new uint__[1];
 	NewTextureCoordinats=new float__[4];
 }
+#include <iostream>
 void__ Scene::LoadData()
 {
     for(std::vector<int_>::iterator iter=veca->begin();iter!=veca->end();iter++)
     {
+		if (!filereader->Opened()) {
+			std::cout << "\nFile not open!" << std::endl;
+			std::cout<<filereader->GetFileName() << std::endl;
+		}
         filereader->ReadFile((*ves)[counttexture],Data2);
         for(float__ i=0;i<(*iter).a*(*iter).b+18;i++)
         {

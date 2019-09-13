@@ -1,6 +1,8 @@
 #include "FileReader.h"
 #ifdef _WINDOWS_2
     #pragma warning(disable : 4996)
+	#include <windows.h>
+#include <iostream>
 #endif
 FileReader::FileReader()
 {
@@ -11,6 +13,7 @@ FileReader::FileReader()
     tmpstroke=new char__[64];
 	open_=false;
 	str=new char__[64];
+	filename_ = new char[MAX_PATH];
 }
 void__ FileReader::ReadFile(int__ size_,void__ *buf)
 {
@@ -34,6 +37,7 @@ std::string FileReader::GetNumber()
 }
 void FileReader::FileReader__(const char__ *filename,const char__ *state)
 {
+	strcpy(filename_, filename);
 	std::string ext="";
 	int__ l=strlen(filename);
 	while(--l>0&&filename[l]!='.')
@@ -60,8 +64,16 @@ void FileReader::FileReader__(const char__ *filename,const char__ *state)
 	{
         #ifdef _WINDOWS_2
             life=open(filename,_A_ARCH);
-			if (life == -1)
-				printf("Open failed on input file: %s",filename);
+			if (life == -1) {
+				printf("Open failed on input file: %s\n", filename);
+#ifdef _WINDOWS_2
+				wchar_t path[MAX_PATH];
+				GetCurrentDirectory(sizeof(path),path);
+				//std::string path_in_string = path;
+				std::wcout << path/*path_in_string.c_str()*/ << std::endl;
+#endif // _WINDOWS
+
+			}
 		#else
 		    life=open(filename,O_RDONLY);
 		#endif // _WINDOWS_2
@@ -126,6 +138,10 @@ void__ FileReader::Convert(float__ flt)
 bool__ FileReader::Opened()
 {
     return open_;
+}
+char__*FileReader::GetFileName()
+{
+	return filename_;
 }
 FileReader::~FileReader()
 {

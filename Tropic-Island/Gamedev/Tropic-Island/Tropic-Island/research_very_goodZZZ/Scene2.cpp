@@ -15,6 +15,7 @@ Scene2::Scene2()
 	num_ = new char__[25];
 	loading = false;
 }
+#include <iostream>
 void__ Scene2::LoadImage(const ILstring path)
 {
 	ILenum ext;
@@ -44,7 +45,9 @@ void__ Scene2::LoadImage(const ILstring path)
     strError = iluErrorString(err);
         // Выдаем сообщение об ошибке
     #ifdef _WINDOWS_2
-        MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
+	std::cout << "\nNot find file: ";
+	std::wcout << path << std::endl;
+	MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
     #endif
         // выход из программы
         exit(EXIT_FAILURE);

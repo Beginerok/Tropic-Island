@@ -25,6 +25,7 @@ public:
     void__ ReadFile(int__ size_,void__ *buf);
     void__ PutBuf(int__ size_,void__ *buf);
 	void__ SetOff(int__ fes);
+	char__*GetFileName();
     virtual ~FileReader();
 protected:
     FILE *file;
@@ -36,5 +37,6 @@ protected:
     char__ *tmpstroke;
     int__ countbyte;
 	int__ org;
+	char__ *filename_;
 };
 #endif

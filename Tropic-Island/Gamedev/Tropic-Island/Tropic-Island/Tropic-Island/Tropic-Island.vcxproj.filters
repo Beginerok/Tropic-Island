@@ -15,99 +15,99 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\c.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\c.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Coor.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Coor.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Drum.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Drum.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\FileReader.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\FileReader.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Game.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Game.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\keyboard.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\keyboard.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\keyboard_.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\keyboard_.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Logic.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Logic.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\main.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\main.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Math.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Math.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Scene.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Scene.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Scene1.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Scene1.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Scene2.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Scene2.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Snd.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Snd.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\game3\research_very_goodZZZ\Vector3.cpp">
+    <ClCompile Include="..\research_very_goodZZZ\Vector3.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\c.h">
+    <ClInclude Include="..\research_very_goodZZZ\c.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Coor.h">
+    <ClInclude Include="..\research_very_goodZZZ\Coor.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Drum.h">
+    <ClInclude Include="..\research_very_goodZZZ\Drum.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\FileReader.h">
+    <ClInclude Include="..\research_very_goodZZZ\FileReader.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Game.h">
+    <ClInclude Include="..\research_very_goodZZZ\Game.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\keyboard.h">
+    <ClInclude Include="..\research_very_goodZZZ\keyboard.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\keyboard_.h">
+    <ClInclude Include="..\research_very_goodZZZ\keyboard_.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Logic.h">
+    <ClInclude Include="..\research_very_goodZZZ\Logic.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Math.h">
+    <ClInclude Include="..\research_very_goodZZZ\Math.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Project.h">
+    <ClInclude Include="..\research_very_goodZZZ\Project.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Scene.h">
+    <ClInclude Include="..\research_very_goodZZZ\Scene.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Scene1.h">
+    <ClInclude Include="..\research_very_goodZZZ\Scene1.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Scene2.h">
+    <ClInclude Include="..\research_very_goodZZZ\Scene2.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Snd.h">
+    <ClInclude Include="..\research_very_goodZZZ\Snd.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\typedefs.h">
+    <ClInclude Include="..\research_very_goodZZZ\typedefs.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\game3\research_very_goodZZZ\Vector3.h">
+    <ClInclude Include="..\research_very_goodZZZ\Vector3.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

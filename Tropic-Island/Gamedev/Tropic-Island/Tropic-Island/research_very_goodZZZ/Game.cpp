@@ -32,14 +32,15 @@ void__ Game::draw_screen()
 			Math_->keyboard_->setF(false, 4);
 		}
 		if (!bonus){
-			
+			/*
 			Scene1_->ShowDrum(Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
 				Math_->GetLines(), Math_->GetMS(), Math_->keyboard_->GetF());
+			*/
 			//Scene1_->ShowWelcome(loading);
-			//Scene_->Show(Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
-				//Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
-				//Math_->GetLines(), Math_->GetMS(), Math_->keyboard_->GetF());
+			Scene_->Show(Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
+				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
+				Math_->GetLines(), Math_->GetMS(), Math_->keyboard_->GetF());
 		}
 		else
 		{
