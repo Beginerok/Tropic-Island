@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo\Demo;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Users\User\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,22 +150,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Demo\Demo\Game.h" />
-    <ClInclude Include="..\..\Demo\Demo\WindowsSDLApi.h" />
-    <ClInclude Include="..\..\Demo\Demo\Logic.h" />
-    <ClInclude Include="..\..\Demo\Demo\Scene1.h" />
-    <ClInclude Include="..\..\Demo\Demo\Window.h" />
     <ClInclude Include="DataBaseConnection.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Logic.h" />
+    <ClInclude Include="Scene1.h" />
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="WindowsSDLApi.h" />
     <ClInclude Include="WindowsWinApi.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Demo\Demo\Game.cpp" />
-    <ClCompile Include="..\..\Demo\Demo\WindowsSDLApi.cpp" />
-    <ClCompile Include="..\..\Demo\Demo\Logic.cpp" />
-    <ClCompile Include="..\..\Demo\Demo\main.cpp" />
-    <ClCompile Include="..\..\Demo\Demo\Scene1.cpp" />
-    <ClCompile Include="..\..\Demo\Demo\Window.cpp" />
     <ClCompile Include="DataBaseConnection.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Logic.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scene1.cpp" />
+    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WindowsSDLApi.cpp" />
     <ClCompile Include="WindowsWinApi.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
