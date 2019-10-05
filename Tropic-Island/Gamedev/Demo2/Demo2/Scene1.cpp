@@ -810,7 +810,7 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		}
 		glPopMatrix();
 	}
-	glPopMatrix();
+	//glPopMatrix();
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
