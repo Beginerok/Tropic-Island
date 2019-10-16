@@ -20,19 +20,17 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
- 
         getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
- 
         try {
             String nickname = request.getParameter("nickname");
             String  email = request.getParameter("email");
             String  password = request.getParameter("password");
             Users users = new Users(nickname,email, password);
             UsersDB.insert(users);
-            response.sendRedirect(request.getContextPath()+"/index");
+            response.sendRedirect(/*request.getContextPath()+*/"/index.html");
         }
         catch(Exception ex) {
             getServletContext().getRequestDispatcher("/create.jsp").forward(request, response); 

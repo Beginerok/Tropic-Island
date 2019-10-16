@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet("/")
+@WebServlet("/index")
 public class IndexServlet extends HttpServlet {
      
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
