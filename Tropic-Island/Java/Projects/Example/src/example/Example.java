@@ -5,6 +5,7 @@
  */
 package example;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class Example {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // TODO code application logic here
         System.out.println("Java Правит Интернетом!");
         System.out.println(md5Apache("root"));
@@ -65,7 +66,33 @@ public class Example {
               
              System.out.println(ex);
          }
+        
     }
+    /*
+    public static void showFilesAndDirectoryes (File f) throws Exception  {
+        
+        if (!f.isDirectory ()) {
+        System.out.println (f.getName ());
+        }
+        
+        if (f.isDirectory ()) { 
+            try {
+                System.out.println(f.getCanonicalFile()); 
+                File[] child = f.listFiles();
+                
+                for (int i = 0; i < child.length; i++) {
+                    System.out.println(child[i].getParent());   
+                    showFilesAndDirectoryes (child[i]);     
+                }//for
+         
+            }//try
+            catch(Exception e){
+                e.printStackTrace();
+            }//catch
+        } //if  
+    }
+    */
+  
     public static String md5Apache(String st) {
         String md5Hex = DigestUtils.md5Hex(st);
         return md5Hex;
