@@ -7,7 +7,9 @@
 </head>
 <body>
 <h2>Users List</h2>
+<!--
 <p><a href='<c:url value="/create" />'>Create new</a></p>
+-->
 <table>
 <tr><th>NickName</th><th>Password</th><th>email</th></tr>
 <c:forEach var="user" items="${users}">
