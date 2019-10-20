@@ -17,7 +17,7 @@
 <input class="inputer" name="password" type="password" /><br><br>
 <label class="labeler">Email</label><br>
 <input class="inputer" id="email" name="email" /><br><br>
-<input class="button" type="submit" value="Save" onsubmit="return ValidMail()"/>
+<input class="button" type="submit" value="Save"/>
 </form>
 </div>
 </body>

@@ -25,7 +25,7 @@ public class DeleteServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));          
             UsersDB.delete(id);
-            response.sendRedirect(request.getContextPath() + "/index2");
+            response.sendRedirect(request.getContextPath() + "/index");
         }
         catch(Exception ex) {
             getServletContext().getRequestDispatcher("/notfound.jsp").forward(request, response);
