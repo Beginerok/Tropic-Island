@@ -1,7 +1,5 @@
-h1{
-  color: crimson;
-  position: absolute;
-  left: 30%;
+.h3{
+	color: crimson;
 }
 .labeler{
   color: crimson;
@@ -28,12 +26,12 @@ body
 	background-size: 100%;
 }
 #CenterBlock{
-border-radius: 40px;
+		border-radius:40px;
         width:400px;
-        height:650px;
+        height:530px;
         background:radial-gradient(circle at 65% 15%, aqua, darkblue);
         position:absolute;
-        top:10%;
-        left:30%;
+        top:20%;
+        left:37%;
         margin:0 0 0 0;
     }

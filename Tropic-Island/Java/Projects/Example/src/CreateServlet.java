@@ -30,8 +30,11 @@ public class CreateServlet extends HttpServlet{
             String  password = request.getParameter("password");
             Users users = new Users(nickname,email, password);
             UsersDB.insert(users);
-            getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
-            //response.sendRedirect(/*request.getContextPath()+*/"/index.html");
+            users.setnickname("");
+            users.setPassword("");
+            users.setEmail("");
+            //getServletContext().getRequestDispatcher("/create.jsp").forward(request, response);
+            response.sendRedirect(/*request.getContextPath()+*/"/index.html");
         }
         catch(Exception ex) {
             getServletContext().getRequestDispatcher("/create.jsp").forward(request, response); 

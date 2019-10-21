@@ -7,3 +7,4 @@ function ValidMail() {
     document.getElementById('message').innerHTML = output;
     return valid;
 }
+

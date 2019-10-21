@@ -7,17 +7,23 @@
 <script type="text/javascript" src="create.js"></script>
 </head>
 <body>
-<h1>Create Account</h1>
 <div id="CenterBlock">
 <form method="post"  onsubmit="return ValidMail()">
-<p id="message" >Enter your information</p>
-<label class="labeler">NickName</label><br>
-<input class="inputer" name="nickname"/><br><br>
+<h3>Create Account</h3>
+<!--
+<label class="labeler">Username</label><br>
+-->
+<input class="inputer" name="nickname" placeholder="Username *"/><br><br>
+<!--
 <label class="labeler">Password</label><br>
-<input class="inputer" name="password" type="password" /><br><br>
+-->
+<input class="inputer" name="password" type="password" placeholder="Password *"/><br><br>
+<!--
 <label class="labeler">Email</label><br>
-<input class="inputer" id="email" name="email" /><br><br>
-<input class="button" type="submit" value="Save"/>
+-->
+<input class="inputer" id="email" name="email" value="" placeholder="E-mail *"/><br><br>
+<input class="button" type="submit" value="Create"/>
+<p id="message" >Enter your information</p>
 </form>
 </div>
 </body>
