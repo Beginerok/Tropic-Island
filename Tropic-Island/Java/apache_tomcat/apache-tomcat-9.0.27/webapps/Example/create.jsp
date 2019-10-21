@@ -3,17 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Create User</title>
+<link rel="stylesheet" href="create.css">
+<script type="text/javascript" src="create.js"></script>
 </head>
 <body>
-<h3>New User</h3>
-<form method="post">
-<label>NickName</label><br>
-<input name="nickname"/><br><br>
-<label>Password</label><br>
-<input name="password" /><br><br>
-<label>Email</label><br>
-<input name="email" /><br><br>
-<input type="submit" value="Save" />
+<h1>Create Account</h1>
+<div id="CenterBlock">
+<form method="post"  onsubmit="return ValidMail()">
+<p id="message" >Enter your information</p>
+<label class="labeler">NickName</label><br>
+<input class="inputer" name="nickname"/><br><br>
+<label class="labeler">Password</label><br>
+<input class="inputer" name="password" type="password" /><br><br>
+<label class="labeler">Email</label><br>
+<input class="inputer" id="email" name="email" /><br><br>
+<input class="button" type="submit" value="Save"/>
 </form>
+</div>
 </body>
 </html>
