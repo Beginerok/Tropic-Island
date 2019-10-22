@@ -7,4 +7,21 @@ function ValidMail() {
     document.getElementById('message').innerHTML = output;
     return valid;
 }
+function validate_form() {
+                valid = true;
+                if (document.form['nickname'] == "") {
+                    alert("Вы не ввели своё имя");
+                    valid = false;
+                }
+                if (document.form['password'] == "") {
+                    alert("Вы не ввели свой password");
+                    valid = false;
+                }
+                if (document.form['email'] == "") {
+                    alert("Вы не ввели свой email");
+                    valid = false;
+                }
+                return valid;
+                
+} 
 
