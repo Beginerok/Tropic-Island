@@ -2,22 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Create User</title>
+<title>Sign Up</title>
 <link rel="stylesheet" href="create.css">
 <script type="text/javascript" src="create.js"></script>
 </head>
 <body>
-<h1>Create Account</h1>
-<p id="message" >Enter your information</p>
 <div id="CenterBlock">
-<form method="post"  onsubmit="return ValidMail()">
-<label class="labeler">NickName</label><br>
-<input class="inputer" name="nickname"/><br><br>
+<form method="post"  onsubmit="return ValidMail();">
+<h3>Create Account</h3>
+<!--
+<label class="labeler">Username</label><br>
+-->
+<input class="inputer" name="nickname" placeholder="Username *" required/><br><br>
+<!--
 <label class="labeler">Password</label><br>
-<input class="inputer" name="password" type="password" /><br><br>
+-->
+<input class="inputer" name="password" type="password" placeholder="Password *" required/><br><br>
+<!--
 <label class="labeler">Email</label><br>
-<input class="inputer" id="email" name="email" /><br><br>
-<input class="button" type="submit" value="Save"/>
+-->
+<input class="inputer" id="email" name="email" value="" placeholder="E-mail *" required/><br><br>
+<input class="button" type="submit" value="Sign Up"/>
+<p id="message" >Enter your information</p>
 </form>
 </div>
 </body>
