@@ -66,7 +66,8 @@ public class Example {
               
              System.out.println(ex);
          }
-        
+        GeneratePlaylist g = new GeneratePlaylist();
+        g.LoadFromFiles();
     }
     /*
     public static void showFilesAndDirectoryes (File f) throws Exception  {
@@ -97,5 +98,4 @@ public class Example {
         String md5Hex = DigestUtils.md5Hex(st);
         return md5Hex;
     }
-    //public void 
 }
