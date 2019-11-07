@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,19 +50,25 @@ public class GeneratePlaylist {
         }
         //public Map<Float, String> music,talk;
         public ArrayList<Type> music,talk;
+        
+        SecureRandom random;
         public GeneratePlaylist()
         {
             //music = new HashMap<Float, String>();
             //talk = new HashMap<Float, String>();
             music = new ArrayList<Type>();
             talk = new ArrayList<Type>();
+            random = new SecureRandom(/*System.currentTimeMillis()*/);
         }
         public void LoadFromFiles()
         {
             try {
-            File file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist4.m3u8");
+            File file = new File("C:\\Users\\User\\Desktop\\Tropic-Island\\Tropic-Island\\C++\\Project1\\Project1\\playlist4.m3u8");
             //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(file);
+            //FileReader fr = new FileReader(file);
+            
+	    FileInputStream fStream = new FileInputStream(file);
+            InputStreamReader fr = new InputStreamReader(fStream, "windows-1251");
             //создаем BufferedReader с существующего FileReader для построчного считывания
             BufferedReader reader = new BufferedReader(fr);
             // считаем сначала первую строку
@@ -86,7 +93,7 @@ public class GeneratePlaylist {
         }
            
             try {
-            File file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist5.m3u8");
+            File file = new File("C:\\Users\\User\\Desktop\\Tropic-Island\\Tropic-Island\\C++\\Project1\\Project1\\playlist5.m3u8");
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
             
@@ -115,34 +122,39 @@ public class GeneratePlaylist {
             e.printStackTrace();
         }
           Collections.sort(music);
+          
+            Collections.sort(talk);
        /*
            for(Type t:music)
            {
                System.out.println(t.name+"\n"+t.length);
            }
            */
-           for (int i = 0; i < music.size(); i++)
-             System.out.print(music.get(i).length + " ");
+           //for (int i = 0; i < music.size(); i++)
+             //System.out.print(music.get(i).length + " ");
+           ArrayList<Type>  vec ;
+           for(int j=0;j<5;j++)
+           {
+           
             float length = (float) 3600.0, currentlength = 0.0f;
-            ArrayList<Type>  vec = new ArrayList<Type> ();
+            vec = new ArrayList<Type> ();
 
             //srand(time(0));
             currentlength = AddMusic(music, vec, currentlength, length);
-            System.out.println("vec: ");
-            for (int i = 0; i < vec.size(); i++)
-		System.out.print(vec.get(i).length +" ");
+            //System.out.println("vec: ");
+            //for (int i = 0; i < vec.size(); i++)
+		//System.out.print(vec.get(i).length +" ");
             System.out.println("\n+cl:"+ currentlength);
 	
-            Collections.sort(talk);
-            for (int i = 0; i < talk.size(); i++)
-		System.out.print(talk.get(i).length + " ");
+            //for (int i = 0; i < talk.size(); i++)
+		//System.out.print(talk.get(i).length + " ");
             
             length = (float) (2.5 * 3600.0);
             currentlength = AddTalk(talk, vec, currentlength, length);
             currentlength = AddMusic(music, vec, currentlength, length);
-	System.out.println("vec: ");
-	for (int i = 0; i < vec.size(); i++)
-		System.out.print(vec.get(i).length + " ");
+	//System.out.println("vec: ");
+	//for (int i = 0; i < vec.size(); i++)
+		//System.out.print(vec.get(i).length + " ");
 	System.out.println("\n+cl:" + currentlength);
 
 	length = (float) 10800.0;
@@ -150,13 +162,13 @@ public class GeneratePlaylist {
 	currentlength = AddTalk(talk, vec, currentlength, length);
 	//
 	currentlength = AddMusic(music, vec, currentlength, length);
-	System.out.println("vec: ");
-	for (int i = 0; i < vec.size(); i++)
-		System.out.print(vec.get(i).length+ " ");
+	//System.out.println("vec: ");
+	//for (int i = 0; i < vec.size(); i++)
+		//System.out.print(vec.get(i).length+ " ");
 	System.out.println("\n+cl:"+ currentlength);
         
         //try(FileWriter writer = new FileWriter("playlist.m3u8", false))
-        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("playlist.m3u8"), "windows-1251")))
+        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("playlist"+Integer.toString(j)+".m3u8"), "windows-1251")))
         {
             
             writer.write("#EXTM3U\n");
@@ -176,20 +188,24 @@ public class GeneratePlaylist {
              
             System.out.println(ex.getMessage());
         } 
-        
+        vec.clear();
+           }
        }
        public float AddMusic(ArrayList<Type> src, ArrayList<Type> dst,float currentlength, float maxlength)
         {
             int num;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
 		num = Random(src);
+                //System.out.print(Integer.toString(num)+" ");
 		if (src.get(num).length + currentlength <= maxlength)
 		{
 			dst.add(src.get(num));
 			currentlength += dst.get(dst.size()-1).length;
 		}
             }   
+            
+            for (int ii = 0; ii < src.size(); ii++)
             for (int i = 0; i < src.size(); i++)
             {   
 		if (src.get(i).length + currentlength <= maxlength)
@@ -202,7 +218,6 @@ public class GeneratePlaylist {
         }
         public int Random(ArrayList<Type> vector)
         {
-            Random random = new Random();
             int min = 0, max = vector.size()-1;
             return min + random.nextInt(max - min + 1);
         }
