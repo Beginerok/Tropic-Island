@@ -2,11 +2,13 @@ package example;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -86,7 +88,10 @@ public class GeneratePlaylist {
             try {
             File file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist5.m3u8");
             //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(file);
+            //FileReader fr = new FileReader(file);
+            
+	    FileInputStream fStream = new FileInputStream(file);
+            InputStreamReader fr = new InputStreamReader(fStream, "windows-1251");
             //создаем BufferedReader с существующего FileReader для построчного считывания
             BufferedReader reader = new BufferedReader(fr);
             // считаем сначала первую строку
@@ -151,7 +156,7 @@ public class GeneratePlaylist {
 	System.out.println("\n+cl:"+ currentlength);
         
         //try(FileWriter writer = new FileWriter("playlist.m3u8", false))
-        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("playlist.m3u8"), "UTF-8")))
+        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("playlist.m3u8"), "windows-1251")))
         {
             
             writer.write("#EXTM3U\n");
