@@ -63,7 +63,7 @@ public class GeneratePlaylist {
         public void LoadFromFiles()
         {
             try {
-            File file = new File("C:\\Users\\User\\Desktop\\Tropic-Island\\Tropic-Island\\C++\\Project1\\Project1\\playlist4.m3u8");
+            File file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist4.m3u8");
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
             
@@ -93,7 +93,7 @@ public class GeneratePlaylist {
         }
            
             try {
-            File file = new File("C:\\Users\\User\\Desktop\\Tropic-Island\\Tropic-Island\\C++\\Project1\\Project1\\playlist5.m3u8");
+            File file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist5.m3u8");
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
             
