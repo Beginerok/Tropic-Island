@@ -1,0 +1,1385 @@
+Этот файл сгенерирован DeDe Ver 3.50.02 Copyright (c) 1999-2001 DaFixer
+
+Graphics
+
+TGraphic._PROC_0041C60B                                          0041C60B
+
+
+
+Graphics
+
+TIcon._PROC_0041CAFC                                             0041CAFC
+TIcon._PROC_0041CAFE                                             0041CAFE
+TIcon._PROC_0041CB77                                             0041CB77
+TIcon._PROC_0041CBAC                                             0041CBAC
+TIcon._PROC_0041CBD0                                             0041CBD0
+TIcon._PROC_0041CBDC                                             0041CBDC
+TIcon._PROC_0041CBE8                                             0041CBE8
+TIcon._PROC_0041CCCC                                             0041CCCC
+TIcon._PROC_0041CD88                                             0041CD88
+TIcon._PROC_0041CE04                                             0041CE04
+TIcon._PROC_0041CE74                                             0041CE74
+TIcon._PROC_0041CEF0                                             0041CEF0
+TIcon._PROC_0041CF9C                                             0041CF9C
+TIcon._PROC_0041D40F                                             0041D40F
+TIcon._PROC_0041D420                                             0041D420
+TIcon._PROC_0041D430                                             0041D430
+TIcon._PROC_0041D440                                             0041D440
+TIcon._PROC_0041D465                                             0041D465
+TIcon._PROC_0041D4C6                                             0041D4C6
+TIcon._PROC_0041D53E                                             0041D53E
+TIcon._PROC_0041D59E                                             0041D59E
+TIcon._PROC_0041D5D2                                             0041D5D2
+TIcon._PROC_0041D618                                             0041D618
+TIcon._PROC_0041D6C8                                             0041D6C8
+TIcon._PROC_0041D71C                                             0041D71C
+TIcon._PROC_0041D744                                             0041D744
+TIcon._PROC_0041D760                                             0041D760
+TIcon._PROC_0041D834                                             0041D834
+TIcon._PROC_0041D84C                                             0041D84C
+TIcon._PROC_0041D89C                                             0041D89C
+TIcon._PROC_0041D8B0                                             0041D8B0
+TIcon._PROC_0041DA5B                                             0041DA5B
+TIcon._PROC_0041DA7C                                             0041DA7C
+TIcon._PROC_0041DA84                                             0041DA84
+TIcon._PROC_0041DAAC                                             0041DAAC
+TIcon._PROC_0041DAC4                                             0041DAC4
+TIcon._PROC_0041DB20                                             0041DB20
+TIcon._PROC_0041DB3C                                             0041DB3C
+TIcon._PROC_0041DB5C                                             0041DB5C
+TIcon._PROC_0041DB68                                             0041DB68
+TIcon._PROC_0041DB94                                             0041DB94
+TIcon._PROC_0041DB9C                                             0041DB9C
+TIcon._PROC_0041DBC4                                             0041DBC4
+TIcon._PROC_0041DBCC                                             0041DBCC
+TIcon._PROC_0041DBF4                                             0041DBF4
+TIcon._PROC_0041DC38                                             0041DC38
+TIcon._PROC_0041DC60                                             0041DC60
+TIcon._PROC_0041DD18                                             0041DD18
+TIcon._PROC_0041DD30                                             0041DD30
+TIcon._PROC_0041DD80                                             0041DD80
+TIcon._PROC_0041DD88                                             0041DD88
+TIcon._PROC_0041DDB0                                             0041DDB0
+TIcon._PROC_0041DE48                                             0041DE48
+TIcon._PROC_0041DE5C                                             0041DE5C
+TIcon._PROC_0041DE64                                             0041DE64
+TIcon._PROC_0041DE8C                                             0041DE8C
+TIcon._PROC_0041DE94                                             0041DE94
+TIcon._PROC_0041DEC0                                             0041DEC0
+TIcon._PROC_0041DF00                                             0041DF00
+TIcon._PROC_0041DF28                                             0041DF28
+TIcon._PROC_0041DFD0                                             0041DFD0
+TIcon._PROC_0041DFEC                                             0041DFEC
+TIcon._PROC_0041E03C                                             0041E03C
+TIcon._PROC_0041E060                                             0041E060
+TIcon._PROC_0041E068                                             0041E068
+TIcon._PROC_0041E09C                                             0041E09C
+TIcon._PROC_0041E17C                                             0041E17C
+TIcon._PROC_0041E184                                             0041E184
+TIcon._PROC_0041E1B8                                             0041E1B8
+TIcon._PROC_0041E2D9                                             0041E2D9
+TIcon._PROC_0041E599                                             0041E599
+TIcon._PROC_0041E621                                             0041E621
+TIcon._PROC_0041E809                                             0041E809
+TIcon._PROC_0041E88F                                             0041E88F
+TIcon._PROC_0041E8B8                                             0041E8B8
+TIcon._PROC_0041E940                                             0041E940
+TIcon._PROC_0041E98B                                             0041E98B
+TIcon._PROC_0041E9A4                                             0041E9A4
+TIcon._PROC_0041E9C4                                             0041E9C4
+TIcon._PROC_0041EA20                                             0041EA20
+TIcon._PROC_0041EA48                                             0041EA48
+TIcon._PROC_0041EA58                                             0041EA58
+TIcon._PROC_0041EA64                                             0041EA64
+TIcon._PROC_0041EA70                                             0041EA70
+TIcon._PROC_0041EA90                                             0041EA90
+TIcon._PROC_0041EA97                                             0041EA97
+TIcon._PROC_0041EAB4                                             0041EAB4
+TIcon._PROC_0041EAE1                                             0041EAE1
+TIcon._PROC_0041EBAB                                             0041EBAB
+TIcon._PROC_0041EBFC                                             0041EBFC
+TIcon._PROC_0041EC73                                             0041EC73
+TIcon._PROC_0041ECC4                                             0041ECC4
+TIcon._PROC_0041ECF4                                             0041ECF4
+TIcon._PROC_0041ED70                                             0041ED70
+TIcon._PROC_0041ED90                                             0041ED90
+TIcon._PROC_0041EDB0                                             0041EDB0
+TIcon._PROC_0041EDD0                                             0041EDD0
+TIcon._PROC_0041EDE8                                             0041EDE8
+TIcon._PROC_0041EE00                                             0041EE00
+TIcon._PROC_0041EE0C                                             0041EE0C
+TIcon._PROC_0041EE18                                             0041EE18
+TIcon._PROC_0041EE24                                             0041EE24
+TIcon._PROC_0041EE78                                             0041EE78
+TIcon._PROC_0041EF20                                             0041EF20
+TIcon._PROC_0041EF30                                             0041EF30
+TIcon._PROC_0041F090                                             0041F090
+TIcon._PROC_0041F0B0                                             0041F0B0
+TIcon._PROC_0041F0C4                                             0041F0C4
+TIcon._PROC_0041F358                                             0041F358
+TIcon._PROC_0041F3A0                                             0041F3A0
+TIcon._PROC_0041F414                                             0041F414
+TIcon._PROC_0041F46C                                             0041F46C
+TIcon._PROC_0041F584                                             0041F584
+TIcon._PROC_0041F61C                                             0041F61C
+TIcon._PROC_0041F6C0                                             0041F6C0
+TIcon._PROC_0041F714                                             0041F714
+TIcon._PROC_0041F8D8                                             0041F8D8
+TIcon._PROC_0041F8E4                                             0041F8E4
+TIcon._PROC_0041F974                                             0041F974
+TIcon._PROC_0041FC88                                             0041FC88
+TIcon._PROC_0041FCB0                                             0041FCB0
+TIcon._PROC_0041FD94                                             0041FD94
+TIcon._PROC_0041FDF8                                             0041FDF8
+TIcon._PROC_0041FE00                                             0041FE00
+TIcon._PROC_0041FEB0                                             0041FEB0
+TIcon._PROC_0041FEC4                                             0041FEC4
+TIcon._PROC_0041FEC8                                             0041FEC8
+TIcon._PROC_0041FED4                                             0041FED4
+TIcon._PROC_004200D0                                             004200D0
+TIcon._PROC_00420108                                             00420108
+TIcon._PROC_00420120                                             00420120
+TIcon._PROC_00420178                                             00420178
+TIcon._PROC_004201C5                                             004201C5
+TIcon._PROC_0042030C                                             0042030C
+TIcon._PROC_00420310                                             00420310
+TIcon._PROC_00420314                                             00420314
+TIcon._PROC_00420368                                             00420368
+TIcon._PROC_00420390                                             00420390
+TIcon._PROC_0042039C                                             0042039C
+TIcon._PROC_004203F4                                             004203F4
+TIcon._PROC_004203F8                                             004203F8
+TIcon._PROC_00420408                                             00420408
+TIcon._PROC_00420414                                             00420414
+
+
+
+Graphics
+
+TBitmapCanvas._PROC_00421D0C                                     00421D0C
+TBitmapCanvas._PROC_00421D88                                     00421D88
+TBitmapCanvas._PROC_00421DC4                                     00421DC4
+TBitmapCanvas._PROC_00421DF0                                     00421DF0
+TBitmapCanvas._PROC_00421E90                                     00421E90
+TBitmapCanvas._PROC_00421F7C                                     00421F7C
+TBitmapCanvas._PROC_00421F80                                     00421F80
+TBitmapCanvas._PROC_00421FA0                                     00421FA0
+TBitmapCanvas._PROC_00421FFC                                     00421FFC
+TBitmapCanvas._PROC_00422048                                     00422048
+TBitmapCanvas._PROC_00422104                                     00422104
+TBitmapCanvas._PROC_00422150                                     00422150
+TBitmapCanvas._PROC_004227B4                                     004227B4
+TBitmapCanvas._PROC_00422818                                     00422818
+TBitmapCanvas._PROC_00422A24                                     00422A24
+TBitmapCanvas._PROC_00422A8C                                     00422A8C
+TBitmapCanvas._PROC_00422AC8                                     00422AC8
+TBitmapCanvas._PROC_00422BC0                                     00422BC0
+TBitmapCanvas._PROC_00422C80                                     00422C80
+TBitmapCanvas._PROC_00422CA4                                     00422CA4
+TBitmapCanvas._PROC_00422CB0                                     00422CB0
+TBitmapCanvas._PROC_00422D24                                     00422D24
+TBitmapCanvas._PROC_00422F7C                                     00422F7C
+TBitmapCanvas._PROC_00422FA8                                     00422FA8
+TBitmapCanvas._PROC_00422FD8                                     00422FD8
+TBitmapCanvas._PROC_00422FF4                                     00422FF4
+TBitmapCanvas._PROC_0042303C                                     0042303C
+TBitmapCanvas._PROC_00423060                                     00423060
+TBitmapCanvas._PROC_0042308C                                     0042308C
+TBitmapCanvas._PROC_0042309C                                     0042309C
+TBitmapCanvas._PROC_004230B0                                     004230B0
+TBitmapCanvas._PROC_004230CC                                     004230CC
+TBitmapCanvas._PROC_004230E0                                     004230E0
+TBitmapCanvas._PROC_00423164                                     00423164
+TBitmapCanvas._PROC_004231CC                                     004231CC
+TBitmapCanvas._PROC_00423214                                     00423214
+TBitmapCanvas._PROC_0042321C                                     0042321C
+TBitmapCanvas._PROC_00423290                                     00423290
+TBitmapCanvas._PROC_004232A0                                     004232A0
+TBitmapCanvas._PROC_00423340                                     00423340
+TBitmapCanvas._PROC_00423420                                     00423420
+TBitmapCanvas._PROC_00423480                                     00423480
+TBitmapCanvas._PROC_00423538                                     00423538
+TBitmapCanvas._PROC_004235BC                                     004235BC
+TBitmapCanvas._PROC_004235E0                                     004235E0
+TBitmapCanvas._PROC_004236E0                                     004236E0
+TBitmapCanvas._PROC_00423708                                     00423708
+TBitmapCanvas._PROC_00423C70                                     00423C70
+TBitmapCanvas._PROC_00423CE0                                     00423CE0
+TBitmapCanvas._PROC_00423DA4                                     00423DA4
+TBitmapCanvas._PROC_00423EDC                                     00423EDC
+TBitmapCanvas._PROC_00423F30                                     00423F30
+TBitmapCanvas._PROC_00423FB0                                     00423FB0
+TBitmapCanvas._PROC_00424084                                     00424084
+TBitmapCanvas._PROC_004241EC                                     004241EC
+TBitmapCanvas._PROC_0042423C                                     0042423C
+TBitmapCanvas._PROC_00424290                                     00424290
+TBitmapCanvas._PROC_00424298                                     00424298
+TBitmapCanvas._PROC_00424559                                     00424559
+TBitmapCanvas._PROC_004245F8                                     004245F8
+TBitmapCanvas._PROC_00424628                                     00424628
+TBitmapCanvas._PROC_00424640                                     00424640
+TBitmapCanvas._PROC_00424694                                     00424694
+TBitmapCanvas._PROC_004246C4                                     004246C4
+TBitmapCanvas._PROC_00424724                                     00424724
+TBitmapCanvas._PROC_00424760                                     00424760
+TBitmapCanvas._PROC_00424768                                     00424768
+TBitmapCanvas._PROC_0042477C                                     0042477C
+TBitmapCanvas._PROC_00424790                                     00424790
+TBitmapCanvas._PROC_004247A4                                     004247A4
+TBitmapCanvas._PROC_004247B8                                     004247B8
+TBitmapCanvas._PROC_00424830                                     00424830
+TBitmapCanvas._PROC_004248E4                                     004248E4
+TBitmapCanvas._PROC_0042499C                                     0042499C
+TBitmapCanvas._PROC_00424A10                                     00424A10
+TBitmapCanvas._PROC_00424A28                                     00424A28
+TBitmapCanvas._PROC_00424A40                                     00424A40
+TBitmapCanvas._PROC_00424A44                                     00424A44
+TBitmapCanvas._PROC_00424A5C                                     00424A5C
+TBitmapCanvas._PROC_00424A84                                     00424A84
+TBitmapCanvas._PROC_00424A98                                     00424A98
+TBitmapCanvas._PROC_00424AAC                                     00424AAC
+TBitmapCanvas._PROC_00424AE4                                     00424AE4
+TBitmapCanvas._PROC_00424B28                                     00424B28
+TBitmapCanvas._PROC_00424B87                                     00424B87
+TBitmapCanvas._PROC_00424BFB                                     00424BFB
+TBitmapCanvas._PROC_00424C2C                                     00424C2C
+TBitmapCanvas._PROC_00424C58                                     00424C58
+TBitmapCanvas._PROC_00424C64                                     00424C64
+TBitmapCanvas._PROC_00424C70                                     00424C70
+TBitmapCanvas._PROC_00424D24                                     00424D24
+TBitmapCanvas._PROC_00424E24                                     00424E24
+TBitmapCanvas._PROC_00424EA4                                     00424EA4
+TBitmapCanvas._PROC_00424EDC                                     00424EDC
+TBitmapCanvas._PROC_00424FB0                                     00424FB0
+TBitmapCanvas._PROC_004250AC                                     004250AC
+TBitmapCanvas._PROC_004250B4                                     004250B4
+TBitmapCanvas._PROC_004250BC                                     004250BC
+TBitmapCanvas._PROC_004250EC                                     004250EC
+TBitmapCanvas._PROC_004250F4                                     004250F4
+
+
+
+StdCtrls
+
+TLabel._PROC_004290AD                                            004290AD
+
+
+
+StdCtrls
+
+TComboBox._PROC_004299C3                                         004299C3
+TComboBox._PROC_00429EE3                                         00429EE3
+TComboBox._PROC_0042A0BB                                         0042A0BB
+
+
+
+StdCtrls
+
+TButton._PROC_0042A9D7                                           0042A9D7
+TButton._PROC_0042AA47                                           0042AA47
+
+
+
+StdCtrls
+
+TListBox._PROC_0042B775                                          0042B775
+TListBox._PROC_0042B80D                                          0042B80D
+TListBox._PROC_0042B863                                          0042B863
+TListBox._PROC_0042B8FC                                          0042B8FC
+TListBox._PROC_0042B90C                                          0042B90C
+
+
+
+StdCtrls
+
+TListBoxStrings._PROC_0042BB18                                   0042BB18
+TListBoxStrings._PROC_0042BB35                                   0042BB35
+TListBoxStrings._PROC_0042BCA8                                   0042BCA8
+TListBoxStrings._PROC_0042BDA0                                   0042BDA0
+TListBoxStrings._PROC_0042BDBC                                   0042BDBC
+TListBoxStrings._PROC_0042BE8C                                   0042BE8C
+TListBoxStrings._PROC_0042BEA8                                   0042BEA8
+TListBoxStrings._PROC_0042BEC4                                   0042BEC4
+TListBoxStrings._PROC_0042BED0                                   0042BED0
+TListBoxStrings._PROC_0042BEE4                                   0042BEE4
+TListBoxStrings._PROC_0042BF00                                   0042BF00
+TListBoxStrings._PROC_0042BF40                                   0042BF40
+TListBoxStrings._PROC_0042BFED                                   0042BFED
+TListBoxStrings._PROC_0042C088                                   0042C088
+TListBoxStrings._PROC_0042C0AC                                   0042C0AC
+TListBoxStrings._PROC_0042C0D0                                   0042C0D0
+TListBoxStrings._PROC_0042C0EC                                   0042C0EC
+TListBoxStrings._PROC_0042C164                                   0042C164
+TListBoxStrings._PROC_0042C188                                   0042C188
+TListBoxStrings._PROC_0042C1E4                                   0042C1E4
+TListBoxStrings._PROC_0042C254                                   0042C254
+TListBoxStrings._PROC_0042C274                                   0042C274
+TListBoxStrings._PROC_0042C29C                                   0042C29C
+TListBoxStrings._PROC_0042C2D0                                   0042C2D0
+TListBoxStrings._PROC_0042C354                                   0042C354
+TListBoxStrings._PROC_0042C3D4                                   0042C3D4
+TListBoxStrings._PROC_0042C4BF                                   0042C4BF
+TListBoxStrings._PROC_0042C530                                   0042C530
+TListBoxStrings._PROC_0042C535                                   0042C535
+TListBoxStrings._PROC_0042C540                                   0042C540
+TListBoxStrings._PROC_0042C55E                                   0042C55E
+TListBoxStrings._PROC_0042C574                                   0042C574
+TListBoxStrings._PROC_0042C594                                   0042C594
+TListBoxStrings._PROC_0042C5B8                                   0042C5B8
+TListBoxStrings._PROC_0042C600                                   0042C600
+TListBoxStrings._PROC_0042C62C                                   0042C62C
+TListBoxStrings._PROC_0042C668                                   0042C668
+TListBoxStrings._PROC_0042C6A8                                   0042C6A8
+TListBoxStrings._PROC_0042C6B8                                   0042C6B8
+TListBoxStrings._PROC_0042C6DC                                   0042C6DC
+TListBoxStrings._PROC_0042C6E4                                   0042C6E4
+TListBoxStrings._PROC_0042C6EC                                   0042C6EC
+TListBoxStrings._PROC_0042C6F4                                   0042C6F4
+TListBoxStrings._PROC_0042C718                                   0042C718
+TListBoxStrings._PROC_0042C72C                                   0042C72C
+TListBoxStrings._PROC_0042C750                                   0042C750
+TListBoxStrings._PROC_0042C778                                   0042C778
+TListBoxStrings._PROC_0042C870                                   0042C870
+TListBoxStrings._PROC_0042C890                                   0042C890
+TListBoxStrings._PROC_0042C8A4                                   0042C8A4
+TListBoxStrings._PROC_0042CB80                                   0042CB80
+TListBoxStrings._PROC_0042CC8B                                   0042CC8B
+TListBoxStrings._PROC_0042CC91                                   0042CC91
+TListBoxStrings._PROC_0042CDEC                                   0042CDEC
+TListBoxStrings._PROC_0042CDFC                                   0042CDFC
+TListBoxStrings._PROC_0042CE20                                   0042CE20
+TListBoxStrings._PROC_0042CEDC                                   0042CEDC
+TListBoxStrings._PROC_0042CEFC                                   0042CEFC
+TListBoxStrings._PROC_0042CF24                                   0042CF24
+TListBoxStrings._PROC_0042CF58                                   0042CF58
+TListBoxStrings._PROC_0042CF78                                   0042CF78
+TListBoxStrings._PROC_0042CFA4                                   0042CFA4
+TListBoxStrings._PROC_0042CFDC                                   0042CFDC
+TListBoxStrings._PROC_0042D098                                   0042D098
+TListBoxStrings._PROC_0042D0BC                                   0042D0BC
+TListBoxStrings._PROC_0042D0C8                                   0042D0C8
+TListBoxStrings._PROC_0042D154                                   0042D154
+TListBoxStrings._PROC_0042D180                                   0042D180
+TListBoxStrings._PROC_0042D18C                                   0042D18C
+TListBoxStrings._PROC_0042D194                                   0042D194
+TListBoxStrings._PROC_0042D1EC                                   0042D1EC
+TListBoxStrings._PROC_0042D270                                   0042D270
+TListBoxStrings._PROC_0042D2AC                                   0042D2AC
+TListBoxStrings._PROC_0042D2C0                                   0042D2C0
+TListBoxStrings._PROC_0042D39D                                   0042D39D
+TListBoxStrings._PROC_0042D4C8                                   0042D4C8
+TListBoxStrings._PROC_0042D518                                   0042D518
+TListBoxStrings._PROC_0042D56C                                   0042D56C
+TListBoxStrings._PROC_0042D598                                   0042D598
+TListBoxStrings._PROC_0042D660                                   0042D660
+TListBoxStrings._PROC_0042DA28                                   0042DA28
+TListBoxStrings._PROC_0042DBF0                                   0042DBF0
+TListBoxStrings._PROC_0042DC10                                   0042DC10
+TListBoxStrings._PROC_0042DCE8                                   0042DCE8
+TListBoxStrings._PROC_0042DD14                                   0042DD14
+TListBoxStrings._PROC_0042DD8C                                   0042DD8C
+TListBoxStrings._PROC_0042DDD4                                   0042DDD4
+TListBoxStrings._PROC_0042DDE0                                   0042DDE0
+TListBoxStrings._PROC_0042DDE8                                   0042DDE8
+TListBoxStrings._PROC_0042E020                                   0042E020
+TListBoxStrings._PROC_0042E024                                   0042E024
+TListBoxStrings._PROC_0042E048                                   0042E048
+TListBoxStrings._PROC_0042E080                                   0042E080
+TListBoxStrings._PROC_0042E0E4                                   0042E0E4
+TListBoxStrings._PROC_0042E138                                   0042E138
+TListBoxStrings._PROC_0042E180                                   0042E180
+TListBoxStrings._PROC_0042E188                                   0042E188
+TListBoxStrings._PROC_0042E18C                                   0042E18C
+TListBoxStrings._PROC_0042E190                                   0042E190
+TListBoxStrings._PROC_0042E208                                   0042E208
+TListBoxStrings._PROC_0042E254                                   0042E254
+TListBoxStrings._PROC_0042E280                                   0042E280
+TListBoxStrings._PROC_0042E2A4                                   0042E2A4
+TListBoxStrings._PROC_0042E2B8                                   0042E2B8
+TListBoxStrings._PROC_0042E348                                   0042E348
+TListBoxStrings._PROC_0042E398                                   0042E398
+TListBoxStrings._PROC_0042E3CC                                   0042E3CC
+TListBoxStrings._PROC_0042E402                                   0042E402
+TListBoxStrings._PROC_0042E414                                   0042E414
+TListBoxStrings._PROC_0042E41A                                   0042E41A
+TListBoxStrings._PROC_0042E423                                   0042E423
+TListBoxStrings._PROC_0042E434                                   0042E434
+TListBoxStrings._PROC_0042E4A5                                   0042E4A5
+TListBoxStrings._PROC_0042E528                                   0042E528
+TListBoxStrings._PROC_0042E57C                                   0042E57C
+TListBoxStrings._PROC_0042E5A8                                   0042E5A8
+TListBoxStrings._PROC_0042E5F4                                   0042E5F4
+TListBoxStrings._PROC_0042E610                                   0042E610
+TListBoxStrings._PROC_0042E6E4                                   0042E6E4
+TListBoxStrings._PROC_0042E778                                   0042E778
+TListBoxStrings._PROC_0042E7F8                                   0042E7F8
+TListBoxStrings._PROC_0042E820                                   0042E820
+TListBoxStrings._PROC_0042E8C0                                   0042E8C0
+TListBoxStrings._PROC_0042E958                                   0042E958
+TListBoxStrings._PROC_0042E968                                   0042E968
+TListBoxStrings._PROC_0042EACC                                   0042EACC
+TListBoxStrings._PROC_0042EADC                                   0042EADC
+TListBoxStrings._PROC_0042EB10                                   0042EB10
+TListBoxStrings._PROC_0042EB54                                   0042EB54
+TListBoxStrings._PROC_0042EC64                                   0042EC64
+TListBoxStrings._PROC_0042ED99                                   0042ED99
+TListBoxStrings._PROC_0042EE1C                                   0042EE1C
+TListBoxStrings._PROC_0042EE3C                                   0042EE3C
+TListBoxStrings._PROC_0042EE60                                   0042EE60
+TListBoxStrings._PROC_0042EE6C                                   0042EE6C
+TListBoxStrings._PROC_0042EE78                                   0042EE78
+TListBoxStrings._PROC_0042EE98                                   0042EE98
+TListBoxStrings._PROC_0042EEC0                                   0042EEC0
+TListBoxStrings._PROC_0042EECC                                   0042EECC
+TListBoxStrings._PROC_0042EF14                                   0042EF14
+TListBoxStrings._PROC_0042F03C                                   0042F03C
+TListBoxStrings._PROC_0042F0A8                                   0042F0A8
+TListBoxStrings._PROC_0042F0FC                                   0042F0FC
+TListBoxStrings._PROC_0042F140                                   0042F140
+TListBoxStrings._PROC_0042F17C                                   0042F17C
+TListBoxStrings._PROC_0042F1A0                                   0042F1A0
+TListBoxStrings._PROC_0042F1BC                                   0042F1BC
+TListBoxStrings._PROC_0042F208                                   0042F208
+TListBoxStrings._PROC_0042F21C                                   0042F21C
+TListBoxStrings._PROC_0042F244                                   0042F244
+TListBoxStrings._PROC_0042F288                                   0042F288
+TListBoxStrings._PROC_0042F2A0                                   0042F2A0
+TListBoxStrings._PROC_0042F2BC                                   0042F2BC
+TListBoxStrings._PROC_0042F2D0                                   0042F2D0
+TListBoxStrings._PROC_0042F320                                   0042F320
+TListBoxStrings._PROC_0042F3D0                                   0042F3D0
+TListBoxStrings._PROC_0042F3F4                                   0042F3F4
+TListBoxStrings._PROC_0042F430                                   0042F430
+TListBoxStrings._PROC_0042F44C                                   0042F44C
+TListBoxStrings._PROC_0042F500                                   0042F500
+TListBoxStrings._PROC_0042F5A4                                   0042F5A4
+TListBoxStrings._PROC_0042F5B8                                   0042F5B8
+TListBoxStrings._PROC_0042F5E4                                   0042F5E4
+TListBoxStrings._PROC_0042F628                                   0042F628
+TListBoxStrings._PROC_0042F6B4                                   0042F6B4
+TListBoxStrings._PROC_0042F7CF                                   0042F7CF
+TListBoxStrings._PROC_0042F8A8                                   0042F8A8
+TListBoxStrings._PROC_0042F924                                   0042F924
+TListBoxStrings._PROC_0042F987                                   0042F987
+TListBoxStrings._PROC_0042F990                                   0042F990
+TListBoxStrings._PROC_0042FA28                                   0042FA28
+TListBoxStrings._PROC_0042FA5C                                   0042FA5C
+TListBoxStrings._PROC_0042FBBC                                   0042FBBC
+TListBoxStrings._PROC_0042FBEC                                   0042FBEC
+TListBoxStrings._PROC_0042FC00                                   0042FC00
+TListBoxStrings._PROC_0042FC60                                   0042FC60
+TListBoxStrings._PROC_0042FD7C                                   0042FD7C
+TListBoxStrings._PROC_0042FD9C                                   0042FD9C
+TListBoxStrings._PROC_0042FE58                                   0042FE58
+TListBoxStrings._PROC_0042FE88                                   0042FE88
+TListBoxStrings._PROC_0042FEB4                                   0042FEB4
+TListBoxStrings._PROC_0042FEEC                                   0042FEEC
+TListBoxStrings._PROC_0042FFD0                                   0042FFD0
+TListBoxStrings._PROC_004301A0                                   004301A0
+TListBoxStrings._PROC_00430284                                   00430284
+TListBoxStrings._PROC_004302A4                                   004302A4
+TListBoxStrings._PROC_004302CC                                   004302CC
+TListBoxStrings._PROC_004302F0                                   004302F0
+TListBoxStrings._PROC_0043030C                                   0043030C
+TListBoxStrings._PROC_00430338                                   00430338
+TListBoxStrings._PROC_00430368                                   00430368
+TListBoxStrings._PROC_00430370                                   00430370
+TListBoxStrings._PROC_004303A0                                   004303A0
+TListBoxStrings._PROC_004303A8                                   004303A8
+TListBoxStrings._PROC_004303D8                                   004303D8
+TListBoxStrings._PROC_004303E0                                   004303E0
+TListBoxStrings._PROC_00430410                                   00430410
+TListBoxStrings._PROC_00430418                                   00430418
+TListBoxStrings._PROC_00430448                                   00430448
+TListBoxStrings._PROC_00430450                                   00430450
+
+
+
+ExtCtrls
+
+TImage._PROC_00430A13                                            00430A13
+TImage._PROC_00430A16                                            00430A16
+
+
+
+ExtCtrls
+
+TPanel._PROC_00431064                                            00431064
+TPanel._PROC_0043159D                                            0043159D
+TPanel._PROC_0043162B                                            0043162B
+TPanel._PROC_004316F4                                            004316F4
+TPanel._PROC_00431754                                            00431754
+TPanel._PROC_00431840                                            00431840
+TPanel._PROC_00431968                                            00431968
+TPanel._PROC_00431A28                                            00431A28
+TPanel._PROC_00431AC0                                            00431AC0
+TPanel._PROC_00431B2C                                            00431B2C
+TPanel._PROC_00431B44                                            00431B44
+TPanel._PROC_00431B54                                            00431B54
+TPanel._PROC_00431B6C                                            00431B6C
+TPanel._PROC_00431B84                                            00431B84
+TPanel._PROC_00431B9C                                            00431B9C
+TPanel._PROC_00431CBF                                            00431CBF
+TPanel._PROC_00431CC8                                            00431CC8
+TPanel._PROC_00431D2C                                            00431D2C
+TPanel._PROC_00431D7C                                            00431D7C
+TPanel._PROC_00431DB4                                            00431DB4
+TPanel._PROC_00431E28                                            00431E28
+TPanel._PROC_00431EB4                                            00431EB4
+TPanel._PROC_00431EC4                                            00431EC4
+TPanel._PROC_00431ED4                                            00431ED4
+TPanel._PROC_00431EEC                                            00431EEC
+TPanel._PROC_00431F00                                            00431F00
+TPanel._PROC_00431FBB                                            00431FBB
+TPanel._PROC_00431FF4                                            00431FF4
+TPanel._PROC_00431FFC                                            00431FFC
+TPanel._PROC_00432010                                            00432010
+TPanel._PROC_00432018                                            00432018
+TPanel._PROC_00432044                                            00432044
+TPanel._PROC_00432058                                            00432058
+TPanel._PROC_00432158                                            00432158
+TPanel._PROC_00432190                                            00432190
+TPanel._PROC_004323B5                                            004323B5
+TPanel._PROC_004323D8                                            004323D8
+TPanel._PROC_004323E7                                            004323E7
+TPanel._PROC_004323FD                                            004323FD
+TPanel._PROC_00432538                                            00432538
+TPanel._PROC_00432564                                            00432564
+TPanel._PROC_0043259B                                            0043259B
+TPanel._PROC_00432895                                            00432895
+TPanel._PROC_004328DC                                            004328DC
+TPanel._PROC_0043290C                                            0043290C
+TPanel._PROC_0043293C                                            0043293C
+TPanel._PROC_00432945                                            00432945
+
+
+
+Dialogs
+
+TSaveDialog.Execute                                              00433E54
+TSaveDialog._PROC_00433198                                       00433198
+TSaveDialog._PROC_00433200                                       00433200
+TSaveDialog._PROC_00433248                                       00433248
+TSaveDialog._PROC_0043327C                                       0043327C
+TSaveDialog._PROC_004332A4                                       004332A4
+TSaveDialog._PROC_004332DC                                       004332DC
+TSaveDialog._PROC_00433328                                       00433328
+TSaveDialog._PROC_00433330                                       00433330
+TSaveDialog._PROC_00433348                                       00433348
+TSaveDialog._PROC_00433360                                       00433360
+TSaveDialog._PROC_00433374                                       00433374
+TSaveDialog._PROC_00433448                                       00433448
+TSaveDialog._PROC_0043345C                                       0043345C
+TSaveDialog._PROC_00433470                                       00433470
+TSaveDialog._PROC_004334F4                                       004334F4
+TSaveDialog._PROC_00433568                                       00433568
+TSaveDialog._PROC_004335F1                                       004335F1
+TSaveDialog._PROC_004336CC                                       004336CC
+TSaveDialog._PROC_004336F4                                       004336F4
+TSaveDialog._PROC_00433714                                       00433714
+TSaveDialog._PROC_00433734                                       00433734
+TSaveDialog._PROC_00433754                                       00433754
+TSaveDialog._PROC_00433790                                       00433790
+TSaveDialog._PROC_004337D5                                       004337D5
+TSaveDialog._PROC_0043383D                                       0043383D
+TSaveDialog._PROC_00433AFC                                       00433AFC
+TSaveDialog._PROC_00433B50                                       00433B50
+TSaveDialog._PROC_00433C55                                       00433C55
+TSaveDialog._PROC_00433D0C                                       00433D0C
+TSaveDialog._PROC_00433D60                                       00433D60
+TSaveDialog._PROC_00433DB8                                       00433DB8
+TSaveDialog._PROC_00433DC8                                       00433DC8
+TSaveDialog._PROC_00433E30                                       00433E30
+TSaveDialog._PROC_00433E6C                                       00433E6C
+TSaveDialog._PROC_00433EC0                                       00433EC0
+TSaveDialog._PROC_00433FEA                                       00433FEA
+
+
+
+Dialogs
+
+TMessageForm._PROC_004340B0                                      004340B0
+TMessageForm._PROC_004340C8                                      004340C8
+TMessageForm._PROC_00434135                                      00434135
+TMessageForm._PROC_00434274                                      00434274
+TMessageForm._PROC_00434515                                      00434515
+TMessageForm._PROC_00434AB5                                      00434AB5
+TMessageForm._PROC_00434AD8                                      00434AD8
+TMessageForm._PROC_00434B8C                                      00434B8C
+TMessageForm._PROC_00434B98                                      00434B98
+TMessageForm._PROC_00434BAB                                      00434BAB
+TMessageForm._PROC_00434BB0                                      00434BB0
+TMessageForm._PROC_00434D05                                      00434D05
+TMessageForm._PROC_00434D60                                      00434D60
+TMessageForm._PROC_00434DA0                                      00434DA0
+TMessageForm._PROC_00434DDC                                      00434DDC
+TMessageForm._PROC_00434E35                                      00434E35
+TMessageForm._PROC_00434E64                                      00434E64
+TMessageForm._PROC_00434E6C                                      00434E6C
+
+
+
+StdActns
+
+THintAction._PROC_00434F67                                       00434F67
+THintAction._PROC_00434F9C                                       00434F9C
+THintAction._PROC_00434FCC                                       00434FCC
+THintAction._PROC_00434FD4                                       00434FD4
+
+
+
+Controls
+
+TImageList._PROC_00437E30                                        00437E30
+TImageList._PROC_00437F36                                        00437F36
+TImageList._PROC_00437F5A                                        00437F5A
+TImageList._PROC_00437F67                                        00437F67
+TImageList._PROC_00437F74                                        00437F74
+TImageList._PROC_00437F81                                        00437F81
+TImageList._PROC_00437F8E                                        00437F8E
+TImageList._PROC_00437F9B                                        00437F9B
+TImageList._PROC_00437FA8                                        00437FA8
+
+
+
+Controls
+
+TCustomListControl._PROC_00438292                                00438292
+TCustomListControl._PROC_004382A2                                004382A2
+TCustomListControl._PROC_004383E6                                004383E6
+
+
+
+Controls
+
+TCustomMultiSelectListControl._PROC_00438430                     00438430
+TCustomMultiSelectListControl._PROC_004384E8                     004384E8
+TCustomMultiSelectListControl._PROC_0043851C                     0043851C
+TCustomMultiSelectListControl._PROC_00438578                     00438578
+TCustomMultiSelectListControl._PROC_004385A0                     004385A0
+TCustomMultiSelectListControl._PROC_0043863F                     0043863F
+TCustomMultiSelectListControl._PROC_004387E7                     004387E7
+TCustomMultiSelectListControl._PROC_00438838                     00438838
+TCustomMultiSelectListControl._PROC_00438860                     00438860
+TCustomMultiSelectListControl._PROC_004388A4                     004388A4
+
+
+
+ImgList
+
+TCustomImageList._PROC_00448454                                  00448454
+TCustomImageList._PROC_00448474                                  00448474
+TCustomImageList._PROC_004484C0                                  004484C0
+TCustomImageList._PROC_00448514                                  00448514
+TCustomImageList._PROC_00448580                                  00448580
+TCustomImageList._PROC_00448638                                  00448638
+TCustomImageList._PROC_00448640                                  00448640
+TCustomImageList._PROC_0044864C                                  0044864C
+TCustomImageList._PROC_00448710                                  00448710
+TCustomImageList._PROC_00448748                                  00448748
+TCustomImageList._PROC_0044878C                                  0044878C
+TCustomImageList._PROC_004487D0                                  004487D0
+TCustomImageList._PROC_004487FC                                  004487FC
+TCustomImageList._PROC_0044880C                                  0044880C
+TCustomImageList._PROC_0044881C                                  0044881C
+TCustomImageList._PROC_00448870                                  00448870
+TCustomImageList._PROC_004488A8                                  004488A8
+TCustomImageList._PROC_00448948                                  00448948
+TCustomImageList._PROC_00448A14                                  00448A14
+TCustomImageList._PROC_00448B30                                  00448B30
+TCustomImageList._PROC_00448B54                                  00448B54
+TCustomImageList._PROC_00448D7C                                  00448D7C
+TCustomImageList._PROC_00448E08                                  00448E08
+TCustomImageList._PROC_00448E14                                  00448E14
+TCustomImageList._PROC_00448E4C                                  00448E4C
+TCustomImageList._PROC_00448E74                                  00448E74
+TCustomImageList._PROC_00449048                                  00449048
+TCustomImageList._PROC_0044906C                                  0044906C
+TCustomImageList._PROC_004490B8                                  004490B8
+TCustomImageList._PROC_00449260                                  00449260
+TCustomImageList._PROC_00449280                                  00449280
+TCustomImageList._PROC_00449340                                  00449340
+TCustomImageList._PROC_004493E4                                  004493E4
+TCustomImageList._PROC_004493F0                                  004493F0
+TCustomImageList._PROC_00449468                                  00449468
+TCustomImageList._PROC_00449480                                  00449480
+TCustomImageList._PROC_00449490                                  00449490
+TCustomImageList._PROC_004494E0                                  004494E0
+TCustomImageList._PROC_00449524                                  00449524
+TCustomImageList._PROC_00449538                                  00449538
+TCustomImageList._PROC_0044957C                                  0044957C
+TCustomImageList._PROC_0044966C                                  0044966C
+TCustomImageList._PROC_004496C8                                  004496C8
+TCustomImageList._PROC_00449721                                  00449721
+TCustomImageList._PROC_004499B4                                  004499B4
+TCustomImageList._PROC_00449B7C                                  00449B7C
+TCustomImageList._PROC_00449C30                                  00449C30
+TCustomImageList._PROC_00449D7A                                  00449D7A
+TCustomImageList._PROC_00449DE4                                  00449DE4
+TCustomImageList._PROC_00449E14                                  00449E14
+TCustomImageList._PROC_00449E1C                                  00449E1C
+
+
+
+Menus
+
+TMenuItem._PROC_0044A4A1                                         0044A4A1
+
+
+
+Forms
+
+TCustomForm._PROC_0045121A                                       0045121A
+
+
+
+Forms
+
+TForm._PROC_00451558                                             00451558
+TForm._PROC_00451CCE                                             00451CCE
+TForm._PROC_00451D3E                                             00451D3E
+TForm._PROC_00451D58                                             00451D58
+
+
+
+Forms
+
+TApplication._PROC_00452290                                      00452290
+TApplication._PROC_00452298                                      00452298
+TApplication._PROC_004522E4                                      004522E4
+TApplication._PROC_0045231C                                      0045231C
+TApplication._PROC_0045236C                                      0045236C
+TApplication._PROC_00452420                                      00452420
+TApplication._PROC_00452470                                      00452470
+TApplication._PROC_004524D4                                      004524D4
+TApplication._PROC_00452510                                      00452510
+TApplication._PROC_00452530                                      00452530
+TApplication._PROC_00452550                                      00452550
+TApplication._PROC_0045257C                                      0045257C
+TApplication._PROC_004525FC                                      004525FC
+TApplication._PROC_00452604                                      00452604
+TApplication._PROC_004526E1                                      004526E1
+TApplication._PROC_00452750                                      00452750
+TApplication._PROC_00452778                                      00452778
+TApplication._PROC_004527F8                                      004527F8
+TApplication._PROC_00452880                                      00452880
+TApplication._PROC_00452888                                      00452888
+TApplication._PROC_004528D8                                      004528D8
+TApplication._PROC_00452910                                      00452910
+TApplication._PROC_00452973                                      00452973
+TApplication._PROC_0045297D                                      0045297D
+TApplication._PROC_004529E5                                      004529E5
+TApplication._PROC_00452A90                                      00452A90
+TApplication._PROC_00452AC8                                      00452AC8
+TApplication._PROC_00452AFC                                      00452AFC
+TApplication._PROC_00452B78                                      00452B78
+TApplication._PROC_00452BF8                                      00452BF8
+TApplication._PROC_00452C10                                      00452C10
+TApplication._PROC_00452C70                                      00452C70
+TApplication._PROC_00452F70                                      00452F70
+TApplication._PROC_00452FB4                                      00452FB4
+TApplication._PROC_00452FD0                                      00452FD0
+TApplication._PROC_00452FE8                                      00452FE8
+TApplication._PROC_004530AC                                      004530AC
+TApplication._PROC_004530F0                                      004530F0
+TApplication._PROC_00453108                                      00453108
+TApplication._PROC_00453120                                      00453120
+TApplication._PROC_00453138                                      00453138
+TApplication._PROC_0045314C                                      0045314C
+TApplication._PROC_00453158                                      00453158
+TApplication._PROC_00453164                                      00453164
+TApplication._PROC_0045326C                                      0045326C
+TApplication._PROC_00453384                                      00453384
+TApplication._PROC_00453443                                      00453443
+TApplication._PROC_00453448                                      00453448
+TApplication._PROC_00453488                                      00453488
+TApplication._PROC_004534A8                                      004534A8
+TApplication._PROC_004534C8                                      004534C8
+TApplication._PROC_004535E0                                      004535E0
+TApplication._PROC_00453604                                      00453604
+TApplication._PROC_00453640                                      00453640
+TApplication._PROC_00453650                                      00453650
+TApplication._PROC_00453660                                      00453660
+TApplication._PROC_00453758                                      00453758
+TApplication._PROC_00453770                                      00453770
+TApplication._PROC_004538C4                                      004538C4
+TApplication._PROC_00453968                                      00453968
+TApplication._PROC_0045398C                                      0045398C
+TApplication._PROC_00453990                                      00453990
+TApplication._PROC_00453A6C                                      00453A6C
+TApplication._PROC_00453A90                                      00453A90
+TApplication._PROC_00453AB4                                      00453AB4
+TApplication._PROC_00453B24                                      00453B24
+TApplication._PROC_00453BB4                                      00453BB4
+TApplication._PROC_00453D40                                      00453D40
+TApplication._PROC_00453D78                                      00453D78
+TApplication._PROC_00453F23                                      00453F23
+TApplication._PROC_00453F5C                                      00453F5C
+TApplication._PROC_00454040                                      00454040
+TApplication._PROC_004540BC                                      004540BC
+TApplication._PROC_0045411C                                      0045411C
+TApplication._PROC_00454158                                      00454158
+TApplication._PROC_00454264                                      00454264
+TApplication._PROC_004545BB                                      004545BB
+TApplication._PROC_004545C4                                      004545C4
+TApplication._PROC_004545E0                                      004545E0
+TApplication._PROC_004545FC                                      004545FC
+TApplication._PROC_00454628                                      00454628
+TApplication._PROC_004546A4                                      004546A4
+TApplication._PROC_00454700                                      00454700
+TApplication._PROC_00454710                                      00454710
+TApplication._PROC_00454738                                      00454738
+TApplication._PROC_0045476C                                      0045476C
+TApplication._PROC_0045478C                                      0045478C
+TApplication._PROC_004547AC                                      004547AC
+TApplication._PROC_004547E4                                      004547E4
+TApplication._PROC_0045486C                                      0045486C
+TApplication._PROC_004548D8                                      004548D8
+TApplication._PROC_00454904                                      00454904
+TApplication._PROC_00454998                                      00454998
+TApplication._PROC_004549C0                                      004549C0
+TApplication._PROC_004549EB                                      004549EB
+TApplication._PROC_00454A06                                      00454A06
+TApplication._PROC_00454A0C                                      00454A0C
+TApplication._PROC_00454A65                                      00454A65
+TApplication._PROC_00454AC8                                      00454AC8
+TApplication._PROC_00454ACC                                      00454ACC
+TApplication._PROC_00454B04                                      00454B04
+TApplication._PROC_00454B44                                      00454B44
+TApplication._PROC_00454F7D                                      00454F7D
+TApplication._PROC_00454FC8                                      00454FC8
+TApplication._PROC_00455008                                      00455008
+TApplication._PROC_004551E8                                      004551E8
+TApplication._PROC_00455254                                      00455254
+TApplication._PROC_004552EC                                      004552EC
+TApplication._PROC_00455374                                      00455374
+TApplication._PROC_004553A0                                      004553A0
+TApplication._PROC_004553D8                                      004553D8
+TApplication._PROC_0045541C                                      0045541C
+TApplication._PROC_00455470                                      00455470
+TApplication._PROC_004554A4                                      004554A4
+TApplication._PROC_004554F0                                      004554F0
+TApplication._PROC_00455540                                      00455540
+TApplication._PROC_00455570                                      00455570
+TApplication._PROC_00455658                                      00455658
+TApplication._PROC_00455660                                      00455660
+TApplication._PROC_0045566C                                      0045566C
+TApplication._PROC_00455674                                      00455674
+TApplication._PROC_0045569C                                      0045569C
+TApplication._PROC_0045571C                                      0045571C
+TApplication._PROC_00455798                                      00455798
+TApplication._PROC_004557BC                                      004557BC
+TApplication._PROC_004557E4                                      004557E4
+TApplication._PROC_004559B8                                      004559B8
+TApplication._PROC_004559CC                                      004559CC
+TApplication._PROC_00455A00                                      00455A00
+TApplication._PROC_00455A1C                                      00455A1C
+TApplication._PROC_00455A28                                      00455A28
+TApplication._PROC_00455A58                                      00455A58
+TApplication._PROC_00455A7C                                      00455A7C
+TApplication._PROC_00455A94                                      00455A94
+TApplication._PROC_00455ADC                                      00455ADC
+TApplication._PROC_00455AFC                                      00455AFC
+TApplication._PROC_00455B18                                      00455B18
+TApplication._PROC_00455B58                                      00455B58
+TApplication._PROC_00455EAC                                      00455EAC
+TApplication._PROC_004560CB                                      004560CB
+TApplication._PROC_0045620D                                      0045620D
+TApplication._PROC_00456344                                      00456344
+TApplication._PROC_00456388                                      00456388
+TApplication._PROC_004563EC                                      004563EC
+TApplication._PROC_004564A4                                      004564A4
+TApplication._PROC_004564EC                                      004564EC
+TApplication._PROC_00456510                                      00456510
+TApplication._PROC_004567A3                                      004567A3
+TApplication._PROC_004567B9                                      004567B9
+TApplication._PROC_004567FC                                      004567FC
+TApplication._PROC_00456860                                      00456860
+TApplication._PROC_004568B0                                      004568B0
+TApplication._PROC_00456958                                      00456958
+TApplication._PROC_004569A4                                      004569A4
+TApplication._PROC_004569D4                                      004569D4
+TApplication._PROC_00456A04                                      00456A04
+TApplication._PROC_00456A24                                      00456A24
+TApplication._PROC_00456A40                                      00456A40
+TApplication._PROC_00456AFC                                      00456AFC
+TApplication._PROC_00456B9C                                      00456B9C
+TApplication._PROC_00456C1F                                      00456C1F
+TApplication._PROC_00456C7C                                      00456C7C
+TApplication._PROC_00456CB4                                      00456CB4
+TApplication._PROC_00456CC8                                      00456CC8
+TApplication._PROC_00456DC4                                      00456DC4
+TApplication._PROC_00456DF8                                      00456DF8
+TApplication._PROC_00456E88                                      00456E88
+TApplication._PROC_00456EE8                                      00456EE8
+TApplication._PROC_00456F1C                                      00456F1C
+TApplication._PROC_00456F34                                      00456F34
+TApplication._PROC_00456F6C                                      00456F6C
+TApplication._PROC_00457014                                      00457014
+TApplication._PROC_00457034                                      00457034
+TApplication._PROC_0045706C                                      0045706C
+TApplication._PROC_00457074                                      00457074
+TApplication._PROC_004570A0                                      004570A0
+TApplication._PROC_004570F8                                      004570F8
+TApplication._PROC_00457184                                      00457184
+TApplication._PROC_0045721C                                      0045721C
+TApplication._PROC_00457274                                      00457274
+TApplication._PROC_004572A0                                      004572A0
+TApplication._PROC_004572BC                                      004572BC
+TApplication._PROC_004572FC                                      004572FC
+TApplication._PROC_00457334                                      00457334
+TApplication._PROC_00457368                                      00457368
+TApplication._PROC_004574C8                                      004574C8
+TApplication._PROC_0045753C                                      0045753C
+TApplication._PROC_00457568                                      00457568
+TApplication._PROC_00457620                                      00457620
+TApplication._PROC_00457644                                      00457644
+TApplication._PROC_00457668                                      00457668
+TApplication._PROC_00457704                                      00457704
+TApplication._PROC_00457C7C                                      00457C7C
+TApplication._PROC_00457C9C                                      00457C9C
+TApplication._PROC_00457CA4                                      00457CA4
+TApplication._PROC_00457CF4                                      00457CF4
+TApplication._PROC_00457CFC                                      00457CFC
+TApplication._PROC_00457D68                                      00457D68
+TApplication._PROC_00457D94                                      00457D94
+TApplication._PROC_00457E38                                      00457E38
+TApplication._PROC_00457E9C                                      00457E9C
+TApplication._PROC_00457F34                                      00457F34
+TApplication._PROC_00457F3C                                      00457F3C
+TApplication._PROC_00457F54                                      00457F54
+TApplication._PROC_00457FD0                                      00457FD0
+TApplication._PROC_00457FEC                                      00457FEC
+TApplication._PROC_004582C4                                      004582C4
+TApplication._PROC_00458334                                      00458334
+TApplication._PROC_0045839C                                      0045839C
+TApplication._PROC_004583B8                                      004583B8
+TApplication._PROC_004583DC                                      004583DC
+TApplication._PROC_0045840C                                      0045840C
+TApplication._PROC_00458488                                      00458488
+TApplication._PROC_004584DC                                      004584DC
+TApplication._PROC_0045850C                                      0045850C
+TApplication._PROC_00458588                                      00458588
+TApplication._PROC_004585DC                                      004585DC
+TApplication._PROC_00458630                                      00458630
+TApplication._PROC_004586AC                                      004586AC
+TApplication._PROC_004586E8                                      004586E8
+TApplication._PROC_00458720                                      00458720
+TApplication._PROC_00458730                                      00458730
+TApplication._PROC_00458808                                      00458808
+TApplication._PROC_0045881C                                      0045881C
+TApplication._PROC_00458830                                      00458830
+TApplication._PROC_00458844                                      00458844
+TApplication._PROC_00458858                                      00458858
+TApplication._PROC_00458884                                      00458884
+TApplication._PROC_004588E8                                      004588E8
+TApplication._PROC_004589CC                                      004589CC
+TApplication._PROC_004589EC                                      004589EC
+TApplication._PROC_00458A38                                      00458A38
+TApplication._PROC_00458A64                                      00458A64
+TApplication._PROC_00458A8C                                      00458A8C
+TApplication._PROC_00458B24                                      00458B24
+TApplication._PROC_00458B7C                                      00458B7C
+TApplication._PROC_00458C50                                      00458C50
+TApplication._PROC_00458C68                                      00458C68
+TApplication._PROC_00458CA4                                      00458CA4
+TApplication._PROC_00458CBC                                      00458CBC
+TApplication._PROC_00458CD8                                      00458CD8
+TApplication._PROC_00458CF0                                      00458CF0
+TApplication._PROC_00458D0C                                      00458D0C
+TApplication._PROC_00458D3C                                      00458D3C
+TApplication._PROC_00458D6C                                      00458D6C
+TApplication._PROC_00458EC4                                      00458EC4
+TApplication._PROC_00458F8C                                      00458F8C
+TApplication._PROC_00458F98                                      00458F98
+TApplication._PROC_00458FA4                                      00458FA4
+TApplication._PROC_00458FB0                                      00458FB0
+TApplication._PROC_00458FBC                                      00458FBC
+TApplication._PROC_00458FC8                                      00458FC8
+TApplication._PROC_00458FD4                                      00458FD4
+TApplication._PROC_00458FE8                                      00458FE8
+TApplication._PROC_00459004                                      00459004
+TApplication._PROC_00459018                                      00459018
+TApplication._PROC_00459020                                      00459020
+TApplication._PROC_00459034                                      00459034
+TApplication._PROC_0045903C                                      0045903C
+TApplication._PROC_00459088                                      00459088
+TApplication._PROC_004590C0                                      004590C0
+TApplication._PROC_00459110                                      00459110
+TApplication._PROC_0045911C                                      0045911C
+TApplication._PROC_00459128                                      00459128
+TApplication._PROC_00459184                                      00459184
+TApplication._PROC_004591FC                                      004591FC
+TApplication._PROC_00459224                                      00459224
+TApplication._PROC_00459481                                      00459481
+TApplication._PROC_004594D4                                      004594D4
+TApplication._PROC_0045950C                                      0045950C
+TApplication._PROC_0045959C                                      0045959C
+TApplication._PROC_004596F0                                      004596F0
+TApplication._PROC_004596F8                                      004596F8
+TApplication._PROC_00459718                                      00459718
+TApplication._PROC_00459720                                      00459720
+TApplication._PROC_00459780                                      00459780
+TApplication._PROC_00459930                                      00459930
+TApplication._PROC_00459A7C                                      00459A7C
+TApplication._PROC_00459AD4                                      00459AD4
+TApplication._PROC_00459B5C                                      00459B5C
+TApplication._PROC_00459BE4                                      00459BE4
+TApplication._PROC_00459BF0                                      00459BF0
+TApplication._PROC_00459C28                                      00459C28
+TApplication._PROC_00459C48                                      00459C48
+TApplication._PROC_00459C9C                                      00459C9C
+TApplication._PROC_00459CF8                                      00459CF8
+TApplication._PROC_00459D3C                                      00459D3C
+TApplication._PROC_00459DB0                                      00459DB0
+TApplication._PROC_00459E0C                                      00459E0C
+TApplication._PROC_00459E3C                                      00459E3C
+TApplication._PROC_00459E64                                      00459E64
+TApplication._PROC_00459E94                                      00459E94
+TApplication._PROC_0045A0A7                                      0045A0A7
+TApplication._PROC_0045A1C0                                      0045A1C0
+TApplication._PROC_0045A370                                      0045A370
+TApplication._PROC_0045A3D0                                      0045A3D0
+TApplication._PROC_0045A440                                      0045A440
+TApplication._PROC_0045A4F0                                      0045A4F0
+TApplication._PROC_0045A51C                                      0045A51C
+TApplication._PROC_0045A548                                      0045A548
+TApplication._PROC_0045A550                                      0045A550
+TApplication._PROC_0045A558                                      0045A558
+TApplication._PROC_0045A5C4                                      0045A5C4
+TApplication._PROC_0045A5DC                                      0045A5DC
+TApplication._PROC_0045A5F4                                      0045A5F4
+TApplication._PROC_0045A64C                                      0045A64C
+TApplication._PROC_0045A6B8                                      0045A6B8
+TApplication._PROC_0045A6F4                                      0045A6F4
+TApplication._PROC_0045A740                                      0045A740
+TApplication._PROC_0045A85B                                      0045A85B
+TApplication._PROC_0045AE82                                      0045AE82
+TApplication._PROC_0045AF0C                                      0045AF0C
+TApplication._PROC_0045B00C                                      0045B00C
+TApplication._PROC_0045B048                                      0045B048
+TApplication._PROC_0045B094                                      0045B094
+TApplication._PROC_0045B0B8                                      0045B0B8
+TApplication._PROC_0045B108                                      0045B108
+TApplication._PROC_0045B1C0                                      0045B1C0
+TApplication._PROC_0045B1F4                                      0045B1F4
+TApplication._PROC_0045B260                                      0045B260
+TApplication._PROC_0045B2F8                                      0045B2F8
+TApplication._PROC_0045B31C                                      0045B31C
+TApplication._PROC_0045B378                                      0045B378
+TApplication._PROC_0045B404                                      0045B404
+TApplication._PROC_0045B41C                                      0045B41C
+TApplication._PROC_0045B49C                                      0045B49C
+TApplication._PROC_0045B588                                      0045B588
+TApplication._PROC_0045B59C                                      0045B59C
+TApplication._PROC_0045B62C                                      0045B62C
+TApplication._PROC_0045B794                                      0045B794
+TApplication._PROC_0045B85C                                      0045B85C
+TApplication._PROC_0045B870                                      0045B870
+TApplication._PROC_0045B9D4                                      0045B9D4
+TApplication._PROC_0045BA3C                                      0045BA3C
+TApplication._PROC_0045BACC                                      0045BACC
+TApplication._PROC_0045BB54                                      0045BB54
+TApplication._PROC_0045BB5C                                      0045BB5C
+TApplication._PROC_0045BBAC                                      0045BBAC
+TApplication._PROC_0045BC10                                      0045BC10
+TApplication._PROC_0045BC88                                      0045BC88
+TApplication._PROC_0045BDA8                                      0045BDA8
+TApplication._PROC_0045BDE4                                      0045BDE4
+TApplication._PROC_0045BE48                                      0045BE48
+TApplication._PROC_0045BEDC                                      0045BEDC
+TApplication._PROC_0045BF38                                      0045BF38
+TApplication._PROC_0045BFC0                                      0045BFC0
+TApplication._PROC_0045BFE8                                      0045BFE8
+TApplication._PROC_0045C02C                                      0045C02C
+TApplication._PROC_0045C054                                      0045C054
+TApplication._PROC_0045C164                                      0045C164
+TApplication._PROC_0045C19C                                      0045C19C
+TApplication._PROC_0045C1E0                                      0045C1E0
+TApplication._PROC_0045C208                                      0045C208
+TApplication._PROC_0045C218                                      0045C218
+TApplication._PROC_0045C378                                      0045C378
+TApplication._PROC_0045C3D8                                      0045C3D8
+TApplication._PROC_0045C49C                                      0045C49C
+TApplication._PROC_0045C830                                      0045C830
+TApplication._PROC_0045C86C                                      0045C86C
+TApplication._PROC_0045C8FC                                      0045C8FC
+TApplication._PROC_0045C924                                      0045C924
+TApplication._PROC_0045C94C                                      0045C94C
+TApplication._PROC_0045C96F                                      0045C96F
+TApplication._PROC_0045C9D9                                      0045C9D9
+TApplication._PROC_0045CA34                                      0045CA34
+TApplication._PROC_0045CA79                                      0045CA79
+TApplication._PROC_0045CAA8                                      0045CAA8
+TApplication._PROC_0045CAB0                                      0045CAB0
+TApplication._PROC_0045CAE0                                      0045CAE0
+TApplication._PROC_0045CAE8                                      0045CAE8
+TApplication._PROC_0045CB18                                      0045CB18
+TApplication._PROC_0045CB20                                      0045CB20
+
+
+
+Buttons
+
+TSpeedButton._PROC_0045CE2F                                      0045CE2F
+TSpeedButton._PROC_0045D1C5                                      0045D1C5
+
+
+
+Buttons
+
+TGlyphList._PROC_0045D33D                                        0045D33D
+TGlyphList._PROC_0045D390                                        0045D390
+TGlyphList._PROC_0045D3C0                                        0045D3C0
+TGlyphList._PROC_0045D40C                                        0045D40C
+TGlyphList._PROC_0045D438                                        0045D438
+TGlyphList._PROC_0045D468                                        0045D468
+TGlyphList._PROC_0045D4AC                                        0045D4AC
+TGlyphList._PROC_0045D4DC                                        0045D4DC
+TGlyphList._PROC_0045D53C                                        0045D53C
+TGlyphList._PROC_0045D560                                        0045D560
+TGlyphList._PROC_0045D56C                                        0045D56C
+TGlyphList._PROC_0045D600                                        0045D600
+TGlyphList._PROC_0045D65C                                        0045D65C
+TGlyphList._PROC_0045D6A0                                        0045D6A0
+TGlyphList._PROC_0045D6D0                                        0045D6D0
+TGlyphList._PROC_0045D748                                        0045D748
+TGlyphList._PROC_0045D770                                        0045D770
+TGlyphList._PROC_0045DD48                                        0045DD48
+TGlyphList._PROC_0045DEAC                                        0045DEAC
+TGlyphList._PROC_0045DF8C                                        0045DF8C
+TGlyphList._PROC_0045E2B8                                        0045E2B8
+TGlyphList._PROC_0045E328                                        0045E328
+TGlyphList._PROC_0045E34C                                        0045E34C
+TGlyphList._PROC_0045E398                                        0045E398
+TGlyphList._PROC_0045E3C8                                        0045E3C8
+TGlyphList._PROC_0045E3E8                                        0045E3E8
+TGlyphList._PROC_0045E408                                        0045E408
+TGlyphList._PROC_0045E4C3                                        0045E4C3
+TGlyphList._PROC_0045E500                                        0045E500
+TGlyphList._PROC_0045E938                                        0045E938
+TGlyphList._PROC_0045E99C                                        0045E99C
+TGlyphList._PROC_0045E9C8                                        0045E9C8
+TGlyphList._PROC_0045EA20                                        0045EA20
+TGlyphList._PROC_0045EAC0                                        0045EAC0
+TGlyphList._PROC_0045EBB8                                        0045EBB8
+TGlyphList._PROC_0045EBC0                                        0045EBC0
+TGlyphList._PROC_0045EBD4                                        0045EBD4
+TGlyphList._PROC_0045EBDC                                        0045EBDC
+TGlyphList._PROC_0045EBE8                                        0045EBE8
+TGlyphList._PROC_0045EC00                                        0045EC00
+TGlyphList._PROC_0045EC0C                                        0045EC0C
+TGlyphList._PROC_0045EC38                                        0045EC38
+TGlyphList._PROC_0045EC40                                        0045EC40
+TGlyphList._PROC_0045EC78                                        0045EC78
+TGlyphList._PROC_0045ECE8                                        0045ECE8
+TGlyphList._PROC_0045ED04                                        0045ED04
+TGlyphList._PROC_0045ED18                                        0045ED18
+TGlyphList._PROC_0045ED34                                        0045ED34
+TGlyphList._PROC_0045ED54                                        0045ED54
+TGlyphList._PROC_0045ED70                                        0045ED70
+TGlyphList._PROC_0045EDA8                                        0045EDA8
+TGlyphList._PROC_0045EDEB                                        0045EDEB
+TGlyphList._PROC_0045EE14                                        0045EE14
+TGlyphList._PROC_0045EE84                                        0045EE84
+TGlyphList._PROC_0045EF1C                                        0045EF1C
+TGlyphList._PROC_0045EF24                                        0045EF24
+TGlyphList._PROC_0045EF2C                                        0045EF2C
+TGlyphList._PROC_0045EF50                                        0045EF50
+TGlyphList._PROC_0045EFC4                                        0045EFC4
+TGlyphList._PROC_0045F02C                                        0045F02C
+TGlyphList._PROC_0045F0BC                                        0045F0BC
+TGlyphList._PROC_0045F15C                                        0045F15C
+TGlyphList._PROC_0045F178                                        0045F178
+TGlyphList._PROC_0045F1F5                                        0045F1F5
+TGlyphList._PROC_0045F22C                                        0045F22C
+TGlyphList._PROC_0045F254                                        0045F254
+TGlyphList._PROC_0045F284                                        0045F284
+TGlyphList._PROC_0045F2A5                                        0045F2A5
+TGlyphList._PROC_0045F2EC                                        0045F2EC
+TGlyphList._PROC_0045F30D                                        0045F30D
+TGlyphList._PROC_0045F354                                        0045F354
+TGlyphList._PROC_0045F371                                        0045F371
+TGlyphList._PROC_0045F3C0                                        0045F3C0
+TGlyphList._PROC_0045F3C8                                        0045F3C8
+TGlyphList._PROC_0045F418                                        0045F418
+TGlyphList._PROC_0045F420                                        0045F420
+TGlyphList._PROC_0045F450                                        0045F450
+TGlyphList._PROC_0045F458                                        0045F458
+
+
+
+ComCtrls
+
+TTrackBar._PROC_0045FC14                                         0045FC14
+
+
+
+MPlayer
+
+TMediaPlayer._PROC_00460F4D                                      00460F4D
+TMediaPlayer._PROC_00460F8D                                      00460F8D
+TMediaPlayer._PROC_00461073                                      00461073
+TMediaPlayer._PROC_004610F4                                      004610F4
+TMediaPlayer._PROC_004612DB                                      004612DB
+TMediaPlayer._PROC_00461304                                      00461304
+TMediaPlayer._PROC_00461338                                      00461338
+TMediaPlayer._PROC_0046137C                                      0046137C
+TMediaPlayer._PROC_004613EC                                      004613EC
+TMediaPlayer._PROC_00461414                                      00461414
+TMediaPlayer._PROC_0046143C                                      0046143C
+TMediaPlayer._PROC_004614CC                                      004614CC
+TMediaPlayer._PROC_004617C8                                      004617C8
+TMediaPlayer._PROC_0046183C                                      0046183C
+TMediaPlayer._PROC_004618A3                                      004618A3
+TMediaPlayer._PROC_004618CC                                      004618CC
+TMediaPlayer._PROC_00461907                                      00461907
+TMediaPlayer._PROC_00461942                                      00461942
+TMediaPlayer._PROC_0046197D                                      0046197D
+TMediaPlayer._PROC_004619B8                                      004619B8
+TMediaPlayer._PROC_004619F3                                      004619F3
+TMediaPlayer._PROC_00461A1F                                      00461A1F
+TMediaPlayer._PROC_00461A68                                      00461A68
+TMediaPlayer._PROC_00461B44                                      00461B44
+TMediaPlayer._PROC_00461B54                                      00461B54
+TMediaPlayer._PROC_00461B64                                      00461B64
+TMediaPlayer._PROC_00461BCC                                      00461BCC
+TMediaPlayer._PROC_00461C8C                                      00461C8C
+TMediaPlayer._PROC_00461CA0                                      00461CA0
+TMediaPlayer._PROC_00461D24                                      00461D24
+TMediaPlayer._PROC_00461D30                                      00461D30
+TMediaPlayer._PROC_00461D3C                                      00461D3C
+TMediaPlayer._PROC_00461D44                                      00461D44
+TMediaPlayer._PROC_00461E20                                      00461E20
+TMediaPlayer._PROC_00461EBF                                      00461EBF
+TMediaPlayer._PROC_00461EEB                                      00461EEB
+TMediaPlayer._PROC_00461F08                                      00461F08
+TMediaPlayer._PROC_00461F28                                      00461F28
+TMediaPlayer._PROC_00461F48                                      00461F48
+TMediaPlayer._PROC_00461F5C                                      00461F5C
+TMediaPlayer._PROC_00461FD1                                      00461FD1
+TMediaPlayer._PROC_0046225F                                      0046225F
+TMediaPlayer._PROC_00462323                                      00462323
+TMediaPlayer._PROC_00462430                                      00462430
+TMediaPlayer._PROC_00462508                                      00462508
+TMediaPlayer._PROC_0046259C                                      0046259C
+TMediaPlayer._PROC_004625E8                                      004625E8
+TMediaPlayer._PROC_0046267C                                      0046267C
+TMediaPlayer._PROC_00462730                                      00462730
+TMediaPlayer._PROC_004628C0                                      004628C0
+TMediaPlayer._PROC_00462A7C                                      00462A7C
+TMediaPlayer._PROC_00462B58                                      00462B58
+TMediaPlayer._PROC_00462C1C                                      00462C1C
+TMediaPlayer._PROC_00462CC8                                      00462CC8
+TMediaPlayer._PROC_00462D6C                                      00462D6C
+TMediaPlayer._PROC_00462D98                                      00462D98
+TMediaPlayer._PROC_00462DD0                                      00462DD0
+TMediaPlayer._PROC_00462DE8                                      00462DE8
+TMediaPlayer._PROC_00462E00                                      00462E00
+TMediaPlayer._PROC_00462E10                                      00462E10
+TMediaPlayer._PROC_00462E4C                                      00462E4C
+TMediaPlayer._PROC_00462ED4                                      00462ED4
+TMediaPlayer._PROC_00462F14                                      00462F14
+TMediaPlayer._PROC_00462F60                                      00462F60
+TMediaPlayer._PROC_00462FB4                                      00462FB4
+TMediaPlayer._PROC_00463148                                      00463148
+TMediaPlayer._PROC_00463190                                      00463190
+TMediaPlayer._PROC_004631D8                                      004631D8
+TMediaPlayer._PROC_00463220                                      00463220
+TMediaPlayer._PROC_00463264                                      00463264
+TMediaPlayer._PROC_004632A4                                      004632A4
+TMediaPlayer._PROC_004632EC                                      004632EC
+TMediaPlayer._PROC_0046333C                                      0046333C
+TMediaPlayer._PROC_0046336C                                      0046336C
+TMediaPlayer._PROC_00463495                                      00463495
+TMediaPlayer._PROC_004634C4                                      004634C4
+TMediaPlayer._PROC_004634D8                                      004634D8
+TMediaPlayer._PROC_00463520                                      00463520
+TMediaPlayer._PROC_00463528                                      00463528
+
+
+
+jpeg
+
+TJPEGImage._PROC_00463674                                        00463674
+TJPEGImage._PROC_00463684                                        00463684
+TJPEGImage._PROC_0046369C                                        0046369C
+TJPEGImage._PROC_004636B0                                        004636B0
+TJPEGImage._PROC_004636CC                                        004636CC
+TJPEGImage._PROC_004636E8                                        004636E8
+TJPEGImage._PROC_004636F0                                        004636F0
+TJPEGImage._PROC_00463708                                        00463708
+
+
+
+XPMan
+
+TXPManifest._PROC_004769F4                                       004769F4
+TXPManifest._PROC_004769FC                                       004769FC
+TXPManifest._PROC_00476B26                                       00476B26
+
+
+
+Animate
+
+TForm3.tmr1Timer                                                 004781C8
+TForm3.FormCreate                                                0047826C
+TForm3.FormClose                                                 0047843C
+TForm3.FormCanResize                                             00478498
+TForm3.FormMouseMove                                             004784A8
+TForm3.FormMouseDown                                             0047854C
+TForm3.FormMouseUp                                               0047855C
+TForm3.FormDblClick                                              0047856C
+TForm3.ChangeLight                                               00478678
+
+
+
+LibraryFunctions
+
+TForm2.ComboBox3Change                                           00478D70
+TForm2.FormCreate                                                00478E8C
+TForm2.TrackBar1Change                                           00478EC4
+TForm2.FormResize                                                00478EB0
+TForm2._PROC_00478980                                            00478980
+TForm2._PROC_00478A20                                            00478A20
+TForm2._PROC_00478AB4                                            00478AB4
+TForm2._PROC_00478B48                                            00478B48
+TForm2._PROC_00478C21                                            00478C21
+TForm2._PROC_00478CF9                                            00478CF9
+TForm2._PROC_00478F59                                            00478F59
+TForm2._PROC_00478F88                                            00478F88
+TForm2._PROC_00478F90                                            00478F90
+TForm2._PROC_004790E2                                            004790E2
+
+
+
+MediaFunctions
+
+TForm1.ListBoxtrackClick                                         00479C5C
+TForm1.FormCreate                                                00479DBC
+TForm1.tmr1Timer                                                 00479E74
+TForm1.mediaplayer1Click                                         0047A0A0
+TForm1.VolumeTrackBarChange                                      00479B88
+TForm1.FormCanResize                                             0047A190
+TForm1.OpenFolderClick                                           0047A290
+TForm1.SavePlaylistClick                                         0047A660
+TForm1.OpenPlaylistClick                                         0047A820
+TForm1.OpenFileMenuClick                                         0047AA40
+TForm1.ListBoxtrackDblClick                                      0047ACE8
+TForm1.PlaySpeedButtonClick                                      0047ADC4
+TForm1.PauseSpeedButtonClick                                     0047ADE0
+TForm1.NextSpeedButtonClick                                      0047AE00
+TForm1.PreviuoseSpeedButtonClick                                 0047AE1C
+TForm1.ExitClick                                                 0047AE38
+TForm1.SoundTrackBarChange                                       0047AE50
+TForm1.AnimationClick                                            0047AEB0
+TForm1.N2Click                                                   0047AEF0
+TForm1.N3Click                                                   0047B0AC
+TForm1.N4Click                                                   0047B134
+TForm1.N5Click                                                   0047B17C
+TForm1.N6Click                                                   0047B424
+TForm1.ListBoxtrackKeyDown                                       0047B48C
+TForm1.FormResize                                                0047B494
+
+
+
