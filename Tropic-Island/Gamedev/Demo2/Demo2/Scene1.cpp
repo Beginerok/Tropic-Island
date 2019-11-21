@@ -25,6 +25,8 @@ Scene1::Scene1(void)
 	//randommassive = new int[30];
 	start = true;
 	flogout.open("log.txt");
+	animateboomer = 0;
+	slowlychangesprite = 0;
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -35,6 +37,9 @@ void Scene1::LoadImage(const ILstring path)
 		ext = IL_JPG;
 	if (strstr(reinterpret_cast<const char*>(path), "bmp"))
 		ext = IL_BMP;
+	if (strstr(reinterpret_cast<const char*>(path), "gif"))
+		ext = IL_GIF;
+
 	ilLoad(ext, reinterpret_cast<const ILstring>(path));
 	// Получение кода ошибки
 	err = ilGetError();
@@ -1846,6 +1851,128 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 
 		glEnd();//total bet
 	}
+}
+void Scene1::LoadBoomer()
+{
+	vectorboomer.push_back("0");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//boomer//0.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\0.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "0";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorboomer.push_back("1");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//boomer//1.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\1.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "1";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorboomer.push_back("2");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//boomer//2.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\2.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "2";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorboomer.push_back("3");
+#ifndef _WINDOWS_2
+	LoadImage(reinterpret_cast<const ILstring>("content//boomer//3.png"));
+#else
+	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\3.png"));
+#endif
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "3";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+}
+void Scene1::ShowBoomer()
+{
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	glAlphaFunc(GL_GREATER, 0.0f);
+	if (slowlychangesprite > 100 && slowlychangesprite < 200 && animateboomer == 0)
+		animateboomer++;
+	if (slowlychangesprite > 200 && slowlychangesprite < 300 && animateboomer == 1)
+		animateboomer++;
+	if (slowlychangesprite > 300 && slowlychangesprite < 400 && animateboomer == 2)
+		animateboomer++;
+	if (slowlychangesprite > 400 && slowlychangesprite < 500 && animateboomer == 3)
+		animateboomer++;
+	if (animateboomer == vectorboomer.size())
+	{
+		animateboomer = 0;
+		slowlychangesprite = 0;
+	}
+	int numTexture = FindTexture(vectorboomer[animateboomer]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[numTexture]);
+	EnableTextureBoomer(numTexture);
+	//animateboomer++;
+	slowlychangesprite++;
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
+}
+void Scene1::EnableTextureBoomer(int animboom)
+{
+	glBegin(GL_QUADS);
+	glTexCoord2f(image->TextureCoordinats[animboom][0], image->TextureCoordinats[animboom][2]);
+	glVertex2f(image->VertexCoordinats[animboom][0], image->VertexCoordinats[animboom][2]);
+
+	glTexCoord2f(image->TextureCoordinats[animboom][1], image->TextureCoordinats[animboom][2]);
+	glVertex2f(image->VertexCoordinats[animboom][1], image->VertexCoordinats[animboom][2]);
+	
+	glTexCoord2f(image->TextureCoordinats[animboom][1], image->TextureCoordinats[animboom][3]);
+	glVertex2f(image->VertexCoordinats[animboom][1], image->VertexCoordinats[animboom][3]);
+	
+	glTexCoord2f(image->TextureCoordinats[animboom][0], image->TextureCoordinats[animboom][3]);
+	glVertex2f(image->VertexCoordinats[animboom][0], image->VertexCoordinats[animboom][3]);
+	glEnd();
 }
 Scene1::~Scene1()
 {

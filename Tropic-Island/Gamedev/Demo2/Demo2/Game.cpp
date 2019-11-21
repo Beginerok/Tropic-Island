@@ -67,6 +67,7 @@ void Game::draw_screen()
 			
 			Scene1_->ShowButtons();
 			Scene1_->ShowNumbersAndWords();
+			Scene1_->ShowBoomer();
 		}
 		else
 			Scene1_->ShowWelcome(loading);
@@ -109,6 +110,7 @@ int Game::Execute()
 	Scene1_->LoadButtons();
 	//
 	Scene1_->LoadNumbersAndWords();
+	Scene1_->LoadBoomer();
 	//
 #if WINAPI_ == 0
 	WindowsSDLApi_ = new WindowsSDLApi();

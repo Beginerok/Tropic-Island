@@ -83,6 +83,9 @@ public:
 	void LoadNumbersAndWords();
 	void ShowNumbersAndWords();
 	void EnableTextureNumbersAndWords(int i);
+	void LoadBoomer();
+	void ShowBoomer();
+	void EnableTextureBoomer(int i);
 	~Scene1();
 	int err;
 #ifdef _WINDOWS_2
@@ -99,7 +102,7 @@ public:
 	// Тип хранения данных
 	unsigned int type;
 	unsigned char*copyData;
-	static const int CountTexture = 53;//40
+	static const int CountTexture = 57;//40//53
 	Image *image;
 	int CountIndexTexture;
 	int AnimateBar;
@@ -119,5 +122,7 @@ public:
 
 	std::vector<std::string>vectornumbersandwords;
 	std::ofstream flogout;// ("log.txt");
+	std::vector<std::string>vectorboomer;
+	int animateboomer,slowlychangesprite;
 };
 
