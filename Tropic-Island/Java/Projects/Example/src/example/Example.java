@@ -66,8 +66,10 @@ public class Example {
               
              System.out.println(ex);
          }
-        GeneratePlaylist g = new GeneratePlaylist();
-        g.LoadFromFiles();
+        //GeneratePlaylist g = new GeneratePlaylist();
+        //g.LoadFromFiles();
+        Email e = new Email();
+        e.Send();
     }
     /*
     public static void showFilesAndDirectoryes (File f) throws Exception  {
