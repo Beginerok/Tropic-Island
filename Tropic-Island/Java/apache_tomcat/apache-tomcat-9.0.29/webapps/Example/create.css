@@ -1,0 +1,39 @@
+.h3{
+	color: crimson;
+}
+.labeler{
+  color: crimson;
+  font-style: Tahoma;
+  font-size: 50px;
+}
+.inputer{
+  width: 300px;
+  border-radius: 20px;
+  height: 100px;
+  font-size: 44px;
+  margin-left: 10%;
+}
+.button{
+  border-radius: 30px;
+  width: 300px;
+  height: 50px;
+  margin-left: 10%;
+  background-color:  crimson;
+}
+body
+{
+	background: url(28.jpg) no-repeat;
+	background-size: 100%;
+}
+#CenterBlock{
+		border-radius:40px;
+        width:400px;
+        height:530px;
+        background:radial-gradient(circle at 65% 15%, aqua, darkblue);
+        position:absolute;
+        top:20%;
+        left:37%;
+        margin:0 0 0 0;
+    }
+	
+	

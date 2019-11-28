@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+.menu-main {
+  list-style: none;
+  margin: 40px 0 5px;
+  padding: 25px 0 5px;
+  text-align: center;
+  background: white;
+}
+.menu-main li {display: inline-block;}
+.menu-main li:after {
+  content: "|";
+  color: #606060;
+  display: inline-block;
+  vertical-align:top;
+}
+.menu-main li:last-child:after {content: none;}
+.menu-main a {
+  text-decoration: none;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 20px;
+  margin: 0 34px 0 30px;
+  font-size: 17px;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: color .2s;
+}
+.menu-main a, .menu-main a:visited {color: #9d999d;}
+.menu-main a.current, .menu-main a:hover{color: #feb386;}
+.menu-main a:before,
+.menu-main a:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  top: auto;
+  right: 50%;
+  bottom: -5px;
+  left: 50%;
+  background: #feb386;
+  transition: .8s;
+}
+.menu-main a:hover:before, .menu-main .current:before {left: 0;}
+.menu-main a:hover:after, .menu-main .current:after {right: 0;}   
+@media (max-width: 550px) {
+.menu-main {padding-top: 0;}
+.menu-main li {display: block;}
+.menu-main li:after {content: none;}
+.menu-main a {
+  padding: 25px 0 20px; 
+  margin: 0 30px;
+}
+}
+
+
+
+
+
+.title {
+	font-size: 50px;
+	line-height: 56px;	
+	color: radial-gradient(40% 50%, #888888, #FF00FF);
+	font-family: fantasy;
+}
+.title span {
+	padding: 0 10px;
+	background: rgba(37,219,237,0.8);
+}
+#square {
+    width: 1000px;
+    height: 900px;
+	position: absolute;
+	left: 20%;
+	top: 12%;
+	z-index: -5;
+    background: transparent;
+	background: radial-gradient(40% 50%, #FAECD5, #CAE4D8);
+	opacity: 0.5;
+}
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+.footer {
+  list-style: none;
+  margin: 40px 0 5px;
+  padding: 25px 0 5px;
+  text-align: center;
+  background: white;
+}
+.footer li {display: inline-block;}
+.footer li:after {
+  content: "|";
+  color: #606060;
+  display: inline-block;
+  vertical-align:top;
+}
+.footer li:last-child:after {content: none;}
+.footer a {
+  text-decoration: none;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 20px;
+  margin: 0 34px 0 30px;
+  font-size: 17px;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: color .2s;
+}
+.footer a, .footer a:visited {color: #9d999d;}
+.footer a.current, .footer a:hover{color: #feb386;}
+.footer a:before,
+.footer a:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  top: auto;
+  right: 50%;
+  bottom: -5px;
+  left: 50%;
+  background: #feb386;
+  transition: .8s;
+}
+.footer a:hover:before, .footer .current:before {left: 0;}
+.footer a:hover:after, .footer .current:after {right: 0;}   
+@media (max-width: 550px) {
+.footer {padding-top: 0;}
+.footer li {display: block;}
+.footer li:after {content: none;}
+.footer a {
+  padding: 25px 0 20px; 
+  margin: 0 30px;
+}
+}
+
+
+
+
+
+
+
