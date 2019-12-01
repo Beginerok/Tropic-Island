@@ -151,8 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="DataBaseConnection.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Loader.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="Scene1.h" />
     <ClInclude Include="Window.h" />
@@ -160,8 +162,10 @@
     <ClInclude Include="WindowsWinApi.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="DataBaseConnection.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene1.cpp" />
