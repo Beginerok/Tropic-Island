@@ -3,10 +3,10 @@
 Scene1::Scene1(void)
 {
 	image = new Image[CountTexture];
-	image->TextureCoordinats = new float*[CountTexture];
-	image->VertexCoordinats = new float*[CountTexture];
+	image->TextureCoordinats = new float* [CountTexture];
+	image->VertexCoordinats = new float* [CountTexture];
 	image->Name = new std::string[CountTexture];
-	for (int i = 0; i<CountTexture; i++)
+	for (int i = 0; i < CountTexture; i++)
 	{
 		image->TextureCoordinats[i] = new float[4];
 		image->VertexCoordinats[i] = new float[4];
@@ -18,7 +18,7 @@ Scene1::Scene1(void)
 	AnimateBar = 0;
 	rotate = new float[CountDrum];
 	startrotate = new bool[CountDrum];
-	for (int i = 0; i<CountDrum; i++) {
+	for (int i = 0; i < CountDrum; i++) {
 		rotate[i] = 360.0f;
 		startrotate[i] = false;
 	}
@@ -27,6 +27,21 @@ Scene1::Scene1(void)
 	flogout.open("log.txt");
 	animateboomer = 0;
 	slowlychangesprite = 0;
+	animation = new Animation();
+	animation2 = new Animation();
+	animation3 = new Animation();
+	drumanimation = new int*[3];
+	drumanimation[0] = new int[CountDrum * CountTextureOnDrum];
+	drumanimation[1] = new int[CountDrum * CountTextureOnDrum];
+	drumanimation[2] = new int[CountDrum * CountTextureOnDrum];
+	speedchangeanimation = new int[CountDrum * CountTextureOnDrum];
+	for (int i = 0; i < CountDrum * CountTextureOnDrum; i++)
+	{
+		drumanimation[0][i] = 0;
+		drumanimation[1][i] = 0;
+		drumanimation[2][i] = 0;
+		speedchangeanimation[i] = 0;
+	}
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -807,11 +822,46 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 	{
 		glPushMatrix();
 		glRotatef(rotate[i], 1, 0, 0);
-		for (int j = 0; j<counttextureondrums; j++)
+		for (int j = 0; j < counttextureondrums; j++)
 		{
 			//glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[DrumPosition[++k]/*GetMassive(++k)*/])]);
-			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(drum[++k])]);
-			EnableTexture(i, j);
+			++k;
+			
+			if (speedchangeanimation[k] % 23 == 0)
+			{
+				drumanimation[0][k]++;
+				drumanimation[1][k]++;
+				drumanimation[2][k]++;
+			}
+			if (drumanimation[0][k] == animation->path.size())
+				drumanimation[0][k] = 0;
+			if (drumanimation[1][k] == animation2->path.size())
+				drumanimation[1][k] = 0;
+			if (drumanimation[2][k] == animation3->path.size())
+				drumanimation[2][k] = 0;
+			speedchangeanimation[k]++;
+			
+			/*image->IndexTexture[FindTexture(drum[++k])]*/
+			
+			if (i == 0 || i == 1)
+			{
+				std::string str = "content//drum//animated auto//" + std::to_string(drumanimation[0][k]) + ".png";
+				glBindTexture(GL_TEXTURE_2D, animation->loader->image->IndexTexture[animation->loader->FindTexture(str)]);
+				EnableTexture(i, j);
+			}
+			if (i == 2)
+			{
+				std::string str = "content//drum//animated auto 2//" + std::to_string(drumanimation[1][k]) + ".png";
+				glBindTexture(GL_TEXTURE_2D, animation2->loader->image->IndexTexture[animation2->loader->FindTexture(str)]);
+				EnableTexture(i, j);
+			}
+			if (i == 3 || i == 4)
+			{
+				std::string str = "content//drum//animated auto 3//" + std::to_string(drumanimation[2][k]) + ".png";
+				glBindTexture(GL_TEXTURE_2D, animation3->loader->image->IndexTexture[animation3->loader->FindTexture(str)]);
+				EnableTexture(i, j);
+			}
+			
 		}
 		glPopMatrix();
 	}
@@ -1854,6 +1904,38 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 }
 void Scene1::LoadBoomer()
 {
+
+	std::vector<std::string> anim;// = new std::vector<std::string>();
+	anim.push_back("content//drum//animated auto//0.png");
+	anim.push_back("content//drum//animated auto//1.png");
+	anim.push_back("content//drum//animated auto//2.png");
+	anim.push_back("content//drum//animated auto//3.png");
+	anim.push_back("content//drum//animated auto//4.png");
+	anim.push_back("content//drum//animated auto//5.png");
+	anim.push_back("content//drum//animated auto//6.png");
+	anim.push_back("content//drum//animated auto//7.png");
+	anim.push_back("content//drum//animated auto//8.png");
+	anim.push_back("content//drum//animated auto//9.png");
+	anim.push_back("content//drum//animated auto//10.png");
+	anim.push_back("content//drum//animated auto//11.png");
+	animation = new Animation(anim);
+
+	std::vector<std::string> anim2;// = new std::vector<std::string>();
+	anim2.push_back("content//drum//animated auto 2//0.png");
+	anim2.push_back("content//drum//animated auto 2//1.png");
+	animation2 = new Animation(anim2);
+
+	std::vector<std::string> anim3;// = new std::vector<std::string>();
+	anim3.push_back("content//drum//animated auto 3//0.png");
+	anim3.push_back("content//drum//animated auto 3//1.png");
+	anim3.push_back("content//drum//animated auto 3//2.png");
+	anim3.push_back("content//drum//animated auto 3//3.png");
+	anim3.push_back("content//drum//animated auto 3//4.png");
+	anim3.push_back("content//drum//animated auto 3//5.png");
+	anim3.push_back("content//drum//animated auto 3//6.png");
+	anim3.push_back("content//drum//animated auto 3//7.png");
+	animation3 = new Animation(anim3);
+
 	vectorboomer.push_back("0");
 #ifndef _WINDOWS_2
 	LoadImage(reinterpret_cast<const ILstring>("content//boomer//0.png"));
@@ -1866,7 +1948,7 @@ void Scene1::LoadBoomer()
 	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
 
 	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
 	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
 	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
@@ -1885,7 +1967,7 @@ void Scene1::LoadBoomer()
 	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
 
 	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
 	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
 	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
@@ -1904,7 +1986,7 @@ void Scene1::LoadBoomer()
 	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
 
 	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
 	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
 	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
@@ -1923,15 +2005,18 @@ void Scene1::LoadBoomer()
 	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
 
 	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .2f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
 	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
 	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
 	image->Name[CountIndexTexture - 1] = "3";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	
 }
 void Scene1::ShowBoomer()
 {
+	//animation->ShowAnimation();
+	
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1957,9 +2042,11 @@ void Scene1::ShowBoomer()
 	slowlychangesprite++;
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
+	
 }
 void Scene1::EnableTextureBoomer(int animboom)
 {
+	
 	glBegin(GL_QUADS);
 	glTexCoord2f(image->TextureCoordinats[animboom][0], image->TextureCoordinats[animboom][2]);
 	glVertex2f(image->VertexCoordinats[animboom][0], image->VertexCoordinats[animboom][2]);
@@ -1973,6 +2060,7 @@ void Scene1::EnableTextureBoomer(int animboom)
 	glTexCoord2f(image->TextureCoordinats[animboom][0], image->TextureCoordinats[animboom][3]);
 	glVertex2f(image->VertexCoordinats[animboom][0], image->VertexCoordinats[animboom][3]);
 	glEnd();
+	
 }
 Scene1::~Scene1()
 {

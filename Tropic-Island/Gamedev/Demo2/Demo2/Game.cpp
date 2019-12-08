@@ -52,6 +52,7 @@ void Game::draw_screen()
 		//bool*buttons;
 		if (!loading) 
 		{
+		
 			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums, Logic_->GetDrum(),/*Logic_->GetRandom(),credits,win,totalbet,line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
@@ -91,7 +92,7 @@ void Game::draw_screen()
 }
 int Game::Execute()
 {
-	bool fullscreen = false;
+	bool fullscreen = true;
 #if WINAPI_==1
 	WindowsWinApi_ = new WindowsWinApi();
 	if (!WindowsWinApi_->keyboard__->CreateWindow_(L"Tropic Island",700,500, 32, fullscreen))
