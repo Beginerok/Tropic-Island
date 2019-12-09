@@ -1,41 +1,21 @@
 #pragma once
 //#define _WINDOWS_2
-#ifdef _WINDOWS_2
-#include <Windows.h>
+#ifdef __unix__
 #else
-	#ifdef __unix__
-	#else
-		#include <Windows.h>
-	#endif
-#define SDL_MAIN_HANDLED
-
-#include "SDL2/SDL.h"
-#pragma comment(lib,"OpenGL32.lib")
-#pragma comment(lib,"Glu32.lib")
-#pragma comment(lib,"ILU.lib")
-#pragma comment(lib,"DevIl.lib")
-#pragma comment(lib,"SDL2.lib")
+	#include <Windows.h>
 #endif
-#include <GL/gl.h>
-#include <GL/glu.h>
 
-#ifdef _WINDOWS_2
-#include <IL\il.h>
-#include <IL\ilu.h>
-#pragma comment(lib,"ILU.lib")
-#pragma comment(lib,"DevIl.lib")
-#else
-#include "IL/il.h"
-#include "IL/ilu.h"
+#define SDL_MAIN_HANDLED
+#include "SDL2/SDL.h"
+
+#include "Animation.h"
+//#include <GL/gl.h>
+//#include <GL/glu.h>
+//#include "IL/il.h"
+//#include "IL/ilu.h"
 #include <string.h>
-#endif // _WINDOWS_2
-#include<string>
-//#include "Vector3.h"
-//#include "FileReader.h"
-#include <vector>
-//#include <time.h>
-//#include <random>
-//#include "Logic.h"
+//#include <string>
+//#include <vector>
 #include <iostream>
 #include <fstream>
 struct Image
@@ -54,12 +34,12 @@ public:
 	void LoadImage(const ILstring path);
 	void ShowWelcome(bool show);
 	void LoadWelcome();
-	void EnableTexture(float*texcoor, float*vercoor);
+	void EnableTexture(float* texcoor, float* vercoor);
 	int FindTexture(std::string name);
 	int LoadDrum(int iter);
-	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,
+	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums, std::vector<std::string> drum,
 		/*int*DrumPosition, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms,*/
-		bool*buttons,int pressbutton);
+		bool* buttons, int pressbutton);
 	void EnableTexture(int n, int m);
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
@@ -89,11 +69,11 @@ public:
 	~Scene1();
 	int err;
 #ifdef _WINDOWS_2
-	 char*strError;
+	char* strError;
 	//or  wchar_t*strError;
 #else
 	//or const char*strError;
-	wchar_t*strError;
+	wchar_t* strError;
 #endif
 	// Ширина изображения
 	int width;
@@ -101,17 +81,18 @@ public:
 	int height;
 	// Тип хранения данных
 	unsigned int type;
-	unsigned char*copyData;
+	unsigned char* copyData;
 	static const int CountTexture = 57;//40//53
-	Image *image;
+	Image* image;
 	int CountIndexTexture;
 	int AnimateBar;
 	std::string NameAnimateBar;
 
 	float xl, xr, yd, yu, z;
-	float*rotate;
-	bool*startrotate;
+	float* rotate;
+	bool* startrotate;
 	static const int CountDrum = 5;
+	static const int CountTextureOnDrum = 6;
 	std::vector<std::string>vectordrum;
 
 	std::vector<std::string>vectorbuttons;
@@ -123,6 +104,8 @@ public:
 	std::vector<std::string>vectornumbersandwords;
 	std::ofstream flogout;// ("log.txt");
 	std::vector<std::string>vectorboomer;
-	int animateboomer,slowlychangesprite;
+	int animateboomer, slowlychangesprite;
+	Animation *animation,*animation2,*animation3;
+	int **drumanimation;
+	int *speedchangeanimation;
 };
-
