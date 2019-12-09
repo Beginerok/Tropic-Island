@@ -171,7 +171,7 @@ public class GeneratePlaylist {
                 str="playlist";
                 break;
         }             
-            float length = (float) 3600.0, currentlength = 0.0f;
+            float length = (float) 3640.0, currentlength = 0.0f;
             vec = new ArrayList<Type> ();
 
             //srand(time(0));
@@ -185,7 +185,7 @@ public class GeneratePlaylist {
             //for (int i = 0; i < talk.size(); i++)
 		//System.out.print(talk.get(i).length + " ");
             
-            length = (float) (2.5 * 3600.0);
+            length = (float) (2.5 * 3600.0+40.0);
             currentlength = AddTalk(talk, vec, currentlength, length);
             if((int)60 / (((int)currentlength)/60) == 0)
                 shedulewriter.write("10.00 – 10.");   
@@ -239,7 +239,7 @@ public class GeneratePlaylist {
         if(debug)
         System.out.println("\n+cl:" + currentlength);
 
-	length = (float) 10800.0;
+	length = (float) ((float) 10800.0+40.0);
 	//
 	currentlength = AddTalk(talk, vec, currentlength, length);
         
