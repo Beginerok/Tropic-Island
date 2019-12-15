@@ -92,7 +92,7 @@ void Game::draw_screen()
 }
 int Game::Execute()
 {
-	bool fullscreen = true;
+	bool fullscreen = false;
 #if WINAPI_==1
 	WindowsWinApi_ = new WindowsWinApi();
 	if (!WindowsWinApi_->keyboard__->CreateWindow_(L"Tropic Island",700,500, 32, fullscreen))
