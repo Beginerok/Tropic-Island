@@ -100,7 +100,7 @@ int Game::Execute()
 #else
 	SDL_GLContext context;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Tropic Island", 10, 10,700,500, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Tropic Island", 10, 10,700 ,500, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	context = SDL_GL_CreateContext(window);
 	SDL_GL_SetSwapInterval(1);
 #endif

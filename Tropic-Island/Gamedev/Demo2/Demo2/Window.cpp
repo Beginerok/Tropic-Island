@@ -9,6 +9,10 @@ HDC Window::hdc;
 HWND Window::hwnd;
 HINSTANCE Window::hinstance;
 int Window::x, Window::y;
+HWND Window::edit1, Window::edit2;
+
+TCHAR Window::pszTextBuff[500];
+TCHAR Window::Buff1[500];
 Window::Window()
 {
 	msg_ = new MSG();
@@ -104,12 +108,64 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		menuheight = 40;
 		menuwidth = 20;
 	}
-	if (!(hwnd = CreateWindowEx(dwexstyle, L"My Window", title, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle, 0, 0, windowrect->right - windowrect->left + menuwidth, windowrect->bottom - windowrect->top + menuheight, 0, 0, hinstance, 0)))
+	if (!(hwnd = CreateWindowEx(dwexstyle, L"My Window", title, 
+		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
+		0, 0, windowrect->right - windowrect->left + menuwidth, 
+		windowrect->bottom - windowrect->top + menuheight, 0, 0, hinstance, 0)))
 	{
 		KillWindow();
 		MessageBox(0, L"Create w error", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
+	HWND button = CreateWindowEx(
+		BS_PUSHBUTTON,
+		L"BUTTON",
+		L"OK",
+		WS_CHILD | WS_VISIBLE,
+		250,
+		150,
+		70,
+		30,
+		hwnd,
+		(HMENU)1001,
+		hinstance,
+		NULL
+	);
+	HWND RADIOBUTTON1 = CreateWindowEx(
+		BS_PUSHBUTTON,
+		L"BUTTON",
+		L"OFFLINE",
+		WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON,
+		350,
+		150,
+		70,
+		30,
+		hwnd,
+		(HMENU)1002,
+		hinstance,
+		NULL
+	);
+	HWND RADIOBUTTON2 = CreateWindowEx(
+		BS_PUSHBUTTON,
+		L"BUTTON",
+		L"ONLINE",
+		WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON,
+		450,
+		150,
+		70,
+		30,
+		hwnd,
+		(HMENU)1003,
+		hinstance,
+		NULL
+	);
+	edit1 = CreateWindowEx(/*DT_EDITCONTROL*/0L,L"Edit", L"E-mail",
+		WS_VISIBLE | WS_CHILD | WS_BORDER, 200, 10, 200,
+		30, hwnd, (HMENU)1004, hinstance, NULL);
+
+	edit2 = CreateWindowEx(/*DT_EDITCONTROL*/0L, L"Edit", L"password",
+		WS_VISIBLE | WS_CHILD , 300, 50, 200,
+		30, hwnd, (HMENU)1005, hinstance, NULL); 
 	GLuint pixelformat;
 	PPIXELFORMATDESCRIPTOR pfd = new PIXELFORMATDESCRIPTOR();
 	pfd->nSize = sizeof(PPIXELFORMATDESCRIPTOR);
@@ -191,6 +247,7 @@ Window::~Window()
 	//19.09.2017 21:22 no work in vs2010
 	//delete msg_;
 }
+#include <iostream>
 LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)
 {
 	switch (umsg)
@@ -257,6 +314,52 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 	{
 		lparam_ = lparam;
 		return 0;
+	}
+	case WM_COMMAND: 
+	{
+		if (wparam == 1001)
+		{
+			/*
+			GetWindowText(*edit1, *login, count);
+			GetWindowText(*edit2, *pass, count);
+			std::cout << CW2A(*login)<<std::endl;
+			std::cout << CW2A(*pass) << std::endl;
+			*/
+			//Edit_SetText(edit1, TEXT("91797 w7f9a789wf evckavolw4koar"));
+			//SetWindowText(edit1, L"Text");
+			//GetWindowText(edit1, login,count);
+			//Edit_GetText(edit1, login, count);
+			int cch;
+			//static TCHAR pszTextBuff[500];
+			cch = SendMessage(edit1, WM_GETTEXT, 500, (LPARAM)pszTextBuff);
+			cch = SendMessage(edit2, WM_GETTEXT, 500, (LPARAM)Buff1);
+			if (cch == 0)
+				;//	MessageBox(hwnd, TEXT("Введите текст"), TEXT("Читаем Edit"), MB_OK);
+			else
+			{
+				//TCHAR Buff1[500] = { 0 };
+				/*
+				SYSTEMTIME st; GetSystemTime(&st);
+				wsprintf(Buff1, TEXT("Время : %d ч %d мин %d сек\n"),
+					st.wHour + 3, st.wMinute, st.wSecond);
+				lstrcat(Buff1, __TEXT("Текст в памяти: "));
+				*/
+				//lstrcat(Buff1, pszTextBuff);
+				//MessageBox(hwnd, Buff1, TEXT("Содержимое буфера"), MB_OK);
+				std::wcout << pszTextBuff << std::endl;
+				std::wcout << Buff1 << std::endl;
+			}
+		}
+		if (wparam == 1002)
+			std::cout << "ofline!";
+		if (wparam == 1003)
+			std::cout << "online!";
+		if (wparam == 1004)
+			std::cout << "editlogin!";
+		if (wparam == 1005)
+			std::cout << "editpass!";
+
+		break;
 	}
 	}
 	return DefWindowProc(hwnd, umsg, wparam, lparam);

@@ -3,6 +3,8 @@
 #include <gl\GLU.h>
 #pragma comment(lib,"OpenGL32.lib")
 #pragma comment(lib,"glu32.lib")
+#include <atlstr.h>
+#include <windowsx.h>
 class Window
 {
 public:
@@ -22,4 +24,9 @@ public:
 	static HINSTANCE hinstance;
 	static GLboolean fullscreen;
 	static int x, y;
+
+	static HWND edit1, edit2;
+
+	static TCHAR pszTextBuff[500];
+	static TCHAR Buff1[500];
 };

@@ -28,6 +28,28 @@ void DataBaseConnection::Connect()
 		fprintf(stdout, "Success!\n");
 	}
 }
+bool DataBaseConnection::Autorization()
+{
+	std::string query = "SELECT * FROM users WHERE email=bvn13@mail.ru and password="+md5("00000000");
+	const char* q = query.c_str();
+	qstate = mysql_query(conn, q);
+	if (!qstate)
+	{
+		res = mysql_store_result(conn);
+		
+		while (row = mysql_fetch_row(res))
+		{
+			//printf("ID: %s,Position: %s, Image: %s\n", row[0], row[1], row[2]);
+			vectordrum.push_back(row[4]);
+		}
+		return true;
+	}
+	else
+	{
+		std::cout << "Query failed:" << mysql_error(conn) << std::endl;
+		return false;
+	}
+}
 std::vector<std::string> DataBaseConnection::Query()
 {
 	vectordrum.clear();

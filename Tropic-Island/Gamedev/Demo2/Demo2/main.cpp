@@ -17,7 +17,7 @@ int main(int argc,char**argv)
 	SDL_Quit();
 	*/
 
-	cout << "md5 of 'grape': " << md5("grape") << endl;
+	cout << "md5 of 'grape': " << md5("00000000") << endl;
 	Game*game = new Game();
 	game->Execute();
 	
