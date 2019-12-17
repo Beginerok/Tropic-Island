@@ -2,7 +2,9 @@
 #include "Game.h"
 #include <iostream>
 //#include <SDL/SDL_main.h>
+#include "md5.h"
 
+using std::cout; using std::endl;
 
 int main(int argc,char**argv)
 {
@@ -14,6 +16,8 @@ int main(int argc,char**argv)
 	}
 	SDL_Quit();
 	*/
+
+	cout << "md5 of 'grape': " << md5("grape") << endl;
 	Game*game = new Game();
 	game->Execute();
 	
