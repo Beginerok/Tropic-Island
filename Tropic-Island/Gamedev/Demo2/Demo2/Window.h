@@ -20,7 +20,7 @@ public:
 	static WPARAM wparam_;
 	static HGLRC hrc;
 	static HDC hdc;
-	static HWND hwnd;
+	static HWND hwnd,hwnd2;
 	static HINSTANCE hinstance;
 	static GLboolean fullscreen;
 	static int x, y;
@@ -29,4 +29,5 @@ public:
 
 	static TCHAR pszTextBuff[500];
 	static TCHAR Buff1[500];
+	static bool offline;
 };

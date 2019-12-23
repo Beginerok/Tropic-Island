@@ -6,16 +6,18 @@ LPARAM Window::lparam_;
 WPARAM Window::wparam_;
 HGLRC Window::hrc;
 HDC Window::hdc;
-HWND Window::hwnd;
+HWND Window::hwnd,Window::hwnd2;
 HINSTANCE Window::hinstance;
 int Window::x, Window::y;
 HWND Window::edit1, Window::edit2;
 
 TCHAR Window::pszTextBuff[500];
 TCHAR Window::Buff1[500];
+bool Window::offline;
 Window::Window()
 {
 	msg_ = new MSG();
+	offline = true;
 }
 GLvoid Window::KillWindow()
 {
@@ -117,16 +119,20 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		MessageBox(0, L"Create w error", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
+	hwnd2 = CreateWindowEx(dwexstyle, L"My Window", L"Settings"/*title*/,
+		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
+		0, 0, 400,
+		250, 0, 0, hinstance, 0);
 	HWND button = CreateWindowEx(
 		BS_PUSHBUTTON,
 		L"BUTTON",
 		L"OK",
 		WS_CHILD | WS_VISIBLE,
-		250,
+		50,
 		150,
 		70,
 		30,
-		hwnd,
+		hwnd2,
 		(HMENU)1001,
 		hinstance,
 		NULL
@@ -136,11 +142,11 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		L"BUTTON",
 		L"OFFLINE",
 		WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON,
-		350,
-		150,
+		50,
+		100,
 		70,
 		30,
-		hwnd,
+		hwnd2,
 		(HMENU)1002,
 		hinstance,
 		NULL
@@ -150,22 +156,22 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		L"BUTTON",
 		L"ONLINE",
 		WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON,
-		450,
 		150,
+		100,
 		70,
 		30,
-		hwnd,
+		hwnd2,
 		(HMENU)1003,
 		hinstance,
 		NULL
 	);
 	edit1 = CreateWindowEx(/*DT_EDITCONTROL*/0L,L"Edit", L"E-mail",
-		WS_VISIBLE | WS_CHILD | WS_BORDER, 200, 10, 200,
-		30, hwnd, (HMENU)1004, hinstance, NULL);
+		WS_VISIBLE | WS_CHILD | WS_BORDER, 50, 10, 200,
+		30, hwnd2, (HMENU)1004, hinstance, NULL);
 
 	edit2 = CreateWindowEx(/*DT_EDITCONTROL*/0L, L"Edit", L"password",
-		WS_VISIBLE | WS_CHILD , 300, 50, 200,
-		30, hwnd, (HMENU)1005, hinstance, NULL); 
+		WS_VISIBLE | WS_CHILD , 50, 50, 200,
+		30, hwnd2, (HMENU)1005, hinstance, NULL); 
 	GLuint pixelformat;
 	PPIXELFORMATDESCRIPTOR pfd = new PIXELFORMATDESCRIPTOR();
 	pfd->nSize = sizeof(PPIXELFORMATDESCRIPTOR);
@@ -227,6 +233,9 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	ShowWindow(hwnd, SW_SHOW);
 	SetForegroundWindow(hwnd);
 	SetFocus(hwnd);
+	ShowWindow(hwnd2, SW_SHOW);
+	SetForegroundWindow(hwnd2);
+	SetFocus(hwnd2);
 	return true;
 }
 GLvoid Window::Show()
@@ -349,11 +358,19 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 				std::wcout << pszTextBuff << std::endl;
 				std::wcout << Buff1 << std::endl;
 			}
+			//SendMessage(hwnd2, WM_CLOSE, 0, 0);
+			ShowWindow(hwnd2, SW_HIDE);
 		}
-		if (wparam == 1002)
+		if (wparam == 1002) {
+
+			offline = true;
 			std::cout << "ofline!";
+		}
 		if (wparam == 1003)
+		{
+			offline = false;
 			std::cout << "online!";
+		}
 		if (wparam == 1004)
 			std::cout << "editlogin!";
 		if (wparam == 1005)
