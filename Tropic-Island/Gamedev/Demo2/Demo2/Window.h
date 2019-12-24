@@ -5,6 +5,8 @@
 #pragma comment(lib,"glu32.lib")
 #include <atlstr.h>
 #include <windowsx.h>
+#include<string>
+#include "DataBaseConnection.h"
 class Window
 {
 public:
@@ -30,4 +32,7 @@ public:
 	static TCHAR pszTextBuff[500];
 	static TCHAR Buff1[500];
 	static bool offline;
+	static std::string login, pass;
+	static bool connect;
+	static DataBaseConnection *db;
 };

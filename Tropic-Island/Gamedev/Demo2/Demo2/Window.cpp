@@ -13,11 +13,16 @@ HWND Window::edit1, Window::edit2;
 
 TCHAR Window::pszTextBuff[500];
 TCHAR Window::Buff1[500];
-bool Window::offline;
+bool Window::offline,Window::connect;
+std::string Window::login, Window::pass;
+DataBaseConnection *Window::db;
 Window::Window()
 {
 	msg_ = new MSG();
 	offline = true;
+	connect = false;
+	db = new DataBaseConnection();
+	db->Connect();
 }
 GLvoid Window::KillWindow()
 {
@@ -110,15 +115,7 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		menuheight = 40;
 		menuwidth = 20;
 	}
-	if (!(hwnd = CreateWindowEx(dwexstyle, L"My Window", title, 
-		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
-		0, 0, windowrect->right - windowrect->left + menuwidth, 
-		windowrect->bottom - windowrect->top + menuheight, 0, 0, hinstance, 0)))
-	{
-		KillWindow();
-		MessageBox(0, L"Create w error", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
-		return false;
-	}
+	
 	hwnd2 = CreateWindowEx(dwexstyle, L"My Window", L"Settings"/*title*/,
 		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
 		0, 0, 400,
@@ -165,13 +162,27 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		hinstance,
 		NULL
 	);
-	edit1 = CreateWindowEx(/*DT_EDITCONTROL*/0L,L"Edit", L"E-mail",
+	edit1 = CreateWindowEx(/*DT_EDITCONTROL*/0L,L"Edit", L"bvn13@mail.ru",
 		WS_VISIBLE | WS_CHILD | WS_BORDER, 50, 10, 200,
 		30, hwnd2, (HMENU)1004, hinstance, NULL);
 
-	edit2 = CreateWindowEx(/*DT_EDITCONTROL*/0L, L"Edit", L"password",
+	edit2 = CreateWindowEx(/*DT_EDITCONTROL*/0L, L"Edit", L"00000000",
 		WS_VISIBLE | WS_CHILD , 50, 50, 200,
 		30, hwnd2, (HMENU)1005, hinstance, NULL); 
+
+	ShowWindow(hwnd2, SW_SHOW);
+	SetForegroundWindow(hwnd2);
+	SetFocus(hwnd2);
+
+	if (!(hwnd = CreateWindowEx(dwexstyle, L"My Window", title,
+		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
+		0, 0, windowrect->right - windowrect->left + menuwidth,
+		windowrect->bottom - windowrect->top + menuheight, 0, 0, hinstance, 0)))
+	{
+		KillWindow();
+		MessageBox(0, L"Create w error", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
+		return false;
+	}
 	GLuint pixelformat;
 	PPIXELFORMATDESCRIPTOR pfd = new PIXELFORMATDESCRIPTOR();
 	pfd->nSize = sizeof(PPIXELFORMATDESCRIPTOR);
@@ -233,9 +244,6 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	ShowWindow(hwnd, SW_SHOW);
 	SetForegroundWindow(hwnd);
 	SetFocus(hwnd);
-	ShowWindow(hwnd2, SW_SHOW);
-	SetForegroundWindow(hwnd2);
-	SetFocus(hwnd2);
 	return true;
 }
 GLvoid Window::Show()
@@ -355,8 +363,26 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 				*/
 				//lstrcat(Buff1, pszTextBuff);
 				//MessageBox(hwnd, Buff1, TEXT("Содержимое буфера"), MB_OK);
-				std::wcout << pszTextBuff << std::endl;
-				std::wcout << Buff1 << std::endl;
+				//std::wcout << pszTextBuff << std::endl;
+				//std::wcout << Buff1 << std::endl;
+
+				std::wstring wstr = L"",wpass=L"";
+				for (int i = 0;i < /*500*/lstrlen(pszTextBuff);i++)
+				{
+					wstr += pszTextBuff[i];
+				}
+				for (int i = 0;i < /*500*/lstrlen(Buff1);i++)
+				{
+						wpass += Buff1[i];
+				}
+				std::string str(wstr.begin(), wstr.end());
+				std::string str2(wpass.begin(), wpass.end());
+				std::cout<<str.size()<<"str="<<str<<std::endl;
+				std::cout<< str2.size() << "str2="<<str2<<std::endl;
+				login = str;
+				pass = str2;
+				connect = true;
+				db->Authorization(login, pass);
 			}
 			//SendMessage(hwnd2, WM_CLOSE, 0, 0);
 			ShowWindow(hwnd2, SW_HIDE);

@@ -28,9 +28,9 @@ void DataBaseConnection::Connect()
 		fprintf(stdout, "Success!\n");
 	}
 }
-bool DataBaseConnection::Autorization()
+bool DataBaseConnection::Authorization(std::string login,std::string pass)
 {
-	std::string query = "SELECT * FROM users WHERE email=bvn13@mail.ru and password="+md5("00000000");
+	std::string query = "SELECT * FROM users WHERE email='"+login+"' and password='"+md5(pass)+"'";
 	const char* q = query.c_str();
 	qstate = mysql_query(conn, q);
 	if (!qstate)
@@ -39,8 +39,8 @@ bool DataBaseConnection::Autorization()
 		
 		while (row = mysql_fetch_row(res))
 		{
-			//printf("ID: %s,Position: %s, Image: %s\n", row[0], row[1], row[2]);
-			vectordrum.push_back(row[4]);
+			printf("ID: %s,nick: %s,email: %s, pass: %s , date: %s\n", row[0], row[1], row[2],row[3],row[4]);
+			//vectordrum.push_back(row[4]);
 		}
 		return true;
 	}

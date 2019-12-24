@@ -10,7 +10,7 @@ class DataBaseConnection
 public:
 	DataBaseConnection();
 	void Connect();
-	bool Autorization();
+	bool Authorization(std::string login, std::string pass);
 	std::vector<std::string> Query();
 	void Close();
 	~DataBaseConnection();
