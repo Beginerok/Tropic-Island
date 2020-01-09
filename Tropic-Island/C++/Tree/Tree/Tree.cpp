@@ -40,7 +40,10 @@ void print(node *t, int u)
 	}
 	print(t->r, ++u);                       //С помощью рекурсии посещаем правое поддерево
 }
-
+int sum(node *node_) {
+	if (node_ == 0) return 0;
+	return node_->info + sum(node_->l) + sum(node_->r);
+}
 int main()
 {
 	int n = 16;                              //Количество элементов
@@ -48,10 +51,12 @@ int main()
 
 	for (int i = 0; i < n; ++i)
 	{
-		s = -50 + rand() % 100;                       //Считываем элемент за элементом
+		s = -5 + rand() % 10;                       //Считываем элемент за элементом
 		push(s, &tree);                 //И каждый кладем в дерево
 	}
 	cout << "ваше дерево\n";
 	print(tree, 0);
+	cout << "сумма\n"<<
+		sum(tree) << endl;
 	cin.ignore().get();
 }
