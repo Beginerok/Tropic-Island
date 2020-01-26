@@ -1,10 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#ifdef _WIN32 || _W64
-    #include <WinSock.h>
-    #pragma comment (lib,"WS2_32.lib")
-#else
     #include <unistd.h>
     #include <sys/types.h>
     #include <sys/socket.h>
@@ -12,7 +7,6 @@
 	#include <netdb.h>
 	#include <arpa/inet.h>
 	#include <pthread.h>
-#endif // _WIN32
         int sockfd
         , portno
         , n
@@ -21,49 +15,14 @@
         ,clients
         ,currentclient=0;
         ;
-
-#ifdef _WIN32 || _W64
-        int clilen;
-#else
         socklen_t clilen;
-#endif // _WIN32
         struct sockaddr_in serv_addr
         ,cli_addr;
         struct hostent *server;
         char* name;
         char buffer[2][256];
-
-#ifdef _WIN32 || _W64
-void bzero(char * buf,int l)
-{
-	for(int i=0;i<l;i++)
-		buf[i] = '\0';
-}
-int write(int sock,char * buf,int l)
-{
-	return send(sock,buf,l,0);
-}
-int read(int sock,char * buf,int l)
-{
-	return recv(sock,buf,l,0);
-}
-void close(int sock)
-{
-	shutdown(sock,0);
-}
-void bcopy(char * from, char *to, int l)
-{
-	for(int i=0;i<l;i++)
-		to[i] = from[i];
-}
-#endif // _WIN32
 int Init()
 {
-#ifdef _WIN32 || _W64
-	WSADATA ws={0};
-	if(WSAStartup(MAKEWORD(2,2),&ws)==0)
-	{
-#endif // _WIN32
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
 		if (sockfd < 0)
 	        error("ERROR opening socket");
@@ -94,10 +53,6 @@ int Init()
 				error("ERROR on accept");
             currentclient++;
 		}
-
-#ifdef _WIN32 || _W64
-	}
-#endif // _WIN32
 	return 0;
 }
 void *a(void *args)
@@ -114,9 +69,6 @@ void error(const char *msg)
 {
     perror(msg);
     close(sockfd);
-#ifdef _WIN32 || _W64
-	WSACleanup();
-#endif // _WIN32
 	exit(1);
 }
 int Close()
@@ -124,9 +76,6 @@ int Close()
     close(sockfd);
     if(id == 0)
         close(newsockfd);
-#ifdef _WIN32 || _W64
-    WSACleanup();
-#endif // _WIN32
 	return 0;
 }
 void Send(int numberclient,int numberbuf)
