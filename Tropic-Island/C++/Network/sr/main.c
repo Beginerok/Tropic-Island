@@ -21,6 +21,9 @@
         struct hostent *server;
         char* name;
         char buffer[2][256];
+
+int roundr = 0;
+int rounds = 0;
 int Init()
 {
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -30,26 +33,21 @@ int Init()
 		serv_addr.sin_family = AF_INET;
 		if(id==0)
 			serv_addr.sin_addr.s_addr = INADDR_ANY;
-		else
-			serv_addr.sin_addr.s_addr = inet_addr(name);
+
 		serv_addr.sin_port = htons(portno);
 		if(id==0)
 		{
 	        if (bind(sockfd, (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
 				error("ERROR on binding");
 		}
-		else
-		{
-	        if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
-		        error("ERROR connecting");
-		}
+
 		if(id == 0)
 		{
 	        listen(sockfd,5);
 		    clilen = sizeof(cli_addr);
 
 			newsockfd[currentclient] = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
-			if (newsockfd < 0)
+			if (newsockfd[currentclient] < 0)
 				error("ERROR on accept");
             currentclient++;
 		}
@@ -63,6 +61,7 @@ void *a(void *args)
         if (newsockfd[currentclient]< 0)
             error("ERROR on accept");
         currentclient++;
+        printf("curr_cli",currentclient-1);
     }
 }
 void error(const char *msg)
@@ -74,30 +73,38 @@ void error(const char *msg)
 int Close()
 {
     close(sockfd);
-    if(id == 0)
-        close(newsockfd);
+    close(newsockfd);
 	return 0;
 }
+
 void Send(int numberclient,int numberbuf)
 {
-    if(id == 0)
-        n = write(newsockfd[numberclient],buffer[numberbuf],255);
-    else
-        n = write(sockfd,buffer[numberbuf],strlen(buffer));
-    if (n < 0) error("ERROR writing to socket");
-        bzero(buffer,256);
+    n = write(newsockfd[numberclient],buffer[numberbuf],256);
+    if(n < 0)
+    {
+        char*str=(char*)malloc(sizeof(char)*3);
+        sprintf(str,"%s",rounds);
+        perror(str);
+        error("ERROR writing to socket");
+        free(str);
+    }
+    //bzero(buffer,256);
 }
 void Recv(int numberclient,int numberbuf)
 {
-	if(id == 0)
-		n = read(  newsockfd[numberclient] ,buffer[numberbuf],255);
-	else
-		n = read(  sockfd ,buffer[numberbuf],255);
-    if (n < 0) error("ERROR reading from socket");
+    n = read(newsockfd[numberclient],buffer[numberbuf],256);
+    if (n < 0)
+    {
+        char*str=(char*)malloc(sizeof(char)*3);
+        sprintf(str,"%s",roundr);
+        perror(str);
+        error("ERROR reading from socket");
+        free(str);
+    }
 }
 void SetBuf(char * s,int numberbuf)
 {
-    bzero(buffer[numberbuf],256);
+    //bzero(buffer[numberbuf],256);
     unsigned int i;
     for(i = 0;i<strlen(s);i++)
         buffer[numberbuf][i] = s[i];
@@ -120,68 +127,84 @@ void SetPort(int portno_)
 }
 const int length = 256;
 char *text;
+#include <stdbool.h>
 typedef struct
 {
     int numberclient;
     int numberbuf;
+    bool exit;
 }clientdata;
 void s(void *numbers)
 {
     clientdata *data = (clientdata*)numbers;
     data->numberbuf = 1;
-    while(1)
+    while(rounds++<100)
     {
-        ClearBuf(data->numberbuf);
+        //ClearBuf(data->numberbuf);
         //Sleep(1);
         //scanf("%s",text);
         SetBuf(text,data->numberbuf);
         Send(data->numberclient,data->numberbuf);
+        printf("%s",GetBuf(data->numberbuf));
         //if(text[0] == '0')
           //  break;
     }
+    data->exit = true;
 }
 void r(void *numbers)
 {
     clientdata *data = (clientdata*)numbers;
     data->numberbuf = 0;
-    while(1)
+
+    while(roundr++<100)
     {
-        ClearBuf(data->numberbuf);
+        //ClearBuf(data->numberbuf);
         //Sleep(1);
         Recv(data->numberclient,data->numberbuf);
         printf("%s",GetBuf(data->numberbuf));
         //if(GetBuf(data->numberbuf)[0] == '0')
            // break;
     }
+    data->exit = true;
 }
 int main()
 {
-    text = "azaza";
+    text = "0000000000000001\n";
+
     printf("Enter clients count\n");
-    scanf("%d",&clients);
+    //scanf("%d",&clients);
+    clients=1;
     newsockfd = (int*)malloc(sizeof(int)*clients);
     pthread_t threadsend,threadreceive,threadaccept;
     text = (char*)malloc(sizeof(char)*length);
-    id = 0;
 	printf("input port number\n");
-	int port;//=15000;
-	scanf("%d",&port);
+	int port=15000;
+	//scanf("%d",&port);
 	SetPort(port);
 	Init();
 	pthread_create(&threadaccept,NULL,a,NULL/*(void*)currentclient*/);
-	clientdata *d;
+    clientdata *datareceive = (clientdata*)malloc(sizeof(clientdata));
+    clientdata*datasend=(clientdata*)malloc(sizeof(clientdata));
 	for(int i=0;i<clients;i++)
     {
-        d->numberclient = i;
-        pthread_create(&threadreceive,NULL,r,(void*)d);
-        pthread_create(&threadsend,NULL,s,(void*)d);
+        datareceive->numberclient = i;
+        datareceive->exit = false;
+        datasend->numberclient = i;
+        datasend->exit = false;
+        pthread_create(&threadreceive,NULL,r,(void*)datareceive);
+        pthread_create(&threadsend,NULL,s,(void*)datasend);
         //pthread_join(threadreceive,NULL);
         //pthread_join(threadsend,NULL);
 	}
+	while(!(datareceive->exit && datasend->exit))
+        sleep(1);
+
         //r(i);
 	Close();
 	//system("pause");
 	free(text);
 	free(newsockfd);
+	//char c;
+	//scanf("%c",&c);
     return 0;
 }
