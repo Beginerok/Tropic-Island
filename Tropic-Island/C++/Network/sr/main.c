@@ -24,6 +24,12 @@
 
 int roundr = 0;
 int rounds = 0;
+void error(const char *msg)
+{
+    perror(msg);
+    close(sockfd);
+	exit(1);
+}
 int Init()
 {
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -48,7 +54,10 @@ int Init()
 
 			newsockfd[currentclient] = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
 			if (newsockfd[currentclient] < 0)
-				error("ERROR on accept");
+            {
+                //perror("curr_cli %d\n",currentclient);
+                error("ERROR on accept");
+            }
             currentclient++;
 		}
 	return 0;
@@ -59,21 +68,19 @@ void *a(void *args)
     {
         newsockfd[currentclient] = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
         if (newsockfd[currentclient]< 0)
+        {
+            //perror("curr_cli %d\n",currentclient);
             error("ERROR on accept");
+        }
         currentclient++;
-        printf("curr_cli",currentclient-1);
     }
 }
-void error(const char *msg)
-{
-    perror(msg);
-    close(sockfd);
-	exit(1);
-}
+
 int Close()
 {
     close(sockfd);
-    close(newsockfd);
+    for(int i=0;i<currentclient;i++)
+    close(newsockfd[i]);
 	return 0;
 }
 
@@ -83,7 +90,7 @@ void Send(int numberclient,int numberbuf)
     if(n < 0)
     {
         char*str=(char*)malloc(sizeof(char)*3);
-        sprintf(str,"%s",rounds);
+        sprintf(str,"%d",rounds);
         perror(str);
         error("ERROR writing to socket");
         free(str);
@@ -96,7 +103,7 @@ void Recv(int numberclient,int numberbuf)
     if (n < 0)
     {
         char*str=(char*)malloc(sizeof(char)*3);
-        sprintf(str,"%s",roundr);
+        sprintf(str,"%d",roundr);
         perror(str);
         error("ERROR reading from socket");
         free(str);
@@ -138,14 +145,14 @@ void s(void *numbers)
 {
     clientdata *data = (clientdata*)numbers;
     data->numberbuf = 1;
-    while(rounds++<100)
+    while(rounds++<10)
     {
         //ClearBuf(data->numberbuf);
         //Sleep(1);
         //scanf("%s",text);
         SetBuf(text,data->numberbuf);
         Send(data->numberclient,data->numberbuf);
-        printf("%s",GetBuf(data->numberbuf));
+        perror(GetBuf(data->numberbuf));
         //if(text[0] == '0')
           //  break;
     }
@@ -156,12 +163,12 @@ void r(void *numbers)
     clientdata *data = (clientdata*)numbers;
     data->numberbuf = 0;
 
-    while(roundr++<100)
+    while(roundr++<10)
     {
         //ClearBuf(data->numberbuf);
         //Sleep(1);
         Recv(data->numberclient,data->numberbuf);
-        printf("%s",GetBuf(data->numberbuf));
+        perror(GetBuf(data->numberbuf));
         //if(GetBuf(data->numberbuf)[0] == '0')
            // break;
     }
@@ -169,14 +176,14 @@ void r(void *numbers)
 }
 int main()
 {
-    text = "0000000000000001\n";
-
     printf("Enter clients count\n");
     //scanf("%d",&clients);
     clients=1;
     newsockfd = (int*)malloc(sizeof(int)*clients);
     pthread_t threadsend,threadreceive,threadaccept;
     text = (char*)malloc(sizeof(char)*length);
+    text = "0000000000000000\n";
+    SetBuf(text,1);
 	printf("input port number\n");
 	int port=15000;
 	//scanf("%d",&port);

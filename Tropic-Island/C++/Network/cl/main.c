@@ -22,6 +22,12 @@
 
 int roundr = 0;
 int rounds = 0;
+void error(const char *msg)
+{
+    perror(msg);
+    close(sockfd);
+	exit(1);
+}
 int Init()
 {
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -39,12 +45,7 @@ int Init()
 		}
 	return 0;
 }
-void error(const char *msg)
-{
-    perror(msg);
-    close(sockfd);
-	exit(1);
-}
+
 int Close()
 {
     close(sockfd);
@@ -143,19 +144,18 @@ void r(void *numbers)
 }
 int main()
 {
-    text = "1111111111111111\n";
-    SetBuf(text,1);
 	printf("input ip address\n");
 	char *name = (char*)malloc(sizeof(char)*15);
-	name = "83.169.46.248";
+	name = "127.0.0.1";
 	//scanf("%s",name);
 	SetName(name);
 	printf("input port number\n");
 	int port=15000;
 	//scanf("%d",&port);
 	SetPort(port);
-
-    text = (char*)malloc(sizeof(char)*length);
+    text = (char*)malloc(sizeof(char)*length);   
+    text = "1111111111111111\n";
+    SetBuf(text,1);
     data *datareceive = (data*)malloc(sizeof(data));
     data*datasend=(data*)malloc(sizeof(data));
     /*
@@ -172,6 +172,6 @@ int main()
         sleep(1);
 	Close();
 	free(text);
-	free(name);
+	//free(name);
     return 0;
 }
