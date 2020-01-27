@@ -55,9 +55,9 @@ void Send(int numberbuf)
     n = write(sockfd,buffer[numberbuf],256);
     if (n < 0)
 	{
-	//char*str=(char*)malloc(sizeof(char)*3);
-//        sprintf(str,"%s",rounds);
-        //perror(str);
+        char*str=(char*)malloc(sizeof(char)*3);
+        sprintf(str,"%d",rounds);
+        perror(str);
         error("ERROR writing to socket");
   //      free(str);
 	}
@@ -68,10 +68,9 @@ void Recv(int numberbuf)
     n = read(sockfd,buffer[numberbuf],256);
 	if (n < 0)
     {
-        //char*str=(char*)malloc(sizeof(char)*3);
-//        sprintf(str,"%s",roundr);
-	printf("FSSS");
-        //perror(str);
+        char*str=(char*)malloc(sizeof(char)*3);
+        sprintf(str,"%d",roundr);
+        perror(str);
         error("ERROR reading from socket");
   //      free(str);
     }
@@ -113,7 +112,7 @@ void s(void *numbers)
     data *data_ = (data*)numbers;
     data_->numberbuf = 1;
     //int round=0
-    while(rounds++<100)
+    while(rounds++<10)
     {
         ClearBuf(data_->numberbuf);
         //Sleep(1);
@@ -131,7 +130,7 @@ void r(void *numbers)
     data *data_ = (data*)numbers;
     data_->numberbuf = 0;
     //int round = 0;
-    while(roundr++<100)
+    while(roundr++<10)
     {
         ClearBuf(data_->numberbuf);
         //Sleep(1);
@@ -144,10 +143,11 @@ void r(void *numbers)
 }
 int main()
 {
-    text = "1111111111111110\n";
+    text = "1111111111111111\n";
+    SetBuf(text,1);
 	printf("input ip address\n");
 	char *name = (char*)malloc(sizeof(char)*15);
-	name = "127.0.0.1";
+	name = "83.169.46.248";
 	//scanf("%s",name);
 	SetName(name);
 	printf("input port number\n");
