@@ -4,6 +4,7 @@ CREATE TABLE `users_data` (
   `points` int not null,  
   `step` int not null,
    `last_visit` datetime not null, 
+   `version` varchar(16) not null,
     PRIMARY KEY(`id`),
    FOREIGN KEY (`users_id`) REFERENCES users (id)
   );
