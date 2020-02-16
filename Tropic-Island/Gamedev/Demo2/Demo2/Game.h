@@ -8,10 +8,12 @@
 #else
 	#include "WindowsSDLApi.h"
 #endif
+#include "Sound.h"
 class Game
 {
 public:
 	Scene1 *Scene1_;
+	Sound* Sound_;
 #if WINAPI_ == 1
 	WindowsWinApi *WindowsWinApi_;
 #else

@@ -87,6 +87,7 @@ void Game::draw_screen()
 		loading = Scene1_->LoadDrum(++iter);
 		if (iter > 17)
 			iter = 17;
+		Sound_->Play(0);
 	}
 	Exit();
 }
@@ -118,6 +119,8 @@ int Game::Execute()
 #endif
 	Logic_ = new Logic();
 	Logic_->SetRandom();
+	Sound_ = new Sound();
+	Sound_->Init();
 	draw_screen();
 #if WINAPI_==1
 	WindowsWinApi_->keyboard__->KillWindow();
