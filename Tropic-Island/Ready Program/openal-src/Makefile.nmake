@@ -1,0 +1,59 @@
+#
+# Makefile for burn demo for Win32
+#
+# Author: Alex V. Boreskoff, <steps3d@narod.ru>
+#
+
+!include <win32.mak>
+
+DEBUG_COMPILE_FLAGS = /Zi
+DEBUG_LINK_FLAGS    = /DEBUG /DEBUGTYPE:CV
+
+OPENAL_PATH     = D:/SDK/OpenAL 1.0 Software Development Kit
+OPENAL_LIBS     = openal32.lib alut.lib
+OPENAL_LIB_PATH = $(OPENAL_PATH)\libs
+OPENAL_INC_PATH = $(OPENAL_PATH)\Include
+
+VORBIS_PATH     = D:/SDK/oggvorbis
+VORBIS_LIBS     = ogg_static.lib vorbis_static.lib vorbisfile_static.lib
+VORBIS_LIB_PATH = $(VORBIS_PATH)/lib
+VORBIS_INC_PATH = $(VORBIS_PATH)/include
+
+LIBMAD_PATH     = libmad-0.15.1b/msvc++
+LIBMAD_LIB_PATH = $(LIBMAD_PATH)/Debug
+LIB3DPATH      = ../3D/
+LIBTEXTUREPATH = ../libTexture
+
+INC             = $(INC) -I"$(OPENAL_INC_PATH)" -I$(LIB3DPATH) -I$(VORBIS_INC_PATH) -I$(LIBTEXTUREPATH) -I$(LIBMAD_PATH)
+LLDLIBS         = $(LFLAGS) $(OPENAL_LIBS) $(guilibs) /LIBPATH:"$(OPENAL_LIB_PATH)" /LIBPATH:$(VORBIS_LIB_PATH) /LIBPATH:$(LIBMAD_LIB_PATH)
+CFLAGS          = $(CFLAGS) /GX $(DEBUG_COMPILE_FLAGS)
+EXES            = example-1.exe example-2.exe example-3.exe example-4.exe
+
+all: $(EXES)
+
+example-1.exe: example-1.obj $(OBJS)
+	$(link) /NODEFAULTLIB:libcmt /NODEFAULTLIB:libc $(DEBUG_LINK_FLAGS) example-1.obj $(OBJS) $(LLDLIBS)
+
+example-2.exe: example-2.obj $(OBJS)
+	$(link) /NODEFAULTLIB:libcmt /NODEFAULTLIB:libc $(DEBUG_LINK_FLAGS) example-2.obj $(OBJS) $(LLDLIBS)
+
+example-3.exe: example-3.obj OpenAlContext.obj Sound.obj SoundData.obj Data.obj $(OBJS)
+	$(link) /NODEFAULTLIB:libcd /NODEFAULTLIB:libcmt $(DEBUG_LINK_FLAGS) example-3.obj OpenAlContext.obj Sound.obj SoundData.obj Data.obj $(OBJS) $(LLDLIBS) $(VORBIS_LIBS) libmad.lib
+
+example-4.exe: example-4.obj $(OBJS)
+	$(link) /NODEFAULTLIB:libcmt /NODEFAULTLIB:libc $(DEBUG_LINK_FLAGS) example-4.obj $(OBJS) $(LLDLIBS)
+
+clean:
+	@del $(EXES) $(OBJS) example-1.obj example-2.obj example-3.obj example-4.obj Data.obj Sound.obj SoundData.obj OpenAlContext.obj *.pdb *.idb *.ilk 2> nul
+
+.cpp.obj:
+	$(CC) $(CFLAGS) $(INC) /c $<
+
+{$(LIB3DPATH)}.cpp.obj::
+	$(CC) $(CFLAGS) $(INC) /c $<
+
+{$(LIBTEXTUREPATH)}.cpp.obj::
+	$(CC) $(CFLAGS) $(INC) /c $<
+
+.c.obj:
+	$(CC) $(CFLAGS) $(INC) /c $<
