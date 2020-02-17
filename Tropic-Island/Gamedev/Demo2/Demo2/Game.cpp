@@ -25,6 +25,7 @@ void Game::setup_opengl(int width, int height)
 }
 void Game::draw_screen()
 {
+	int jj = 0;
 	while (run)
 	{
         glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -87,7 +88,10 @@ void Game::draw_screen()
 		loading = Scene1_->LoadDrum(++iter);
 		if (iter > 17)
 			iter = 17;
-		Sound_->Play(0);
+		jj += Sound_->Play(0);
+		
+		if (jj == 4)
+			jj = 0;
 	}
 	Exit();
 }

@@ -6,121 +6,132 @@
 
 Sound::Sound()
 {
-	song_ = 3;
-	buffer = new unsigned int[song_];
-	source = new unsigned int[song_];
-	//lhead_ = new lhead[song_];
+	//buffer = new unsigned int[song_];
+	//source = new unsigned int[song_];
+	CountSounds = 5;
+	sounds = new Sounds[CountSounds];
+	sounds->Name = new std::string[CountSounds];
+	for (int i = 0; i < CountSounds; i++)
+	{
+		sounds->Name[i] = "";
+	}
+	sounds->buffer = new unsigned int[CountSounds];
+	sounds->source = new unsigned int[CountSounds];
+	sounds->number = new int[CountSounds];
+	CounterSounds = 0;
 }
 int Sound::Init()
 {
 	dev = alcOpenDevice(0);
 	ctx = alcCreateContext(dev, 0);
 	alcMakeContextCurrent(ctx);
-	alGenBuffers(song_, buffer);
-	alGenSources(song_, source);
-
-	FILE* file_;
-	errno_t err;
-	err = fopen_s(&file_, "content//konga.wav", "rb");
-	if (err)
+	alGenBuffers(CountSounds, sounds->buffer);
+	alGenSources(CountSounds, sounds->source);
+	sounds->Name[0] = "content//robocop.wav";
+	sounds->Name[1] = "content//konga.wav";
+	sounds->Name[2] = "content//internet.wav";
+	sounds->Name[3] = "content//coin.wav";
+	sounds->Name[4] = "content//bonus.wav";
+	for (int j = 0; j < CountSounds; j++)
 	{
-		printf_s("Failed open file, error %d", err);
-		return 0;
-	}
+		FILE* file_;
+		errno_t err;
+		err = fopen_s(&file_,sounds->Name[j].c_str(), "rb");
+		if (err)
+		{
+			printf_s("Failed open file, error %d", err);
+			return 0;
+		}
 
-	WAVHEADER header;
+		WAVHEADER header;
 
-	fread_s(&header, sizeof(WAVHEADER), sizeof(WAVHEADER), 1, file_);
-	printf("audioformat:%d\n", header.audioFormat);
-	printf("bitsPerSample:%d\n", header.bitsPerSample);
-	printf("blockAlign:%d\n", header.blockAlign);
-	printf("byteRate:%lu\n", header.byteRate);
-	printf("chunkId:%s\n", header.chunkId);
-	printf("chunkSize:%lu\n", header.chunkSize);
-	printf("format:%s\n", header.format);
-	printf("numCannels:%d\n", header.numChannels);
-	printf("sampleRate:%lu\n", header.sampleRate);
-	printf("subchunk1Id:%s\n", header.subchunk1Id);
-	printf("subchunk1Size:%lu\n", header.subchunk1Size);
-	printf("subchunk2Id:%s\n", header.subchunk2Id);
-	printf("subchunk2Size:%lu\n", header.subchunk2Size);
-	fclose(file_);
-	if (header.numChannels == 1)
-	{
-		if (header.subchunk1Size == 16)
-			format = AL_FORMAT_MONO16;
+		fread_s(&header, sizeof(WAVHEADER), sizeof(WAVHEADER), 1, file_);
+		printf("audioformat:%d\n", header.audioFormat);
+		printf("bitsPerSample:%d\n", header.bitsPerSample);
+		printf("blockAlign:%d\n", header.blockAlign);
+		printf("byteRate:%lu\n", header.byteRate);
+		printf("chunkId:%s\n", header.chunkId);
+		printf("chunkSize:%lu\n", header.chunkSize);
+		printf("format:%s\n", header.format);
+		printf("numCannels:%d\n", header.numChannels);
+		printf("sampleRate:%lu\n", header.sampleRate);
+		printf("subchunk1Id:%s\n", header.subchunk1Id);
+		printf("subchunk1Size:%lu\n", header.subchunk1Size);
+		printf("subchunk2Id:%s\n", header.subchunk2Id);
+		printf("subchunk2Size:%lu\n", header.subchunk2Size);
+		fclose(file_);
+		if (header.numChannels == 1)
+		{
+			if (header.subchunk1Size == 16)
+				format = AL_FORMAT_MONO16;
+			else
+				format = AL_FORMAT_MONO8;
+		}
 		else
-			format = AL_FORMAT_MONO8;
-	}
-	else
-	{
-		if (header.subchunk1Size == 16)
-			format = AL_FORMAT_STEREO16;
-		else
-			format = AL_FORMAT_STEREO8;
-	}
+		{
+			if (header.subchunk1Size == 16)
+				format = AL_FORMAT_STEREO16;
+			else
+				format = AL_FORMAT_STEREO8;
+		}
 #ifdef _WIN32
-	file = open("content//konga.wav", _A_ARCH);
+		file = open(sounds->Name[j].c_str(), _A_ARCH);
 #else
-	file = open(filename, O_RDONLY);
+		file = open(filename, O_RDONLY);
 #endif // _WIN32
-	if (file == -1)
-	{
-		printf("Open failed on input file: %s\n", "content//konga.wav");
+		if (file == -1)
+		{
+			printf("Open failed on input file: %s\n",sounds->Name[j].c_str());
 #ifdef _WIN32
-		wchar_t path[MAX_PATH];
-		GetCurrentDirectory(sizeof(path), path);
-		std::wcout << path << std::endl;
+			wchar_t path[MAX_PATH];
+			GetCurrentDirectory(sizeof(path), path);
+			std::wcout << path << std::endl;
 #endif // _WIN32
-	}
-	org = 0;
-	int j = 0;
-	//for (int i = 0; i < song_; i++)
-	{
-		lseek(file, 0, org);
+		}
+		org = 0;
+		lseek(file,0,org);
 		buf = new unsigned char[header.subchunk2Size];
 		read(file, buf, header.subchunk2Size);
 		org = 1;
-		alBufferData(buffer[j], format, buf,header.subchunk2Size,header.sampleRate);
-		alSourcei(source[j], AL_BUFFER, buffer[j]);
-		j++;
+		alBufferData(sounds->buffer[j], format, buf, header.subchunk2Size, header.sampleRate);
+		delete buf;
+		alSourcei(sounds->source[j], AL_BUFFER, sounds->buffer[j]);
+		close(file);
 	}
 	
-	
-	return 0;;
+	return 0;
 }
 int Sound::Play(int src)
 {
-	alGetSourcei(source[src], AL_SOURCE_STATE, &state);
+	alGetSourcei(sounds->source[src], AL_SOURCE_STATE, &state);
 	if (state == AL_PLAYING)
 		return 0;
-	alSourcePlay(source[src]);
-	return 0;
+	alSourcePlay(sounds->source[src]);
+	return 1;
 }
 int Sound::Stop(int src, bool force)
 {
-	alGetSourcei(source[src], AL_SOURCE_STATE, &state);
+	alGetSourcei(sounds->source[src], AL_SOURCE_STATE, &state);
 	if (state == AL_PLAYING || force)
-		alSourceStop(source[src]);
+		alSourceStop(sounds->source[src]);
 	return 0;
 }
 int Sound::StopAll()
 {
-	for (int i = 0; i < song_; i++)
+	for (int i = 0; i < CountSounds; i++)
 		Stop(i, false);
 	return 0;
 }
 Sound::~Sound()
 {
-	alDeleteSources(song_, source);
-	alDeleteBuffers(song_, buffer);
-	delete source;
-	delete buffer;
-	//delete lhead_;
+	alDeleteSources(CountSounds, sounds->source);
+	alDeleteBuffers(CountSounds, sounds->buffer);
+	//delete source;
+	//delete buffer;
+	delete sounds;
 	delete buf;
 	alcMakeContextCurrent(0);
 	alcDestroyContext(ctx);
 	alcCloseDevice(dev);
 	org = 2;
-	close(file);
 }

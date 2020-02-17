@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-//#include "FileReader.h"
 #ifdef _WIN32
 	#include <io.h>
 	#include <Windows.h>
@@ -14,24 +13,7 @@
 	#include <fcntl.h>
 	#include <sys/stat.h>
 #endif // _WIN32
-/*
-struct lhead
-{
-	unsigned int i1;
-	unsigned short ul1;
-	unsigned short us5;
-	unsigned int ul2;
-};
-struct WavFmt
-{
-	unsigned short encoding;
-	unsigned short channels;
-	unsigned int   frequency;
-	unsigned int   byterate;
-	unsigned short blockAlign;
-	unsigned short bitsPerSample;
-};
-*/
+
 struct WAVHEADER
 {
 	// WAV-формат начинаетс€ с RIFF-заголовка:
@@ -82,7 +64,6 @@ struct WAVHEADER
 
 	// “ак называема€ "глубина€" или точность звучани€. 8 бит, 16 бит и т.д.
 	unsigned short bitsPerSample;
-	//char s[178l];
 	// ѕодцепочка "data" содержит аудио-данные и их размер.
 	// —одержит символы "data"
 	// (0x64617461 в big-endian представлении)
@@ -94,15 +75,13 @@ struct WAVHEADER
 
 	// ƒалее следуют непосредственно Wav данные.
 };
-/*
-enum
+struct Sounds
 {
-	RIFF = 0x46464952,
-	WAVE = 0x45564157,
-	FMT = 0x20746D66,
-	DATA = 0x61746164,
+	unsigned int* buffer;
+	unsigned int* source;
+	std::string* Name;
+	int* number;
 };
-*/
 class Sound
 {
 public:
@@ -117,14 +96,14 @@ private:
 protected:
 	ALCdevice* dev;
 	ALCcontext* ctx;
-	unsigned int* buffer, * source;
+	//unsigned int* buffer, * source;
 	int state;
-	int song_;
+	//int song_;
 	unsigned char* buf;
 	unsigned int size_, freq;
 	int format;
-	//lhead* lhead_;
 	int file;
 	int org;
-	//Data* data;
+	Sounds *sounds;
+	int CounterSounds, CountSounds;
 };
