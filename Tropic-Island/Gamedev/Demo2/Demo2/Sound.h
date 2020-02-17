@@ -14,6 +14,7 @@
 	#include <fcntl.h>
 	#include <sys/stat.h>
 #endif // _WIN32
+/*
 struct lhead
 {
 	unsigned int i1;
@@ -30,6 +31,7 @@ struct WavFmt
 	unsigned short blockAlign;
 	unsigned short bitsPerSample;
 };
+*/
 struct WAVHEADER
 {
 	// WAV-формат начинаетс€ с RIFF-заголовка:
@@ -80,9 +82,8 @@ struct WAVHEADER
 
 	// “ак называема€ "глубина€" или точность звучани€. 8 бит, 16 бит и т.д.
 	unsigned short bitsPerSample;
-
+	//char s[178l];
 	// ѕодцепочка "data" содержит аудио-данные и их размер.
-
 	// —одержит символы "data"
 	// (0x64617461 в big-endian представлении)
 	char subchunk2Id[4];
@@ -93,6 +94,7 @@ struct WAVHEADER
 
 	// ƒалее следуют непосредственно Wav данные.
 };
+/*
 enum
 {
 	RIFF = 0x46464952,
@@ -100,6 +102,7 @@ enum
 	FMT = 0x20746D66,
 	DATA = 0x61746164,
 };
+*/
 class Sound
 {
 public:
@@ -120,7 +123,7 @@ protected:
 	unsigned char* buf;
 	unsigned int size_, freq;
 	int format;
-	lhead* lhead_;
+	//lhead* lhead_;
 	int file;
 	int org;
 	//Data* data;
