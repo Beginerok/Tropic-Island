@@ -65,7 +65,8 @@ void Game::draw_screen()
 				WindowsSDLApi_->pressbutton
 #else
 				WindowsWinApi_->GetF(),
-				WindowsWinApi_->pressbutton
+				WindowsWinApi_->pressbutton,
+				&WindowsWinApi_->upbutton
 #endif
 			);
 			

@@ -7,6 +7,7 @@
 #include <windowsx.h>
 #include<string>
 #include "DataBaseConnection.h"
+#include <iostream>
 class Window
 {
 public:

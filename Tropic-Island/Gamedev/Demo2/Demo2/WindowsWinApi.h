@@ -31,6 +31,7 @@ public:
 	int GetCountF();
 	Window *keyboard__;
 	int pressbutton;
+	int upbutton;
 
 protected:
 	bool done;

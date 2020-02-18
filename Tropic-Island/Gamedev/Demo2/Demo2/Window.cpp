@@ -264,7 +264,6 @@ Window::~Window()
 	//19.09.2017 21:22 no work in vs2010
 	//delete msg_;
 }
-#include <iostream>
 LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)
 {
 	switch (umsg)

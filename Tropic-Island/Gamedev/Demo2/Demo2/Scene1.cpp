@@ -734,7 +734,7 @@ int Scene1::LoadDrum(int iter)
 	else
 		return 1;
 }
-void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,/* int*DrumPosition, const char*line, int bet, bool*lines, int**ms*/ bool*buttons,int pressbutton)
+void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,/* int*DrumPosition, const char*line, int bet, bool*lines, int**ms*/ bool*buttons,int pressbutton,int *upbutton)
 {
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -742,8 +742,8 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	glAlphaFunc(GL_GREATER, 0.0f); 
 	//29.03.2019
-	if (buttons[2] && pressbutton == 1) {
-		StartRotate();
+	if (!buttons[2] && pressbutton == 1 && *upbutton==0) {
+		StartRotate(upbutton);
 	}
 	Rotate();
 	int k = -1;
@@ -753,7 +753,9 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j < counttextureondrums; j++)
 		{
-			//glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectordrum[DrumPosition[++k]/*GetMassive(++k)*/])]);
+			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(drum[++k])]);
+			EnableTexture(i, j);
+			/*
 			++k;
 			
 			if (speedchangeanimation[k] % 23 == 0)
@@ -770,7 +772,7 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 				drumanimation[2][k] = 0;
 			speedchangeanimation[k]++;
 			
-			/*image->IndexTexture[FindTexture(drum[++k])]*/
+			//image->IndexTexture[FindTexture(drum[++k])]
 			
 			if (i == 0 || i == 1)
 			{
@@ -790,7 +792,7 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 				glBindTexture(GL_TEXTURE_2D, animation3->loader->image->IndexTexture[animation3->loader->FindTexture(str)]);
 				EnableTexture(i, j);
 			}
-			
+			*/
 		}
 		glPopMatrix();
 	}
@@ -1452,7 +1454,7 @@ void Scene1::Rotate()
 		}
 	}
 }
-void Scene1::StartRotate()
+void Scene1::StartRotate(int *upbutton)
 {
 	for (int i = 0; i < CountDrum; i++)
 	{
@@ -1460,6 +1462,7 @@ void Scene1::StartRotate()
 			continue;
 		if (rotate[i] >= 360.0f)
 		{
+			*upbutton += 1;
 			startrotate[i] = true;
 			rotate[i] = 0.0f;
 			//srand(time(0));

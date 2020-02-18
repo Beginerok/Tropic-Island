@@ -46,7 +46,7 @@ public:
 	int LoadDrum(int iter);
 	void ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums, std::vector<std::string> drum,
 		/*int*DrumPosition, int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms,*/
-		bool* buttons, int pressbutton);
+		bool* buttons, int pressbutton,int *upbutton);
 	void EnableTexture(int n, int m);
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
@@ -55,7 +55,7 @@ public:
 	void EnablePolygonBackMiddle(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonBackDown(float leftup, float leftdown, float rightdown, float rightup);
 	void Rotate(/*bool__*buttons*/);
-	void StartRotate();
+	void StartRotate(int *upbutoon);
 	//int GetRandom();
 	//int *GetRandomMassive();
 

@@ -11,6 +11,7 @@ WindowsWinApi::WindowsWinApi()
 	SetBet_(8);
 	keyboard__ = new Window();
 	pressbutton = 0;
+	upbutton = 1;
 }
 int WindowsWinApi::getAny()
 {
@@ -61,6 +62,7 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 				setF(true, 1);
 			if (point.x > 330 && point.x < 401)
 			{
+				upbutton += 1;
 				setF(true, 2);
 				pressbutton += 1;
 				std::cout << "press button:" << pressbutton << std::endl;
@@ -85,6 +87,7 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 					setF(true, 1);
 				if (point.x > 330 && point.x < 401)
 				{
+					upbutton += 1;
 					setF(true, 2);
 					pressbutton += 1;
 					std::cout << "press button:" << pressbutton << std::endl;
@@ -119,9 +122,11 @@ bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_)
 			//if (point.x >330 && point.x<401)
 			if (getF(2))
 			{
+				pressbutton = 1;
+				upbutton = 0;
 				setF(false, 2);
-				pressbutton = 0;
 				std::cout << "press button:" << pressbutton << std::endl;
+				keyboard__->db->Query();
 			}
 			//if (point.x >436 && point.x<506)
 			{
@@ -157,8 +162,9 @@ bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_)
 				//if (point.x >330 && point.x<401)
 				if (getF(2))
 				{
+					pressbutton = 1;
+					upbutton = 0;
 					setF(false, 2);
-					pressbutton = 0;
 					std::cout << "press button:" << pressbutton << std::endl;
 				}
 				//if (point.x >436 && point.x<506)
