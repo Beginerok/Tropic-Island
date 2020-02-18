@@ -42,9 +42,11 @@ void Game::draw_screen()
 		int counttextureondrums = 6;
 		/*
 		int**drum;
-		int credits;
-		int win; 
-		int totalbet;
+		*/
+		int credits =1234567890;
+		int win     =1234567890; 
+		int totalbet=1234567890;
+		/*
 		const char*line;
 		int bet;
 		bool*lines;
@@ -54,7 +56,7 @@ void Game::draw_screen()
 		if (!loading) 
 		{
 		
-			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums, Logic_->GetDrum(),/*Logic_->GetRandom(),credits,win,totalbet,line,bet,lines,ms,buttons*/
+			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums, Logic_->GetDrum(),/*Logic_->GetRandom(),line,bet,lines,ms,buttons*/
 			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
 				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
 				Math_->GetLines(), Math_->GetMS()*/
@@ -68,7 +70,7 @@ void Game::draw_screen()
 			);
 			
 			Scene1_->ShowButtons();
-			Scene1_->ShowNumbersAndWords();
+			Scene1_->ShowNumbersAndWords(credits, win, totalbet);
 			Scene1_->ShowBoomer();
 		}
 		else

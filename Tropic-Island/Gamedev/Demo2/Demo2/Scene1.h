@@ -18,6 +18,7 @@
 //#include <vector>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 struct Image
 {
 	float**TextureCoordinats;
@@ -26,7 +27,13 @@ struct Image
 	std::string *Name;
 	int *number;
 };
-
+struct Coor
+{
+	std::vector<float> a;
+	float b;
+	float width;
+	float height;
+};
 /*ref*/ class Scene1
 {
 public:
@@ -61,11 +68,14 @@ public:
 	void EnableTextureButtons(int i);
 
 	void LoadNumbersAndWords();
-	void ShowNumbersAndWords();
+	void ShowNumbersAndWords(int credits,int win,int totalbet);
 	void EnableTextureNumbersAndWords(int i);
 	void LoadBoomer();
 	void ShowBoomer();
 	void EnableTextureBoomer(int i);
+
+	void DrawWord(int word_,int pos);
+	void EnableTextureNumbers(int position, int numberword);
 	~Scene1();
 	int err;
 #ifdef _WINDOWS_2
@@ -108,4 +118,5 @@ public:
 	Animation *animation,*animation2,*animation3;
 	int **drumanimation;
 	int *speedchangeanimation;
+	Coor* coor;
 };

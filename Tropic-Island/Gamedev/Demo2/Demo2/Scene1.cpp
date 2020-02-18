@@ -42,6 +42,7 @@ Scene1::Scene1(void)
 		drumanimation[2][i] = 0;
 		speedchangeanimation[i] = 0;
 	}
+	coor = new Coor[3];
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -63,8 +64,8 @@ void Scene1::LoadImage(const ILstring path)
 		// Получение строки с ошибкой
 		strError = (wchar_t *)iluErrorString(err);
 		// Выдаем сообщение об ошибке
-#ifdef _WINDOWS_2
-		MessageBox(NULL, NULL, "Ошибка при загрузке il!", MB_OK);
+#ifdef _WIN32
+		MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
 #endif
 		// выход из программы
 		flogout << "Error loading image: " << reinterpret_cast<const char*>(path) << std::endl;
@@ -112,11 +113,7 @@ void Scene1::LoadImage(const ILstring path)
 };
 void Scene1::LoadWelcome()
 {
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//welcome.jpg"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\welcome.jpg"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -132,11 +129,7 @@ void Scene1::LoadWelcome()
 
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//logo.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\logo.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -151,11 +144,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar0.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar0.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -170,11 +159,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar1.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar1.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -189,11 +174,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar2.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar2.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -208,11 +189,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar3.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar3.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -227,11 +204,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar4.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar4.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -246,11 +219,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar5.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar5.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -265,11 +234,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar6.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar6.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -284,11 +249,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar7.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar7.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -302,11 +263,7 @@ void Scene1::LoadWelcome()
 	image->Name[CountIndexTexture - 1] = "bar7";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar8.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar8.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -321,11 +278,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar9.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar9.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -340,11 +293,7 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//progress//bar10.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\progress\\bar10.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -359,7 +308,6 @@ void Scene1::LoadWelcome()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 }
-#include <sstream>
 void Scene1::ShowWelcome(bool show)
 {
 	if (!show)
@@ -394,6 +342,56 @@ void Scene1::ShowWelcome(bool show)
 	AnimateBar++;
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
+}
+void Scene1::DrawWord(int word_,int pos)
+{
+	char* word = (char*)malloc(sizeof(char)*25);
+#ifndef _WIN32
+	sprintf(word, "%d", word_);
+#else
+	sprintf_s(word, 25, "%d", word_);
+#endif
+	coor[0].a.clear();
+	coor[1].a.clear();
+	coor[2].a.clear();
+	coor[0].a.push_back(-1.0f);
+	coor[0].b = 0.8;
+	coor[0].width = 0.03f;
+	coor[0].height = 0.09; 
+	coor[1].a.push_back(-0.1f);
+	coor[1].b = 0.8;
+	coor[1].width = 0.03f;
+	coor[1].height = 0.09;
+	coor[2].a.push_back(0.5f);
+	coor[2].b = 0.8;
+	coor[2].width = 0.03f;
+	coor[2].height = 0.09;
+
+	for (int i = 0; i < strlen(word); i++)
+		coor[pos].a.push_back(coor[pos].a[i] + coor[pos].width);
+	
+	for (int i = 0; i < strlen(word); i++) {
+		std::string str = "";
+		str+=word[i];
+		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(str)]);
+		EnableTextureNumbers(i,pos);
+		str.clear();
+	}
+	
+	free(word);
+}
+void Scene1::EnableTextureNumbers(int position,int numberword)
+{
+	glBegin(GL_QUADS);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex2f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b + coor[numberword].height);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex2f(coor[numberword].a[position], coor[numberword].b + coor[numberword].height);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex2f(coor[numberword].a[position], coor[numberword].b);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex2f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b);
+	glEnd();
 }
 void Scene1::EnableTexture(float*texcoor, float*vercoor)
 {
@@ -435,11 +433,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 0)
 	{
 		vectordrum.push_back("auto1");//1
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto1.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto1.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -456,11 +450,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 1)
 	{
 		vectordrum.push_back("auto2");//2
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto2.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto2.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -478,11 +468,7 @@ int Scene1::LoadDrum(int iter)
 	{
 
 		vectordrum.push_back("auto3");//3
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto3.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto3.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -499,11 +485,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 3)
 	{
 		vectordrum.push_back("auto4");//4
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto4.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto4.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -520,11 +502,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 4)
 	{
 		vectordrum.push_back("auto5");//5
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto5.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto5.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -541,11 +519,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 5)
 	{
 		vectordrum.push_back("auto6");//6
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto6.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto6.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -562,11 +536,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 6)
 	{
 		vectordrum.push_back("auto7");//7
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto7.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto7.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -583,11 +553,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 7)
 	{
 		vectordrum.push_back("auto8");//8
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto8.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto8.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -604,11 +570,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 8)
 	{
 		vectordrum.push_back("auto9");//9
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto9.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto9.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -625,11 +587,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 9)
 	{
 		vectordrum.push_back("auto10");//10
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto10.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto10.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -646,11 +604,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 10)
 	{
 		vectordrum.push_back("auto11");//11
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto11.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto11.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -667,11 +621,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 11)
 	{
 		vectordrum.push_back("auto12");//12
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto12.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto12.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -688,11 +638,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 12)
 	{
 		vectordrum.push_back("auto13");//13
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto13.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto13.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -709,11 +655,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 13)
 	{
 		vectordrum.push_back("auto14");//14
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto14.jpg"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto14.jpg"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -730,11 +672,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 14)
 	{
 		vectordrum.push_back("auto15");//15
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto15.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\auto15.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -751,11 +689,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 15)
 	{
 		vectordrum.push_back("moto");//16
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//moto.png"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\moto.png"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -772,11 +706,7 @@ int Scene1::LoadDrum(int iter)
 	if (iter == 16)
 	{
 		vectordrum.push_back("wild");//17
-#ifndef _WINDOWS_2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//wild.jpg"));
-#else
 		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\wild.jpg"));
-#endif
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -804,8 +734,7 @@ int Scene1::LoadDrum(int iter)
 	else
 		return 1;
 }
-void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,/* int*DrumPosition,
-	int credits, int win, int totalbet, const char*line, int bet, bool*lines, int**ms*/ bool*buttons,int pressbutton)
+void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,/* int*DrumPosition, const char*line, int bet, bool*lines, int**ms*/ bool*buttons,int pressbutton)
 {
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -882,11 +811,7 @@ void Scene1::SetMassive(int number, int value)
 void Scene1::LoadButtons()
 {
 	vectorbuttons.push_back("HELP");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//HELP.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\HELP.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -901,11 +826,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("TAKE");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//TAKE.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\TAKE.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -920,11 +841,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("PLAY");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//PLAY.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\PLAY.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -939,11 +856,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("FLIP");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//FLIP.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\FLIP.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -958,11 +871,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("EXIT");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//EXIT.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\EXIT.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -977,11 +886,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("HELP_PRESS");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//HELP_PRESS.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\HELP_PRESS.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -996,11 +901,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("TAKE_PRESS");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//TAKE_PRESS.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\TAKE_PRESS.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1015,11 +916,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("PLAY_PRESS");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//PLAY_PRESS.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\PLAY_PRESS.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1034,11 +931,7 @@ void Scene1::LoadButtons()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorbuttons.push_back("FLIP_PRESS");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//FLIP_PRESS.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\FLIP_PRESS.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1054,11 +947,7 @@ void Scene1::LoadButtons()
 
 
 	vectorbuttons.push_back("EXIT_PRESS");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//buttons//EXIT_PRESS.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\buttons\\EXIT_PRESS.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1582,11 +1471,7 @@ void Scene1::StartRotate()
 void Scene1::LoadNumbersAndWords()
 {
 	vectornumbersandwords.push_back("CREDITS");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//CREDITS.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\CREDITS.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1599,13 +1484,10 @@ void Scene1::LoadNumbersAndWords()
 
 	image->Name[CountIndexTexture - 1] = "CREDITS";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	
 
 	vectornumbersandwords.push_back("WIN");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//WIN.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\WIN.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1618,13 +1500,10 @@ void Scene1::LoadNumbersAndWords()
 
 	image->Name[CountIndexTexture - 1] = "WIN";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+	
 
 	vectornumbersandwords.push_back("TOTAL BET");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//TOTAL BET.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\TOTAL BET.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1636,14 +1515,10 @@ void Scene1::LoadNumbersAndWords()
 	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
 	image->Name[CountIndexTexture - 1] = "TOTAL BET";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1; 
+	
 	vectornumbersandwords.push_back("0");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//0.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\0.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1658,11 +1533,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("1");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//1.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\1.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1677,11 +1548,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("2");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//2.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\2.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1696,11 +1563,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("3");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//3.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\3.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1715,11 +1578,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("4");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//4.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\4.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1734,11 +1593,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("5");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//5.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\5.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1753,11 +1608,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("6");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//6.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\6.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1772,11 +1623,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("7");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//7.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\7.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1791,11 +1638,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("8");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//8.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\8.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1810,11 +1653,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectornumbersandwords.push_back("9");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//9.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\numbers_and_words\\9.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1829,7 +1668,7 @@ void Scene1::LoadNumbersAndWords()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 }
-void Scene1::ShowNumbersAndWords()
+void Scene1::ShowNumbersAndWords(int credits, int win, int totalbet)
 {
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -1841,6 +1680,9 @@ void Scene1::ShowNumbersAndWords()
 		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectornumbersandwords[i])]);
 		EnableTextureNumbersAndWords(i);
 	}
+	DrawWord(credits,0);
+	DrawWord(win,1);
+	DrawWord(totalbet,2);
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
@@ -1863,7 +1705,7 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(-1.f, 1.f, 1.0f);
 
-		glEnd();//HELP
+		glEnd();//credits
 	}
 	if (i == 1)
 	{
@@ -1935,13 +1777,9 @@ void Scene1::LoadBoomer()
 	anim3.push_back("content//drum//animated auto 3//6.png");
 	anim3.push_back("content//drum//animated auto 3//7.png");
 	animation3 = new Animation(anim3);
-
+	/*
 	vectorboomer.push_back("0");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//boomer//0.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\0.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1956,11 +1794,7 @@ void Scene1::LoadBoomer()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorboomer.push_back("1");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//boomer//1.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\1.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1975,11 +1809,7 @@ void Scene1::LoadBoomer()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorboomer.push_back("2");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//boomer//2.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\2.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1994,11 +1824,7 @@ void Scene1::LoadBoomer()
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorboomer.push_back("3");
-#ifndef _WINDOWS_2
-	LoadImage(reinterpret_cast<const ILstring>("content//boomer//3.png"));
-#else
 	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\3.png"));
-#endif
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -2011,12 +1837,12 @@ void Scene1::LoadBoomer()
 
 	image->Name[CountIndexTexture - 1] = "3";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-	
+	*/
 }
 void Scene1::ShowBoomer()
 {
 	//animation->ShowAnimation();
-	
+	/*
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -2042,7 +1868,7 @@ void Scene1::ShowBoomer()
 	slowlychangesprite++;
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
-	
+	*/
 }
 void Scene1::EnableTextureBoomer(int animboom)
 {
