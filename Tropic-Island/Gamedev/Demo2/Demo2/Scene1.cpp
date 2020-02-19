@@ -354,18 +354,18 @@ void Scene1::DrawWord(int word_,int pos)
 	coor[0].a.clear();
 	coor[1].a.clear();
 	coor[2].a.clear();
-	coor[0].a.push_back(-1.0f);
-	coor[0].b = 0.8;
+	coor[0].a.push_back(-0.75f);
+	coor[0].b = 0.9;
 	coor[0].width = 0.03f;
-	coor[0].height = 0.09; 
-	coor[1].a.push_back(-0.1f);
-	coor[1].b = 0.8;
+	coor[0].height = 0.1; 
+	coor[1].a.push_back(-0.05f);
+	coor[1].b = 0.9;
 	coor[1].width = 0.03f;
-	coor[1].height = 0.09;
-	coor[2].a.push_back(0.5f);
-	coor[2].b = 0.8;
+	coor[1].height = 0.1;
+	coor[2].a.push_back(0.65f);
+	coor[2].b = 0.9;
 	coor[2].width = 0.03f;
-	coor[2].height = 0.09;
+	coor[2].height = 0.1;
 
 	for (int i = 0; i < strlen(word); i++)
 		coor[pos].a.push_back(coor[pos].a[i] + coor[pos].width);
@@ -734,7 +734,8 @@ int Scene1::LoadDrum(int iter)
 	else
 		return 1;
 }
-void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums,std::vector<std::string> drum,/* int*DrumPosition, const char*line, int bet, bool*lines, int**ms*/ bool*buttons,int pressbutton,int *upbutton)
+void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::string> drum,
+	bool*buttons,int pressbutton,int *upbutton)
 {
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -800,16 +801,6 @@ void Scene1::ShowDrum(int countdrums,/* float*rotate_,*/ int counttextureondrums
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
-/*
-int Scene1::GetMassive(int number)
-{
-	return randommassive[number];
-}
-void Scene1::SetMassive(int number, int value)
-{
-	randommassive[number] = value;
-}
-*/
 void Scene1::LoadButtons()
 {
 	vectorbuttons.push_back("HELP");
@@ -1072,22 +1063,6 @@ void Scene1::EnableTextureButtons(int i)
 		glEnd();//EXIT
 	}
 }
-/*
-int Scene1::GetRandom()
-{
-	return ((int)((float)rand() / RAND_MAX*(max_ - min_) + min_));
-}
-int*Scene1::GetRandomMassive()
-{
-	for (int i = 0; i<30; i++)
-	{
-		randommassive[i] = GetRandom();
-		//std::cout<<randommassive[i]<<"|";
-	}
-	//std::cout<<std::endl;
-	return randommassive;
-}
-*/
 void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float yup)
 {
 
@@ -1465,8 +1440,6 @@ void Scene1::StartRotate(int *upbutton)
 			*upbutton += 1;
 			startrotate[i] = true;
 			rotate[i] = 0.0f;
-			//srand(time(0));
-			//GetRandomMassive();
 		}
 	}
 }
@@ -1715,16 +1688,16 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 		glBegin(GL_POLYGON);//win
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(.1f, 1.f, 1.0f);
+		glVertex3f(-.1f, 1.f, 1.0f);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(.1f, .9f, 1.0f);
-
-		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(-.1f, .9f, 1.0f);
 
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.3f, .9f, 1.0f);
+
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-.1f, 1.f, 1.0f);
+		glVertex3f(-.3f, 1.f, 1.0f);
 
 		glEnd();//win
 	}
@@ -1733,21 +1706,21 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 		glBegin(GL_POLYGON);//totalbet
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(.9f, 1.f, 1.0f);
+		glVertex3f(.6f, 1.f, 1.0f);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(.9f, .9f, 1.0f);
+		glVertex3f(.6f, .9f, 1.0f);
 
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(.7f, .9f, 1.0f);
+		glVertex3f(.4f, .9f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(.7f, 1.f, 1.0f);
+		glVertex3f(.4f, 1.f, 1.0f);
 
 		glEnd();//total bet
 	}
 }
-void Scene1::LoadBoomer()
+void Scene1::LoadAnimatedAuto()
 {
 
 	std::vector<std::string> anim;// = new std::vector<std::string>();
@@ -1780,116 +1753,6 @@ void Scene1::LoadBoomer()
 	anim3.push_back("content//drum//animated auto 3//6.png");
 	anim3.push_back("content//drum//animated auto 3//7.png");
 	animation3 = new Animation(anim3);
-	/*
-	vectorboomer.push_back("0");
-	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\0.png"));
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "0";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectorboomer.push_back("1");
-	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\1.png"));
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "1";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectorboomer.push_back("2");
-	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\2.png"));
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "2";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	vectorboomer.push_back("3");
-	LoadImage(reinterpret_cast<const ILstring>("content\\boomer\\3.png"));
-	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
-	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
-	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
-
-	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
-	image->VertexCoordinats[CountIndexTexture - 1][1] = .6f;
-	image->VertexCoordinats[CountIndexTexture - 1][2] = -.2f;
-	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
-
-	image->Name[CountIndexTexture - 1] = "3";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-	*/
-}
-void Scene1::ShowBoomer()
-{
-	//animation->ShowAnimation();
-	/*
-	glEnable(GL_ALPHA_TEST);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	glAlphaFunc(GL_GREATER, 0.0f);
-	if (slowlychangesprite > 100 && slowlychangesprite < 200 && animateboomer == 0)
-		animateboomer++;
-	if (slowlychangesprite > 200 && slowlychangesprite < 300 && animateboomer == 1)
-		animateboomer++;
-	if (slowlychangesprite > 300 && slowlychangesprite < 400 && animateboomer == 2)
-		animateboomer++;
-	if (slowlychangesprite > 400 && slowlychangesprite < 500 && animateboomer == 3)
-		animateboomer++;
-	if (animateboomer == vectorboomer.size())
-	{
-		animateboomer = 0;
-		slowlychangesprite = 0;
-	}
-	int numTexture = FindTexture(vectorboomer[animateboomer]);
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[numTexture]);
-	EnableTextureBoomer(numTexture);
-	//animateboomer++;
-	slowlychangesprite++;
-	glDisable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);
-	*/
-}
-void Scene1::EnableTextureBoomer(int animboom)
-{
-	
-	glBegin(GL_QUADS);
-	glTexCoord2f(image->TextureCoordinats[animboom][0], image->TextureCoordinats[animboom][2]);
-	glVertex2f(image->VertexCoordinats[animboom][0], image->VertexCoordinats[animboom][2]);
-
-	glTexCoord2f(image->TextureCoordinats[animboom][1], image->TextureCoordinats[animboom][2]);
-	glVertex2f(image->VertexCoordinats[animboom][1], image->VertexCoordinats[animboom][2]);
-	
-	glTexCoord2f(image->TextureCoordinats[animboom][1], image->TextureCoordinats[animboom][3]);
-	glVertex2f(image->VertexCoordinats[animboom][1], image->VertexCoordinats[animboom][3]);
-	
-	glTexCoord2f(image->TextureCoordinats[animboom][0], image->TextureCoordinats[animboom][3]);
-	glVertex2f(image->VertexCoordinats[animboom][0], image->VertexCoordinats[animboom][3]);
-	glEnd();
-	
 }
 Scene1::~Scene1()
 {

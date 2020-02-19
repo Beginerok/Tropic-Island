@@ -36,30 +36,14 @@ void Game::draw_screen()
 		glEnable(GL_TEXTURE_2D);
 		
 		int countdrums = 5;
-		/*
-		float*rotate_;
-		*/
 		int counttextureondrums = 6;
-		/*
-		int**drum;
-		*/
 		int credits =1234567890;
 		int win     =1234567890; 
 		int totalbet=1234567890;
-		/*
-		const char*line;
-		int bet;
-		bool*lines;
-		int**ms;
-		*/
-		//bool*buttons;
 		if (!loading) 
 		{
 		
-			Scene1_->ShowDrum(countdrums,/*rotate_,*/counttextureondrums, Logic_->GetDrum(),/*Logic_->GetRandom(),line,bet,lines,ms,buttons*/
-			/*Math_->GetCountDrums(), Math_->GetRotate(), Math_->GetCountTextureOnDrums(), Math_->GetDrums(),
-				Math_->GetCredits(), Math_->GetWin_(), Math_->GetTotalBet(), Math_->GetLines_(), Math_->GetBet(),
-				Math_->GetLines(), Math_->GetMS()*/
+			Scene1_->ShowDrum(countdrums,counttextureondrums, Logic_->GetDrum(),
 #if WINAPI_==0
 				WindowsSDLApi_->GetF(),
 				WindowsSDLApi_->pressbutton
@@ -72,7 +56,6 @@ void Game::draw_screen()
 			
 			Scene1_->ShowButtons();
 			Scene1_->ShowNumbersAndWords(credits, win, totalbet);
-			Scene1_->ShowBoomer();
 		}
 		else
 			Scene1_->ShowWelcome(loading);
@@ -119,12 +102,14 @@ int Game::Execute()
 	Scene1_->LoadButtons();
 	//
 	Scene1_->LoadNumbersAndWords();
-	Scene1_->LoadBoomer();
 	//
 #if WINAPI_ == 0
 	WindowsSDLApi_ = new WindowsSDLApi();
 #endif
 	Logic_ = new Logic();
+	Logic_->dbconn = WindowsWinApi_->keyboard__->db;
+	Logic_->dbconn->Connect();
+	Logic_->dbconn->Query();
 	Logic_->SetRandom();
 	Sound_ = new Sound();
 	Sound_->Init();

@@ -122,11 +122,11 @@ bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_)
 			//if (point.x >330 && point.x<401)
 			if (getF(2))
 			{
+				keyboard__->db->Query();
 				pressbutton = 1;
 				upbutton = 0;
 				setF(false, 2);
 				std::cout << "press button:" << pressbutton << std::endl;
-				keyboard__->db->Query();
 			}
 			//if (point.x >436 && point.x<506)
 			{

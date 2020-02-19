@@ -4,8 +4,8 @@ Logic::Logic()
 	CountPosition = 30;
 	random = new int[CountPosition];
 	dbconn = new DataBaseConnection();
-	dbconn->Connect();
-	dbconn->Query();
+	//dbconn->Connect();
+	//dbconn->Query();
 }
 int *Logic::GetRandom()
 {
@@ -24,6 +24,9 @@ void Logic::SetDrum()
 }
 std::vector<std::string> Logic::GetDrum()
 {
+	//for (int i = 0; i < dbconn->vectordrum.size(); i++)
+//		printf("%s ",dbconn->vectordrum[i]);
+	//printf("\n");
 	return dbconn->vectordrum;
 }
 float Logic::GetCredits()
