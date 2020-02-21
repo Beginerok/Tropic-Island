@@ -173,7 +173,6 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	ShowWindow(hwnd2, SW_SHOW);
 	SetForegroundWindow(hwnd2);
 	SetFocus(hwnd2);
-
 	if (!(hwnd = CreateWindowEx(dwexstyle, L"My Window", title,
 		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
 		0, 0, windowrect->right - windowrect->left + menuwidth,

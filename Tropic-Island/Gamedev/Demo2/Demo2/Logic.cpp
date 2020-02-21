@@ -41,9 +41,9 @@ float Logic::GetTotalBet()
 {
 	return TotalBet;
 }
-void Logic::SetCredits(float credits)
+void Logic::SetCredits()
 {
-	Credits = credits;
+	Credits = dbconn->SetCredits();
 }
 void Logic::SetWin(float win)
 {

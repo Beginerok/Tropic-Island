@@ -18,7 +18,7 @@ public:
 	float GetCredits();
 	float GetWin();
 	float GetTotalBet();
-	void SetCredits(float credits);
+	void SetCredits();
 	void SetWin(float win);
 	void SetTotalBet(float totalbet);
 	~Logic();

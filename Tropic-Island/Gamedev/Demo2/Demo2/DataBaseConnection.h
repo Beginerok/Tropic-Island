@@ -17,6 +17,7 @@ public:
 	void CountDistinct();
 	void SelectStep();
 	void UpdateStep();
+	int SetCredits();
 	~DataBaseConnection();
 	MYSQL *conn;
 	MYSQL_ROW row;
@@ -24,5 +25,6 @@ public:
 	int qstate;
 	std::vector<std::string> vectordrum;
 	int userid,countdistinct,step;
+	int pointscredits;
 };
 

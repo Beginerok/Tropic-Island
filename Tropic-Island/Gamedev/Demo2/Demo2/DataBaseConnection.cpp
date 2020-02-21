@@ -163,6 +163,26 @@ void DataBaseConnection::UpdateStep()
 		std::cout << "Query failed:" << mysql_error(conn) << std::endl;
 	}
 }
+int DataBaseConnection::SetCredits()
+{
+	std::string query = "SELECT points FROM users_data where users_id=" + std::to_string(userid) + ";";
+	const char* q = query.c_str();
+	qstate = mysql_query(conn, q);
+	if (!qstate)
+	{
+		res = mysql_store_result(conn);
+		while (row = mysql_fetch_row(res))
+		{
+			//printf("ID: %s,Position: %s, Image: %s\n", row[0], row[1], row[2]);
+			pointscredits = atoi(row[0]);
+		}
+	}
+	else
+	{
+		std::cout << "Query failed:" << mysql_error(conn) << std::endl;
+	}
+	return pointscredits;
+}
 void DataBaseConnection::Close()
 {
 	// «акрываем соединение с сервером базы данных

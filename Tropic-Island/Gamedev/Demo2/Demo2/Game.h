@@ -30,7 +30,7 @@ public:
 	void Exit();
 	int iter;
 	Logic *Logic_;
-	bool bonus;
+	bool bonus,firsttime;
 	~Game();
 };
 

@@ -6,6 +6,7 @@ Game::Game()
 	loading = true;
 	iter = -1;
 	bonus = false;
+	firsttime = false;
 }
 void Game::setup_opengl(int width, int height)
 {
@@ -28,7 +29,12 @@ void Game::draw_screen()
 	int jj = 0;
 	while (run)
 	{
-        glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+		if (!firsttime && Logic_->dbconn->userid != -1)
+		{
+			firsttime = true;
+			Logic_->SetCredits();
+		}
+		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glDepthMask (GL_TRUE);
         glClearColor(0.0f,0.0f,0.0f,1.0f);
         glClearDepth(1.0);
@@ -37,7 +43,7 @@ void Game::draw_screen()
 		
 		int countdrums = 5;
 		int counttextureondrums = 6;
-		int credits =1234567890;
+		//int credits =1234567890;
 		int win     =1234567890; 
 		int totalbet=1234567890;
 		if (!loading) 
@@ -55,7 +61,7 @@ void Game::draw_screen()
 			);
 			
 			Scene1_->ShowButtons();
-			Scene1_->ShowNumbersAndWords(credits, win, totalbet);
+			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), win, totalbet);
 		}
 		else
 			Scene1_->ShowWelcome(loading);
