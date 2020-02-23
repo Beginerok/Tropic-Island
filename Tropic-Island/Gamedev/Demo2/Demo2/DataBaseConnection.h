@@ -17,7 +17,8 @@ public:
 	void CountDistinct();
 	void SelectStep();
 	void UpdateStep();
-	int SetCredits();
+	int GetCredits();
+	void SetCredits(int pointscredits_);
 	~DataBaseConnection();
 	MYSQL *conn;
 	MYSQL_ROW row;

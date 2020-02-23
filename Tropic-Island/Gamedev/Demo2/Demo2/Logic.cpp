@@ -4,8 +4,6 @@ Logic::Logic()
 	CountPosition = 30;
 	random = new int[CountPosition];
 	dbconn = new DataBaseConnection();
-	//dbconn->Connect();
-	//dbconn->Query();
 }
 int *Logic::GetRandom()
 {
@@ -24,9 +22,6 @@ void Logic::SetDrum()
 }
 std::vector<std::string> Logic::GetDrum()
 {
-	//for (int i = 0; i < dbconn->vectordrum.size(); i++)
-//		printf("%s ",dbconn->vectordrum[i]);
-	//printf("\n");
 	return dbconn->vectordrum;
 }
 float Logic::GetCredits()
@@ -43,7 +38,12 @@ float Logic::GetTotalBet()
 }
 void Logic::SetCredits()
 {
-	Credits = dbconn->SetCredits();
+	Credits = dbconn->GetCredits();
+}
+void Logic::SetCredits(float credits)
+{
+	Credits = credits;
+	dbconn->SetCredits(credits);
 }
 void Logic::SetWin(float win)
 {

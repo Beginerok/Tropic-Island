@@ -26,7 +26,6 @@ void Game::setup_opengl(int width, int height)
 }
 void Game::draw_screen()
 {
-	int jj = 0;
 	while (run)
 	{
 		if (!firsttime && Logic_->dbconn->userid != -1)
@@ -43,12 +42,10 @@ void Game::draw_screen()
 		
 		int countdrums = 5;
 		int counttextureondrums = 6;
-		//int credits =1234567890;
-		int win     =1234567890; 
-		int totalbet=1234567890;
 		if (!loading) 
 		{
-		
+			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0)
+				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet());
 			Scene1_->ShowDrum(countdrums,counttextureondrums, Logic_->GetDrum(),
 #if WINAPI_==0
 				WindowsSDLApi_->GetF(),
@@ -61,7 +58,7 @@ void Game::draw_screen()
 			);
 			
 			Scene1_->ShowButtons();
-			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), win, totalbet);
+			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
 		}
 		else
 			Scene1_->ShowWelcome(loading);
@@ -80,10 +77,7 @@ void Game::draw_screen()
 		loading = Scene1_->LoadDrum(++iter);
 		if (iter > 17)
 			iter = 17;
-		jj += Sound_->Play(0);
-		
-		if (jj == 4)
-			jj = 0;
+		Sound_->Play(0);
 	}
 	Exit();
 }
@@ -117,6 +111,8 @@ int Game::Execute()
 	Logic_->dbconn->Connect();
 	Logic_->dbconn->Query();
 	Logic_->SetRandom();
+	Logic_->SetTotalBet(1);
+	Logic_->SetWin(0);
 	Sound_ = new Sound();
 	Sound_->Init();
 	draw_screen();

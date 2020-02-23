@@ -742,10 +742,8 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	glAlphaFunc(GL_GREATER, 0.0f); 
-	//29.03.2019
-	if (!buttons[2] && pressbutton == 1 && *upbutton==0) {
-		StartRotate(upbutton);
-	}
+	if (!buttons[2] && pressbutton == 1 && *upbutton==0) 
+			StartRotate(upbutton);
 	Rotate();
 	int k = -1;
 	for (int i = 0; i<countdrums; i++)

@@ -145,7 +145,7 @@ void DataBaseConnection::SelectStep()
 }
 void DataBaseConnection::UpdateStep()
 {
-	std::string query = "UPDATE users_data SET step=" + std::to_string(step) + ";";
+	std::string query = "UPDATE users_data SET step=" + std::to_string(step) + " where users_id=" + std::to_string(userid) + ";";
 	const char* q = query.c_str();
 	qstate = mysql_query(conn, q);
 	if (!qstate)
@@ -163,7 +163,7 @@ void DataBaseConnection::UpdateStep()
 		std::cout << "Query failed:" << mysql_error(conn) << std::endl;
 	}
 }
-int DataBaseConnection::SetCredits()
+int DataBaseConnection::GetCredits()
 {
 	std::string query = "SELECT points FROM users_data where users_id=" + std::to_string(userid) + ";";
 	const char* q = query.c_str();
@@ -182,6 +182,26 @@ int DataBaseConnection::SetCredits()
 		std::cout << "Query failed:" << mysql_error(conn) << std::endl;
 	}
 	return pointscredits;
+}
+void DataBaseConnection::SetCredits(int pointscredits_)
+{
+	std::string query = "UPDATE users_data SET points=" + std::to_string(pointscredits_) + " where users_id="+std::to_string(userid)+";";
+	const char* q = query.c_str();
+	qstate = mysql_query(conn, q);
+	if (!qstate)
+	{
+		/*
+		res = mysql_store_result(conn);
+		while (row = mysql_fetch_row(res))
+		{
+			//printf("ID: %s,Position: %s, Image: %s\n", row[0], row[1], row[2]);
+		}
+		*/
+	}
+	else
+	{
+		std::cout << "Query failed:" << mysql_error(conn) << std::endl;
+	}
 }
 void DataBaseConnection::Close()
 {
