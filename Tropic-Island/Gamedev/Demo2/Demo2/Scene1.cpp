@@ -1418,7 +1418,7 @@ void Scene1::Rotate()
 	{
 		if (startrotate[i])
 		{
-			if (rotate[i]<360.0f)
+			if (rotate[i]<1800.0f)
 				rotate[i] += 5.0f;
 			else
 			{
