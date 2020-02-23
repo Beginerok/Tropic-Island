@@ -96,4 +96,5 @@ public:
 	int **drumanimation;
 	int *speedchangeanimation;
 	Coor* coor;
+	//float xxx;
 };

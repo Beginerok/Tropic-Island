@@ -43,6 +43,7 @@ Scene1::Scene1(void)
 		speedchangeanimation[i] = 0;
 	}
 	coor = new Coor[3];
+	//xxx = 0;
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -745,6 +746,7 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	if (!buttons[2] && pressbutton == 1 && *upbutton==0) 
 			StartRotate(upbutton);
 	Rotate();
+	//glRotatef(0.05, 0, 1, 0);
 	int k = -1;
 	for (int i = 0; i<countdrums; i++)
 	{
@@ -795,7 +797,6 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 		}
 		glPopMatrix();
 	}
-	//glPopMatrix();
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
@@ -1419,7 +1420,7 @@ void Scene1::Rotate()
 		if (startrotate[i])
 		{
 			if (rotate[i]<1800.0f)
-				rotate[i] += 5.0f;
+				rotate[i] += 1.0f;
 			else
 			{
 				startrotate[i] = false;
