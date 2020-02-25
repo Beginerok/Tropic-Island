@@ -96,9 +96,7 @@ private:
 protected:
 	ALCdevice* dev;
 	ALCcontext* ctx;
-	//unsigned int* buffer, * source;
 	int state;
-	//int song_;
 	unsigned char* buf;
 	unsigned int size_, freq;
 	int format;

@@ -5,7 +5,7 @@
 #pragma comment(lib,"glu32.lib")
 #include <atlstr.h>
 #include <windowsx.h>
-#include<string>
+#include <string>
 #include "DataBaseConnection.h"
 #include <iostream>
 class Window

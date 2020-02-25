@@ -6,8 +6,6 @@
 
 Sound::Sound()
 {
-	//buffer = new unsigned int[song_];
-	//source = new unsigned int[song_];
 	CountSounds = 5;
 	sounds = new Sounds[CountSounds];
 	sounds->Name = new std::string[CountSounds];
@@ -126,8 +124,6 @@ Sound::~Sound()
 {
 	alDeleteSources(CountSounds, sounds->source);
 	alDeleteBuffers(CountSounds, sounds->buffer);
-	//delete source;
-	//delete buffer;
 	delete sounds;
 	delete buf;
 	alcMakeContextCurrent(0);
