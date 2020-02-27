@@ -47,7 +47,11 @@ public class EditServlet extends HttpServlet {
             String nickname = request.getParameter("nickname");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-            Users users = new Users(id, nickname, password,email,true);
+            String reg_date = request.getParameter("reg_date");
+            String ip = request.getParameter("ip");
+            String user_agent = request.getParameter("user_agent");
+            String phone = request.getParameter("phone");
+            Users users = new Users(id, nickname, password,email,true,reg_date,ip,user_agent,phone);
             UsersDB.update(users);
             response.sendRedirect(request.getContextPath() + "/index");
         }

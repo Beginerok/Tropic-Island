@@ -22,6 +22,7 @@
 <label class="labeler">Email</label><br>
 -->
 <input class="inputer" id="email" name="email" value="" placeholder="E-mail *" required/><br><br>
+<input class="inputer" id="phone" name="phone" value="" placeholder="Phone 8*" required/><br><br>
 <input class="button" type="submit" value="Create"/>
 <p id="message" >Enter your information</p>
 </form>

@@ -34,7 +34,11 @@ public class UsersDB {
                     String nickname = resultSet.getString(2);
                     String email = resultSet.getString(3);
                     String pass = resultSet.getString(4);
-                    Users user = new  Users(id, nickname, email,pass,false);
+                    String reg_date = resultSet.getString(5);
+                    String ip = resultSet.getString(6);
+                    String user_agent = resultSet.getString(7);
+                    String phone = resultSet.getString(8);
+                    Users user = new  Users(id, nickname, email,pass,false,reg_date,ip,user_agent,phone);
                     users.add(user);
                 }
             }
@@ -61,7 +65,11 @@ public class UsersDB {
                         String nickname = resultSet.getString(2);
                         String email = resultSet.getString(3);
                         String pass = resultSet.getString(4);
-                        user = new Users(userId, nickname, email,pass,false);
+                        String reg_date = resultSet.getString(5);
+                        String ip = resultSet.getString(6);
+                        String user_agent = resultSet.getString(7);
+                        String phone = resultSet.getString(8);
+                        user = new Users(userId, nickname, email,pass,false,reg_date,ip,user_agent,phone);
                     }
                 }
             }
@@ -77,11 +85,16 @@ public class UsersDB {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection conn = DriverManager.getConnection(url, username, password)){
                   
-                String sql = "INSERT INTO users (nickname,email,password) Values (?, ?,?)";
+                String sql = "INSERT INTO users (nickname,email,password,reg_date,ip,user_agent,phone) Values (?, ?, ?, ?,?,?,?)";
                 try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
                     preparedStatement.setString(1, users.getnickname());
                     preparedStatement.setString(2, users.getEmail());
                     preparedStatement.setString(3, users.getPassword());
+                    
+                    preparedStatement.setString(4, users.getReg_date());
+                    preparedStatement.setString(5, users.getIp());
+                    preparedStatement.setString(6, users.getUser_agent());
+                    preparedStatement.setString(7, users.getPhone());
                     return  preparedStatement.executeUpdate();
                 }
             }
@@ -98,11 +111,12 @@ public class UsersDB {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection conn = DriverManager.getConnection(url, username, password)){
                   
-                String sql = "UPDATE products SET nickname = ?,email = ?, password = ? WHERE id = ?";
+                String sql = "UPDATE users SET nickname = ?,email = ?, password = ?, phone = ? WHERE id = ?";
                 try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
                     preparedStatement.setString(1, users.getnickname());
                     preparedStatement.setString(2, users.getEmail());
                     preparedStatement.setString(3, users.getPassword());
+                    preparedStatement.setString(3, users.getPhone());
                     preparedStatement.setInt(4, users.getId());
                       
                     return  preparedStatement.executeUpdate();
