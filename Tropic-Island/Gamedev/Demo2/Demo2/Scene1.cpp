@@ -385,13 +385,13 @@ void Scene1::EnableTextureNumbers(int position,int numberword)
 {
 	glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex2f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b + coor[numberword].height);
+		glVertex3f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b + coor[numberword].height, 1.0f);
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex2f(coor[numberword].a[position], coor[numberword].b + coor[numberword].height);
+		glVertex3f(coor[numberword].a[position], coor[numberword].b + coor[numberword].height, 1.0f);
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex2f(coor[numberword].a[position], coor[numberword].b);
+		glVertex3f(coor[numberword].a[position], coor[numberword].b, 1.0f);
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex2f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b);
+		glVertex3f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b,1.0f);
 	glEnd();
 }
 void Scene1::EnableTexture(float*texcoor, float*vercoor)
@@ -735,14 +735,15 @@ int Scene1::LoadDrum(int iter)
 	else
 		return 1;
 }
-void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::string> drum,
-	bool*buttons,int pressbutton,int *upbutton)
+void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::string> drum,bool*buttons,int pressbutton,int *upbutton)
 {
+	/*
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	glAlphaFunc(GL_GREATER, 0.0f); 
+	*/
 	if (!buttons[2] && pressbutton == 1 && *upbutton==0) 
 			StartRotate(upbutton);
 	Rotate();
@@ -797,8 +798,10 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 		}
 		glPopMatrix();
 	}
+	/*
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
+	*/
 }
 void Scene1::LoadButtons()
 {
@@ -958,9 +961,9 @@ void Scene1::ShowButtons()
 {
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-	glAlphaFunc(GL_GREATER, 0.0f); 
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glBlendFunc(GL_SRC_ALPHA,GL_ONE);
+	//glAlphaFunc(GL_GREATER, 0.0f); 
 	for (int i = 0; i < vectorbuttons.size()/2; i++)
 	{
 		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectorbuttons[i])]);
@@ -976,7 +979,7 @@ void Scene1::EnableTextureButtons(int i)
 		glBegin(GL_POLYGON);//HELP
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(-.45f, -.9f, 0.0f);
+		glVertex3f(-.45f, -.9f, 1.0f);
 
 		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(-.45f, -1.f, 1.0f);
@@ -985,7 +988,7 @@ void Scene1::EnableTextureButtons(int i)
 		glVertex3f(-.65f, -1.f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-.65f, -.9f, 0.0f);
+		glVertex3f(-.65f, -.9f, 1.0f);
 
 		glEnd();//HELP
 	}
@@ -994,7 +997,7 @@ void Scene1::EnableTextureButtons(int i)
 		glBegin(GL_POLYGON);//TAKE
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(-.15f, -.9f, 0.0f);
+		glVertex3f(-.15f, -.9f, 1.0f);
 
 		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(-.15f, -1.f, 1.0f);
@@ -1003,7 +1006,7 @@ void Scene1::EnableTextureButtons(int i)
 		glVertex3f(-.35f, -1.f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-.35f, -.9f, 0.0f);
+		glVertex3f(-.35f, -.9f, 1.0f);
 
 		glEnd();//TAKE
 	}
@@ -1012,7 +1015,7 @@ void Scene1::EnableTextureButtons(int i)
 		glBegin(GL_POLYGON);//PLAY
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(.15f, -.9f, 0.0f);
+		glVertex3f(.15f, -.9f, 1.0f);
 
 		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(.15f, -1.f, 1.0f);
@@ -1021,7 +1024,7 @@ void Scene1::EnableTextureButtons(int i)
 		glVertex3f(-.05f, -1.f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-.05f, -.9f, 0.0f);
+		glVertex3f(-.05f, -.9f, 1.0f);
 
 		glEnd();//PLAY
 	}
@@ -1030,7 +1033,7 @@ void Scene1::EnableTextureButtons(int i)
 		glBegin(GL_POLYGON);//FLIP
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(.45f, -.9f, 0.0f);
+		glVertex3f(.45f, -.9f, 1.0f);
 
 		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(.45f, -1.f, 1.0f);
@@ -1039,7 +1042,7 @@ void Scene1::EnableTextureButtons(int i)
 		glVertex3f(.25f, -1.f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(.25f, -.9f, 0.0f);
+		glVertex3f(.25f, -.9f, 1.0f);
 
 		glEnd();//FLIP
 	}
@@ -1048,7 +1051,7 @@ void Scene1::EnableTextureButtons(int i)
 		glBegin(GL_POLYGON);//EXIT
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(.75f, -.9f, 0.0f);
+		glVertex3f(.75f, -.9f, 1.0f);
 
 		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(.75f, -1.f, 1.0f);
@@ -1057,7 +1060,7 @@ void Scene1::EnableTextureButtons(int i)
 		glVertex3f(.55f, -1.f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(.55f, -.9f, 0.0f);
+		glVertex3f(.55f, -.9f, 1.0f);
 
 		glEnd();//EXIT
 	}
@@ -1071,10 +1074,10 @@ void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float 
 	glVertex3f(xleft, yup, 0.0f);
 
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(xleft, ydown, 1.0f);
+	glVertex3f(xleft, ydown, .6f);
 
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(xright, ydown, 1.0f);
+	glVertex3f(xright, ydown, .6f);
 
 	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(xright, yup, 0.0f);
@@ -1087,16 +1090,16 @@ void Scene1::EnablePolygonFrontMiddle(float xleft, float xright, float ydown, fl
 	glBegin(GL_POLYGON);
 
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(xleft, yup, 1.0f);
+	glVertex3f(xleft, yup, .6f);
 
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(xleft, ydown, 1.0f);
+	glVertex3f(xleft, ydown, .6f);
 
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(xright, ydown, 1.0f);
+	glVertex3f(xright, ydown, .6f);
 
 	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(xright, yup, 1.0f);
+	glVertex3f(xright, yup, .6f);
 
 	glEnd();
 }
@@ -1105,7 +1108,7 @@ void Scene1::EnablePolygonFrontDown(float xleft, float xright, float ydown, floa
 	glBegin(GL_POLYGON);
 
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(xleft, yup, 1.0f);
+	glVertex3f(xleft, yup, .6f);
 
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(xleft, ydown, 0.0f);
@@ -1114,7 +1117,7 @@ void Scene1::EnablePolygonFrontDown(float xleft, float xright, float ydown, floa
 	glVertex3f(xright, ydown, 0.0f);
 
 	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(xright, yup, 1.0f);
+	glVertex3f(xright, yup, .6f);
 
 	glEnd();
 }
@@ -1123,7 +1126,7 @@ void Scene1::EnablePolygonBackUp(float xleft, float xright, float ydown, float y
 	glBegin(GL_POLYGON);
 
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(xleft, ydown, -1.0f);
+	glVertex3f(xleft, ydown, -.6f);
 
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(xleft, yup, 0.0f);
@@ -1132,7 +1135,7 @@ void Scene1::EnablePolygonBackUp(float xleft, float xright, float ydown, float y
 	glVertex3f(xright, yup, 0.0f);
 
 	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(xright, ydown, -1.0f);
+	glVertex3f(xright, ydown, -.6f);
 
 	glEnd();
 }
@@ -1141,16 +1144,16 @@ void Scene1::EnablePolygonBackMiddle(float xleft, float xright, float ydown, flo
 	glBegin(GL_POLYGON);
 
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(xleft, ydown, -1.0f);
+	glVertex3f(xleft, ydown, -.6f);
 
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(xleft, yup, -1.0f);
+	glVertex3f(xleft, yup, -.6f);
 
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(xright, yup, -1.0f);
+	glVertex3f(xright, yup, -.6f);
 
 	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(xright, ydown, -1.0f);
+	glVertex3f(xright, ydown, -.6f);
 
 	glEnd();
 }
@@ -1162,10 +1165,10 @@ void Scene1::EnablePolygonBackDown(float xleft, float xright, float ydown, float
 	glVertex3f(xleft, ydown, 0.0f);
 
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(xleft, yup, -1.0f);
+	glVertex3f(xleft, yup, -.6f);
 
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(xright, yup, -1.0f);
+	glVertex3f(xright, yup, -.6f);
 
 	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(xright, ydown, 0.0f);
@@ -1177,44 +1180,44 @@ void Scene1::EnableTexture(int n, int m)
     if(n == 0)
     {
         if(m == 0){
-        xl = -0.8f;
+        xl = -0.78f;//08
         xr = -0.48f;
         yd = 0.3f;
-        yu = 0.9;
+        yu = 0.68;//09
         EnablePolygonFrontUp(xl, xr, yd, yu);
         }
 		if (m == 1) {
-			xl = -0.8f;
+			xl = -0.78f;
 			xr = -0.48f;
 			yd = -0.3f;
 			yu = 0.3;
 			EnablePolygonFrontMiddle(xl, xr, yd, yu);
 		}
 		if (m == 2) {
-			xl = -0.8f;
+			xl = -0.78f;
 			xr = -0.48f;
-			yd = -0.9f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonFrontDown(xl, xr, yd, yu);
 		}
 		if (m == 3) {
-			xl = -0.8f;
+			xl = -0.78f;
 			xr = -0.48f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonBackUp(xl, xr, yd, yu);
 		}
 		if (m == 4) {
-			xl = -0.8f;
+			xl = -0.78f;
 			xr = -0.48f;
 			yd = -0.3f;
 			yu = 0.3;
 			EnablePolygonBackMiddle(xl, xr, yd, yu);
 		}
 		if (m == 5) {
-			xl = -0.8f;
+			xl = -0.78f;
 			xr = -0.48f;
-			yd = -0.9f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonBackDown(xl, xr, yd, yu);
 		}
@@ -1228,7 +1231,7 @@ void Scene1::EnableTexture(int n, int m)
 			xl = -0.48f;
 			xr = -0.16f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonFrontUp(xl, xr, yd, yu);
 		}
         if(m == 1){
@@ -1241,7 +1244,7 @@ void Scene1::EnableTexture(int n, int m)
 		if (m == 2) {
 			xl = -0.48f;
 			xr = -0.16f;
-			yd = -0.9f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonFrontDown(xl, xr, yd, yu);
 		}
@@ -1249,7 +1252,7 @@ void Scene1::EnableTexture(int n, int m)
 			xl = -0.48f;
 			xr = -0.16f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonBackUp(xl, xr, yd, yu);
 		}
 		if (m == 4) {
@@ -1262,7 +1265,7 @@ void Scene1::EnableTexture(int n, int m)
 		if (m == 5) {
 			xl = -0.48f;
 			xr = -0.16f;
-			yd = -0.9f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonBackDown(xl, xr, yd, yu);
 		}
@@ -1276,7 +1279,7 @@ void Scene1::EnableTexture(int n, int m)
 			xl = -0.16f;
 			xr = 0.16f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonFrontUp(xl, xr, yd, yu);
 		}
 		if (m == 1) {
@@ -1289,7 +1292,7 @@ void Scene1::EnableTexture(int n, int m)
         if(m == 2){
         xl = -0.16f;
         xr = 0.16f;
-        yd = -0.9f;
+        yd = -0.68f;
         yu = -0.3;
         EnablePolygonFrontDown(xl, xr, yd, yu);
         }
@@ -1297,7 +1300,7 @@ void Scene1::EnableTexture(int n, int m)
 			xl = -0.16f;
 			xr = 0.16f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonBackUp(xl, xr, yd, yu);
 		}
 		if (m == 4) {
@@ -1310,7 +1313,7 @@ void Scene1::EnableTexture(int n, int m)
 		if (m == 5) {
 			xl = -0.16f;
 			xr = 0.16f;
-			yd = -0.9f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonBackDown(xl, xr, yd, yu);
 		}
@@ -1324,7 +1327,7 @@ void Scene1::EnableTexture(int n, int m)
 			xl = 0.16f;
 			xr = 0.48f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonFrontUp(xl, xr, yd, yu);
 		}
 		if (m == 1) {
@@ -1337,7 +1340,7 @@ void Scene1::EnableTexture(int n, int m)
 		if (m == 2) {
 			xl = 0.16f;
 			xr = 0.48f;
-			yd = -0.9f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonFrontDown(xl, xr, yd, yu);
 		}
@@ -1345,7 +1348,7 @@ void Scene1::EnableTexture(int n, int m)
         xl = 0.16f;
         xr = 0.48f;
         yd = 0.3f;
-        yu = 0.9;
+        yu = 0.68;
         EnablePolygonBackUp(xl, xr, yd, yu);
         }
 		if (m == 4) {
@@ -1358,7 +1361,7 @@ void Scene1::EnableTexture(int n, int m)
 		if (m == 5) {
 			xl = 0.16f;
 			xr = 0.48f;
-			yd = -0.9f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonBackDown(xl, xr, yd, yu);
 		}
@@ -1370,43 +1373,43 @@ void Scene1::EnableTexture(int n, int m)
     {
 		if (m == 0) {
 			xl = 0.48f;
-			xr = 0.8f;
+			xr = 0.78f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonFrontUp(xl, xr, yd, yu);
 		}
 		if (m == 1) {
 			xl = 0.48f;
-			xr = 0.8f;
+			xr = 0.78f;
 			yd = -0.3f;
 			yu = 0.3;
 			EnablePolygonFrontMiddle(xl, xr, yd, yu);
 		}
 		if (m == 2) {
 			xl = 0.48f;
-			xr = 0.8f;
-			yd = -0.9f;
+			xr = 0.78f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonFrontDown(xl, xr, yd, yu);
 		}
 		if (m == 3) {
 			xl = 0.48f;
-			xr = 0.8f;
+			xr = 0.78f;
 			yd = 0.3f;
-			yu = 0.9;
+			yu = 0.68;
 			EnablePolygonBackUp(xl, xr, yd, yu);
 		}
         if(m == 4){
         xl = 0.48f;
-        xr = 0.8f;
+        xr = 0.78f;
         yd = -0.3f;
         yu = 0.3;
         EnablePolygonBackMiddle(xl, xr, yd, yu);
         }
 		if (m == 5) {
 			xl = 0.48f;
-			xr = 0.8f;
-			yd = -0.9f;
+			xr = 0.78f;
+			yd = -0.68f;
 			yu = -0.3;
 			EnablePolygonBackDown(xl, xr, yd, yu);
 		}
@@ -1752,6 +1755,55 @@ void Scene1::LoadAnimatedAuto()
 	anim3.push_back("content//drum//animated auto 3//6.png");
 	anim3.push_back("content//drum//animated auto 3//7.png");
 	animation3 = new Animation(anim3);
+}
+void Scene1::LoadRam()
+{
+	vectorram.push_back("ram");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\ram.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "ram";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+}
+void Scene1::ShowRam()
+{
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_BLEND);
+	/*
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	glAlphaFunc(GL_GREATER, 0.0f);
+	*/
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectorram[0])]);
+
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.0f, 1.0f, 0.9f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(1.0f, -1.0f, 0.9f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-1.0f, -1.0f, 0.9f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.0f, 1.0f, 0.9f);
+
+	glEnd();
+
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
 }
 Scene1::~Scene1()
 {

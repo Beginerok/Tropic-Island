@@ -58,7 +58,9 @@ public:
 	void LoadAnimatedAuto();
 
 	void DrawWord(int word_,int pos);
-	void EnableTextureNumbers(int position, int numberword);
+	void EnableTextureNumbers(int position, int numberword); 
+	void LoadRam();
+	void ShowRam();
 	~Scene1();
 	int err;
 #ifndef _WIN32
@@ -75,7 +77,7 @@ public:
 	// Тип хранения данных
 	unsigned int type;
 	unsigned char* copyData;
-	static const int CountTexture = 57;//40//53
+	static const int CountTexture = 58;// 57;//40//53
 	Image* image;
 	int CountIndexTexture;
 	int AnimateBar;
@@ -96,4 +98,5 @@ public:
 	int **drumanimation;
 	int *speedchangeanimation;
 	Coor* coor;
+	std::vector<std::string>vectorram;
 };

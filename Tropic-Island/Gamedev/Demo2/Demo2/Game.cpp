@@ -59,6 +59,8 @@ void Game::draw_screen()
 			
 			Scene1_->ShowButtons();
 			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
+
+			Scene1_->ShowRam();
 		}
 		else
 			Scene1_->ShowWelcome(loading);
@@ -115,6 +117,7 @@ int Game::Execute()
 	Logic_->SetWin(0);
 	Sound_ = new Sound();
 	Sound_->Init();
+	Scene1_->LoadRam();
 	draw_screen();
 #if WINAPI_==1
 	WindowsWinApi_->keyboard__->KillWindow();
