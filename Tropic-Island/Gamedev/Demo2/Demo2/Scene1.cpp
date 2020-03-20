@@ -517,6 +517,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto5";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
+	/*
 	if (iter == 5)
 	{
 		vectordrum.push_back("auto6");//6
@@ -619,6 +620,7 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto11";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
+	
 	if (iter == 11)
 	{
 		vectordrum.push_back("auto12");//12
@@ -687,10 +689,11 @@ int Scene1::LoadDrum(int iter)
 		image->Name[CountIndexTexture - 1] = "auto15";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
+	*/
 	if (iter == 15)
 	{
-		vectordrum.push_back("moto");//16
-		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\moto.png"));
+		vectordrum.push_back("bonus");//16
+		LoadImage(reinterpret_cast<const ILstring>("content\\drum\\bonus.png"));
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -701,7 +704,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "moto";
+		image->Name[CountIndexTexture - 1] = "bonus";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 16)
@@ -1772,6 +1775,21 @@ void Scene1::LoadRam()
 
 	image->Name[CountIndexTexture - 1] = "ram";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("table_rules");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\table_rules.jpg"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "table_rules";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 }
 void Scene1::ShowRam()
 {
@@ -1784,7 +1802,7 @@ void Scene1::ShowRam()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	glAlphaFunc(GL_GREATER, 0.0f);
 	*/
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectorram[0])]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("ram")]);
 
 	glBegin(GL_POLYGON);
 
@@ -1804,6 +1822,28 @@ void Scene1::ShowRam()
 
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
+}
+void Scene1::ShowHelp()
+{
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("table_rules")]);
+
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.8f, 0.8f, 0.95f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.8f, -0.8f, 0.95f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.8f, -0.8f, 0.95f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.8f, 0.8f, 0.95f);
+
+	glEnd();
+
 }
 Scene1::~Scene1()
 {

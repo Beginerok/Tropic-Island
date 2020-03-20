@@ -35,7 +35,7 @@ CREATE TABLE `drum` (
 
 LOCK TABLES `drum` WRITE;
 /*!40000 ALTER TABLE `drum` DISABLE KEYS */;
-INSERT INTO `drum` VALUES (0,0,'wild'),(0,1,'wild'),(0,2,'wild'),(0,3,'wild'),(0,4,'wild'),(0,5,'wild'),(0,6,'moto'),(0,7,'moto'),(0,8,'moto'),(0,9,'moto'),(0,10,'moto'),(0,11,'moto'),(0,12,'auto1'),(0,13,'auto1'),(0,14,'auto1'),(0,15,'auto1'),(0,16,'auto1'),(0,17,'auto1'),(0,18,'auto2'),(0,19,'auto2'),(0,20,'auto2'),(0,21,'auto2'),(0,22,'auto2'),(0,23,'auto2'),(0,24,'auto11'),(0,25,'auto11'),(0,26,'auto11'),(0,27,'auto11'),(0,28,'auto11'),(0,29,'auto11');
+INSERT INTO `drum` VALUES (0,0,'wild'),(0,1,'wild'),(0,2,'wild'),(0,3,'wild'),(0,4,'wild'),(0,5,'wild'),(0,6,'bonus'),(0,7,'bonus'),(0,8,'bonus'),(0,9,'bonus'),(0,10,'bonus'),(0,11,'bonus'),(0,12,'auto1'),(0,13,'auto1'),(0,14,'auto1'),(0,15,'auto1'),(0,16,'auto1'),(0,17,'auto1'),(0,18,'auto2'),(0,19,'auto2'),(0,20,'auto2'),(0,21,'auto2'),(0,22,'auto2'),(0,23,'auto2'),(0,24,'auto3'),(0,25,'auto3'),(0,26,'auto3'),(0,27,'auto3'),(0,28,'auto3'),(0,29,'auto3');
 /*!40000 ALTER TABLE `drum` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

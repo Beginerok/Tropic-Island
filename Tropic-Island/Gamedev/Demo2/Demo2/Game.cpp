@@ -61,6 +61,10 @@ void Game::draw_screen()
 			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
 
 			Scene1_->ShowRam();
+			if (WindowsWinApi_->GetF()[0])
+			{
+				Scene1_->ShowHelp();
+			}
 		}
 		else
 			Scene1_->ShowWelcome(loading);

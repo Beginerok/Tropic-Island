@@ -61,6 +61,7 @@ public:
 	void EnableTextureNumbers(int position, int numberword); 
 	void LoadRam();
 	void ShowRam();
+	void ShowHelp();
 	~Scene1();
 	int err;
 #ifndef _WIN32
