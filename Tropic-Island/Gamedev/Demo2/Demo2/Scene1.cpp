@@ -1790,6 +1790,171 @@ void Scene1::LoadRam()
 
 	image->Name[CountIndexTexture - 1] = "table_rules";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("auto11");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\auto11.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "auto11";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("auto22");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\auto22.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "auto22";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("auto333");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\auto33.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "auto33";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("auto44");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\auto44.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "auto44";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("auto55");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\auto55.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "auto55";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("wildwild");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\wildwild.jpg"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "wildwild";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("bonusbonus");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\bonusbonus.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "bonusbonus";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("tire");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\tire.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "tire";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("rules");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\rules.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "rules";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("bonus2");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\bonus2.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "bonus2";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+
+	vectorram.push_back("wild2");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\wild2.png"));
+	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
+	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->TextureCoordinats[CountIndexTexture - 1][3] = .0f;
+
+	image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+
+	image->Name[CountIndexTexture - 1] = "wild2";
+	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 }
 void Scene1::ShowRam()
 {
@@ -1825,11 +1990,10 @@ void Scene1::ShowRam()
 }
 void Scene1::ShowHelp()
 {
-
+	
 	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("table_rules")]);
 
 	glBegin(GL_POLYGON);
-
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.8f, 0.8f, 0.95f);
 
@@ -1841,9 +2005,398 @@ void Scene1::ShowHelp()
 
 	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.8f, 0.8f, 0.95f);
+	glEnd();
+	
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("rules")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.2f, 0.75f, 0.95f);
 
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.2f, 0.55f, 0.95f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.2f, 0.55f, 0.95f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.2f, 0.75f, 0.95f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("auto11")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.55f, 0.45f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.55f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.3f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.3f, 0.45f, 1.0f);
+	glEnd();
+	
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.25f, 0.37f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.25f, 0.33f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.2f, 0.33f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.2f, 0.37f, 1.0f);
 	glEnd();
 
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("5")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.05f, 0.45f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.05f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.15f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.15f, 0.45f, 1.0f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("auto22")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.55f, 0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.55f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.3f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.3f, 0.225f, 1.0f);
+	glEnd();
+	
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.25f, 0.125f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.25f, 0.085f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.2f, 0.085f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.2f, 0.125f, 1.0f);
+	glEnd();
+
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("1")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.1f, 0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.1f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.15f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.15f, 0.225f, 1.0f);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("0")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.05f, 0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.05f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.1f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.1f, 0.225f, 1.0f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("auto33")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.55f, 0.0f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.55f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.3f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.3f, 0.0f, 1.0f);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.25f, -0.12f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.25f, -0.08f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.2f, -0.08f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.2f, -0.12f, 1.0f);
+	glEnd();
+
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("1")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.1f, 0.0f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.1f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.15f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.15f, 0.0f, 1.0f);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("5")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.05f, 0.0f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.05f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.1f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.1f, 0.0f, 1.0f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("auto44")]);
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.55f, -0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.55f, -0.425f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.3f, -0.425f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.3f, -0.225f, 1.0f);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.25f, -0.345f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.25f, -0.305f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.2f, -0.305f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.2f, -0.345f, 1.0f);
+	glEnd();
+
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("2")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.1f, -0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.1f, -0.425f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.15f, -0.425f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.15f, -0.225f, 1.0f);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("0")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.05f, -0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(-0.05f, -0.425f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.1f, -0.425f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.1f, -0.225f, 1.0f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+	
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("auto55")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.25f, 0.45f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.25f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.0f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.0f, 0.45f, 1.0f);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.3f, 0.37f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.3f, 0.33f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.35f, 0.33f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.35f, 0.37f, 1.0f);
+	glEnd();
+
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("2")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.45f, 0.45f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.45f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.4f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.4f, 0.45f, 1.0f);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("5")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.5f, 0.45f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.5f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.45f, 0.25f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.45f, 0.45f, 1.0f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+	
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("wildwild")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.25f, 0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.25f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.0f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.0f, 0.225f, 1.0f);
+	glEnd();
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("wild2")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.6f, 0.225f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.6f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.2f, 0.025f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.2f, 0.225f, 1.0f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
+
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("bonusbonus")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.25f, 0.0f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.25f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.0f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 1.0f);
+	glEnd();
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("bonus2")]);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.6f, 0.0f, 1.0f);
+
+	glTexCoord2f(1.f, 0.0f);
+	glVertex3f(0.6f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.2f, -0.2f, 1.0f);
+
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.2f, 0.0f, 1.0f);
+	glEnd();
+	glDisable(GL_ALPHA_TEST);
+	glDisable(GL_BLEND);
 }
 Scene1::~Scene1()
 {
