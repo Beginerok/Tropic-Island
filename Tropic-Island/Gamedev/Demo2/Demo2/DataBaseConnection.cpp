@@ -19,7 +19,7 @@ void DataBaseConnection::Connect()
 		//exit(1); //Если используется оконное приложение
 	}
 	// Подключаемся к серверу
-	if (!mysql_real_connect(conn, "185.26.122.49", "host6491_root", "password", "host6491_test", NULL, NULL, 0))
+	if (!mysql_real_connect(conn, "185.26.122.49", "host6491_root", "R0oT", "host6491_test", NULL, NULL, 0))
 	{
 		// Если нет возможности установить соединение с сервером 
 		// базы данных выводим сообщение об ошибке
