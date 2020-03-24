@@ -5,7 +5,7 @@
 #include <list>
 
 int main()
-{	
+{
 	// quick sort
 	std::list<int> list;
 	const int N = 20;
@@ -24,13 +24,15 @@ int main()
 	for (std::list<int>::iterator it = list.begin(); it != list.end(); it++) {
 		std::cout << (*it) << " ";
 	}
+	//quick sort end
 	std::cout << std::endl;
-	list.sort(std::greater<int>()); 
+	//sort greater
+	list.sort(std::greater<int>());
 	for (std::list<int>::iterator it = list.begin(); it != list.end(); it++) {
 		std::cout << (*it) << " ";
 	}
 	std::cout << std::endl;
-	//quick sort end
+	//sort greater end
 
 	std::cin.ignore();
 }
