@@ -30,7 +30,7 @@ int main()
 	std::cout << std::endl;
 	for (int j = 0; j < N; j++)
 	{
-		for (int i = N / 2 - j/2; i > -1; i--)
+		for (int i = N / 2 -1 - j/2; i > -1; i--)
 		{
 			if (2 * i + 2 <= N - 1-j)
 			{
