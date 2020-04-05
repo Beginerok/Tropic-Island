@@ -356,15 +356,15 @@ void Scene1::DrawWord(int word_,int pos)
 	coor[1].a.clear();
 	coor[2].a.clear();
 	coor[0].a.push_back(-0.75f);
-	coor[0].b = 0.9;
+	coor[0].b = 0.8;
 	coor[0].width = 0.03f;
 	coor[0].height = 0.1; 
 	coor[1].a.push_back(-0.05f);
-	coor[1].b = 0.9;
+	coor[1].b = 0.8;
 	coor[1].width = 0.03f;
 	coor[1].height = 0.1;
 	coor[2].a.push_back(0.65f);
-	coor[2].b = 0.9;
+	coor[2].b = 0.8;
 	coor[2].width = 0.03f;
 	coor[2].height = 0.1;
 
@@ -1675,16 +1675,16 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 		glBegin(GL_POLYGON);//credits
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(-.8f, 1.f, 1.0f);
-
-		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(-.8f, .9f, 1.0f);
 
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(-.8f, .8f, 1.0f);
+
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(-1.f, .9f, 1.0f);
+		glVertex3f(-1.f, .8f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-1.f, 1.f, 1.0f);
+		glVertex3f(-1.f, .9f, 1.0f);
 
 		glEnd();//credits
 	}
@@ -1693,16 +1693,16 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 		glBegin(GL_POLYGON);//win
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(-.1f, 1.f, 1.0f);
-
-		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(-.1f, .9f, 1.0f);
 
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(-.1f, .8f, 1.0f);
+
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(-.3f, .9f, 1.0f);
+		glVertex3f(-.3f, .8f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-.3f, 1.f, 1.0f);
+		glVertex3f(-.3f, .9f, 1.0f);
 
 		glEnd();//win
 	}
@@ -1711,16 +1711,16 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 		glBegin(GL_POLYGON);//totalbet
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(.6f, 1.f, 1.0f);
-
-		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(.6f, .9f, 1.0f);
 
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(.6f, .8f, 1.0f);
+
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(.4f, .9f, 1.0f);
+		glVertex3f(.4f, .8f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(.4f, 1.f, 1.0f);
+		glVertex3f(.4f, .9f, 1.0f);
 
 		glEnd();//total bet
 	}
