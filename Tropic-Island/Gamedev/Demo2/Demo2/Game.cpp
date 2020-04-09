@@ -45,8 +45,18 @@ void Game::draw_screen()
 		if (!loading) 
 		{
 			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0)
+			{
 				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet());
-			Scene1_->ShowDrum(countdrums,counttextureondrums, Logic_->GetDrum(),
+			}
+			if (WindowsWinApi_->GetF()[1])
+			{
+				Logic_->firstline = false;
+				Logic_->secondline = false;
+				Logic_->thirdline = false;
+				Logic_->SetCredits(Logic_->GetCredits()+Logic_->GetWin());
+				Logic_->SetWin(0.0f);
+			}
+			Scene1_->ShowDrum(countdrums, counttextureondrums, Logic_->GetDrum(),
 #if WINAPI_==0
 				WindowsSDLApi_->GetF(),
 				WindowsSDLApi_->pressbutton
@@ -61,7 +71,8 @@ void Game::draw_screen()
 			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
 
 			Scene1_->ShowBorder();
-			Scene1_->ShowLine(true,true,true);
+			Scene1_->ShowLine(Logic_->firstline,Logic_->secondline,Logic_->thirdline);
+			Logic_->CheckWin();
 			if (WindowsWinApi_->GetF()[0])
 			{
 				Scene1_->ShowHelp();
