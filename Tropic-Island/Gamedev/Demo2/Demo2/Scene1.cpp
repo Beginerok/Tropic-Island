@@ -1759,10 +1759,10 @@ void Scene1::LoadAnimatedAuto()
 	anim3.push_back("content//drum//animated auto 3//7.png");
 	animation3 = new Animation(anim3);
 }
-void Scene1::LoadRam()
+void Scene1::LoadBorder()
 {
-	vectorram.push_back("ram");//1
-	LoadImage(reinterpret_cast<const ILstring>("content\\ram.png"));
+	vectorram.push_back("border");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\border.png"));
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1773,7 +1773,7 @@ void Scene1::LoadRam()
 	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-	image->Name[CountIndexTexture - 1] = "ram";
+	image->Name[CountIndexTexture - 1] = "border";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorram.push_back("table_rules");//1
@@ -1896,8 +1896,8 @@ void Scene1::LoadRam()
 	image->Name[CountIndexTexture - 1] = "bonusbonus";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	vectorram.push_back("tire");//1
-	LoadImage(reinterpret_cast<const ILstring>("content\\tire.png"));
+	vectorram.push_back("cross");//1
+	LoadImage(reinterpret_cast<const ILstring>("content\\cross.png"));
 	image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 	image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 	image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1908,7 +1908,7 @@ void Scene1::LoadRam()
 	image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 	image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-	image->Name[CountIndexTexture - 1] = "tire";
+	image->Name[CountIndexTexture - 1] = "cross";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	vectorram.push_back("rules");//1
@@ -1956,7 +1956,7 @@ void Scene1::LoadRam()
 	image->Name[CountIndexTexture - 1] = "wild2";
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 }
-void Scene1::ShowRam()
+void Scene1::ShowBorder()
 {
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
@@ -1967,7 +1967,7 @@ void Scene1::ShowRam()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	glAlphaFunc(GL_GREATER, 0.0f);
 	*/
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("ram")]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("border")]);
 
 	glBegin(GL_POLYGON);
 
@@ -2041,7 +2041,7 @@ void Scene1::ShowHelp()
 	glVertex3f(-0.3f, 0.45f, 1.0f);
 	glEnd();
 	
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.37f, 1.0f);
@@ -2090,7 +2090,7 @@ void Scene1::ShowHelp()
 	glVertex3f(-0.3f, 0.225f, 1.0f);
 	glEnd();
 	
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.125f, 1.0f);
@@ -2154,7 +2154,7 @@ void Scene1::ShowHelp()
 	glVertex3f(-0.3f, 0.0f, 1.0f);
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, -0.12f, 1.0f);
@@ -2219,7 +2219,7 @@ void Scene1::ShowHelp()
 	glVertex3f(-0.3f, -0.225f, 1.0f);
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, -0.345f, 1.0f);
@@ -2283,7 +2283,7 @@ void Scene1::ShowHelp()
 	glVertex3f(0.0f, 0.45f, 1.0f);
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("tire")]);
+	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.3f, 0.37f, 1.0f);
@@ -2397,6 +2397,438 @@ void Scene1::ShowHelp()
 	glEnd();
 	glDisable(GL_ALPHA_TEST);
 	glDisable(GL_BLEND);
+}
+void Scene1::ShowLine(bool firstline, bool secondline, bool thirdline)
+{
+	if (firstline)
+	{
+		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
+		glBegin(GL_POLYGON);//up both line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, 0.32f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, 0.3f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, 0.3f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, 0.32f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//up line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, 0.67f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, 0.67f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//gorizontal left-middle line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.78f, 0.49f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.78f, 0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.85f, 0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.85f, 0.49f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//first left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.76f, 0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.76f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, 0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//second left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.47f, 0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.47f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.49f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.49f, 0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//third left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.18f, 0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.18f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.20f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.20f, 0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//four left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.13f, 0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.13f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.15f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.15f, 0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//five left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.44f, 0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.44f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.46f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.46f, 0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//six left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.76f, 0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.76f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.78f, 0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.78f, 0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//gorizontal right-middle line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, 0.49f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, 0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.85f, 0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.85f, 0.49f, 1.0f);
+		glEnd();
+	}
+	if (secondline)
+	{
+		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
+		glBegin(GL_POLYGON);//up line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, 0.29f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, 0.27f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, 0.27f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, 0.29f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//up both line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, -0.27f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, -0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, -0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, -0.27f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//gorizontal left-middle line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.78f, -0.01f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.78f, 0.01f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.85f, 0.01f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.85f, -0.01f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//first left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.76f, -0.29f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.76f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, -0.29f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//second left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.47f, -0.29f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.47f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.49f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.49f, -0.29f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//third left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.18f, -0.29f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.18f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.20f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.20f, -0.29f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//four left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.13f, -0.29f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.13f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.15f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.15f, -0.29f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//five left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.44f, -0.29f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.44f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.46f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.46f, -0.29f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//six left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.76f, -0.29f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.76f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.78f, 0.29f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.78f, -0.29f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//gorizontal right-middle line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, -0.01f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, 0.01f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.85f, 0.01f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.85f, -0.01f, 1.0f);
+		glEnd();
+	}
+	if (thirdline)
+	{
+		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
+		glBegin(GL_POLYGON);//up both line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, -0.32f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, -0.3f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, -0.3f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, -0.32f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//up line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, -0.67f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, -0.67f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//gorizontal left-middle line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.78f, -0.49f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.78f, -0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.85f, -0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.85f, -0.49f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//first left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.76f, -0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.76f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.78f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.78f, -0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//second left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.47f, -0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.47f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.49f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.49f, -0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//third left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-.18f, -0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(-.18f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-.20f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-.20f, -0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//four left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.13f, -0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.13f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.15f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.15f, -0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//five left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.44f, -0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.44f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.46f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.46f, -0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//six left vertical line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.76f, -0.3f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.76f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.78f, -0.69f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.78f, -0.3f, 1.0f);
+		glEnd();
+
+		glBegin(GL_POLYGON);//gorizontal right-middle line
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(.78f, -0.49f, 1.0f);
+
+		glTexCoord2f(1.f, 0.0f);
+		glVertex3f(.78f, -0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(.85f, -0.51f, 1.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(.85f, -0.49f, 1.0f);
+		glEnd();
+	}
 }
 Scene1::~Scene1()
 {

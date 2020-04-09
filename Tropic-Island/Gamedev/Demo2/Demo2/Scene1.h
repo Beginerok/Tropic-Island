@@ -59,9 +59,10 @@ public:
 
 	void DrawWord(int word_,int pos);
 	void EnableTextureNumbers(int position, int numberword); 
-	void LoadRam();
-	void ShowRam();
+	void LoadBorder();
+	void ShowBorder();
 	void ShowHelp();
+	void ShowLine(bool firstline,bool secondline, bool thirdline);
 	~Scene1();
 	int err;
 #ifndef _WIN32

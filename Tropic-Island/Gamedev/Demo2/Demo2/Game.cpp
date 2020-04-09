@@ -60,7 +60,8 @@ void Game::draw_screen()
 			Scene1_->ShowButtons();
 			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
 
-			Scene1_->ShowRam();
+			Scene1_->ShowBorder();
+			Scene1_->ShowLine(true,true,true);
 			if (WindowsWinApi_->GetF()[0])
 			{
 				Scene1_->ShowHelp();
@@ -92,7 +93,7 @@ int Game::Execute()
 	bool fullscreen = false;
 #if WINAPI_==1
 	WindowsWinApi_ = new WindowsWinApi();
-	if (!WindowsWinApi_->keyboard__->CreateWindow_(L"Tropic Island",700,500, 32, fullscreen))
+	if (!WindowsWinApi_->keyboard__->CreateWindow_(L"Cars",700,500, 32, fullscreen))
 		return 0;
 #else
 	SDL_GLContext context;
@@ -116,12 +117,11 @@ int Game::Execute()
 	Logic_->dbconn = WindowsWinApi_->keyboard__->db;
 	Logic_->dbconn->Connect();
 	Logic_->dbconn->Query();
-	Logic_->SetRandom();
 	Logic_->SetTotalBet(1);
 	Logic_->SetWin(0);
 	Sound_ = new Sound();
 	Sound_->Init();
-	Scene1_->LoadRam();
+	Scene1_->LoadBorder();
 	draw_screen();
 #if WINAPI_==1
 	WindowsWinApi_->keyboard__->KillWindow();
