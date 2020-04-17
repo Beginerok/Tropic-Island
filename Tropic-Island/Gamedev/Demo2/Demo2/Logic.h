@@ -26,5 +26,6 @@ public:
 	float Credits, Win, TotalBet;
 	DataBaseConnection * dbconn;
 	bool firstline, secondline, thirdline;
+	bool checkwin;
 };
 #endif

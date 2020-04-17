@@ -4,6 +4,7 @@ Logic::Logic()
 	CountPosition = 30;
 	dbconn = new DataBaseConnection();
 	thirdline = secondline = firstline = false;
+	checkwin = false;
 }
 void Logic::SetDrum()
 {
@@ -44,6 +45,8 @@ void Logic::SetTotalBet(float totalbet)
 }
 bool Logic::CheckWin()
 {
+	if (checkwin)
+		return 0;
 	if (dbconn->vectordrum[0] == dbconn->vectordrum[6] &&
 		dbconn->vectordrum[6] == dbconn->vectordrum[12] &&
 		dbconn->vectordrum[12] == dbconn->vectordrum[18] &&
@@ -104,6 +107,7 @@ bool Logic::CheckWin()
 	}
 	if(firstline || secondline || thirdline)
 	{
+		checkwin = true;
 		return 1;
 	}
 	else

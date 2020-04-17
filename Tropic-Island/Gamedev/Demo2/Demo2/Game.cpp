@@ -47,6 +47,7 @@ void Game::draw_screen()
 			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0)
 			{
 				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet());
+				Logic_->checkwin = false;
 			}
 			if (WindowsWinApi_->GetF()[1])
 			{
