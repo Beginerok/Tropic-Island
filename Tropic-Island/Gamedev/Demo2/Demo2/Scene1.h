@@ -54,7 +54,7 @@ public:
 
 	void LoadNumbersAndWords();
 	void ShowNumbersAndWords(int credits,int win,int totalbet);
-	void EnableTextureNumbersAndWords(int i);
+	void EnableTextureNumbersAndWords(int i,int win);
 	void LoadAnimatedAuto();
 
 	void DrawWord(int word_,int pos);
@@ -101,4 +101,5 @@ public:
 	int *speedchangeanimation;
 	Coor* coor;
 	std::vector<std::string>vectorram;
+	float scale;
 };

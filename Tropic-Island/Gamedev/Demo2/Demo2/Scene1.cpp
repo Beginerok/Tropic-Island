@@ -43,7 +43,7 @@ Scene1::Scene1(void)
 		speedchangeanimation[i] = 0;
 	}
 	coor = new Coor[3];
-	//xxx = 0;
+	scale = 1.0f;
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -383,6 +383,7 @@ void Scene1::DrawWord(int word_,int pos)
 }
 void Scene1::EnableTextureNumbers(int position,int numberword)
 {
+	
 	glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b + coor[numberword].height, 1.0f);
@@ -393,6 +394,8 @@ void Scene1::EnableTextureNumbers(int position,int numberword)
 		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b,1.0f);
 	glEnd();
+	//glScalef(0.999f, 0.999f, 1.0f);
+	//glPopMatrix();
 }
 void Scene1::EnableTexture(float*texcoor, float*vercoor)
 {
@@ -1659,7 +1662,7 @@ void Scene1::ShowNumbersAndWords(int credits, int win, int totalbet)
 	for (int i = 0; i < vectornumbersandwords.size(); i++)
 	{
 		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(vectornumbersandwords[i])]);
-		EnableTextureNumbersAndWords(i);
+		EnableTextureNumbersAndWords(i,win);
 	}
 	DrawWord(credits,0);
 	DrawWord(win,1);
@@ -1668,7 +1671,7 @@ void Scene1::ShowNumbersAndWords(int credits, int win, int totalbet)
 	glDisable(GL_ALPHA_TEST);
 }
 
-void Scene1::EnableTextureNumbersAndWords(int i)
+void Scene1::EnableTextureNumbersAndWords(int i,int win)
 {
 	if (i == 0)
 	{
@@ -1690,21 +1693,32 @@ void Scene1::EnableTextureNumbersAndWords(int i)
 	}
 	if (i == 1)
 	{
+		glPushMatrix();
+		glTranslatef(-0.2f, 0.85f, 0.0f);
+		if (win)
+		{
+			scale = (float)(rand() % 100) / (100 * 1.0) + 1.0f;
+			glScalef(scale, scale, 1.0f);
+		}
 		glBegin(GL_POLYGON);//win
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(-.1f, .9f, 1.0f);
-
+		//glVertex3f(-.1f, .9f, 1.0f);
+		glVertex3f(0.1f, 0.05f, 1.0f);
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(-.1f, .8f, 1.0f);
-
+		//glVertex3f(-.1f, .8f, 1.0f);
+		glVertex3f(0.1f, -0.05f, 1.0f);
+		
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(-.3f, .8f, 1.0f);
+		//glVertex3f(-.3f, .8f, 1.0f);
+		glVertex3f(-0.1f, -0.05f, 1.0f);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-.3f, .9f, 1.0f);
+		//glVertex3f(-.3f, .9f, 1.0f);
+		glVertex3f(-0.1f, 0.05f, 1.0f);
 
 		glEnd();//win
+		glPopMatrix();
 	}
 	if (i == 2)
 	{
