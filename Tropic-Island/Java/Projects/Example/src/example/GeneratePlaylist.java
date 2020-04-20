@@ -54,6 +54,7 @@ public class GeneratePlaylist {
         
         SecureRandom random;
         boolean debug = false;
+        boolean fromhome = true;
         public GeneratePlaylist()
         {
             //music = new HashMap<Float, String>();
@@ -65,7 +66,11 @@ public class GeneratePlaylist {
         public void LoadFromFiles() throws FileNotFoundException, UnsupportedEncodingException, IOException
         {
             try {
-            File file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist4.m3u8");
+                File file ;
+                if(fromhome)
+                    file = new File("D:\\Git\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\playlist4.m3u8");
+                else
+                    file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist4.m3u8");
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
             
@@ -95,12 +100,22 @@ public class GeneratePlaylist {
         }
            
             try {
-            File file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist5.m3u8");
+                File file;
+                if(fromhome)
+                    file = new File("D:\\Git\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\day of victory.m3u8");
+                else
+                    file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist5.m3u8");
+            
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
             
 	    FileInputStream fStream = new FileInputStream(file);
-            InputStreamReader fr = new InputStreamReader(fStream, "windows-1251");
+            InputStreamReader fr;
+            if(fromhome)
+                fr= new InputStreamReader(fStream, "UTF-8");
+            else
+                fr= new InputStreamReader(fStream, "windows-1251");
+            
             //создаем BufferedReader с существующего FileReader для построчного считывания
             BufferedReader reader = new BufferedReader(fr);
             // считаем сначала первую строку
@@ -123,194 +138,173 @@ public class GeneratePlaylist {
         } catch (IOException e) {
             e.printStackTrace();
         }
-          Collections.sort(music);
-          
-            Collections.sort(talk);
-       /*
-           for(Type t:music)
-           {
-               System.out.println(t.name+"\n"+t.length);
-           }
-           */
-           //for (int i = 0; i < music.size(); i++)
-             //System.out.print(music.get(i).length + " ");
-           try(Writer shedulewriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Расписание работы радио"+".txt"), "windows-1251")))
-            {
-               shedulewriter.write("Расписание работы радио\n");
-           ArrayList<Type>  vec ;
+        Collections.sort(music);
+        Collections.sort(talk);
+        try(Writer shedulewriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Расписание работы радио"+".txt"), "windows-1251")))
+        {
+           shedulewriter.write("Расписание работы радио\n");
+           ArrayList<Type>  vec;
            for(int j=0;j<5;j++)
            {
-           String str="";
-        switch(j){
-            case 0:
-                str="понедельник";      
-            shedulewriter.write(str+"\n");
-            shedulewriter.write("9.00 – 10.00 – музыка (Жанр:Heavy metal;)\n");
+                String str="";
+                switch(j){
+                    case 0:
+                        str="понедельник";      
+                        shedulewriter.write(str+"\n");
+                        shedulewriter.write("9.00 – 10.00 – музыка (Жанр:Heavy metal;)\n");
                         break;
-            case 1:
-                str="вторник";
-            shedulewriter.write(str+"\n");
-            shedulewriter.write("9.00 - 10.00 – музыка (Жанр: Blues;)\n");
+                    case 1:
+                        str="вторник";
+                        shedulewriter.write(str+"\n");
+                        shedulewriter.write("9.00 - 10.00 – музыка (Жанр: Blues;)\n");
                         break;
-            case 2:
-                str="среда";
-            shedulewriter.write(str+"\n");
-            shedulewriter.write("9.00 - 10.00 – музыка (Жанр: Drum’n’bass;)\n");
+                    case 2:
+                        str="среда";
+                        shedulewriter.write(str+"\n");
+                        shedulewriter.write("9.00 - 10.00 – музыка (Жанр: Drum’n’bass;)\n");
                         break;
-            case 3:
-                str="четверг";
-            shedulewriter.write(str+"\n");
-            shedulewriter.write("9.00 - 10.00 – музыка (Жанр:Rock;)\n");
+                    case 3:
+                        str="четверг";
+                        shedulewriter.write(str+"\n");
+                        shedulewriter.write("9.00 - 10.00 – музыка (Жанр:Rock;)\n");
                         break;
-            case 4:
-                str="пятница";
-            shedulewriter.write(str+"\n");
-            shedulewriter.write("9.00 - 10.00 – музыка (Жанр: Rap;)\n");
+                    case 4:
+                        str="пятница";
+                        shedulewriter.write(str+"\n");
+                        shedulewriter.write("9.00 - 10.00 – музыка (Жанр: Rap;)\n");
                         break;
-            default:
-                str="playlist";
-                break;
-        }             
-            float length = (float) 3640.0, currentlength = 0.0f;
-            vec = new ArrayList<Type> ();
-
-            //srand(time(0));
-            currentlength = AddMusic(music, vec, currentlength, length);
-            //System.out.println("vec: ");
-            //for (int i = 0; i < vec.size(); i++)
+                    default:
+                        str="playlist";
+                        break;
+                }             
+                float length = (float) 3640.0, currentlength = 0.0f;
+                vec = new ArrayList<Type> ();
+                //srand(time(0));
+                currentlength = AddMusic(music, vec, currentlength, length);
+                //System.out.println("vec: ");
+                //for (int i = 0; i < vec.size(); i++)
 		//System.out.print(vec.get(i).length +" ");
-            if(debug)
-            System.out.println("\n+cl:"+ currentlength);
-	
-            //for (int i = 0; i < talk.size(); i++)
+                if(debug)
+                    System.out.println("\n+cl:"+ currentlength);	
+                //for (int i = 0; i < talk.size(); i++)
 		//System.out.print(talk.get(i).length + " ");
-            
-            length = (float) (2.5 * 3600.0+40.0);
-            currentlength = AddTalk(talk, vec, currentlength, length);
-            if((int)60 / (((int)currentlength)/60) == 0)
-                shedulewriter.write("10.00 – 10.");   
-            else
-                shedulewriter.write("10.00 – 11.");   
-           int k = ((int)currentlength/60) % 60;
-            shedulewriter.write(Integer.toString(k));
-            String path = vec.get(vec.size()-1).name;
-            File f = new File(path);
-            String fName = f.getName();
-            fName = fName.substring(0, fName.lastIndexOf('.'));
-            shedulewriter.write("-\""+fName/*vec.get(vec.size()-1).name*/+"\"\n");  
-            
-            if((int)60 / (((int)currentlength)/60) == 0)
-                shedulewriter.write("10.");   
-            else
-                shedulewriter.write("11.");   
-            k = (((int)currentlength/60)) % 60;
-            shedulewriter.write(Integer.toString(k)+" - 11.30 - ");   
-            currentlength = AddMusic(music, vec, currentlength, length);
-            
-            switch(j){
-            case 0:
-                str="понедельник";      
-            shedulewriter.write("музыка (Жанр: Rock;)\n");
+                length = (float) (2.5 * 3600.0+40.0);
+                currentlength = AddTalk(talk, vec, currentlength, length);
+                if((int)60 / (((int)currentlength)/60) == 0)
+                    shedulewriter.write("10.00 – 10.");   
+                else
+                    shedulewriter.write("10.00 – 11.");   
+                int k = ((int)currentlength/60) % 60;
+                shedulewriter.write(Integer.toString(k));
+                String path = vec.get(vec.size()-1).name;
+                File f = new File(path);
+                String fName = f.getName();
+                fName = fName.substring(0, fName.lastIndexOf('.'));
+                shedulewriter.write("-\""+fName/*vec.get(vec.size()-1).name*/+"\"\n");  
+                if((int)60 / (((int)currentlength)/60) == 0)
+                    shedulewriter.write("10.");   
+                else
+                    shedulewriter.write("11.");   
+                k = (((int)currentlength/60)) % 60;
+                shedulewriter.write(Integer.toString(k)+" - 11.30 - ");   
+                currentlength = AddMusic(music, vec, currentlength, length);
+                switch(j){
+                    case 0:
+                        str="понедельник";      
+                        shedulewriter.write("музыка (Жанр: Rock;)\n");
                         break;
-            case 1:
-                str="вторник";
-            shedulewriter.write("музыка (Жанр: Electrohouse;)\n");
+                    case 1:
+                        str="вторник";
+                        shedulewriter.write("музыка (Жанр: Electrohouse;)\n");
                         break;
-            case 2:
-                str="среда";
-            shedulewriter.write("музыка (Жанр:Pop;)\n");
+                    case 2:
+                        str="среда";
+                        shedulewriter.write("музыка (Жанр:Pop;)\n");
                         break;
-            case 3:
-                str="четверг";
-            shedulewriter.write("(Жанр: Reggae;)\n");
+                    case 3:
+                        str="четверг";
+                        shedulewriter.write("(Жанр: Reggae;)\n");
                         break;
-            case 4:
-                str="пятница";
-            shedulewriter.write("музыка (Жанр: Hip-hop;)\n");
+                    case 4:
+                        str="пятница";
+                        shedulewriter.write("музыка (Жанр: Hip-hop;)\n");
                         break;
-            default:
-                str="playlist";
-                break;
-        }   
-           shedulewriter.write("11.30 – 11."); 
-	//System.out.println("vec: ");
-	//for (int i = 0; i < vec.size(); i++)
+                    default:
+                        str="playlist";
+                        break;
+                }   
+                shedulewriter.write("11.30 – 11."); 
+                //System.out.println("vec: ");
+                //for (int i = 0; i < vec.size(); i++)
 		//System.out.print(vec.get(i).length + " ");
-        if(debug)
-        System.out.println("\n+cl:" + currentlength);
-
-	length = (float) ((float) 10800.0+40.0);
-	//
-	currentlength = AddTalk(talk, vec, currentlength, length);
-        
-        shedulewriter.write((Integer.toString(((int)currentlength/60) % 60)));
-        path = vec.get(vec.size()-1).name;
-        f = new File(path);
-        fName = f.getName();
-        fName = fName.substring(0, fName.lastIndexOf('.'));
-        shedulewriter.write("-\""+fName/*vec.get(vec.size()-1).name*/+"\"\n"); 
-        
-        shedulewriter.write("11."+(Integer.toString(((int)currentlength/60) % 60))+"– 12.00 – музыка");
-        switch(j){
-            case 0:
-                str="понедельник";      
-            shedulewriter.write("(Жанр: Alternative;)\n");
-                        break;
-            case 1:
-                str="вторник";
-            shedulewriter.write("(Жанр: Alternative;)\n");
-                        break;
-            case 2:
-                str="среда";
-            shedulewriter.write("(Жанр:Blues;)\n");
-                        break;
-            case 3:
-                str="четверг";
-            shedulewriter.write(" (Жанр:Dubstep;)\n");
-                        break;
-            case 4:
-                str="пятница";
-            shedulewriter.write("(Жанр: Rnb;)\n");
-                        break;
-            default:
-                str="playlist";
-                break;
-        }   
-	//
-	currentlength = AddMusic(music, vec, currentlength, length);
-	//System.out.println("vec: ");
-	//for (int i = 0; i < vec.size(); i++)
+                if(debug)
+                    System.out.println("\n+cl:" + currentlength);
+        	length = (float) ((float) 10800.0+40.0);
+                //
+                currentlength = AddTalk(talk, vec, currentlength, length);
+                shedulewriter.write((Integer.toString(((int)currentlength/60) % 60)));
+                path = vec.get(vec.size()-1).name;
+                f = new File(path);
+                fName = f.getName();
+                fName = fName.substring(0, fName.lastIndexOf('.'));
+                shedulewriter.write("-\""+fName/*vec.get(vec.size()-1).name*/+"\"\n"); 
+                shedulewriter.write("11."+(Integer.toString(((int)currentlength/60) % 60))+"– 12.00 – музыка");
+                switch(j){
+                case 0:
+                    str="понедельник";      
+                    shedulewriter.write("(Жанр: Alternative;)\n");
+                    break;
+                case 1:
+                    str="вторник";
+                    shedulewriter.write("(Жанр: Alternative;)\n");
+                    break;
+                case 2:
+                    str="среда";
+                    shedulewriter.write("(Жанр:Blues;)\n");
+                    break;
+                case 3:
+                    str="четверг";
+                    shedulewriter.write(" (Жанр:Dubstep;)\n");
+                    break;
+                case 4:
+                    str="пятница";
+                    shedulewriter.write("(Жанр: Rnb;)\n");
+                    break;
+                default:
+                    str="playlist";
+                    break;
+                }   
+                //
+                currentlength = AddMusic(music, vec, currentlength, length);
+                //System.out.println("vec: ");
+                //for (int i = 0; i < vec.size(); i++)
 		//System.out.print(vec.get(i).length+ " ");
-	if(debug)
-            System.out.println("\n+cl:"+ currentlength);
-        
-        //try(FileWriter writer = new FileWriter("playlist.m3u8", false))
-            
-        try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(str+".m3u8"), "windows-1251")))
-        {
-            
-            writer.write("#EXTM3U\n");
-	for (int i = 0; i < vec.size(); i++)
-	{
-		writer.write("#EXTINF:");
-		writer.write(Integer.toString((int)vec.get(i).length));
-		writer.write(",");
-		writer.write(vec.get(i).name);
-		writer.write("\n");
-		writer.write(vec.get(i).name);
-		writer.write("\n");
-	}    
-            writer.flush();
-        }
-        catch(IOException ex){
-             
-            System.out.println(ex.getMessage());
-        } 
-        vec.clear();
+        	if(debug)
+                    System.out.println("\n+cl:"+ currentlength);
+                //try(FileWriter writer = new FileWriter("playlist.m3u8", false))
+                try(Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(str+".m3u8"), "windows-1251")))
+                {
+                    writer.write("#EXTM3U\n");
+                    for (int i = 0; i < vec.size(); i++)
+                    {
+                        writer.write("#EXTINF:");
+                        writer.write(Integer.toString((int)vec.get(i).length));
+                        writer.write(",");
+                        writer.write(vec.get(i).name);
+                        writer.write("\n");
+                        writer.write(vec.get(i).name);
+                        writer.write("\n");
+                    }    
+                    writer.flush();
+                }
+                catch(IOException ex){
+                    System.out.println(ex.getMessage());
+                } 
+                vec.clear();
            }
-            shedulewriter.close();
-            }
-       }
+           shedulewriter.close();
+        }
+    }
        public float AddMusic(ArrayList<Type> src, ArrayList<Type> dst,float currentlength, float maxlength)
         {
             int num;

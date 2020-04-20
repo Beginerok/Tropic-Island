@@ -33,6 +33,7 @@ public class Example {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
+        /*
         System.out.println("Java Правит Интернетом!");
         System.out.println(md5Apache("root"));
         System.out.println(md5Apache("bvn13@mail.ru"));
@@ -59,13 +60,7 @@ public class Example {
                     if (Objects.equals(resultSet.getString(1), new String("Java")))
                         System.out.println("Input different nickname");
                 }
-               /*
-                PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                preparedStatement.setString(1, pass);
-                //preparedStatement.setDate(2, java.sql.Date.valueOf(date));
-                int rows = preparedStatement.executeUpdate();
-                System.out.printf("Added %d rows", rows);
-                */
+              
              }
          }
          catch(Exception ex){
@@ -73,6 +68,7 @@ public class Example {
               
              System.out.println(ex);
          }
+        */
         GeneratePlaylist g = new GeneratePlaylist();
         g.LoadFromFiles();
         /*
