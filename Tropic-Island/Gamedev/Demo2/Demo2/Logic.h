@@ -11,8 +11,6 @@ class Logic
 {
 public:
 	Logic();
-	int *GetRandom();
-	void SetRandom();
 	void SetDrum();
 	std::vector<std::string> GetDrum();
 	float GetCredits();
@@ -22,10 +20,12 @@ public:
 	void SetCredits(float credits);
 	void SetWin(float win);
 	void SetTotalBet(float totalbet);
+	bool CheckWin();
 	~Logic();
-	int *random;
 	int CountPosition;
 	float Credits, Win, TotalBet;
 	DataBaseConnection * dbconn;
+	bool firstline, secondline, thirdline;
+	bool checkwin;
 };
 #endif

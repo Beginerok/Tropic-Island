@@ -54,13 +54,15 @@ public:
 
 	void LoadNumbersAndWords();
 	void ShowNumbersAndWords(int credits,int win,int totalbet);
-	void EnableTextureNumbersAndWords(int i);
+	void EnableTextureNumbersAndWords(int i,int win);
 	void LoadAnimatedAuto();
 
 	void DrawWord(int word_,int pos);
 	void EnableTextureNumbers(int position, int numberword); 
-	void LoadRam();
-	void ShowRam();
+	void LoadBorder();
+	void ShowBorder();
+	void ShowHelp();
+	void ShowLine(bool firstline,bool secondline, bool thirdline);
 	~Scene1();
 	int err;
 #ifndef _WIN32
@@ -99,4 +101,5 @@ public:
 	int *speedchangeanimation;
 	Coor* coor;
 	std::vector<std::string>vectorram;
+	float scale;
 };
