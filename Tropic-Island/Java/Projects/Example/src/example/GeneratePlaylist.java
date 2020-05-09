@@ -54,7 +54,7 @@ public class GeneratePlaylist {
         
         SecureRandom random;
         boolean debug = false;
-        boolean fromhome = false;
+        boolean fromhome = true;
         int numbertalk;
         public GeneratePlaylist()
         {
@@ -113,9 +113,11 @@ public class GeneratePlaylist {
             
 	    FileInputStream fStream = new FileInputStream(file);
             InputStreamReader fr;
+            /*
             if(fromhome)
                 fr= new InputStreamReader(fStream, "UTF-8");
             else
+                */
                 fr= new InputStreamReader(fStream, "windows-1251");
             
             //создаем BufferedReader с существующего FileReader для построчного считывания
@@ -346,10 +348,12 @@ public class GeneratePlaylist {
             boolean b = false;
             for (int i = 0; i < 1; i++)
             {
+                /*
 		num = numbertalk++;
                 if(numbertalk == 7)
                     numbertalk = 0;
-                //Random(src);
+                */
+                num = Random(src);
 		if (src.get(num).length + currentlength <= maxlength)
 		{
 			b = true;
