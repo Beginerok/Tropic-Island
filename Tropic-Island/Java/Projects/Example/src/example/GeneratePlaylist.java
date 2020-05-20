@@ -54,7 +54,12 @@ public class GeneratePlaylist {
         
         SecureRandom random;
         boolean debug = false;
+<<<<<<< HEAD
         boolean fromhome = false;
+=======
+        boolean fromhome = true;
+        int numbertalk;
+>>>>>>> c9b0820445ce25706184f4e962e7d23cca0d9798
         public GeneratePlaylist()
         {
             //music = new HashMap<Float, String>();
@@ -102,18 +107,27 @@ public class GeneratePlaylist {
             try {
                 File file;
                 if(fromhome)
+<<<<<<< HEAD
                     file = new File("D:\\Git\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\day of victory.m3u8");
                 else
                     file = new File("C:\\Users\\Евгений\\Desktop\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\playlist5.m3u8");
+=======
+                    file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist5.m3u8");
+                else
+                    file = new File("D:\\git\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\day of victory 5.m3u8");
+                    
+>>>>>>> c9b0820445ce25706184f4e962e7d23cca0d9798
             
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
             
 	    FileInputStream fStream = new FileInputStream(file);
             InputStreamReader fr;
+            /*
             if(fromhome)
                 fr= new InputStreamReader(fStream, "UTF-8");
             else
+                */
                 fr= new InputStreamReader(fStream, "windows-1251");
             
             //создаем BufferedReader с существующего FileReader для построчного считывания
@@ -144,6 +158,9 @@ public class GeneratePlaylist {
         {
            shedulewriter.write("Расписание работы радио\n");
            ArrayList<Type>  vec;
+           
+           numbertalk = 0;
+           
            for(int j=0;j<5;j++)
            {
                 String str="";
@@ -341,7 +358,12 @@ public class GeneratePlaylist {
             boolean b = false;
             for (int i = 0; i < 1; i++)
             {
-		num = Random(src);
+                /*
+		num = numbertalk++;
+                if(numbertalk == 7)
+                    numbertalk = 0;
+                */
+                num = Random(src);
 		if (src.get(num).length + currentlength <= maxlength)
 		{
 			b = true;
