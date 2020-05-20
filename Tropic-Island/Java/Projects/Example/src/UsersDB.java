@@ -15,9 +15,10 @@ import java.util.ArrayList;
 public class UsersDB {
     
  
-    private static String url = "jdbc:mysql://localhost/test?serverTimezone=Europe/Moscow";
-    private static String username = "root";
-    private static String password = "root";
+    //private static String url = "jdbc:mysql://localhost/test?serverTimezone=Europe/Moscow";
+    private static String url = "jdbc:mysql://185.26.122.49/host6491_test?serverTimezone=Europe/Moscow";
+    private static String username = "host6491_root";
+    private static String password = "R0oT";
     
     public static ArrayList<Users> select() {
          

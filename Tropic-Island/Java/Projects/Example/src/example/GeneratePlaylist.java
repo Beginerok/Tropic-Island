@@ -54,7 +54,7 @@ public class GeneratePlaylist {
         
         SecureRandom random;
         boolean debug = false;
-        boolean fromhome = true;
+        boolean fromhome = false;
         public GeneratePlaylist()
         {
             //music = new HashMap<Float, String>();
@@ -70,7 +70,7 @@ public class GeneratePlaylist {
                 if(fromhome)
                     file = new File("D:\\Git\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\playlist4.m3u8");
                 else
-                    file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist4.m3u8");
+                    file = new File("C:\\Users\\Евгений\\Desktop\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\playlist4.m3u8");
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
             
@@ -104,7 +104,7 @@ public class GeneratePlaylist {
                 if(fromhome)
                     file = new File("D:\\Git\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\day of victory.m3u8");
                 else
-                    file = new File("C:\\Users\\User\\source\\repos\\Project1\\Project1\\playlist5.m3u8");
+                    file = new File("C:\\Users\\Евгений\\Desktop\\Tropic-Island\\Tropic-Island\\Java\\Projects\\Example\\playlist5.m3u8");
             
             //создаем объект FileReader для объекта File
             //FileReader fr = new FileReader(file);
