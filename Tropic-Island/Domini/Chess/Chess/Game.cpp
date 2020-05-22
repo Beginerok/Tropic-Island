@@ -3,7 +3,7 @@
 Game::Game()
 {
 	run = true;
-	Matrix = new int*[8];
+	Matrix = new int* [8];
 	for (int i = 0; i < 8; i++)
 		Matrix[i] = new int[8];
 	QuadCoorXleft = new int* [8];
@@ -18,15 +18,24 @@ Game::Game()
 		QuadCoorYup[i] = new int[8];
 	}
 	ChessX = new double[18];
-	ChessY = new double[18]; 
+	ChessY = new double[18];
 	ActiveX = -1;
 	ActiveY = -1;
 	Active = -1;
 	firstplayer = true;
 	secondplayer = false;
 	ai = new bool[18];
+	chessai tmp;
 	for (int i = 0; i < 18; i++)
+	{
 		ai[i] = false;
+		if (i > 8)
+		{
+			tmp.ai = ai[i];
+			tmp.value = i+1;
+			Ai.push_back(tmp);
+		}
+	}
 }
 void Game::setup_opengl(int width, int height)
 {
@@ -195,8 +204,8 @@ bool Game::Move_UpAI(int i,int j)
 	if (i != 0 && Matrix[i - 1][j] == 0)
 	{
 		Matrix[i - 1][j] = Matrix[i][j];
-		Matrix[i][j] = 0;
 		ChessY[Matrix[i][j] - 1] += 0.2;
+		Matrix[i][j] = 0;
 		std::cout << "MoveUp AI" << std::endl;
 		return true;
 	}
@@ -208,8 +217,8 @@ bool Game::Move_DownAI(int i, int j)
 	if (i != 7 && Matrix[i + 1][j] == 0)
 	{
 		Matrix[i + 1][j] = Matrix[i][j];
-		Matrix[i][j] = 0;
 		ChessY[Matrix[i][j] - 1] -= 0.2;
+		Matrix[i][j] = 0;
 		std::cout << "MoveDown AI"<< std::endl;
 		return true;
 	}
@@ -221,8 +230,8 @@ bool Game::Move_RightAI(int i, int j)
 	if (j != 7 && Matrix[i][j + 1] == 0)
 	{
 		Matrix[i][j + 1] = Matrix[i][j];
-		Matrix[i][j] = 0;
 		ChessX[Matrix[i][j] - 1] += 0.2;
+		Matrix[i][j] = 0;
 		std::cout << "MoveRight AI" << std::endl;
 		return true;
 	}
@@ -234,24 +243,68 @@ bool Game::Move_LeftAI(int i, int j)
 	if (j != 0 && Matrix[i][j - 1] == 0)
 	{
 		Matrix[i][j - 1] = Matrix[i][j];
-		Matrix[i][j] = 0;
 		ChessX[Matrix[i][j] - 1] -= 0.2;
+		Matrix[i][j] = 0;
 		std::cout << "MoveLeft AI" <<std::endl;
 		return true;
 	}
 	else
 		return false;
 }
-void Game::ReccurentWalk(int numbernotuse)
+POINT Game::FindMatrix(int value)
+{
+	POINT tmp;
+	for (int i = 0; i < 8; i++)
+		for (int j = 0; j < 8; j++)
+			if (Matrix[i][j] == value)
+			{
+				tmp.x = i;
+				tmp.y = j;
+				return tmp;
+			}
+}
+bool Game::Check_MoveUp(int value)
+{
+	POINT p = FindMatrix(value);
+	if (p.x != 0 && Matrix[p.x-1][p.y] == 0)
+		return true;
+	else
+		return false;
+}
+bool Game::Check_MoveLeft(int value)
+{
+	POINT p = FindMatrix(value);
+	if (p.y != 0 && Matrix[p.x][p.y-1] == 0)
+		return true;
+	else
+		return false;
+}
+struct find_s
+{
+	int value;
+	find_s(int value) : value(value) {}
+	bool operator () (const chessai& m) const
+	{
+		return m.value == value;
+	}
+};
+void Game::ReccurentWalk()
 {
 	current = -1, currentI = -1, currentJ = -1;
-	for (int i = 10; i < 18; i++)
-		if (!ai[i] )
+	for (int i = 0; i < Ai.size(); i++)
+		if (!Ai[i].ai)
 		{
-			current = i;
-			if (current == numbernotuse)
-				continue;
-			break;
+			if (Check_MoveUp(Ai[i].value) || Check_MoveLeft(Ai[i].value))
+			{
+				current = Ai[i].value;
+				break;
+			}
+			else
+			{
+				std::vector<chessai>::iterator position = std::find_if(Ai.begin(), Ai.end(), find_s(Ai[i].value));
+				if (position != Ai.end()) // == myVector.end() means the element was not found
+					Ai.erase(position);
+			}
 		}
 	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++)
@@ -261,12 +314,23 @@ void Game::ReccurentWalk(int numbernotuse)
 				currentJ = j;
 				break;
 			}
-	if (!Move_UpAI(currentI, currentJ))
-		if(!Move_LeftAI(currentI, currentJ))
+	if(currentI!=-1 && currentJ!=-1)
+		if (!Move_UpAI(currentI, currentJ))
+			if(!Move_LeftAI(currentI, currentJ))
+			{
+				ReccurentWalk();
+			}
+	chessai tmp;
+	for (int i = 0; i < 18; i++)
+	{
+		ai[i] = false;
+		if (i > 8)
 		{
-			ReccurentWalk(current);
+			tmp.ai = ai[i];
+			tmp.value = i + 1;
+			Ai.push_back(tmp);
 		}
-	//	Move_LeftAI(currentI, currentJ);
+	}
 }
 void Game::AI()
 {
@@ -274,51 +338,51 @@ void Game::AI()
 	{
 		secondplayer = false;
 		firstplayer = true;
-		ReccurentWalk(-2);
+		ReccurentWalk();
 		if (currentI == 0 && currentJ == 0)
 		{
 			ai[9] = true;
-			ReccurentWalk(9);
+			//ReccurentWalk();
 		}
 		if (currentI == 0 && currentJ == 1)
 		{
 			ai[10] = true;
-			ReccurentWalk(10);
+			//ReccurentWalk();
 		}
 		if (currentI == 0 && currentJ == 2)
 		{
 			ai[11] = true;
-			ReccurentWalk(11);
+			//ReccurentWalk();
 		}
 		if (currentI == 1 && currentJ == 0)
 		{
 			ai[12] = true;
-			ReccurentWalk(12);
+			//ReccurentWalk();
 		}
 		if (currentI == 1 && currentJ == 1)
 		{
 			ai[13] = true;
-			ReccurentWalk(13);
+			ReccurentWalk();
 		}
 		if (currentI == 1 && currentJ == 2)
 		{
 			ai[14] = true;
-			ReccurentWalk(14);
+			//ReccurentWalk();
 		}
 		if (currentI == 2 && currentJ == 0)
 		{
 			ai[15] = true;
-			ReccurentWalk(15);
+			//ReccurentWalk();
 		}
 		if (currentI == 2 && currentJ == 1)
 		{
 			ai[16] = true;
-			ReccurentWalk(16);
+			//ReccurentWalk();
 		}
 		if (currentI == 2 && currentJ == 2)
 		{
 			ai[17] = true;
-			ReccurentWalk(17);
+			//ReccurentWalk();
 		}
 	}
 }

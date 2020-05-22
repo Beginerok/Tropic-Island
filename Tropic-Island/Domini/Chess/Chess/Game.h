@@ -1,5 +1,13 @@
 #pragma once
 #include "WindowsSDLApi.h"
+#include <vector>
+#include <algorithm>
+#include <iterator>
+struct chessai
+{
+	bool ai;
+	int value;
+};
 class Game
 {
 public:
@@ -18,7 +26,7 @@ public:
 	void Move_Left();
 	void CheckFinishGame();
 	void AI(); 
-	void ReccurentWalk(int numbernotuse);
+	void ReccurentWalk();
 
 	bool Move_UpAI(int i, int j);
 
@@ -27,6 +35,11 @@ public:
 	bool Move_RightAI(int i, int j);
 
 	bool Move_LeftAI(int i, int j);
+
+	bool Check_MoveLeft(int value);
+	bool Check_MoveUp(int value);
+
+	POINT FindMatrix(int value);
 	bool run;
 	void Exit();
 	int** Matrix;
@@ -36,6 +49,7 @@ public:
 	bool firstplayer, secondplayer,*ai;
 
 	int current, currentI, currentJ;
+	std::vector<chessai> Ai;
 	~Game();
 };
 
