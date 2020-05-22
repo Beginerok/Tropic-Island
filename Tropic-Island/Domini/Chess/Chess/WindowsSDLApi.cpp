@@ -18,9 +18,6 @@ bool WindowsSDLApi::IsMouseButtonDown(byte key,SDL_Event event_)
     if(event_.type == SDL_MOUSEBUTTONDOWN)
 	{
 		GetButtonDownCoords(event_);
-		if(point.y >478 && point.y<496)
-		{
-		}
 		return true;
 	}
     if(event_.type == SDL_MOUSEBUTTONDOWN)
@@ -36,10 +33,6 @@ bool WindowsSDLApi::IsMouseButtonUp(byte key, SDL_Event event_)
     if(event_.type == SDL_MOUSEBUTTONUP)
 	{
 		GetButtonDownCoords(event_);
-		if (point.y >478 && point.y<496)
-		{
-			
-		}
 		return true;
 	}
     if(event_.type == SDL_MOUSEBUTTONDOWN)

@@ -1,25 +1,9 @@
 ﻿// Chess.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
-
 #include "Game.h"
 #include <iostream>
-/*
-#define SDL_MAIN_HANDLED
-#ifndef __unix__
-#include <Windows.h>
-#endif
-#include "SDL2/SDL.h"
-#pragma comment(lib,"SDL2.lib")
-*/
 int main(int argc, char** argv)
 {
-	/*
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-		return 1;
-	}
-	SDL_Quit();
-	*/
 	Game* game = new Game();
 	game->Execute();
 	return 0;

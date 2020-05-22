@@ -122,7 +122,6 @@ void Draw_Circle_Fill()
 		glVertex2f(cos(a), sin(a));
 	}
 }
-
 void Game::Move_Up()
 {
 	if (Active > 0 && ActiveX != 0 && Matrix[ActiveX-1][ActiveY] == 0)
@@ -362,7 +361,7 @@ void Game::AI()
 		if (currentI == 1 && currentJ == 1)
 		{
 			ai[13] = true;
-			ReccurentWalk();
+			//ReccurentWalk();
 		}
 		if (currentI == 1 && currentJ == 2)
 		{

@@ -27,18 +27,12 @@ public:
 	void CheckFinishGame();
 	void AI(); 
 	void ReccurentWalk();
-
 	bool Move_UpAI(int i, int j);
-
 	bool Move_DownAI(int i, int j);
-
 	bool Move_RightAI(int i, int j);
-
 	bool Move_LeftAI(int i, int j);
-
 	bool Check_MoveLeft(int value);
 	bool Check_MoveUp(int value);
-
 	POINT FindMatrix(int value);
 	bool run;
 	void Exit();
@@ -47,7 +41,6 @@ public:
 	int  ActiveX,ActiveY,Active,oldx,oldy;
 	double* ChessX,*ChessY,ChessyX,ChessyY;
 	bool firstplayer, secondplayer,*ai;
-
 	int current, currentI, currentJ;
 	std::vector<chessai> Ai;
 	~Game();

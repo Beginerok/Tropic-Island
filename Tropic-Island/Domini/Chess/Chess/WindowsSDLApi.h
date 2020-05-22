@@ -12,8 +12,8 @@
     #define _POINT_
     typedef struct POINT
     {
-        float x;
-        float y;
+        int x;
+        int y;
     };
     #endif
 #endif
@@ -32,7 +32,6 @@ public:
     POINT GetButtonDownCoords(SDL_Event event_);
     bool IsExit(SDL_Event event_);
     byte GetPressedKey(SDL_Event event_);
-
     bool getdone();
     void setdone(bool state);
 	int pressbutton;
