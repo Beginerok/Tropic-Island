@@ -34,6 +34,8 @@ public:
 	bool Check_MoveLeft(int value);
 	bool Check_MoveUp(int value);
 	POINT FindMatrix(int value);
+	bool Check_MoveDown(int value);
+	bool Check_MoveRight(int value);
 	bool run;
 	void Exit();
 	int** Matrix;

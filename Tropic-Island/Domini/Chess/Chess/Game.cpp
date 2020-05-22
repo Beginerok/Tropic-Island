@@ -278,6 +278,22 @@ bool Game::Check_MoveLeft(int value)
 	else
 		return false;
 }
+bool Game::Check_MoveDown(int value)
+{
+	POINT p = FindMatrix(value);
+	if (p.x != 7 && Matrix[p.x + 1][p.y] == 0)
+		return true;
+	else
+		return false;
+}
+bool Game::Check_MoveRight(int value)
+{
+	POINT p = FindMatrix(value);
+	if (p.y != 7 && Matrix[p.x][p.y + 1] == 0)
+		return true;
+	else
+		return false;
+}
 struct find_s
 {
 	int value;
@@ -313,12 +329,56 @@ void Game::ReccurentWalk()
 				currentJ = j;
 				break;
 			}
-	if(currentI!=-1 && currentJ!=-1)
+	if (currentI != -1 && currentJ != -1)
+	{
 		if (!Move_UpAI(currentI, currentJ))
-			if(!Move_LeftAI(currentI, currentJ))
+			if (!Move_LeftAI(currentI, currentJ))
 			{
 				ReccurentWalk();
 			}
+	}
+	else
+	{
+		chessai tmp;
+		for (int i = 0; i < 18; i++)
+		{
+			ai[i] = false;
+			if (i > 8)
+			{
+				tmp.ai = ai[i];
+				tmp.value = i + 1;
+				Ai.push_back(tmp);
+			}
+		}
+		for (int i = 0; i < Ai.size(); i++)
+			if (!Ai[i].ai)
+			{
+				if (Check_MoveRight(Ai[i].value) || Check_MoveDown(Ai[i].value))
+				{
+					current = Ai[i].value;
+					break;
+				}
+				else
+				{
+					std::vector<chessai>::iterator position = std::find_if(Ai.begin(), Ai.end(), find_s(Ai[i].value));
+					if (position != Ai.end()) // == Vector.end() means the element was not found
+						Ai.erase(position);
+				}
+			}
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 8; j++)
+				if (Matrix[i][j] == current)
+				{
+					currentI = i;
+					currentJ = j;
+					break;
+				}
+		if(!Move_RightAI(currentI, currentJ))
+			if (!Move_DownAI(currentI, currentJ))
+			{
+				std::cout <<"Artificial Intellegence asked: WTF?" << std::endl;
+			}
+	}
 	chessai tmp;
 	for (int i = 0; i < 18; i++)
 	{
