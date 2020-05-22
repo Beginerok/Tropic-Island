@@ -39,7 +39,7 @@ public:
 	int** Matrix;
 	int** QuadCoorXleft, **QuadCoorXright, **QuadCoorYup, **QuadCoorYdown;
 	int  ActiveX,ActiveY,Active,oldx,oldy;
-	double* ChessX,*ChessY,ChessyX,ChessyY;
+	double* ChessX,*ChessY;
 	bool firstplayer, secondplayer,*ai;
 	int current, currentI, currentJ;
 	std::vector<chessai> Ai;

@@ -387,6 +387,86 @@ void Game::AI()
 }
 void Game::SetCoordinats()
 {
+	//
+	for (int i = 0; i < 8; i++)
+		for (int j = 0; j < 8; j++)
+		{
+			Matrix[i][j] = 0;
+		}
+	Matrix[0][0] = 1;
+	Matrix[0][1] = 2;
+	Matrix[0][2] = 3;
+	Matrix[1][0] = 4;
+	Matrix[1][1] = 5;
+	Matrix[1][2] = 6;
+	Matrix[2][0] = 7;
+	Matrix[2][1] = 8;
+	Matrix[2][2] = 9;
+
+	Matrix[5][5] = 10;
+	Matrix[5][6] = 11;
+	Matrix[5][7] = 12;
+	Matrix[6][5] = 13;
+	Matrix[6][6] = 14;
+	Matrix[6][7] = 15;
+	Matrix[7][5] = 16;
+	Matrix[7][6] = 17;
+	Matrix[7][7] = 18;
+
+	ChessX[0] = -0.7;
+	ChessY[0] = 0.7;
+
+	ChessX[1] = -0.5;
+	ChessY[1] = 0.7;
+
+	ChessX[2] = -0.3;
+	ChessY[2] = 0.7;
+
+	ChessX[3] = -0.7;
+	ChessY[3] = 0.5;
+
+	ChessX[4] = -0.5;
+	ChessY[4] = 0.5;
+
+	ChessX[5] = -0.3;
+	ChessY[5] = 0.5;
+
+	ChessX[6] = -0.7;
+	ChessY[6] = 0.3;
+
+	ChessX[7] = -0.5;
+	ChessY[7] = 0.3;
+
+	ChessX[8] = -0.3;
+	ChessY[8] = 0.3;
+
+	ChessX[9] = 0.3;
+	ChessY[9] = -0.3;
+
+	ChessX[10] = 0.5;
+	ChessY[10] = -0.3;
+
+	ChessX[11] = 0.7;
+	ChessY[11] = -0.3;
+
+	ChessX[12] = 0.3;
+	ChessY[12] = -0.5;
+
+	ChessX[13] = 0.5;
+	ChessY[13] = -0.5;
+
+	ChessX[14] = 0.7;
+	ChessY[14] = -0.5;
+
+	ChessX[15] = 0.3;
+	ChessY[15] = -0.7;
+
+	ChessX[16] = 0.5;
+	ChessY[16] = -0.7;
+
+	ChessX[17] = 0.7;
+	ChessY[17] = -0.7;
+	//
 	QuadCoorXleft[0][0] = 73;
 	QuadCoorXright[0][0] = 135;
 	QuadCoorYup[0][0] = 52;
@@ -813,85 +893,6 @@ int Game::Execute()
 	SDL_GL_SetSwapInterval(1);
 	setup_opengl(700, 500);
 	WindowsSDLApi_ = new WindowsSDLApi();
-	for(int i=0;i<8;i++)
-		for (int j = 0; j < 8; j++)
-		{
-			Matrix[i][j] = 0;
-		}
-	Matrix[0][0] = 1;
-	Matrix[0][1] = 2;
-	Matrix[0][2] = 3;
-	Matrix[1][0] = 4;
-	Matrix[1][1] = 5;
-	Matrix[1][2] = 6;
-	Matrix[2][0] = 7;
-	Matrix[2][1] = 8;
-	Matrix[2][2] = 9;
-
-	Matrix[5][5] = 10;
-	Matrix[5][6] = 11;
-	Matrix[5][7] = 12;
-	Matrix[6][5] = 13;
-	Matrix[6][6] = 14;
-	Matrix[6][7] = 15;
-	Matrix[7][5] = 16;
-	Matrix[7][6] = 17;
-	Matrix[7][7] = 18;
-
-	ChessX[0] = -0.7;
-	ChessY[0] = 0.7;
-
-	ChessX[1] = -0.5;
-	ChessY[1] = 0.7;
-
-	ChessX[2] = -0.3;
-	ChessY[2] = 0.7;
-
-	ChessX[3] = -0.7;
-	ChessY[3] = 0.5;
-
-	ChessX[4] = -0.5;
-	ChessY[4] = 0.5;
-
-	ChessX[5] = -0.3;
-	ChessY[5] = 0.5;
-
-	ChessX[6] = -0.7;
-	ChessY[6] = 0.3;
-
-	ChessX[7] = -0.5;
-	ChessY[7] = 0.3;
-
-	ChessX[8] = -0.3;
-	ChessY[8] = 0.3;
-
-	ChessX[9] = 0.3;
-	ChessY[9] = -0.3;
-
-	ChessX[10] = 0.5;
-	ChessY[10] = -0.3;
-
-	ChessX[11] = 0.7;
-	ChessY[11] = -0.3;
-
-	ChessX[12] = 0.3;
-	ChessY[12] = -0.5;
-
-	ChessX[13] = 0.5;
-	ChessY[13] = -0.5;
-
-	ChessX[14] = 0.7;
-	ChessY[14] = -0.5;
-
-	ChessX[15] = 0.3;
-	ChessY[15] = -0.7;
-
-	ChessX[16] = 0.5;
-	ChessY[16] = -0.7;
-
-	ChessX[17] = 0.7;
-	ChessY[17] = -0.7;
-
 	SetCoordinats();
 	draw_screen();
 	SDL_GL_DeleteContext(context);
@@ -922,4 +923,5 @@ Game::~Game()
 	delete[] ChessY;
 	delete[] ai;
 	Ai.clear();
+	delete WindowsSDLApi_;
 }
