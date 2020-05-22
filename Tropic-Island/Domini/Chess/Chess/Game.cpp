@@ -905,4 +905,21 @@ void Game::Exit()
 }
 Game::~Game()
 {
+	for (int i = 0; i < 8; i++)
+	{
+		delete[] Matrix[i];
+		delete[] QuadCoorXleft[i];
+		delete[] QuadCoorXright[i];
+		delete[] QuadCoorYdown[i];
+		delete[] QuadCoorYup[i];
+	}
+	delete[] Matrix;
+	delete[] QuadCoorXleft;
+	delete[] QuadCoorXright;;
+	delete[] QuadCoorYdown;
+	delete[] QuadCoorYup;
+	delete[] ChessX;
+	delete[] ChessY;
+	delete[] ai;
+	Ai.clear();
 }
