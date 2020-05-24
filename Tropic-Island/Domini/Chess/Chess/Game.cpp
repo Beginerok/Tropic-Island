@@ -2,14 +2,15 @@
 #include <iostream>
 Game::Game()
 {
-	run = true;
-	Matrix = new int* [8];
+	run = true;//флаг признак нажатия кнопки выхода F5
+	Matrix = new int* [8];//Поле 64 ячейки - значения 0 - для пустой ячейки, для игрока каждая пешка-шашка от 1 до 9, для компьютера значения в матрице от 10 до 18
 	for (int i = 0; i < 8; i++)
 		Matrix[i] = new int[8];
-	QuadCoorXleft = new int* [8];
-	QuadCoorXright = new int* [8];
-	QuadCoorYdown = new int* [8];
-	QuadCoorYup = new int* [8];
+	//Квадраты координат нужны чтобы программа знала какие ячейки над указателем мыши, 64 квадрата
+	QuadCoorXleft = new int* [8];//каждой ячейки матрицы Matrix соответстует квадрат координат для мыши xleft означает левую координату x
+	QuadCoorXright = new int* [8];//xright - правая x
+	QuadCoorYdown = new int* [8];//верхняя y координата
+	QuadCoorYup = new int* [8];//нижняя y координата
 	for (int i = 0; i < 8; i++)
 	{
 		QuadCoorXleft[i] = new int[8];
@@ -17,14 +18,16 @@ Game::Game()
 		QuadCoorYdown[i] = new int[8];
 		QuadCoorYup[i] = new int[8];
 	}
-	ChessX = new double[18];
-	ChessY = new double[18];
-	ActiveX = -1;
-	ActiveY = -1;
-	Active = -1;
-	firstplayer = true;
-	secondplayer = false;
-	ai = new bool[18];
+	//Координаты пешек для отрисовки
+	ChessX = new double[18];//X
+	ChessY = new double[18];//Y
+	//Выделяемая пешка ее координаты и значения
+	ActiveX = -1;//X
+	ActiveY = -1;//Y
+	Active = -1;//Value
+	firstplayer = true;//флаг того что можете игрок 1й ходить
+	secondplayer = false;//флаг того что можете игрок 2й ходить
+	ai = new bool[18];//ячейки флаги того что пешка на финишной позиции
 	chessai tmp;
 	for (int i = 0; i < 18; i++)
 	{
@@ -33,12 +36,16 @@ Game::Game()
 		{
 			tmp.ai = ai[i];
 			tmp.value = i+1;
-			Ai.push_back(tmp);
+			Ai.push_back(tmp);//Вектор с флагами финиша каждой пешки для искуственного интеллекта
 		}
 	}
+	aicountfirstrow = 0;//счетчик кол-ва пешек ИИ(искуственного интеллекта) на верхней строчке(0-я)
+	aicountsecondrow = 0;//счетчик кол-ва пешек ИИ на предверхней строчке(1-я)
+	aicountthirdrow = 0;//счетчик кол-ва пешек ИИ на предпредверхней строчке(2-я)
 }
 void Game::setup_opengl(int width, int height)
 {
+	//Установка опенгл
 	glClearColor(0, 0, 0, 0);
 	glViewport(0, 0, width, height);
 	glShadeModel(GL_SMOOTH);
@@ -50,6 +57,7 @@ void Game::setup_opengl(int width, int height)
 }
 void Draw_Table()
 {
+	//Отрисовка поля линиями
 	//table
 	glVertex2f(-0.8, 0.8);
 	glVertex2f(-0.8, -0.8);
@@ -109,6 +117,7 @@ void Draw_Table()
 }
 void Draw_Circle()
 {
+	//Отрисовка круга(пешек-шахмат) черного
 	for (int i = 0; i <= 50; i++) {
 		float a = (float)i / 50.0f * 3.1415f * 2.0f;
 		glVertex2f(cos(a), sin(a));
@@ -116,6 +125,7 @@ void Draw_Circle()
 }
 void Draw_Circle_Fill()
 {
+	//Отрисовка круга(пешек-шахмат) белого
 	for (int i = 0; i <= 50; i++) {
 		float a = (float)i / 50.0f * 3.1415f * 2.0f;
 		glVertex2f(0.0, 0.0);
@@ -124,66 +134,71 @@ void Draw_Circle_Fill()
 }
 void Game::Move_Up()
 {
-	if (Active > 0 && ActiveX != 0 && Matrix[ActiveX-1][ActiveY] == 0)
+	//Ход игрока вверх
+	if (Active > 0 && ActiveX != 0 && Matrix[ActiveX-1][ActiveY] == 0)//Если выделенная пешка и не самая верхняя строчка и ячейка выше пустая
 	{
-		Matrix[ActiveX-1][ActiveY] = Matrix[ActiveX][ActiveY] ;
-		Matrix[ActiveX][ActiveY] = 0;
-		ChessY[Active-1] += 0.2;
-		ActiveX = -1;
-		ActiveY = -1;
-		Active = -1;
-		std::cout << "MoveUp " << Active << std::endl;
+		Matrix[ActiveX-1][ActiveY] = Matrix[ActiveX][ActiveY] ;//присваиваем ячейке выше текущюю(выделенную пешку)
+		Matrix[ActiveX][ActiveY] = 0;//затираем старую ячейку на пустую 
+		ChessY[Active-1] += 0.2;//перемещаем координату У пешки вверх для отрисовки
+		ActiveX = -1;//стираем координаты выделенной пешки
+		ActiveY = -1;//стираем координаты выделенной пешки
+		Active = -1;//делаем неактивной текущую выделенную фигуру
+		std::cout << " Player MoveUp " << Active << std::endl;
 		firstplayer = false;
-		secondplayer = true;
+		secondplayer = true;//меняем флаги хода от игрока к ИИ
 	}
 }
 void Game::Move_Down()
 {
-	if (Active > 0 && ActiveX != 7 && Matrix[ActiveX+1][ActiveY] == 0)
+	//Ход игрока вниз
+	if (Active > 0 && ActiveX != 7 && Matrix[ActiveX+1][ActiveY] == 0)//Если выделенная пешка и не самая нижняя строчка и ячейка ниже пустая
 	{
-		Matrix[ActiveX+1][ActiveY] = Matrix[ActiveX][ActiveY] ;
-		Matrix[ActiveX][ActiveY] = 0; 
-		ChessY[Active-1] -= 0.2;
-		ActiveX = -1;
-		ActiveY = -1;
-		Active = -1;
-		std::cout << "MoveDown " << Active << std::endl;
+		Matrix[ActiveX+1][ActiveY] = Matrix[ActiveX][ActiveY] ;//присваиваем ячейке ниже текущюю(выделенную пешку)
+		Matrix[ActiveX][ActiveY] = 0;//затираем старую ячейку на пустую 
+		ChessY[Active-1] -= 0.2;//перемещаем координату У пешки вниз для отрисовки
+		ActiveX = -1;//стираем координаты выделенной пешки
+		ActiveY = -1;//стираем координаты выделенной пешки
+		Active = -1;//делаем неактивной текущую выделенную фигуру
+		std::cout << "Player MoveDown " << Active << std::endl;
 		firstplayer = false;
-		secondplayer = true;
+		secondplayer = true;//меняем флаги хода от игрока к ИИ
 	}
 }
 void Game::Move_Right()
 {
-	if (Active > 0 && ActiveY != 7 && Matrix[ActiveX][ActiveY+1] == 0)
+	//Ход игрока вправо
+	if (Active > 0 && ActiveY != 7 && Matrix[ActiveX][ActiveY+1] == 0)//Если выделенная пешка и не самая правая строчка и ячейка справа пустая
 	{
-		Matrix[ActiveX][ActiveY+1] = Matrix[ActiveX][ActiveY] ;
-		Matrix[ActiveX][ActiveY] = 0;
-		ChessX[Active-1] += 0.2;
-		ActiveX = -1;
-		ActiveY = -1;
-		Active = -1;
+		Matrix[ActiveX][ActiveY+1] = Matrix[ActiveX][ActiveY] ;//присваиваем ячейке справа текущюю(выделенную пешку)
+		Matrix[ActiveX][ActiveY] = 0;//затираем старую ячейку на пустую 
+		ChessX[Active-1] += 0.2;//перемещаем координату Х пешки вправо для отрисовки
+		ActiveX = -1;//стираем координаты выделенной пешки
+		ActiveY = -1;//стираем координаты выделенной пешки
+		Active = -1;//делаем неактивной текущую выделенную фигуру
 		std::cout << "MoveRight " << Active << std::endl;
 		firstplayer = false;
-		secondplayer = true;
+		secondplayer = true;//меняем флаги хода от игрока к ИИ
 	}
 }
 void Game::Move_Left()
 {
-	if (Active > 0 && ActiveY != 0 && Matrix[ActiveX][ActiveY-1] == 0)
+	//Ход игрока влево 
+	if (Active > 0 && ActiveY != 0 && Matrix[ActiveX][ActiveY-1] == 0)//Если выделенная пешка и не самая левая строчка и ячейка слева пустая
 	{
-		Matrix[ActiveX][ActiveY-1] = Matrix[ActiveX][ActiveY] ;
-		Matrix[ActiveX][ActiveY] = 0;
-		ChessX[Active-1] -= 0.2;
-		ActiveX = -1;
-		ActiveY = -1;
-		Active = -1;
+		Matrix[ActiveX][ActiveY-1] = Matrix[ActiveX][ActiveY] ;//присваиваем ячейке слева текущюю(выделенную пешку)
+		Matrix[ActiveX][ActiveY] = 0;//затираем старую ячейку на пустую 
+		ChessX[Active-1] -= 0.2;//перемещаем координату Х пешки влево для отрисовки
+		ActiveX = -1;//стираем координаты выделенной пешки
+		ActiveY = -1;//стираем координаты выделенной пешки
+		Active = -1;//делаем неактивной текущую выделенную фигуру
 		std::cout << "MoveLeft " << Active << std::endl;
 		firstplayer = false;
-		secondplayer = true;
+		secondplayer = true;//меняем флаги хода от игрока к ИИ
 	}
 }
 void Game::CheckFinishGame()
 {
+	//считаем кол-во пешек на финишных позициях для игрока и искуственного интеллекта
 	int countfirstplayer=0, countsecondplayer=0;
 	for (int i = 5; i < 8; i++)
 		for (int j = 5; j < 8; j++)
@@ -196,16 +211,37 @@ void Game::CheckFinishGame()
 			if (Matrix[i][j] > 9)
 				countsecondplayer++;
 	if (countsecondplayer == 9)
-		std::cout << "second player win" << std::endl;
+		std::cout << "second player AI win" << std::endl;
 }
 bool Game::Move_UpAI(int i,int j)
 {
-	if (i != 0 && Matrix[i - 1][j] == 0)
+	//Ход вверх искуственного интеллекта вверх(флаг возвращения определяет успешность хода)
+	if (i != 0 && Matrix[i - 1][j] == 0)//по аналогии с игроком если строчка не самая верхняя и ячейка сверху пустая
 	{
-		Matrix[i - 1][j] = Matrix[i][j];
-		ChessY[Matrix[i][j] - 1] += 0.2;
-		Matrix[i][j] = 0;
+		if (i - 1 == 0 && aicountfirstrow > 2)//если счетчик кол-ва пешек на самой верхней строчке от 3х
+			return false;
+		if (i - 1 == 1 && aicountsecondrow > 2)//если счетчик кол-ва пешек на предверхней строчке от 3х
+			return false;
+		if (i - 1 == 2 && aicountthirdrow > 2)//если счетчик кол-ва пешек на предпредверхней строчке от 3х
+			return false;
+		Matrix[i - 1][j] = Matrix[i][j];//ячейке сверху присваеваем пешку текущей ячейки
+		ChessY[Matrix[i][j] - 1] += 0.2;//смещаем координату Y пешки для отрисовки
+		Matrix[i][j] = 0;//стираем старую ячейку на пустую
 		std::cout << "MoveUp AI" << std::endl;
+		switch (i - 1)//смотрим кол-во пешек на трех верхних строчках
+		{
+		case 0:
+			aicountfirstrow++;
+			aicountsecondrow--;//переместилась со 2 на 1
+			break;
+		case 1:
+			aicountsecondrow++;
+			aicountthirdrow--;//переместилась с 3 на 2
+			break;
+		case 2:
+			aicountthirdrow++;//переместилась на 3
+			break;
+		}
 		return true;
 	}
 	else
@@ -213,12 +249,27 @@ bool Game::Move_UpAI(int i,int j)
 }
 bool Game::Move_DownAI(int i, int j)
 {
-	if (i != 7 && Matrix[i + 1][j] == 0)
+	//Ход искуственного интеллекта вверх(флаг возвращения определяет успешность хода)
+	if (i != 7 && Matrix[i + 1][j] == 0)//по аналогии с игроком если строчка не самая нижняя и ячейка снизу пустая
 	{
-		Matrix[i + 1][j] = Matrix[i][j];
-		ChessY[Matrix[i][j] - 1] -= 0.2;
-		Matrix[i][j] = 0;
+		Matrix[i + 1][j] = Matrix[i][j];//ячейке снизу присваеваем пешку текущей ячейки
+		ChessY[Matrix[i][j] - 1] -= 0.2;//смещаем координату Y пешки для отрисовки
+		Matrix[i][j] = 0;//стираем старую ячейку на пустую
 		std::cout << "MoveDown AI"<< std::endl;
+		switch (i)//смотрим кол-во пешек на трех верхних строчках
+		{
+		case 0:
+			aicountfirstrow--;
+			aicountsecondrow++;//переместилась с 1 на 2
+			break;
+		case 1:
+			aicountsecondrow--;
+			aicountthirdrow++;//переместилась с 2 на 3
+			break;
+		case 2:
+			aicountthirdrow--;//переместилась с 3
+			break;
+		}
 		return true;
 	}
 	else
@@ -226,11 +277,12 @@ bool Game::Move_DownAI(int i, int j)
 }
 bool Game::Move_RightAI(int i, int j)
 {
-	if (j != 7 && Matrix[i][j + 1] == 0)
+	//Ход вправо искуственного интеллекта вверх(флаг возвращения определяет успешность хода)
+	if (j != 7 && Matrix[i][j + 1] == 0)//по аналогии с игроком если строчка не самая правая и ячейка справа пустая
 	{
-		Matrix[i][j + 1] = Matrix[i][j];
-		ChessX[Matrix[i][j] - 1] += 0.2;
-		Matrix[i][j] = 0;
+		Matrix[i][j + 1] = Matrix[i][j];//ячейке справа присваеваем пешку текущей ячейки
+		ChessX[Matrix[i][j] - 1] += 0.2;//смещаем координату X пешки для отрисовки
+		Matrix[i][j] = 0;//стираем старую ячейку на пустую
 		std::cout << "MoveRight AI" << std::endl;
 		return true;
 	}
@@ -239,11 +291,12 @@ bool Game::Move_RightAI(int i, int j)
 }
 bool Game::Move_LeftAI(int i, int j)
 {
-	if (j != 0 && Matrix[i][j - 1] == 0)
+	//Ход влево искуственного интеллекта вверх(флаг возвращения определяет успешность хода)
+	if (j != 0 && Matrix[i][j - 1] == 0)//по аналогии с игроком если строчка не левая и ячейка слева пустая
 	{
-		Matrix[i][j - 1] = Matrix[i][j];
-		ChessX[Matrix[i][j] - 1] -= 0.2;
-		Matrix[i][j] = 0;
+		Matrix[i][j - 1] = Matrix[i][j];//ячейке слева присваеваем пешку текущей ячейки
+		ChessX[Matrix[i][j] - 1] -= 0.2;//смещаем координату X пешки для отрисовки
+		Matrix[i][j] = 0;//стираем старую ячейку на пустую
 		std::cout << "MoveLeft AI" <<std::endl;
 		return true;
 	}
@@ -252,6 +305,7 @@ bool Game::Move_LeftAI(int i, int j)
 }
 POINT Game::FindMatrix(int value)
 {
+	//Поиск в матрице пешки(у каждой свое значение) и вовзрат ее индексов
 	POINT tmp;
 	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++)
@@ -264,7 +318,14 @@ POINT Game::FindMatrix(int value)
 }
 bool Game::Check_MoveUp(int value)
 {
+	//Проверка ИИ может ли походить вверх
 	POINT p = FindMatrix(value);
+	if (p.x - 1 == 0 && aicountfirstrow > 2)//кол-во пешек в самой верхней строчке
+		return false;
+	if (p.x - 1 == 1 && aicountsecondrow > 2)//кол-во пешек в предверхней строчке
+		return false;
+	if (p.x - 1 == 2 && aicountthirdrow > 2)//кол-во пешек в преддпредверхней строчке
+		return false;
 	if (p.x != 0 && Matrix[p.x-1][p.y] == 0)
 		return true;
 	else
@@ -272,6 +333,7 @@ bool Game::Check_MoveUp(int value)
 }
 bool Game::Check_MoveLeft(int value)
 {
+	//Проверка ИИ может ли походить влево
 	POINT p = FindMatrix(value);
 	if (p.y != 0 && Matrix[p.x][p.y-1] == 0)
 		return true;
@@ -280,6 +342,7 @@ bool Game::Check_MoveLeft(int value)
 }
 bool Game::Check_MoveDown(int value)
 {
+	//Проверка ИИ может ли походить вниз
 	POINT p = FindMatrix(value);
 	if (p.x != 7 && Matrix[p.x + 1][p.y] == 0)
 		return true;
@@ -288,6 +351,7 @@ bool Game::Check_MoveDown(int value)
 }
 bool Game::Check_MoveRight(int value)
 {
+	//Проверка ИИ может ли походить вправо
 	POINT p = FindMatrix(value);
 	if (p.y != 7 && Matrix[p.x][p.y + 1] == 0)
 		return true;
@@ -296,6 +360,7 @@ bool Game::Check_MoveRight(int value)
 }
 struct find_s
 {
+	//поиск значения пешки в структуре chessai
 	int value;
 	find_s(int value) : value(value) {}
 	bool operator () (const chessai& m) const
@@ -305,17 +370,19 @@ struct find_s
 };
 void Game::ReccurentWalk()
 {
-	current = -1, currentI = -1, currentJ = -1;
-	for (int i = 0; i < Ai.size(); i++)
-		if (!Ai[i].ai)
+	//Реккурентный ход ИИ
+	current = -1, currentI = -1, currentJ = -1;//изначально выделенная пешка не определена
+	for (int i = 0; i < Ai.size(); i++)//поиск по массиву
+		if (!Ai[i].ai)//если не завершены ходы для конкретных пешек
 		{
-			if (Check_MoveUp(Ai[i].value) || Check_MoveLeft(Ai[i].value))
+			if (Check_MoveUp(Ai[i].value) || Check_MoveLeft(Ai[i].value))//Можно ли походить вверх или влево?
 			{
-				current = Ai[i].value;
+				current = Ai[i].value;//запоминаем текущую пешку
 				break;
 			}
 			else
 			{
+				//Если походить нельзя стираем из массива ходов пешку
 				std::vector<chessai>::iterator position = std::find_if(Ai.begin(), Ai.end(), find_s(Ai[i].value));
 				if (position != Ai.end()) // == myVector.end() means the element was not found
 					Ai.erase(position);
@@ -323,13 +390,13 @@ void Game::ReccurentWalk()
 		}
 	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++)
-			if (Matrix[i][j] == current)
+			if (Matrix[i][j] == current)//ищем в матрице пешку и запоминаем индексы
 			{
 				currentI = i;
 				currentJ = j;
 				break;
 			}
-	if (currentI != -1 && currentJ != -1)
+	if (currentI != -1 && currentJ != -1)//если какая либо найдена ходим либо вверх либо влево
 	{
 		if (!Move_UpAI(currentI, currentJ))
 			if (!Move_LeftAI(currentI, currentJ))
@@ -339,6 +406,7 @@ void Game::ReccurentWalk()
 	}
 	else
 	{
+		//если не найдена заполняем массив ходов снова пешками
 		chessai tmp;
 		for (int i = 0; i < 18; i++)
 		{
@@ -350,6 +418,7 @@ void Game::ReccurentWalk()
 				Ai.push_back(tmp);
 			}
 		}
+		//ищем ту которая может походить вправо или вниз
 		for (int i = 0; i < Ai.size(); i++)
 			if (!Ai[i].ai)
 			{
@@ -360,11 +429,13 @@ void Game::ReccurentWalk()
 				}
 				else
 				{
+					//если не может то стираем из массива
 					std::vector<chessai>::iterator position = std::find_if(Ai.begin(), Ai.end(), find_s(Ai[i].value));
 					if (position != Ai.end()) // == Vector.end() means the element was not found
 						Ai.erase(position);
 				}
 			}
+		//ищем ее индексы в матрице
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++)
 				if (Matrix[i][j] == current)
@@ -373,6 +444,7 @@ void Game::ReccurentWalk()
 					currentJ = j;
 					break;
 				}
+		//ходим вправо или вниз
 		if(!Move_RightAI(currentI, currentJ))
 			if (!Move_DownAI(currentI, currentJ))
 			{
@@ -380,25 +452,27 @@ void Game::ReccurentWalk()
 			}
 	}
 	chessai tmp;
-	for (int i = 0; i < 18; i++)
-	{
-		ai[i] = false;
-		if (i > 8)
+	if(Ai.empty())//если список ходов пуст заполняем снова всеми
+		for (int i = 0; i < 18; i++)
 		{
-			tmp.ai = ai[i];
-			tmp.value = i + 1;
-			Ai.push_back(tmp);
+			ai[i] = false;
+			if (i > 8)
+			{
+				tmp.ai = ai[i];
+				tmp.value = i + 1;
+				Ai.push_back(tmp);
+			}
 		}
-	}
 }
 void Game::AI()
 {
-	if (secondplayer)
+	//Метод искусственного интеллекта
+	if(secondplayer)
 	{
 		secondplayer = false;
-		firstplayer = true;
-		ReccurentWalk();
-		if (currentI == 0 && currentJ == 0)
+		firstplayer = true;//меняем флаги хода игрока и ИИ
+		ReccurentWalk();//Ход ИИ
+		if (currentI == 0 && currentJ == 0)//проверка 9 позиций для завершения игры
 		{
 			ai[9] = true;
 			//ReccurentWalk();
@@ -447,12 +521,13 @@ void Game::AI()
 }
 void Game::SetCoordinats()
 {
-	//
+	//Заполняем матрицу пустыми ячейками
 	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++)
 		{
 			Matrix[i][j] = 0;
 		}
+	//Пешки для игрока
 	Matrix[0][0] = 1;
 	Matrix[0][1] = 2;
 	Matrix[0][2] = 3;
@@ -462,7 +537,7 @@ void Game::SetCoordinats()
 	Matrix[2][0] = 7;
 	Matrix[2][1] = 8;
 	Matrix[2][2] = 9;
-
+	//Пешки для ИИ
 	Matrix[5][5] = 10;
 	Matrix[5][6] = 11;
 	Matrix[5][7] = 12;
@@ -473,6 +548,7 @@ void Game::SetCoordinats()
 	Matrix[7][6] = 17;
 	Matrix[7][7] = 18;
 
+	//Координаты пешек Х и У
 	ChessX[0] = -0.7;
 	ChessY[0] = 0.7;
 
@@ -526,7 +602,8 @@ void Game::SetCoordinats()
 
 	ChessX[17] = 0.7;
 	ChessY[17] = -0.7;
-	//
+
+	//Координаты квадратов для мыши
 	QuadCoorXleft[0][0] = 73;
 	QuadCoorXright[0][0] = 135;
 	QuadCoorYup[0][0] = 52;
@@ -849,12 +926,13 @@ void Game::SetCoordinats()
 }
 void Game::BeganActive()
 {
+	//Ходы игрока тут
 	for(int i=0;i<8;i++)
 		for (int j = 0; j < 8; j++)
 		{
-			if (Active != -1)
+			if (Active != -1)//если выделенная пешка не пустота(точнее уже выделили пешку)
 			{
-				if (oldx - WindowsSDLApi_->point.x > 0 && oldx - WindowsSDLApi_->point.x > 20)
+				if (oldx - WindowsSDLApi_->point.x > 0 && oldx - WindowsSDLApi_->point.x > 20)//сравниваем старые и новые кординаты нажатия мыши и ходим
 					Move_Left();
 				if (oldx - WindowsSDLApi_->point.x < 0 && oldx - WindowsSDLApi_->point.x <-20)
 					Move_Right();
@@ -862,19 +940,18 @@ void Game::BeganActive()
 					Move_Up();
 				if (oldy - WindowsSDLApi_->point.y < 0 && oldy - WindowsSDLApi_->point.y < -20)
 					Move_Down();
-				oldx = WindowsSDLApi_->point.x;
+				oldx = WindowsSDLApi_->point.x;//меняем старые координаты мыши на текущие
 				oldy = WindowsSDLApi_->point.y;
 				return;
 			}
 			if (WindowsSDLApi_->point.x > QuadCoorXleft[i][j] && WindowsSDLApi_->point.x < QuadCoorXright[i][j] &&
 				WindowsSDLApi_->point.y > QuadCoorYup[i][j] && WindowsSDLApi_->point.y < QuadCoorYdown[i][j] && Matrix[i][j] != 0
-				&& oldx!=WindowsSDLApi_->point.x && oldy!=WindowsSDLApi_->point.y)
+				&& oldx!=WindowsSDLApi_->point.x && oldy!=WindowsSDLApi_->point.y)//смотрим в какой квадрат попали координаты клика мыши
 			{
 				if ((Matrix[i][j] > 0 && Matrix[i][j] < 10 && firstplayer) || (Matrix[i][j]>9 && secondplayer))
 				{
 					if (Matrix[i][j] > 0 && Matrix[i][j] < 10 && firstplayer)
 					{
-						
 						std::cout << "first player walk " << firstplayer << " " << secondplayer << std::endl;
 					}
 					if (Matrix[i][j] > 9 && secondplayer)
@@ -883,9 +960,9 @@ void Game::BeganActive()
 						firstplayer = true;
 						std::cout << "second player walk " << firstplayer << " " << secondplayer << std::endl;
 					}
-					Active = Matrix[i][j];
+					Active = Matrix[i][j];//выделяем пешку из матрицы
+					ActiveX = i;//запоминаем индексы её
 					ActiveY = j;
-					ActiveX = i;
 					oldx = WindowsSDLApi_->point.x, oldy = WindowsSDLApi_->point.y;
 					std::cout << ActiveX << " " << ActiveY << std::endl;
 					std::cout << oldx << " " << oldy << std::endl;
@@ -895,9 +972,9 @@ void Game::BeganActive()
 			}
 		}
 }
-
 void Game::draw_screen()
 {
+	//Рендер
 	while (run)
 	{
 		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -905,12 +982,11 @@ void Game::draw_screen()
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClearDepth(1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /*| GL_COLOR_MATERIAL*/);
-		glEnable(GL_TEXTURE_2D);
-
+		//Рисуем поле
 		glBegin(GL_LINES);
 		Draw_Table();
 		glEnd();
-
+		//Рисуем черные пешки игрока
 		for (int i = 0; i < 9; i++)
 		{
 			glPushMatrix();
@@ -921,6 +997,7 @@ void Game::draw_screen()
 			glEnd();
 			glPopMatrix();
 		}
+		//Рисуем белые пешки ИИ
 		for (int i = 9; i < 18; i++)
 		{
 			glPushMatrix();
@@ -931,21 +1008,21 @@ void Game::draw_screen()
 			glEnd();
 			glPopMatrix();
 		}
-		glDisable(GL_TEXTURE_2D);
+
 		SDL_GL_SwapWindow(window);
 		SDL_PollEvent(&event_);
 		SDL_PumpEvents();
 		WindowsSDLApi_->Update(event_);
-		CheckFinishGame();
-		BeganActive();
-		AI();
-		run = !WindowsSDLApi_->getdone();
+		CheckFinishGame();//проверка окончания игры
+		BeganActive();//Обработчик мыши для игрока
+		AI();//Модуль ИИ
+		run = !WindowsSDLApi_->getdone();//Проверка нажатия кнопки закрытия приложения
 	}
 	Exit();
 }
 int Game::Execute()
 {
-	bool fullscreen = false;
+	//Основной поток игры
 	SDL_GLContext context;
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("Chess", 10, 10,700 ,500, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
@@ -966,6 +1043,7 @@ void Game::Exit()
 }
 Game::~Game()
 {
+	//Очистка памяти
 	for (int i = 0; i < 8; i++)
 	{
 		delete[] Matrix[i];

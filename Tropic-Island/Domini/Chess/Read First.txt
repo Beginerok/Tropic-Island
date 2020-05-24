@@ -1,3 +1,3 @@
-The person controls the black circles, the computer controls the white ones.
-To lose weight chess activate the desired click move the mouse to the desired cell and click again to move. 
-Then wait for the computer to walk around. The computer is very stupid
+A person controls a black circle, a computer controls a white one.
+To select a pawn, activate chess with the appropriate mouse click, move the mouse to the desired cell, and click again to move the pawn.
+Then wait for the computer to walk. The computer is very stupid

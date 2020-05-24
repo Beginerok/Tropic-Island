@@ -1,11 +1,11 @@
 ﻿// Chess.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include "Game.h"
-#include <iostream>
 int main(int argc, char** argv)
 {
 	Game* game = new Game();
 	game->Execute();
+	delete game;
 	return 0;
 }
 
