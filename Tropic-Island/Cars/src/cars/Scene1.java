@@ -32,8 +32,9 @@ public class Scene1 {
     }
     static final int CountDrum = 5;
     static final int CountTextureOnDrum = 6;
-    static final int CountTexture = 1;
+    static final int CountTexture = 8;
     public Vector<String> vectordrum;
+    
     int CountIndexTexture;
     Image[] image;
     File im;
@@ -42,6 +43,7 @@ public class Scene1 {
     
     float[] rotate;
     volatile boolean[] startrotate;
+    Vector<String> vectorram;
     int Scene()
     {
 	image = new Image[CountTexture];
@@ -54,6 +56,7 @@ public class Scene1 {
         startrotate = new boolean[5];
         for(int i=0;i<5;i++)
             startrotate[i] = false;
+        vectorram = new Vector<String>();
         return 0;
     }
     int LoadDrum(GLAutoDrawable drawable) throws IOException
@@ -64,69 +67,71 @@ public class Scene1 {
 	{
 		vectordrum.add("auto1");//1
                 CountIndexTexture++;
-		im = new File("C:\\Users\\Евгений\\Desktop\\Tropic-Island\\Tropic-Island\\Cars\\content\\drum\\auto1.png");
+		//im = new File("C:\\Users\\Евгений\\Desktop\\Tropic-Island\\Tropic-Island\\Cars\\content\\drum\\auto1.png");
+                im = new File("content\\drum\\auto1.png");
                 t = TextureIO.newTexture(im, true);
                 img = new Image(t.getTextureObject(gl),"auto1",CountIndexTexture - 1);
                 image[CountIndexTexture - 1] = img;
                
 	}
-        /*
+        
 	//if (iter == 1)
 	{
 		vectordrum.add("auto2");//2
+                CountIndexTexture++;
 		im = new File("content\\drum\\auto2.png");
                 t = TextureIO.newTexture(im, true);
-                image[CountIndexTexture - 1].IndexTexture = t.getTextureObject(gl);
-		image[CountIndexTexture - 1].Name = "auto2";
-		image[CountIndexTexture - 1].number = CountIndexTexture - 1;
+                img = new Image(t.getTextureObject(gl),"auto2",CountIndexTexture - 1);
+                image[CountIndexTexture - 1] = img;
 	}
 	//if (iter == 2)
 	{
 
 		vectordrum.add("auto3");//3
+                CountIndexTexture++;
 		im = new File("content\\drum\\auto3.png");
                 t = TextureIO.newTexture(im, true);
-                image[CountIndexTexture - 1].IndexTexture = t.getTextureObject(gl);
-		image[CountIndexTexture - 1].Name = "auto3";
-		image[CountIndexTexture - 1].number = CountIndexTexture - 1;
+                img = new Image(t.getTextureObject(gl),"auto3",CountIndexTexture - 1);
+                image[CountIndexTexture - 1] = img;
 	}
 	//if (iter == 3)
 	{
 		vectordrum.add("auto4");//4
+                CountIndexTexture++;
 		im = new File("content\\drum\\auto4.png");
                 t = TextureIO.newTexture(im, true);
-                image[CountIndexTexture - 1].IndexTexture = t.getTextureObject(gl);
-		image[CountIndexTexture - 1].Name = "auto4";
-		image[CountIndexTexture - 1].number = CountIndexTexture - 1;
+                img = new Image(t.getTextureObject(gl),"auto4",CountIndexTexture - 1);
+                image[CountIndexTexture - 1] = img;
 	}
 	//if (iter == 4)
 	{
 		vectordrum.add("auto5");//5
+                CountIndexTexture++;
 		im = new File("content\\drum\\auto5.png");
                 t = TextureIO.newTexture(im, true);
-                image[CountIndexTexture - 1].IndexTexture = t.getTextureObject(gl);
-		image[CountIndexTexture - 1].Name = "auto5";
-		image[CountIndexTexture - 1].number = CountIndexTexture - 1;
+                img = new Image(t.getTextureObject(gl),"auto5",CountIndexTexture - 1);
+                image[CountIndexTexture - 1] = img;
 	}
         //if (iter == 15)
 	{
 		vectordrum.add("bonus");//16
+                CountIndexTexture++;
 		im = new File("content\\drum\\bonus.png");
                 t = TextureIO.newTexture(im, true);
-                image[CountIndexTexture - 1].IndexTexture = t.getTextureObject(gl);
-		image[CountIndexTexture - 1].Name = "bonus";
-		image[CountIndexTexture - 1].number = CountIndexTexture - 1;
+                img = new Image(t.getTextureObject(gl),"bonus",CountIndexTexture - 1);
+                image[CountIndexTexture - 1] = img;
 	}
+        
 	//if (iter == 16)
 	{
 		vectordrum.add("wild");//17
+                CountIndexTexture++;
 		im = new File("content\\drum\\wild.jpg");
                 t = TextureIO.newTexture(im, true);
-                image[CountIndexTexture - 1].IndexTexture = t.getTextureObject(gl);
-		image[CountIndexTexture - 1].Name = "wild";
-		image[CountIndexTexture - 1].number = CountIndexTexture - 1;
+                img = new Image(t.getTextureObject(gl),"wild",CountIndexTexture - 1);
+                image[CountIndexTexture - 1] = img;
 	}
-        */
+        
 	//if (iter > 15)
 		return 0;
 	//else
@@ -170,7 +175,7 @@ public class Scene1 {
 			rotate[i] = 0.0f;
 		}
 	}
-}
+    }
     void ShowDrum(int countdrums, int counttextureondrums,Vector<String> drum,final GL2 gl)
     {
 	int k = -1;
@@ -439,8 +444,8 @@ public class Scene1 {
 	gl.glEnd();
 
 }
-void EnablePolygonFrontMiddle(float xleft, float xright, float ydown, float yup,final GL2 gl)
-{
+    void EnablePolygonFrontMiddle(float xleft, float xright, float ydown, float yup,final GL2 gl)
+    {
 	gl.glBegin(GL2.GL_POLYGON);
 
 	gl.glTexCoord2f(1.0f, 1.0f);
@@ -457,8 +462,8 @@ void EnablePolygonFrontMiddle(float xleft, float xright, float ydown, float yup,
 
 	gl.glEnd();
 }
-void EnablePolygonFrontDown(float xleft, float xright, float ydown, float yup,final GL2 gl)
-{
+    void EnablePolygonFrontDown(float xleft, float xright, float ydown, float yup,final GL2 gl)
+    {
 	gl.glBegin(GL2.GL_POLYGON);
 
 	gl.glTexCoord2f(1.0f, 1.0f);
@@ -475,8 +480,8 @@ void EnablePolygonFrontDown(float xleft, float xright, float ydown, float yup,fi
 
 	gl.glEnd();
 }
-void EnablePolygonBackUp(float xleft, float xright, float ydown, float yup,final GL2 gl)
-{
+    void EnablePolygonBackUp(float xleft, float xright, float ydown, float yup,final GL2 gl)
+    {
 	gl.glBegin(GL2.GL_POLYGON);
 
 	gl.glTexCoord2f(1.0f, 1.0f);
@@ -493,8 +498,8 @@ void EnablePolygonBackUp(float xleft, float xright, float ydown, float yup,final
 
 	gl.glEnd();
 }
-void EnablePolygonBackMiddle(float xleft, float xright, float ydown, float yup,final GL2 gl)
-{
+    void EnablePolygonBackMiddle(float xleft, float xright, float ydown, float yup,final GL2 gl)
+    {
 	gl.glBegin(GL2.GL_POLYGON);
 
 	gl.glTexCoord2f(1.0f, 1.0f);
@@ -511,8 +516,8 @@ void EnablePolygonBackMiddle(float xleft, float xright, float ydown, float yup,f
 
 	gl.glEnd();
 }
-void EnablePolygonBackDown(float xleft, float xright, float ydown, float yup,final GL2 gl)
-{
+    void EnablePolygonBackDown(float xleft, float xright, float ydown, float yup,final GL2 gl)
+    {
 	gl.glBegin(GL2.GL_POLYGON);
 
 	gl.glTexCoord2f(1.0f, 1.0f);
@@ -529,4 +534,53 @@ void EnablePolygonBackDown(float xleft, float xright, float ydown, float yup,fin
 
 	gl.glEnd();
     }
+    void LoadBorder(GLAutoDrawable drawable) throws IOException
+    {
+        Image img;
+        final GL2 gl = drawable.getGL().getGL2();
+        //if (iter == 0)
+	{
+		vectorram.add("border");//1
+                CountIndexTexture++;
+		im = new File("content\\border.png");
+                t = TextureIO.newTexture(im, true);
+                img = new Image(t.getTextureObject(gl),"border",CountIndexTexture - 1);
+                image[CountIndexTexture - 1] = img;
+               
+	}
+
+    }
+    void ShowBorder(final GL2 gl)
+    {
+	gl.glEnable(GL2.GL_ALPHA_TEST);
+	gl.glEnable(GL2.GL_BLEND);
+	
+	//gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
+	gl.glTexEnvf(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_BLEND);
+	
+	gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE);
+	gl.glAlphaFunc(GL2.GL_GREATER, 0.0f);
+	
+	gl.glBindTexture(GL2.GL_TEXTURE_2D, image[FindTexture("border")].IndexTexture);
+
+	gl.glBegin(GL2.GL_POLYGON);
+
+	gl.glTexCoord2f(1.0f, 1.0f);
+	gl.glVertex3f(1.0f, 1.0f, 0.9f);
+
+	gl.glTexCoord2f(1.f, 0.0f);
+	gl.glVertex3f(1.0f, -1.0f, 0.9f);
+
+	gl.glTexCoord2f(0.0f, 0.0f);
+	gl.glVertex3f(-1.0f, -1.0f, 0.9f);
+
+	gl.glTexCoord2f(0.0f, 1.0f);
+	gl.glVertex3f(-1.0f, 1.0f, 0.9f);
+
+	gl.glEnd();
+
+	gl.glDisable(GL2.GL_BLEND);
+	gl.glDisable(GL2.GL_ALPHA_TEST);
+    }
 }
+

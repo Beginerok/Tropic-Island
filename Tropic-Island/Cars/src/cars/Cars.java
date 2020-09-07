@@ -34,6 +34,9 @@ import com.jogamp.opengl.glu.*;
 import javax.swing.JFrame;
 
 import com.jogamp.opengl.util.FPSAnimator;
+import java.security.SecureRandom;
+
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,15 +54,16 @@ public class Cars implements GLEventListener {
    static Scene1 scene;
    static Vector<String> drum;
    static boolean b;
+   static SecureRandom random;
    @Override
    public void display(GLAutoDrawable drawable) {
       final GL2 gl = drawable.getGL().getGL2();
       gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
       gl.glLoadIdentity(); // Reset The View
       gl.glTranslatef(0f, 0f, -3.0f);
-      
       scene.ShowDrum(5, 6, drum, gl);
-
+      scene.ShowBorder(gl);
+      
       gl.glFlush();
    }
    
@@ -84,6 +88,7 @@ public class Cars implements GLEventListener {
       
       try {
            scene.LoadDrum(drawable);
+           scene.LoadBorder(drawable);
       } catch (IOException ex) {
            Logger.getLogger(Cars.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -99,22 +104,39 @@ public class Cars implements GLEventListener {
 			
       final float h = (float) width / (float) height;
       gl.glViewport(0, 0, width, height);
+      //gl.glMatrixMode(GL2.GL_MODELVIEW);
       gl.glMatrixMode(GL2.GL_PROJECTION);
       gl.glLoadIdentity();
-		
+      
+      glu.gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+      //glu.gluPerspective(189.0f, 0.5, 0.6, 0.6);
       glu.gluPerspective(45.0f, h, 1.0, 20.0);
       gl.glMatrixMode(GL2.GL_MODELVIEW);
       gl.glLoadIdentity();
    }
- 
+   static int Random(ArrayList<String> vector)
+   {
+        int min = 0, max = vector.size()-1;
+        return min + random.nextInt(max - min + 1);
+   }
    public static void main(String[] args) {
-       b = false;
-   Cars r = new Cars();
+      ArrayList<String> vector = new ArrayList<String>();
+      vector.add("auto1");
+      vector.add("auto2");
+      vector.add("auto3");
+      vector.add("auto4");
+      vector.add("auto5");
+      vector.add("bonus");
+      vector.add("wild");
+      random = new SecureRandom();
+      b = false;
+      Cars r = new Cars();
       scene = new Scene1();
       scene.Scene();
       drum = new Vector<String>();
+     
       for(int i=0;i<30;i++)
-        drum.add("auto1");
+          drum.add("auto1");
       // TODO Auto-generated method stub
       final GLProfile profile = GLProfile.get(GLProfile.GL2);
       GLCapabilities capabilities = new GLCapabilities(profile);
@@ -127,7 +149,7 @@ public class Cars implements GLEventListener {
       
       glcanvas.setSize(400, 400);
 		
-      final JFrame frame = new JFrame (" Textured Cube");
+      final JFrame frame = new JFrame ("Cars");
       
       frame.getContentPane().add(glcanvas);
       frame.setSize(frame.getContentPane().getPreferredSize());
@@ -137,8 +159,17 @@ public class Cars implements GLEventListener {
       {
           public void mouseClicked(MouseEvent e)
           {
-              b=true;
-              if(b)
+              drum.clear();
+              int r;
+               for(int i=0;i<30;i++)
+               {
+                   r = Random(vector);
+                   //System.out.println(r);
+                   drum.add(vector.get(r));
+               }
+            
+             //  b=true;
+              //if(b)
                   scene.StartRotate();
               System.out.println(e.getX() + " " + e.getY());
           }
