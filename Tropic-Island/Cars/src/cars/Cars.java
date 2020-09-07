@@ -9,16 +9,11 @@ package cars;
  *
  * @author Евгений
  */
-//import com.jogamp.newt.event.MouseAdapter;
-//import com.jogamp.newt.event.MouseEvent;
-
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-//import com.jogamp.newt.event.MouseListener;
 
 import java.awt.DisplayMode;
-import java.io.File;
 import java.io.IOException;
 
 /*
@@ -33,89 +28,39 @@ import javax.media.opengl.glu.GLU;
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
-import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.glu.*;
 
 
 import javax.swing.JFrame;
 
 import com.jogamp.opengl.util.FPSAnimator;
-import com.jogamp.opengl.util.texture.Texture;
-import com.jogamp.opengl.util.texture.TextureIO;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Window;
-import java.awt.event.MouseListener;
-import javax.swing.JPanel;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
 
-public class Cars extends JPanel implements GLEventListener {
+
+public class Cars implements GLEventListener {
 
    public static DisplayMode dm, dm_old;
    private GLU glu = new GLU();
    private float xrot,yrot,zrot;
    private int texture;
-   
+   static Scene1 scene;
+   static Vector<String> drum;
+   static boolean b;
    @Override
    public void display(GLAutoDrawable drawable) {
-   
-      // TODO Auto-generated method stub
       final GL2 gl = drawable.getGL().getGL2();
       gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
       gl.glLoadIdentity(); // Reset The View
-      gl.glTranslatef(0f, 0f, -5.0f);
-		
-      gl.glRotatef(xrot, 1.0f, 1.0f, 1.0f);
-      gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f);
-      gl.glRotatef(zrot, 0.0f, 0.0f, 1.0f);
-		
-      gl.glBindTexture(GL2.GL_TEXTURE_2D, texture);
-      gl.glBegin(GL2.GL_QUADS);
+      gl.glTranslatef(0f, 0f, -3.0f);
+      
+      scene.ShowDrum(5, 6, drum, gl);
 
-      // Front Face
-      gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-      gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, 1.0f);
-      gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( 1.0f, 1.0f, 1.0f);
-      gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-
-      // Back Face
-      gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-      gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-      gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( 1.0f, 1.0f, -1.0f);
-      gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);
-
-      // Top Face
-      gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-      gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-      gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( 1.0f, 1.0f, 1.0f);
-      gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( 1.0f, 1.0f, -1.0f);
-
-      // Bottom Face
-      gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-      gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);
-      gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, 1.0f);
-      gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-
-      // Right face
-      gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);
-      gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( 1.0f, 1.0f, -1.0f);
-      gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( 1.0f, 1.0f, 1.0f);
-      gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, 1.0f);
-
-      // Left Face
-      gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-      gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-      gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-      gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-      gl.glEnd();
       gl.glFlush();
-
-      //change the speeds here
-      xrot += .1f;
-      yrot += .1f;
-      zrot += .1f;
    }
    
    @Override
@@ -135,18 +80,12 @@ public class Cars extends JPanel implements GLEventListener {
       gl.glDepthFunc(GL2.GL_LEQUAL);
       gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST);
       
-      //
       gl.glEnable(GL2.GL_TEXTURE_2D);
       
-      
-      try{
-		
-         File im = new File("C:\\Users\\Евгений\\Desktop\\Screenshot_1.png ");
-         Texture t = TextureIO.newTexture(im, true);
-         texture= t.getTextureObject(gl);
-          
-      }catch(IOException e){
-         e.printStackTrace();
+      try {
+           scene.LoadDrum(drawable);
+      } catch (IOException ex) {
+           Logger.getLogger(Cars.class.getName()).log(Level.SEVERE, null, ex);
       }
    }
       
@@ -167,17 +106,22 @@ public class Cars extends JPanel implements GLEventListener {
       gl.glMatrixMode(GL2.GL_MODELVIEW);
       gl.glLoadIdentity();
    }
-   private GLJPanel display;
  
    public static void main(String[] args) {
-   
+       b = false;
+   Cars r = new Cars();
+      scene = new Scene1();
+      scene.Scene();
+      drum = new Vector<String>();
+      for(int i=0;i<30;i++)
+        drum.add("auto1");
       // TODO Auto-generated method stub
       final GLProfile profile = GLProfile.get(GLProfile.GL2);
       GLCapabilities capabilities = new GLCapabilities(profile);
       
       // The canvas
       final GLCanvas glcanvas = new GLCanvas(capabilities);
-      Cars r = new Cars();
+      
 		
       glcanvas.addGLEventListener(r);
       
@@ -191,22 +135,17 @@ public class Cars extends JPanel implements GLEventListener {
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       glcanvas.addMouseListener(new MouseAdapter()
       {
-          public void mousePressed/*Clicked*/(MouseEvent e)
-          {
-              System.out.println(e.getX() + " " + e.getY());
-          }
-      });
-      /*
-      frame.addMouseListener( new MouseAdapter()
-      {
           public void mouseClicked(MouseEvent e)
           {
+              b=true;
+              if(b)
+                  scene.StartRotate();
               System.out.println(e.getX() + " " + e.getY());
           }
       });
-      */
       final FPSAnimator animator = new FPSAnimator(glcanvas, 300, true);
       animator.start();
-   }
+
+    }
 	
 }
