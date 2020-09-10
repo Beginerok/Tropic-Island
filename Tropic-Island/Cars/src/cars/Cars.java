@@ -107,9 +107,8 @@ public class Cars implements GLEventListener {
       //gl.glMatrixMode(GL2.GL_MODELVIEW);
       gl.glMatrixMode(GL2.GL_PROJECTION);
       gl.glLoadIdentity();
-      
+      //gl.glOrtho(1, -1, -1, 1, -3, 3);
       glu.gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-      //glu.gluPerspective(189.0f, 0.5, 0.6, 0.6);
       glu.gluPerspective(45.0f, h, 1.0, 20.0);
       gl.glMatrixMode(GL2.GL_MODELVIEW);
       gl.glLoadIdentity();
