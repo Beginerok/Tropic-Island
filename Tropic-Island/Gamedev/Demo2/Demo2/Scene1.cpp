@@ -726,15 +726,7 @@ int Scene1::LoadDrum(int iter)
 
 		image->Name[CountIndexTexture - 1] = "wild";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-		/*
-		max_ = vectordrum.size() - 1, min_ = 0;
-		srand(time(NULL));
-		for (int i = 0; i < 30; i++)
-		{
-			SetMassive(i, GetRandom());
-		}
-		GetRandomMassive();
-		*/
+		
 	}
 	if (iter > 15)
 		return 0;

@@ -11,7 +11,7 @@ void Logic::SetDrum()
 	dbconn->Query();
 }
 std::vector<std::string> Logic::GetDrum()
-{
+{	
 	return dbconn->vectordrum;
 }
 float Logic::GetCredits()
@@ -30,10 +30,11 @@ void Logic::SetCredits()
 {
 	Credits = dbconn->GetCredits();
 }
-void Logic::SetCredits(float credits)
+void Logic::SetCredits(float credits,bool online)
 {
 	Credits = credits;
-	dbconn->SetCredits(credits);
+	if(online)
+		dbconn->SetCredits(credits);
 }
 void Logic::SetWin(float win)
 {

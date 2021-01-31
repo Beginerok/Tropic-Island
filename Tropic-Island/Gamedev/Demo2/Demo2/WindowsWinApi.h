@@ -17,7 +17,7 @@ public:
 
 	void Update(bool bonus, Logic *Logic_);
 	bool IsMouseButtonDown(byte key, bool bonus);
-	bool IsMouseButtonUp(byte key, bool bonus, Logic *Logic_);
+	bool IsMouseButtonUp(byte key, bool bonus/*, Logic *Logic_*/);
 	bool IsKeyDown(byte key, bool bonus);
 	bool IsKeyUp(byte key, bool bonus, Logic *Logic_);
 	POINT GetButtonDownCoords();

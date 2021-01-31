@@ -17,7 +17,7 @@ public:
 	float GetWin();
 	float GetTotalBet();
 	void SetCredits(); 
-	void SetCredits(float credits);
+	void SetCredits(float credits,bool online);
 	void SetWin(float win);
 	void SetTotalBet(float totalbet);
 	bool CheckWin();

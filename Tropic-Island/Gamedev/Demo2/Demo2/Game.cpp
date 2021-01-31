@@ -7,6 +7,7 @@ Game::Game()
 	iter = -1;
 	bonus = false;
 	firsttime = false;
+	online = false;
 }
 void Game::setup_opengl(int width, int height)
 {
@@ -28,10 +29,11 @@ void Game::draw_screen()
 {
 	while (run)
 	{
+		online = !WindowsWinApi_->keyboard__->offline;
 		if (!firsttime && Logic_->dbconn->userid != -1)
 		{
 			firsttime = true;
-			Logic_->SetCredits();
+			Logic_->SetCredits();//
 		}
 		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glDepthMask (GL_TRUE);
@@ -46,7 +48,7 @@ void Game::draw_screen()
 		{
 			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0)
 			{
-				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet());
+				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(),online);//
 				Logic_->checkwin = false;
 			}
 			if (WindowsWinApi_->GetF()[1])
@@ -54,10 +56,12 @@ void Game::draw_screen()
 				Logic_->firstline = false;
 				Logic_->secondline = false;
 				Logic_->thirdline = false;
-				Logic_->SetCredits(Logic_->GetCredits()+Logic_->GetWin());
+				Logic_->SetCredits(Logic_->GetCredits()+Logic_->GetWin(),online);//
 				Logic_->SetWin(0.0f);
 			}
-			Scene1_->ShowDrum(countdrums, counttextureondrums, Logic_->GetDrum(),
+			Scene1_->ShowDrum(countdrums, counttextureondrums, 
+				
+				Logic_->GetDrum(),//
 #if WINAPI_==0
 				WindowsSDLApi_->GetF(),
 				WindowsSDLApi_->pressbutton

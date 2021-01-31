@@ -3,8 +3,8 @@
 #include <mysql.h>
 #include <vector>
 #include <string>
-#pragma comment(lib,"mysqlcppconn.lib")
 #pragma comment(lib,"libmysql.lib")
+#pragma comment(lib,"mysqlcppconn.lib")
 #include "MD5.h"
 class DataBaseConnection
 {

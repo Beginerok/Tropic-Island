@@ -19,7 +19,7 @@ void DataBaseConnection::Connect()
 		//exit(1); //Если используется оконное приложение
 	}
 	// Подключаемся к серверу
-	if (!mysql_real_connect(conn, "185.26.122.4", "host6491_root", "R0oT", "host6491_test", NULL, NULL, 0))
+	if (!mysql_real_connect(conn, "185.26.122.4", "host6491_root", "ZxCvB", "host6491_test", NULL, NULL, 0))
 	{
 		// Если нет возможности установить соединение с сервером 
 		// базы данных выводим сообщение об ошибке
@@ -63,6 +63,24 @@ std::vector<std::string> DataBaseConnection::Query()
 	{
 		printf("You need autorization in system!\n");
 		vectordrum.clear();
+		int max_ = 6, min_ = 0;
+		srand(time(NULL));
+		std::string* drum = new std::string[max_ + 1];
+		drum[0] = "auto1";
+		drum[1] = "auto2";
+		drum[2] = "auto3";
+		drum[3] = "auto4";
+		drum[4] = "auto5";
+		drum[5] = "bonus";
+		drum[6] = "wild";
+		int num = -1;
+		for (int i = 0; i < 30; i++)
+		{
+			num = min_ + rand() % (max_ - min_ + 1);
+			vectordrum.push_back(drum[num]);
+		}
+		drum->clear();
+		return vectordrum;//new
 		std::string query = "SELECT * FROM drum where id=" + std::to_string(step)+";";
 		const char* q = query.c_str();
 		qstate = mysql_query(conn, q);

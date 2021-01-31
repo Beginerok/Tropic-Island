@@ -116,7 +116,7 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		menuwidth = 20;
 	}
 	
-	hwnd2 = CreateWindowEx(dwexstyle, L"My Window", L"Settings"/*title*/,
+	hwnd2 = CreateWindowEx(dwexstyle, L"My Window", L"Sign in"/*title*/,
 		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
 		0, 0, 400,
 		250, 0, 0, hinstance, 0);
@@ -162,7 +162,7 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		hinstance,
 		NULL
 	);
-	edit1 = CreateWindowEx(/*DT_EDITCONTROL*/0L,L"Edit", L"bvn13@mail.ru",
+	edit1 = CreateWindowEx(/*DT_EDITCONTROL*/0L,L"Edit", L"clownyou@yahoo.com",
 		WS_VISIBLE | WS_CHILD | WS_BORDER, 50, 10, 200,
 		30, hwnd2, (HMENU)1004, hinstance, NULL);
 
@@ -170,9 +170,7 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		WS_VISIBLE | WS_CHILD , 50, 50, 200,
 		30, hwnd2, (HMENU)1005, hinstance, NULL); 
 
-	ShowWindow(hwnd2, SW_SHOW);
-	SetForegroundWindow(hwnd2);
-	SetFocus(hwnd2);
+	//
 	if (!(hwnd = CreateWindowEx(dwexstyle, L"My Window", title,
 		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
 		0, 0, windowrect->right - windowrect->left + menuwidth,
@@ -243,6 +241,10 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	ShowWindow(hwnd, SW_SHOW);
 	SetForegroundWindow(hwnd);
 	SetFocus(hwnd);
+
+	ShowWindow(hwnd2, SW_SHOW);
+	SetForegroundWindow(hwnd2);
+	SetFocus(hwnd2);
 	return true;
 }
 GLvoid Window::Show()
@@ -388,7 +390,7 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 		if (wparam == 1002) {
 
 			offline = true;
-			std::cout << "ofline!";
+			std::cout << "offline!";
 		}
 		if (wparam == 1003)
 		{

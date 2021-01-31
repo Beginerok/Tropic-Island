@@ -30,7 +30,7 @@ public:
 	void Exit();
 	int iter;
 	Logic *Logic_;
-	bool bonus,firsttime;
+	bool bonus,firsttime,online;
 	~Game();
 };
 

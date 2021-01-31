@@ -45,7 +45,7 @@ void WindowsWinApi::Update(bool bonus, Logic *Logic_)
 {
 	keyboard__->Update();
 	IsMouseButtonDown(GetPressedKey(), bonus);
-	IsMouseButtonUp(GetPressedKey(), bonus, Logic_);
+	IsMouseButtonUp(GetPressedKey(), bonus/*, Logic_*/);
 	IsKeyDown(GetPressedKey(), bonus);
 	IsKeyUp(GetPressedKey(), bonus, Logic_);
 }
@@ -106,7 +106,7 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 	}
 	return false;
 }
-bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_)
+bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus/*, Logic *Logic_*/)
 {
 	if (keyboard__->msg_->message == WM_RBUTTONUP || keyboard__->msg_->message == WM_LBUTTONUP && !bonus)
 	{
