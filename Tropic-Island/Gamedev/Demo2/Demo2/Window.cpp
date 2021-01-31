@@ -382,7 +382,8 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 				login = str;
 				pass = str2;
 				connect = true;
-				db->Authorization(login, pass);
+				if(!offline)
+					db->Authorization(login, pass);
 			}
 			//SendMessage(hwnd2, WM_CLOSE, 0, 0);
 			ShowWindow(hwnd2, SW_HIDE);

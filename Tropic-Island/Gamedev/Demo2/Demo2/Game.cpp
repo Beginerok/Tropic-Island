@@ -135,6 +135,7 @@ int Game::Execute()
 	Logic_->dbconn->Query();
 	Logic_->SetTotalBet(1);
 	Logic_->SetWin(0);
+	Logic_->SetCredits(1000,online);
 	Sound_ = new Sound();
 	Sound_->Init();
 	Scene1_->LoadBorder();

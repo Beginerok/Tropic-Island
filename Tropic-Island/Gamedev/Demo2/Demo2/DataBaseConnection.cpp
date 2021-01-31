@@ -7,6 +7,7 @@ DataBaseConnection::DataBaseConnection()
 	countdistinct = 0;
 	userid = -1;
 	step = 0;
+	pointscredits = 0;
 }
 void DataBaseConnection::Connect()
 {
