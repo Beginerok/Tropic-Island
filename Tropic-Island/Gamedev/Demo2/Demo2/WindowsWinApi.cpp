@@ -54,7 +54,7 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 	if (keyboard__->msg_->message == WM_RBUTTONDOWN || keyboard__->msg_->message == WM_LBUTTONDOWN && !bonus)
 	{
 		GetButtonDownCoords();
-		if (point.y >478 && point.y<496)
+		if (point.y >460 && point.y<475)
 		{
 			if (point.x >123 && point.x<190)
 				setF(true, 0);
@@ -79,7 +79,7 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 		{
 			GetButtonDownCoords();
 			std::cout << point.x << " " << point.y << std::endl;
-			if (point.y >478 && point.y<496)
+			if (point.y >460 && point.y<475)
 			{
 				if (point.x >123 && point.x<190)
 					setF(true, 0);
@@ -197,7 +197,7 @@ POINT WindowsWinApi::GetButtonDownCoords()
 {
 	point.x = keyboard__->x;
 	point.y = keyboard__->y;
-	//std::cout << "Coordinats x:" << event_.button.x << "y:"<< event_.button.y << std::endl;
+	//std::cout << "Coordinats x:" << keyboard__->x << "y:"<< keyboard__->y << std::endl;
 	return point;
 }
 bool WindowsWinApi::IsKeyDown(byte key, bool bonus)

@@ -29,6 +29,8 @@ void Game::draw_screen()
 {
 	while (run)
 	{
+		if (!WindowsWinApi_->keyboard__->offline && !online)
+			Sound_->Play(2);
 		online = !WindowsWinApi_->keyboard__->offline;
 		if (!firsttime && Logic_->dbconn->userid != -1)
 		{
@@ -58,6 +60,7 @@ void Game::draw_screen()
 				Logic_->thirdline = false;
 				Logic_->SetCredits(Logic_->GetCredits()+Logic_->GetWin(),online);//
 				Logic_->SetWin(0.0f);
+				Sound_->Play(4);
 			}
 			Scene1_->ShowDrum(countdrums, counttextureondrums, 
 				
@@ -77,7 +80,8 @@ void Game::draw_screen()
 
 			Scene1_->ShowBorder();
 			Scene1_->ShowLine(Logic_->firstline,Logic_->secondline,Logic_->thirdline);
-			Logic_->CheckWin();
+			if (Logic_->CheckWin())
+				Sound_->Play(3);
 			if (WindowsWinApi_->GetF()[0])
 			{
 				Scene1_->ShowHelp();
@@ -100,7 +104,10 @@ void Game::draw_screen()
 		loading = Scene1_->LoadDrum(++iter);
 		if (iter > 17)
 			iter = 17;
-		Sound_->Play(0);
+		if (WindowsWinApi_->keyboard__->enablesound)
+			Sound_->Play(0);
+		else
+			Sound_->StopAll();
 	}
 	Exit();
 }

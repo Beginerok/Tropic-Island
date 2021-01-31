@@ -13,16 +13,18 @@ HWND Window::edit1, Window::edit2;
 
 TCHAR Window::pszTextBuff[500];
 TCHAR Window::Buff1[500];
-bool Window::offline,Window::connect;
+bool Window::offline,/*Window::connect,*/Window::enablesound;
 std::string Window::login, Window::pass;
 DataBaseConnection *Window::db;
+HMENU Window::hMenu, Window::hSubMenu;
 Window::Window()
 {
 	msg_ = new MSG();
 	offline = true;
-	connect = false;
+	//connect = false;
 	db = new DataBaseConnection();
 	db->Connect();
+	enablesound = true;
 }
 GLvoid Window::KillWindow()
 {
@@ -116,6 +118,9 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		menuwidth = 20;
 	}
 	
+
+
+
 	hwnd2 = CreateWindowEx(dwexstyle, L"My Window", L"Sign in"/*title*/,
 		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwstyle,
 		0, 0, 400,
@@ -238,6 +243,17 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		MessageBox(0, L"can't context cur", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
+	
+	hMenu = CreateMenu();
+	//подмень файл
+	hSubMenu = CreateMenu();
+	AppendMenu(hSubMenu, MF_STRING, 1, L"Sign in");
+	AppendMenu(hSubMenu, MF_SEPARATOR, 0, 0);
+	AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, 2, L"Sound");
+	//вставляем подменю файл в главное меню
+	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hSubMenu, L"Settings");
+	SetMenu(hwnd, hMenu);
+
 	ShowWindow(hwnd, SW_SHOW);
 	SetForegroundWindow(hwnd);
 	SetFocus(hwnd);
@@ -366,23 +382,23 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 				//std::wcout << pszTextBuff << std::endl;
 				//std::wcout << Buff1 << std::endl;
 
-				std::wstring wstr = L"",wpass=L"";
-				for (int i = 0;i < /*500*/lstrlen(pszTextBuff);i++)
+				std::wstring wstr = L"", wpass = L"";
+				for (int i = 0; i < /*500*/lstrlen(pszTextBuff); i++)
 				{
 					wstr += pszTextBuff[i];
 				}
-				for (int i = 0;i < /*500*/lstrlen(Buff1);i++)
+				for (int i = 0; i < /*500*/lstrlen(Buff1); i++)
 				{
-						wpass += Buff1[i];
+					wpass += Buff1[i];
 				}
 				std::string str(wstr.begin(), wstr.end());
 				std::string str2(wpass.begin(), wpass.end());
-				std::cout<<str.size()<<"str="<<str<<std::endl;
-				std::cout<< str2.size() << "str2="<<str2<<std::endl;
+				std::cout << str.size() << "str=" << str << std::endl;
+				std::cout << str2.size() << "str2=" << str2 << std::endl;
 				login = str;
 				pass = str2;
-				connect = true;
-				if(!offline)
+				//connect = true;
+				if (!offline)
 					db->Authorization(login, pass);
 			}
 			//SendMessage(hwnd2, WM_CLOSE, 0, 0);
@@ -402,8 +418,18 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 			std::cout << "editlogin!";
 		if (wparam == 1005)
 			std::cout << "editpass!";
-
-		break;
+		if (wparam == 1)
+			ShowWindow(hwnd2, SW_SHOW);
+		if (wparam == 2)
+		{
+			/*
+			if(enablesound)
+				AppendMenu(hSubMenu, MF_STRING | MF_UNCHECKED, 2, L"Sound");
+			else
+				AppendMenu(hSubMenu, MF_STRING | MF_CHECKED, 2, L"Sound");
+			*/
+			enablesound = !enablesound;
+		}
 	}
 	}
 	return DefWindowProc(hwnd, umsg, wparam, lparam);

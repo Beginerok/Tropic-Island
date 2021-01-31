@@ -25,11 +25,11 @@ int Sound::Init()
 	alcMakeContextCurrent(ctx);
 	alGenBuffers(CountSounds, sounds->buffer);
 	alGenSources(CountSounds, sounds->source);
-	sounds->Name[0] = "content//robocop.wav";
+	sounds->Name[0] = "content//test.wav";
 	sounds->Name[1] = "content//konga.wav";
 	sounds->Name[2] = "content//internet.wav";
-	sounds->Name[3] = "content//coin.wav";
-	sounds->Name[4] = "content//bonus.wav";
+	sounds->Name[3] = "content//winner.wav";
+	sounds->Name[4] = "content//coin.wav";
 	for (int j = 0; j < CountSounds; j++)
 	{
 		FILE* file_;

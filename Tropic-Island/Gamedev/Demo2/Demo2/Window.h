@@ -32,8 +32,9 @@ public:
 
 	static TCHAR pszTextBuff[500];
 	static TCHAR Buff1[500];
-	static bool offline;
+	static bool offline,enablesound;
 	static std::string login, pass;
-	static bool connect;
+	//static bool connect;
 	static DataBaseConnection *db;
+	static HMENU hMenu, hSubMenu;
 };
