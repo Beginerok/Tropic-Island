@@ -76,17 +76,17 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\prese\OneDrive\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\prese\OneDrive\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
-    <ExecutablePath>C:\Users\prese\OneDrive\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\prese\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\prese\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\Users\prese\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Users\Евгений\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Евгений\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Users\prese\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\prese\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

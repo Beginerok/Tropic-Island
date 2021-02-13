@@ -1,5 +1,6 @@
 #include "DataBaseConnection.h"
 
+#include <fstream>
 
 
 DataBaseConnection::DataBaseConnection()
@@ -19,8 +20,19 @@ void DataBaseConnection::Connect()
 		fprintf(stderr, "Error: can'tcreate MySQL-descriptor\n");
 		//exit(1); //Если используется оконное приложение
 	}
+	std::string line,ip,user,pass,db;
+	std::ifstream file_settings("settings.txt");
+	if (file_settings.is_open())
+	{
+		getline(file_settings, ip);
+		getline(file_settings, user);
+		getline(file_settings, pass);
+		getline(file_settings, db);
+	}
+	file_settings.close();     // закрываем файл
+
 	// Подключаемся к серверу
-	if (!mysql_real_connect(conn, "185.26.122.4", "host6491_root", "ZxCvB", "host6491_test", NULL, NULL, 0))
+	if (!mysql_real_connect(conn, ip.c_str(),user.c_str(),pass.c_str(),db.c_str(), NULL, NULL, 0))
 	{
 		// Если нет возможности установить соединение с сервером 
 		// базы данных выводим сообщение об ошибке
