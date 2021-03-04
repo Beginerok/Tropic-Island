@@ -48,9 +48,9 @@ function main() {
 function draw(gl, n) {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
-  initVertexBuffers(gl)
+  initVertexBuffers(gl);
     // Draw the rectangle
-  gl.drawArrays(gl.LINES, 0, n);
+  gl.drawArrays(gl.LINE_STRIP, 0, n);
 }
 function fi(x)
 {
