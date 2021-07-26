@@ -74,7 +74,7 @@ var u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
   var tick = function() {
     currentAngle = animate(currentAngle);  // Update the rotation angle
     console.log(currentAngle);
-    if (currentAngle<=-1800 ) {
+    if (currentAngle<=-1820 ) {
       startRotate=!startRotate;
       currentAngle = 0.0;
     }
