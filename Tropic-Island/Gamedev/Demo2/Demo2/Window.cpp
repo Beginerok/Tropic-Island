@@ -15,15 +15,19 @@ TCHAR Window::pszTextBuff[500];
 TCHAR Window::Buff1[500];
 bool Window::offline,/*Window::connect,*/Window::enablesound;
 std::string Window::login, Window::pass;
-DataBaseConnection *Window::db;
+#if DBAPI_ == 1
+	DataBaseConnection *Window::db;
+#endif
 HMENU Window::hMenu, Window::hSubMenu;
 Window::Window()
 {
 	msg_ = new MSG();
 	offline = true;
 	//connect = false;
+#if DBAPI_ == 1
 	db = new DataBaseConnection();
-	db->Connect();
+	db->Connect(); 
+#endif
 	enablesound = true;
 }
 GLvoid Window::KillWindow()
@@ -398,8 +402,10 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 				login = str;
 				pass = str2;
 				//connect = true;
+#if DBAPI_ == 1
 				if (!offline)
 					db->Authorization(login, pass);
+#endif
 			}
 			//SendMessage(hwnd2, WM_CLOSE, 0, 0);
 			ShowWindow(hwnd2, SW_HIDE);

@@ -6,7 +6,9 @@
 #include <atlstr.h>
 #include <windowsx.h>
 #include <string>
-#include "DataBaseConnection.h"
+#if DBAPI_ == 1
+	#include "DataBaseConnection.h"
+#endif
 #include <iostream>
 class Window
 {
@@ -35,6 +37,8 @@ public:
 	static bool offline,enablesound;
 	static std::string login, pass;
 	//static bool connect;
+#if DBAPI_ == 1
 	static DataBaseConnection *db;
+#endif
 	static HMENU hMenu, hSubMenu;
 };

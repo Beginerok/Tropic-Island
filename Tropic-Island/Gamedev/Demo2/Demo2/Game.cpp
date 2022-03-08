@@ -32,7 +32,11 @@ void Game::draw_screen()
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
 		online = !WindowsWinApi_->keyboard__->offline;
-		if (!firsttime && Logic_->dbconn->userid != -1)
+		if (!firsttime 
+#if DBAPI_ == 1			
+			&& Logic_->dbconn->userid != -1
+#endif
+			)
 		{
 			firsttime = true;
 			Logic_->SetCredits();//
@@ -50,6 +54,15 @@ void Game::draw_screen()
 		{
 			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0)
 			{
+				if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
+				{
+					Logic_->firstline = false;
+					Logic_->secondline = false;
+					Logic_->thirdline = false;
+					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);//
+					Logic_->SetWin(0.0f);
+					Sound_->Play(4);
+				}
 				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(),online);//
 				Logic_->checkwin = false;
 			}
@@ -137,9 +150,11 @@ int Game::Execute()
 	WindowsSDLApi_ = new WindowsSDLApi();
 #endif
 	Logic_ = new Logic();
+#if DBAPI_ == 1
 	Logic_->dbconn = WindowsWinApi_->keyboard__->db;
 	Logic_->dbconn->Connect();
 	Logic_->dbconn->Query();
+#endif
 	Logic_->SetTotalBet(1);
 	Logic_->SetWin(0);
 	Logic_->SetCredits(1000,online);

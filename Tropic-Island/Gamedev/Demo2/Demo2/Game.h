@@ -3,6 +3,7 @@
 #define WINAPI_ 1
 #define SDLAPI_ 0
 #define QTAPI_ 0
+#define DBAPI_ 0
 #if WINAPI_ == 1
 	#include "WindowsWinApi.h"
 #else

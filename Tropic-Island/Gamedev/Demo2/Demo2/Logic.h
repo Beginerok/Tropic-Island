@@ -3,7 +3,12 @@
 #include <cmath>
 #include <cstdlib>
 #include <time.h>
-#include <DataBaseConnection.h>
+#if DBAPI_ == 1
+	#include <DataBaseConnection.h>
+#else
+	#include <vector>
+	#include <string>
+#endif
 #ifdef _POSIX_SOURCE
     #include <stdlib.h>
 #endif // _UNIX_
@@ -24,7 +29,11 @@ public:
 	~Logic();
 	int CountPosition;
 	float Credits, Win, TotalBet;
-	DataBaseConnection * dbconn;
+#if DBAPI_ == 1
+	DataBaseConnection * dbconn; 
+#else
+	std::vector<std::string> vectordrum, drum;
+#endif
 	bool firstline, secondline, thirdline;
 	bool checkwin;
 };
