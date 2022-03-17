@@ -44,6 +44,7 @@ Scene1::Scene1(void)
 	}
 	coor = new Coor[3];
 	scale = 1.0f;
+	scaling = true;
 }
 void Scene1::LoadImage(const ILstring path)
 {
@@ -358,9 +359,15 @@ void Scene1::DrawWord(int word_,int pos)
 	coor[0].a.push_back(-0.75f);
 	coor[0].b = 0.8;
 	coor[0].width = 0.03f;
-	coor[0].height = 0.1; 
+	coor[0].height = 0.1;
+	/*
 	coor[1].a.push_back(-0.05f);
 	coor[1].b = 0.8;
+	coor[1].width = 0.03f;
+	coor[1].height = 0.1;
+	*/
+	coor[1].a.push_back(0.0f);
+	coor[1].b = 0.0;
 	coor[1].width = 0.03f;
 	coor[1].height = 0.1;
 	coor[2].a.push_back(0.65f);
@@ -375,15 +382,24 @@ void Scene1::DrawWord(int word_,int pos)
 		std::string str = "";
 		str+=word[i];
 		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(str)]);
-		EnableTextureNumbers(i,pos);
+		EnableTextureNumbers(i,pos,word_);
 		str.clear();
 	}
 	
 	free(word);
 }
-void Scene1::EnableTextureNumbers(int position,int numberword)
+void Scene1::EnableTextureNumbers(int position,int numberword,int win)
 {
-	
+	if (numberword == 1)
+	{
+		glPushMatrix();
+		glTranslatef(-0.05, 0.8, 0.0);
+		if(win)
+		{
+			scale = (float)(rand() % 100) / (100 * 1.0) + 1.0f;
+			glScalef(scale, scale, 1.0f);
+		}
+	}
 	glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b + coor[numberword].height, 1.0f);
@@ -394,8 +410,8 @@ void Scene1::EnableTextureNumbers(int position,int numberword)
 		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(coor[numberword].a[position] + coor[numberword].width, coor[numberword].b,1.0f);
 	glEnd();
-	//glScalef(0.999f, 0.999f, 1.0f);
-	//glPopMatrix();
+	if (numberword == 1)
+		glPopMatrix();
 }
 void Scene1::EnableTexture(float*texcoor, float*vercoor)
 {

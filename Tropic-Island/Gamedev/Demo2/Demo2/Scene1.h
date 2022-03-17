@@ -58,7 +58,7 @@ public:
 	void LoadAnimatedAuto();
 
 	void DrawWord(int word_,int pos);
-	void EnableTextureNumbers(int position, int numberword); 
+	void EnableTextureNumbers(int position, int numberword,int win); 
 	void LoadBorder();
 	void ShowBorder();
 	void ShowHelp();
@@ -102,4 +102,5 @@ public:
 	Coor* coor;
 	std::vector<std::string>vectorram;
 	float scale;
+	bool scaling;
 };
