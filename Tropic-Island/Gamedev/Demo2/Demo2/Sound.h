@@ -1,7 +1,9 @@
 #pragma once
 #include <AL/al.h>
 #include <AL/alc.h>
-#include <AL/alut.h>
+#ifndef _WIN32
+	#include <AL/alut.h>
+#endif
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -13,6 +15,7 @@
 	#include <fcntl.h>
 	#include <sys/stat.h>
 #endif // _WIN32
+#ifdef _WIN32
 struct WAVHEADER
 {
 	// WAV-формат начинается с RIFF-заголовка:
@@ -60,6 +63,7 @@ struct WAVHEADER
 	unsigned long subchunk2Size;
 	// Далее следуют непосредственно Wav данные.
 };
+#endif // _WIN32
 struct Sounds
 {
 	unsigned int* buffer;

@@ -150,7 +150,7 @@ void Game::draw_screen()
 int Game::Execute(int argc, char*argv[])
 {
 	bool fullscreen = false;
-#if _WIN32
+#ifdef _WIN32
 	WindowsWinApi_ = new WindowsWinApi();
 	if (!WindowsWinApi_->keyboard__->CreateWindow_(L"Cars",700,500, 32, fullscreen))
 		return 0;

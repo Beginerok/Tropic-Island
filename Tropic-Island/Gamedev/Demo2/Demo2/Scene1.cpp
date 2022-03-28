@@ -80,13 +80,14 @@ void Scene1::LoadImage(const ILstring path)
 		// выход из программы
 		flogout << "Error loading image: " << reinterpret_cast<const char*>(path) << std::endl;
  		std::cout<< "Error loading image: " << reinterpret_cast<const char*>(path)<<std::endl;
-       long size;
+#ifndef _WIN32
+		long size;
         char*buf,*ptr;
         size=pathconf(".",_PC_PATH_MAX);
         buf = (char*)malloc((size_t)size);
         ptr=getcwd(buf,(size_t)size);
 		std::cout<< ptr<<std::endl;
-
+#endif
 		flogout.close();
 		exit(EXIT_FAILURE);
 	}
