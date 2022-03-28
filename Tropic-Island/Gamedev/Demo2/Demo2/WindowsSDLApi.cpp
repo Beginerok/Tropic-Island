@@ -10,6 +10,7 @@ WindowsSDLApi::WindowsSDLApi()
 	SetBet_(8);
 
 	pressbutton = 0;
+    upbutton = 1;
 }
 int WindowsSDLApi::getAny()
 {
@@ -60,6 +61,7 @@ bool WindowsSDLApi::IsMouseButtonDown(byte key,bool bonus,SDL_Event event_)
 				setF(true, 1);
 			if (point.x > 330 && point.x < 401)
 			{
+                upbutton+=1;
 				setF(true, 2);
 				pressbutton += 1;
 				std::cout << "press button:" << pressbutton << std::endl;
@@ -84,6 +86,7 @@ bool WindowsSDLApi::IsMouseButtonDown(byte key,bool bonus,SDL_Event event_)
 					setF(true, 1);
 				if (point.x > 330 && point.x < 401)
 				{
+                    upbutton+=1;
 					setF(true, 2);
 					pressbutton += 1;
 					std::cout << "press button:" << pressbutton << std::endl;
@@ -121,8 +124,10 @@ bool WindowsSDLApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_,SDL_Even
 			if (getF(2))
 			{
 				setF(false, 2);
-				pressbutton = 0;
+			    upbutton=0;
+                pressbutton = 1;
 				std::cout << "press button:" << pressbutton << std::endl;
+				Logic_->SetDrum();
 			}
 			//if (point.x >436 && point.x<506)
 			{
@@ -158,8 +163,10 @@ bool WindowsSDLApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_,SDL_Even
 				//if (point.x >330 && point.x<401)
 				if (getF(2))
 				{
+
 					setF(false, 2);
-					pressbutton = 0;
+                    upbutton=0;
+					pressbutton = 1;
 					std::cout << "press button:" << pressbutton << std::endl;
 				}
 				//if (point.x >436 && point.x<506)
@@ -295,8 +302,10 @@ bool WindowsSDLApi::IsKeyUp(byte key, bool bonus,Logic *Logic_, SDL_Event event_
             {
                 setF(false, 2);
 				pressbutton = 0;
+				upbutton = 1;
 				std::cout << "press button:" << pressbutton << std::endl;
                 //setF(true, 2);
+                Logic_->SetDrum();
                 break;
             }
             case SDLK_F4:
@@ -334,9 +343,10 @@ bool WindowsSDLApi::IsKeyUp(byte key, bool bonus,Logic *Logic_, SDL_Event event_
 			{
 				setF(false, 2);
 				pressbutton = 0;
+				upbutton = 1;
 				std::cout << "press button:" << pressbutton << std::endl;
 				//Logic_->SetRandom();
-				Logic_->SetDrum();
+
 				break;
 			}
             case SDLK_F4:

@@ -3,6 +3,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <time.h>
+#include <iostream>
 #if DBAPI_ == 1
 	#include <DataBaseConnection.h>
 #else
@@ -21,7 +22,7 @@ public:
 	float GetCredits();
 	float GetWin();
 	float GetTotalBet();
-	void SetCredits(); 
+	void SetCredits();
 	void SetCredits(float credits,bool online);
 	void SetWin(float win);
 	void SetTotalBet(float totalbet);
@@ -30,7 +31,7 @@ public:
 	int CountPosition;
 	float Credits, Win, TotalBet;
 #if DBAPI_ == 1
-	DataBaseConnection * dbconn; 
+	DataBaseConnection * dbconn;
 #else
 	std::vector<std::string> vectordrum, drum;
 #endif

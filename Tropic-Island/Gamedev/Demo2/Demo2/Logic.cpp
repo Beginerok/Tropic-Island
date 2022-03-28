@@ -29,11 +29,13 @@ void Logic::SetDrum()
 	{
 		num = min_ + rand() % (max_ - min_ + 1);
 		vectordrum.push_back(drum[num]);
+		std::cout<<num<<" ";
 	}
+	std::cout<<std::endl;
 #endif
 }
 std::vector<std::string> Logic::GetDrum()
-{	
+{
 #if DBAPI_ == 1
 	return dbconn->vectordrum;
 #else
@@ -92,7 +94,7 @@ bool Logic::CheckWin()
 		dbconn->vectordrum[19] == dbconn->vectordrum[25]
 		)
 		secondline = true;
-			
+
 	if (dbconn->vectordrum[2] == dbconn->vectordrum[8] &&
 		dbconn->vectordrum[8] == dbconn->vectordrum[14] &&
 		dbconn->vectordrum[14] == dbconn->vectordrum[20] &&
@@ -209,7 +211,7 @@ bool Logic::CheckWin()
 Logic::~Logic()
 {
 #if DBAPI_ == 1
-	dbconn->Close(); 
+	dbconn->Close();
 	delete dbconn;
 #else
 	drum.clear();

@@ -1,13 +1,17 @@
 //#pragma once
 #ifndef OGL
 	#define OGL
-#include <Window.h>
+#ifdef _WIN32
+    #include <Window.h>
+#endif // _WIN32
 #include <fstream>
-#include <GL/GL.h>
-#include <GL/GLU.h>
-#include "IL/il.h"
-#include "IL/ilu.h"
-
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <IL/il.h>
+#include <IL/ilu.h>
+#ifdef __unix__
+    #include <cstring>
+#endif
 #pragma comment(lib,"OpenGL32.lib")
 #pragma comment(lib,"Glu32.lib")
 #pragma comment(lib,"ILU.lib")
@@ -42,7 +46,7 @@ public:
 	int height;
 	// Тип хранения данных
 	unsigned int type;
-	unsigned char* copyData; 
+	unsigned char* copyData;
 	static const int CountTexture = 57;//40//53
 	SimpleImage* image;
 	int CountIndexTexture;

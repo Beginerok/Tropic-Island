@@ -29,11 +29,15 @@ void Game::draw_screen()
 {
 	while (run)
 	{
+#ifdef _WIN32
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
 		online = !WindowsWinApi_->keyboard__->offline;
-		if (!firsttime 
-#if DBAPI_ == 1			
+#else
+
+#endif
+		if (!firsttime
+#if DBAPI_ == 1
 			&& Logic_->dbconn->userid != -1
 #endif
 			)
@@ -47,12 +51,16 @@ void Game::draw_screen()
         glClearDepth(1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /*| GL_COLOR_MATERIAL*/);
 		glEnable(GL_TEXTURE_2D);
-		
+
 		int countdrums = 5;
 		int counttextureondrums = 6;
-		if (!loading) 
+		if (!loading)
 		{
+#ifdef _WIN32
 			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0)
+#else
+			if (!WindowsSDLApi_->GetF()[2] && WindowsSDLApi_->pressbutton == 1 && WindowsSDLApi_->upbutton == 0)
+#endif
 			{
 				if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
 				{
@@ -66,7 +74,11 @@ void Game::draw_screen()
 				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(),online);//
 				Logic_->checkwin = false;
 			}
+#ifdef _WIN32
 			if (WindowsWinApi_->GetF()[1])
+#else
+			if (WindowsSDLApi_->GetF()[1])
+#endif
 			{
 				Logic_->firstline = false;
 				Logic_->secondline = false;
@@ -75,19 +87,21 @@ void Game::draw_screen()
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
 			}
-			Scene1_->ShowDrum(countdrums, counttextureondrums, 
-				
-				Logic_->GetDrum(),//
-#if WINAPI_==0
+			Scene1_->ShowDrum(countdrums, counttextureondrums,
+
+				Logic_->GetDrum(),
+#ifndef _WIN32
 				WindowsSDLApi_->GetF(),
-				WindowsSDLApi_->pressbutton
+				WindowsSDLApi_->pressbutton,
+				&WindowsSDLApi_->upbutton
+
 #else
 				WindowsWinApi_->GetF(),
 				WindowsWinApi_->pressbutton,
 				&WindowsWinApi_->upbutton
 #endif
 			);
-			
+
 			Scene1_->ShowButtons();
 			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
 
@@ -95,7 +109,11 @@ void Game::draw_screen()
 			Scene1_->ShowLine(Logic_->firstline,Logic_->secondline,Logic_->thirdline);
 			if (Logic_->CheckWin())
 				Sound_->Play(3);
+#ifdef _WIN32
 			if (WindowsWinApi_->GetF()[0])
+#else
+			if (WindowsSDLApi_->GetF()[0])
+#endif
 			{
 				Scene1_->ShowHelp();
 			}
@@ -103,7 +121,7 @@ void Game::draw_screen()
 		else
 			Scene1_->ShowWelcome(loading);
 		glDisable(GL_TEXTURE_2D);
-#if WINAPI_== 1
+#if _WIN32
 		WindowsWinApi_->keyboard__->Show();
 		WindowsWinApi_->Update(bonus, Logic_);
 		run = !WindowsWinApi_->getdone();
@@ -117,17 +135,22 @@ void Game::draw_screen()
 		loading = Scene1_->LoadDrum(++iter);
 		if (iter > 17)
 			iter = 17;
+#if _WIN32
 		if (WindowsWinApi_->keyboard__->enablesound)
 			Sound_->Play(0);
 		else
 			Sound_->StopAll();
+#else
+        Sound_->Play(0);
+#endif
+
 	}
 	Exit();
 }
-int Game::Execute()
+int Game::Execute(int argc, char*argv[])
 {
 	bool fullscreen = false;
-#if WINAPI_==1
+#if _WIN32
 	WindowsWinApi_ = new WindowsWinApi();
 	if (!WindowsWinApi_->keyboard__->CreateWindow_(L"Cars",700,500, 32, fullscreen))
 		return 0;
@@ -146,7 +169,7 @@ int Game::Execute()
 	//
 	Scene1_->LoadNumbersAndWords();
 	//
-#if WINAPI_ == 0
+#ifndef _WIN32
 	WindowsSDLApi_ = new WindowsSDLApi();
 #endif
 	Logic_ = new Logic();
@@ -159,10 +182,10 @@ int Game::Execute()
 	Logic_->SetWin(0);
 	Logic_->SetCredits(1000,online);
 	Sound_ = new Sound();
-	Sound_->Init();
+	Sound_->Init(argc, argv);
 	Scene1_->LoadBorder();
 	draw_screen();
-#if WINAPI_==1
+#if _WIN32
 	WindowsWinApi_->keyboard__->KillWindow();
 #else
 	SDL_GL_DeleteContext(context);

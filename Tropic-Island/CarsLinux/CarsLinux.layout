@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="Debug" />
+	<File name="../Gamedev/Demo2/Demo2/Sound.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="269" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Logic.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="631" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/WindowsSDLApi.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7840" topLine="126" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Game.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="102" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/WindowsSDLApi.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Game.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1497" topLine="44" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Animation.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1068" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/main.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="320" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Loader.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Scene1.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="28054" topLine="163" />
+		</Cursor>
+		<Folding>
+			<Collapse line="132" />
+			<Collapse line="329" />
+			<Collapse line="364" />
+			<Collapse line="407" />
+			<Collapse line="432" />
+			<Collapse line="445" />
+			<Collapse line="467" />
+			<Collapse line="836" />
+			<Collapse line="990" />
+			<Collapse line="1005" />
+			<Collapse line="1098" />
+			<Collapse line="1118" />
+			<Collapse line="1136" />
+			<Collapse line="1154" />
+			<Collapse line="1172" />
+			<Collapse line="1190" />
+			<Collapse line="1208" />
+			<Collapse line="1449" />
+			<Collapse line="1464" />
+			<Collapse line="1479" />
+			<Collapse line="1679" />
+			<Collapse line="1698" />
+			<Collapse line="1766" />
+			<Collapse line="1800" />
+			<Collapse line="1997" />
+			<Collapse line="2029" />
+			<Collapse line="2439" />
+		</Folding>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Sound.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="266" topLine="104" />
+		</Cursor>
+	</File>
+	<File name="../Gamedev/Demo2/Demo2/Logic.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="109" topLine="0" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>

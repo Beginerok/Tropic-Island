@@ -1,6 +1,7 @@
 #pragma once
 #include <AL/al.h>
 #include <AL/alc.h>
+#include <AL/alut.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -9,11 +10,9 @@
 	#include <Windows.h>
 #else
 	#include <unistd.h>
-	#include <string.h>
 	#include <fcntl.h>
 	#include <sys/stat.h>
 #endif // _WIN32
-
 struct WAVHEADER
 {
 	// WAV-формат начинается с RIFF-заголовка:
@@ -72,7 +71,7 @@ class Sound
 {
 public:
 	Sound();
-	int Init();
+	int Init(int argc, char*argv[]);
 	int Play(int src);
 	int Stop(int src, bool force);
 	int StopAll();

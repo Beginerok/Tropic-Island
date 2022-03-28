@@ -1,9 +1,9 @@
 #pragma once
-#include "Scene1.h"
-#define WINAPI_ 1
-#define SDLAPI_ 0
+#define WINAPI_ 0
+#define SDLAPI_ 1
 #define QTAPI_ 0
 #define DBAPI_ 0
+#include "Scene1.h"
 #if WINAPI_ == 1
 	#include "WindowsWinApi.h"
 #else
@@ -25,7 +25,7 @@ public:
 	Game();
 	void draw_screen();
 	void setup_opengl(int width, int height);
-	int Execute();
+	int Execute(int argc,char*argv[]);
 	bool run;
 	bool loading;
 	void Exit();

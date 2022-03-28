@@ -58,7 +58,7 @@ public:
 	void LoadAnimatedAuto();
 
 	void DrawWord(int word_,int pos);
-	void EnableTextureNumbers(int position, int numberword,int win); 
+	void EnableTextureNumbers(int position, int numberword,int win);
 	void LoadBorder();
 	void ShowBorder();
 	void ShowHelp();
@@ -66,7 +66,7 @@ public:
 	~Scene1();
 	int err;
 #ifndef _WIN32
-	char* strError;
+	const char* strError;
 	//or  wchar_t*strError;
 #else
 	//or const char*strError;

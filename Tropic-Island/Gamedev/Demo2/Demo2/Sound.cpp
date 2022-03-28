@@ -10,16 +10,17 @@ Sound::Sound()
 	sounds = new Sounds[CountSounds];
 	sounds->Name = new std::string[CountSounds];
 	for (int i = 0; i < CountSounds; i++)
-	{
 		sounds->Name[i] = "";
-	}
 	sounds->buffer = new unsigned int[CountSounds];
 	sounds->source = new unsigned int[CountSounds];
 	sounds->number = new int[CountSounds];
 	CounterSounds = 0;
 }
-int Sound::Init()
+int Sound::Init(int argc, char*argv[])
 {
+#ifndef _WIN32
+    alutInit(&argc, argv);
+#endif
 	dev = alcOpenDevice(0);
 	ctx = alcCreateContext(dev, 0);
 	alcMakeContextCurrent(ctx);
@@ -32,6 +33,7 @@ int Sound::Init()
 	sounds->Name[4] = "content//coin.wav";
 	for (int j = 0; j < CountSounds; j++)
 	{
+#ifdef _WIN32
 		FILE* file_;
 		errno_t err;
 		err = fopen_s(&file_,sounds->Name[j].c_str(), "rb");
@@ -40,21 +42,19 @@ int Sound::Init()
 			printf_s("Failed open file, error %d", err);
 			return 0;
 		}
-
 		WAVHEADER header;
-
 		fread_s(&header, sizeof(WAVHEADER), sizeof(WAVHEADER), 1, file_);
-		printf("audioformat:%d\n", header.audioFormat);
-		printf("bitsPerSample:%d\n", header.bitsPerSample);
-		printf("blockAlign:%d\n", header.blockAlign);
-		printf("byteRate:%lu\n", header.byteRate);
 		printf("chunkId:%s\n", header.chunkId);
 		printf("chunkSize:%lu\n", header.chunkSize);
 		printf("format:%s\n", header.format);
-		printf("numCannels:%d\n", header.numChannels);
-		printf("sampleRate:%lu\n", header.sampleRate);
 		printf("subchunk1Id:%s\n", header.subchunk1Id);
 		printf("subchunk1Size:%lu\n", header.subchunk1Size);
+		printf("audioformat:%d\n", header.audioFormat);
+		printf("numCannels:%d\n", header.numChannels);
+		printf("sampleRate:%lu\n", header.sampleRate);
+		printf("byteRate:%lu\n", header.byteRate);
+		printf("blockAlign:%d\n", header.blockAlign);
+		printf("bitsPerSample:%d\n", header.bitsPerSample);
 		printf("subchunk2Id:%s\n", header.subchunk2Id);
 		printf("subchunk2Size:%lu\n", header.subchunk2Size);
 		fclose(file_);
@@ -72,31 +72,31 @@ int Sound::Init()
 			else
 				format = AL_FORMAT_STEREO8;
 		}
-#ifdef _WIN32
 		file = open(sounds->Name[j].c_str(), _A_ARCH);
-#else
-		file = open(filename, O_RDONLY);
-#endif // _WIN32
 		if (file == -1)
 		{
 			printf("Open failed on input file: %s\n",sounds->Name[j].c_str());
-#ifdef _WIN32
 			wchar_t path[MAX_PATH];
 			GetCurrentDirectory(sizeof(path), path);
 			std::wcout << path << std::endl;
-#endif // _WIN32
 		}
 		org = 0;
 		lseek(file,0,org);
+		std::cout<<"hchs="<<header.subchunk2Size<<std::endl;
 		buf = new unsigned char[header.subchunk2Size];
 		read(file, buf, header.subchunk2Size);
 		org = 1;
+
+
 		alBufferData(sounds->buffer[j], format, buf, header.subchunk2Size, header.sampleRate);
 		delete buf;
+#else
+        sounds->buffer[j] = alutCreateBufferFromFile(sounds->Name[j].c_str());
+#endif // _WIN32
 		alSourcei(sounds->source[j], AL_BUFFER, sounds->buffer[j]);
 		close(file);
 	}
-	
+
 	return 0;
 }
 int Sound::Play(int src)

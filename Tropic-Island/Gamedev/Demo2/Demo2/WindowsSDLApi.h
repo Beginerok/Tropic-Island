@@ -41,7 +41,7 @@ public:
 	bool*GetF();
 	bool GetAny();
 
-	int pressbutton;
+	int pressbutton,upbutton;
     virtual ~WindowsSDLApi();
 protected:
     bool done;
