@@ -16,8 +16,7 @@
 Please use a browser that supports "canvas"
 
 </canvas>
-<!-- <p id="nearFar"> The near and far values are displayed here. </p> 
--->
+<p id="nearFar"> The near and far values are displayed here. </p>
 <script src="webgl-utils.js"></script>
 <script src="webgl-debug.js"></script>
 <script src="cuon-utils.js"></script>
