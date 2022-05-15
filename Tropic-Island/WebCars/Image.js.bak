@@ -121,11 +121,11 @@ function initTextures(gl, n) {
     return false;
   }
   
+  requestCORSIfNotSameOrigin(image, 'https://c1.staticflickr.com/9/8873/18598400202_3af67ef38f_q.jpg');
   // Register the event handler to be called on loading an image
   image.onload = function(){ loadTexture(gl, n, texture, u_Sampler, image); };
   // Tell the browser to load an image
   
-  requestCORSIfNotSameOrigin(image, 'https://c1.staticflickr.com/9/8873/18598400202_3af67ef38f_q.jpg');
   image.src = 'https://c1.staticflickr.com/9/8873/18598400202_3af67ef38f_q.jpg';
 
   return true;
