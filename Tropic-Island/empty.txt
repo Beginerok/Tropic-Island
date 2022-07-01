@@ -1,0 +1,1 @@
+ffmpeg -i konga.mp3 -map_metadata -1 -fflags +bitexact konga.wav
