@@ -397,8 +397,8 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 				}
 				std::string str(wstr.begin(), wstr.end());
 				std::string str2(wpass.begin(), wpass.end());
-				std::cout << str.size() << "str=" << str << std::endl;
-				std::cout << str2.size() << "str2=" << str2 << std::endl;
+				//std::cout << str.size() << "str=" << str << std::endl;
+				//std::cout << str2.size() << "str2=" << str2 << std::endl;
 				login = str;
 				pass = str2;
 				//connect = true;
@@ -413,12 +413,12 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 		if (wparam == 1002) {
 
 			offline = true;
-			std::cout << "offline!";
+			//std::cout << "offline!";
 		}
 		if (wparam == 1003)
 		{
 			offline = false;
-			std::cout << "online!";
+			//std::cout << "online!";
 		}
 		if (wparam == 1004)
 			std::cout << "editlogin!";

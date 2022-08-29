@@ -80,6 +80,7 @@ public:
 	int Stop(int src, bool force);
 	int StopAll();
 	void SetPlay(int num);
+	void Pause(int num);
 	virtual ~Sound();
 private:
 protected:

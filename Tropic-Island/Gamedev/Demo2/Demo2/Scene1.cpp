@@ -1,5 +1,8 @@
 #include "Scene1.h"
-
+#ifdef __unix__
+#include <stdlib.h>
+#include <unistd.h>
+#endif
 Scene1::Scene1(void)
 {
 	image = new Image[CountTexture];
@@ -46,10 +49,6 @@ Scene1::Scene1(void)
 	scale = 1.0f;
 	scaling = true;
 }
-#ifdef __unix__
-    #include <stdlib.h>
-    #include <unistd.h>
-#endif
 void Scene1::LoadImage(const ILstring path)
 {
 	ILenum ext;
@@ -130,6 +129,7 @@ void Scene1::LoadImage(const ILstring path)
 
 	CountIndexTexture++;
 };
+//numbers
 void Scene1::LoadWelcome()
 {
 	LoadImage(reinterpret_cast<const ILstring>("content//welcome.jpg"));
@@ -362,6 +362,7 @@ void Scene1::ShowWelcome(bool show)
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
+//malloc free numbers
 void Scene1::DrawWord(int word_,int pos)
 {
 	char* word = (char*)malloc(sizeof(char)*25);
@@ -465,6 +466,7 @@ int Scene1::FindTexture(std::string name)
 	}
 	return result;
 }
+//numbers
 int Scene1::LoadDrum(int iter)
 {
 	if (iter == 0)
@@ -834,6 +836,7 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	glDisable(GL_ALPHA_TEST);
 	*/
 }
+//numbers
 void Scene1::LoadButtons()
 {
 	vectorbuttons.push_back("HELP");
@@ -1003,6 +1006,7 @@ void Scene1::ShowButtons()
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
+//numbers
 void Scene1::EnableTextureButtons(int i)
 {
 	if (i == 0)
@@ -1206,6 +1210,7 @@ void Scene1::EnablePolygonBackDown(float xleft, float xright, float ydown, float
 
 	glEnd();
 }
+//numbers
 void Scene1::EnableTexture(int n, int m)
 {
     if(n == 0)
@@ -1476,7 +1481,7 @@ void Scene1::StartRotate(int *upbutton)
 		}
 	}
 }
-
+//numbers
 void Scene1::LoadNumbersAndWords()
 {
 	vectornumbersandwords.push_back("CREDITS");
@@ -1695,7 +1700,7 @@ void Scene1::ShowNumbersAndWords(int credits, int win, int totalbet)
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
-
+//numbers
 void Scene1::EnableTextureNumbersAndWords(int i,int win)
 {
 	if (i == 0)
@@ -1798,6 +1803,7 @@ void Scene1::LoadAnimatedAuto()
 	anim3.push_back("content//drum//animated auto 3//7.png");
 	animation3 = new Animation(anim3);
 }
+//numbers
 void Scene1::LoadBorder()
 {
 	vectorram.push_back("border");//1
@@ -2027,6 +2033,7 @@ void Scene1::ShowBorder()
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
+//numbers
 void Scene1::ShowHelp()
 {
 
@@ -2437,6 +2444,7 @@ void Scene1::ShowHelp()
 	glDisable(GL_ALPHA_TEST);
 	glDisable(GL_BLEND);
 }
+//numbers
 void Scene1::ShowLine(bool firstline, bool secondline, bool thirdline)
 {
 	if (firstline)

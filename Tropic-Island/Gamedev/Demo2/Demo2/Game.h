@@ -33,5 +33,6 @@ public:
 	Logic *Logic_;
 	bool bonus,firsttime,online;
 	~Game();
+	float xx;
 };
 

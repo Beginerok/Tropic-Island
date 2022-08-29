@@ -13,12 +13,13 @@ void Game::setup_opengl(int width, int height)
 {
 	glClearColor(0, 0, 0, 0);
 	glViewport(0, 0, width, height);
-	glShadeModel(GL_SMOOTH);
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
+	//glShadeModel(GL_SMOOTH);
+	//glCullFace(GL_BACK);
+	//glFrontFace(GL_CCW);
 	glMatrixMode(GL_MODELVIEW);
 	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	gluPerspective(189, 0.5, 0.6, 0.6);
+	glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, -1.0);
 	ilInit(); // Инициализация основной библиотеки
 	iluInit(); // Инициализация библиотеки утилит
 	ilEnable(IL_CONV_PAL);
@@ -45,11 +46,11 @@ void Game::draw_screen()
 			firsttime = true;
 			Logic_->SetCredits();//
 		}
-		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-        glDepthMask (GL_TRUE);
-        glClearColor(0.0f,0.0f,0.0f,1.0f);
-        glClearDepth(1.0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /*| GL_COLOR_MATERIAL*/);
+		//glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        //glDepthMask(GL_TRUE);
+        //glClearColor(0.0f,0.0f,0.0f,1.0f);
+        //glClearDepth(1.0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_TEXTURE_2D);
 
 		int countdrums = 5;
@@ -87,9 +88,9 @@ void Game::draw_screen()
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
 			}
+			
 			Scene1_->ShowDrum(countdrums, counttextureondrums,
-
-				Logic_->GetDrum(),
+			Logic_->GetDrum(),
 #ifndef _WIN32
 				WindowsSDLApi_->GetF(),
 				WindowsSDLApi_->pressbutton,
@@ -101,10 +102,8 @@ void Game::draw_screen()
 				&WindowsWinApi_->upbutton
 #endif
 			);
-
 			Scene1_->ShowButtons();
 			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
-
 			Scene1_->ShowBorder();
 			Scene1_->ShowLine(Logic_->firstline,Logic_->secondline,Logic_->thirdline);
 			if (Logic_->CheckWin())
@@ -116,7 +115,12 @@ void Game::draw_screen()
 #endif
 			{
 				Scene1_->ShowHelp();
+				Sound_->Pause(0);
+				if(WindowsWinApi_->keyboard__->enablesound)
+					Sound_->Play(1);
 			}
+			else
+				Sound_->Pause(1);
 		}
 		else
 			Scene1_->ShowWelcome(loading);
@@ -143,7 +147,6 @@ void Game::draw_screen()
 #else
         Sound_->Play(0);
 #endif
-
 	}
 	Exit();
 }
@@ -157,18 +160,15 @@ int Game::Execute(int argc, char*argv[])
 #else
 	SDL_GLContext context;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Tropic Island", 10, 10,700 ,500, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Cars", 10, 10,700 ,500, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	context = SDL_GL_CreateContext(window);
 	SDL_GL_SetSwapInterval(1);
 #endif
 	setup_opengl(700,500);
-
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
 	Scene1_->LoadButtons();
-	//
 	Scene1_->LoadNumbersAndWords();
-	//
 #ifndef _WIN32
 	WindowsSDLApi_ = new WindowsSDLApi();
 #endif

@@ -29,9 +29,9 @@ void Logic::SetDrum()
 	{
 		num = min_ + rand() % (max_ - min_ + 1);
 		vectordrum.push_back(drum[num]);
-		std::cout<<num<<" ";
+		//std::cout<<num<<" ";
 	}
-	std::cout<<std::endl;
+	//std::cout<<std::endl;
 #endif
 }
 std::vector<std::string> Logic::GetDrum()

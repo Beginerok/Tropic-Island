@@ -1,7 +1,7 @@
 #include "Sound.h"
 #ifdef _WIN32
 	#pragma warning(disable : 4996)
-	#pragma comment(lib,"OpenAL32_.lib")
+	#pragma comment(lib,"OpenAL32.lib")
 #endif
 
 Sound::Sound()
@@ -44,6 +44,7 @@ int Sound::Init(int argc, char*argv[])
 		}
 		WAVHEADER header;
 		fread_s(&header, sizeof(WAVHEADER), sizeof(WAVHEADER), 1, file_);
+		/*
 		printf("chunkId:%s\n", header.chunkId);
 		printf("chunkSize:%lu\n", header.chunkSize);
 		printf("format:%s\n", header.format);
@@ -57,6 +58,7 @@ int Sound::Init(int argc, char*argv[])
 		printf("bitsPerSample:%d\n", header.bitsPerSample);
 		printf("subchunk2Id:%s\n", header.subchunk2Id);
 		printf("subchunk2Size:%lu\n", header.subchunk2Size);
+		*/
 		fclose(file_);
 		if (header.numChannels == 1)
 		{
@@ -72,7 +74,7 @@ int Sound::Init(int argc, char*argv[])
 			else
 				format = AL_FORMAT_STEREO8;
 		}
-		file = open(sounds->Name[j].c_str(), _A_ARCH);
+		file = open(sounds->Name[j].c_str(), _A_SYSTEM);
 		if (file == -1)
 		{
 			printf("Open failed on input file: %s\n",sounds->Name[j].c_str());
@@ -82,19 +84,16 @@ int Sound::Init(int argc, char*argv[])
 		}
 		org = 0;
 		lseek(file,0,org);
-		std::cout<<"hchs="<<header.subchunk2Size<<std::endl;
+		//std::cout<<"hchs="<<header.subchunk2Size<<std::endl;
 		buf = new unsigned char[header.subchunk2Size];
 		read(file, buf, header.subchunk2Size);
-		org = 1;
-
-
+		close(file);
 		alBufferData(sounds->buffer[j], format, buf, header.subchunk2Size, header.sampleRate);
 		delete buf;
 #else
         sounds->buffer[j] = alutCreateBufferFromFile(sounds->Name[j].c_str());
 #endif // _WIN32
 		alSourcei(sounds->source[j], AL_BUFFER, sounds->buffer[j]);
-		close(file);
 	}
 
 	return 0;
@@ -120,6 +119,13 @@ int Sound::StopAll()
 		Stop(i, false);
 	return 0;
 }
+
+void Sound::Pause(int src)
+{
+	alGetSourcei(sounds->source[src], AL_SOURCE_STATE, &state);
+	if (state == AL_PLAYING)
+		alSourcePause(sounds->source[src]);
+}
 Sound::~Sound()
 {
 	alDeleteSources(CountSounds, sounds->source);
@@ -129,5 +135,4 @@ Sound::~Sound()
 	alcMakeContextCurrent(0);
 	alcDestroyContext(ctx);
 	alcCloseDevice(dev);
-	org = 2;
 }
