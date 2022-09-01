@@ -32,13 +32,13 @@ public:
 	Scene1(void);
 	void LoadImage(const ILstring path);
 	void ShowWelcome(bool show);
-	void LoadWelcome();
+	void LoadWelcome();//numbers
 	void EnableTexture(float* texcoor, float* vercoor);
 	int FindTexture(std::string name);
-	int LoadDrum(int iter);
+	int LoadDrum(int iter);//numbers
 	void ShowDrum(int countdrums, int counttextureondrums, std::vector<std::string> drum,
 		bool* buttons, int pressbutton,int *upbutton);
-	void EnableTexture(int n, int m);
+	void EnableTexture(int n, int m);//numbers
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonFrontDown(float leftup, float leftdown, float rightdown, float rightup);
@@ -48,21 +48,21 @@ public:
 	void Rotate();
 	void StartRotate(int *upbutoon);
 
-	void LoadButtons();
+	void LoadButtons();//numbers
 	void ShowButtons();
-	void EnableTextureButtons(int i);
+	void EnableTextureButtons(int i);//numbers
 
-	void LoadNumbersAndWords();
+	void LoadNumbersAndWords();//numbers
 	void ShowNumbersAndWords(int credits,int win,int totalbet);
-	void EnableTextureNumbersAndWords(int i,int win);
+	void EnableTextureNumbersAndWords(int i,int win);//numbers
 	void LoadAnimatedAuto();
 
-	void DrawWord(int word_,int pos);
+	void DrawWord(int word_,int pos);//malloc free numbers
 	void EnableTextureNumbers(int position, int numberword,int win);
-	void LoadBorder();
+	void LoadBorder();//numbers
 	void ShowBorder();
-	void ShowHelp();
-	void ShowLine(bool firstline,bool secondline, bool thirdline);
+	void ShowHelp();//numbers
+	void ShowLine(bool firstline,bool secondline, bool thirdline);//numbers
 	~Scene1();
 	int err;
 #ifndef _WIN32
