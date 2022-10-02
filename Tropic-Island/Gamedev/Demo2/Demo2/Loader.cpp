@@ -27,7 +27,6 @@ SimpleImage* Loader::LoadImage(const ILstring path,std::string path_)
 		ext = IL_BMP;
 	if (strstr(reinterpret_cast<const char*>(path), "gif"))
 		ext = IL_GIF;
-
 	ilLoad(ext, reinterpret_cast<const ILstring>(path));
 	// Получение кода ошибки
 	err = ilGetError();
@@ -36,8 +35,8 @@ SimpleImage* Loader::LoadImage(const ILstring path,std::string path_)
 		// Получение строки с ошибкой
 		strError = (wchar_t*)iluErrorString(err);
 		// Выдаем сообщение об ошибке
-#ifdef _WINDOWS_2
-		MessageBox(NULL, NULL, "Ошибка при загрузке il!", MB_OK);
+#ifdef _WIN32
+		MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
 #endif
 		// выход из программы
 		flogout << "Error loading image: " << reinterpret_cast<const char*>(path) << std::endl;
@@ -48,66 +47,35 @@ SimpleImage* Loader::LoadImage(const ILstring path,std::string path_)
 	width = ilGetInteger(IL_IMAGE_WIDTH);
 	// Высота изображения
 	height = ilGetInteger(IL_IMAGE_HEIGHT);
-	// Число байт на пиксель
-	//int bpp = ilGetInteger(IL_IMAGE_BYTES_PER_PIXEL);
 	// Тип хранения данных
 	type = ilGetInteger(IL_IMAGE_FORMAT);
-	/*
-	unsigned int type;
-	// переопределить тип для OpenGL
-	switch (bpp) {
-	case 1:
-	type  = GL_RGB8;
-	break;
-	case 3:
-	type = GL_RGB;
-	break;
-	case 4:
-	type = GL_RGBA;
-	break;
-	}
-	*/
 	// Индекс текстуры
 	copyData = ilGetData();
 	image->IndexTexture[CountIndexTexture] = 0;
 	glGenTextures(1, &image->IndexTexture[CountIndexTexture]);
 	iluFlipImage();
-
 	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[CountIndexTexture]);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//
 	gluBuild2DMipmaps(GL_TEXTURE_2D, type, width, height, type, GL_UNSIGNED_BYTE, copyData);
-
 	CountIndexTexture++;
-
 	image->Name[CountIndexTexture - 1] = path_;
 	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	return image;
-};
+}
 int Loader::FindTexture(std::string name)
 {
 	int result = -1;
 	for (int i = 0; i < CountTexture; i++)
-	{
 		if (strcmp(image->Name[i].c_str(), name.c_str()) == 0)
-		{
-			/*
-			int bb=0;
-			for(int j=0;j<name.length() && j<image->Name[i].length();j++)
-			{
-			if(name[j] == image->Name[i][j])
-			bb++;
-			}
-			if(name.length() == image->Name[i].length() && bb == name.length())
-			*/
 			result = image->number[i];
-			//break;
-		}
-	}
 	return result;
+}
+void Loader::LoadCoordFromFile()
+{
+
 }
 Loader::~Loader()
 {

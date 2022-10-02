@@ -13,28 +13,49 @@
 #include <sstream>
 struct Image
 {
-	float**TextureCoordinats;
+	//float**TextureCoordinats;
 	float**VertexCoordinats;
 	unsigned int*IndexTexture;
 	std::string *Name;
 	int *number;
 };
+struct Image_s
+{
+	float Xleft;
+	float Xright;
+	float Yup;
+	float Ydown;
+	float Z;
+	unsigned int IndexTexture;
+	std::string Name;
+	int number;
+	bool alpha;
+};
+
 struct Coor
 {
-	std::vector<float> a;
-	float b;
+	std::vector<float> x;
+	float y;
 	float width;
 	float height;
+};
+struct Image_d
+{
+	Coor coor;
+	unsigned int IndexTexture;
+	std::string Name;
+	int number;
 };
 class Scene1
 {
 public:
 	Scene1(void);
-	void LoadImage(const ILstring path);
+	unsigned int LoadImage(const ILstring path);
 	void ShowWelcome(bool show);
 	void LoadWelcome();//numbers
-	void EnableTexture(float* texcoor, float* vercoor);
+	void EnableTexture(Image_s im, bool third,bool alpha);
 	int FindTexture(std::string name);
+	int FindTexture(std::string name, std::vector<Image_s> vec);
 	int LoadDrum(int iter);//numbers
 	void ShowDrum(int countdrums, int counttextureondrums, std::vector<std::string> drum,
 		bool* buttons, int pressbutton,int *upbutton);
@@ -52,17 +73,18 @@ public:
 	void ShowButtons();
 	void EnableTextureButtons(int i);//numbers
 
-	void LoadNumbersAndWords();//numbers
+	void LoadWords();//numbers
 	void ShowNumbersAndWords(int credits,int win,int totalbet);
 	void EnableTextureNumbersAndWords(int i,int win);//numbers
 	void LoadAnimatedAuto();
 
-	void DrawWord(int word_,int pos);//malloc free numbers
-	void EnableTextureNumbers(int position, int numberword,int win);
+	void DrawNumbers(int number,int pos);//malloc free numbers
+	void EnableTextureNumbers(int position, int numberword);
 	void LoadBorder();//numbers
 	void ShowBorder();
 	void ShowHelp();//numbers
 	void ShowLine(bool firstline,bool secondline, bool thirdline);//numbers
+	void LoadNumbers();
 	~Scene1();
 	int err;
 #ifndef _WIN32
@@ -103,4 +125,13 @@ public:
 	std::vector<std::string>vectorram;
 	float scale;
 	bool scaling;
+
+
+	std::vector<Image_s> welcomev;
+
+	std::vector<Image_s>buttonsv;
+
+	std::vector<Image_s>wordsv;
+
+	std::vector<Image_s>borderhelpv;
 };

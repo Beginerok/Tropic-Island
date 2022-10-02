@@ -31,26 +31,22 @@ public:
 	Loader(void);
 	SimpleImage* LoadImage(const ILstring path,std::string path_);
 	int FindTexture(std::string name);
+	void LoadCoordFromFile();
 	~Loader();
 	int err;
-#ifdef _WINDOWS_2
+#ifndef _WIN32
 	char* strError;
-	//or  wchar_t*strError;
 #else
-	//or const char*strError;
 	wchar_t* strError;
 #endif
-	// Ширина изображения
 	int width;
-	// Высота изображения
 	int height;
-	// Тип хранения данных
 	unsigned int type;
 	unsigned char* copyData;
-	static const int CountTexture = 57;//40//53
+	static const int CountTexture = 57;
 	SimpleImage* image;
 	int CountIndexTexture;
-	std::ofstream flogout;// ("log.txt");
+	std::ofstream flogout;
 };
 #else
 #endif

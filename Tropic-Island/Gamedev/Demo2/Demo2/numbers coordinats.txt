@@ -1,0 +1,11 @@
+content//numbers_and_words//0.png
+content//numbers_and_words//1.png
+content//numbers_and_words//2.png
+content//numbers_and_words//3.png
+content//numbers_and_words//4.png
+content//numbers_and_words//5.png
+content//numbers_and_words//6.png
+content//numbers_and_words//7.png
+content//numbers_and_words//8.png
+content//numbers_and_words//9.png
+content//cross.png

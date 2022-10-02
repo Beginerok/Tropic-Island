@@ -167,8 +167,6 @@ int Game::Execute(int argc, char*argv[])
 	setup_opengl(700,500);
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
-	Scene1_->LoadButtons();
-	Scene1_->LoadNumbersAndWords();
 #ifndef _WIN32
 	WindowsSDLApi_ = new WindowsSDLApi();
 #endif
@@ -183,6 +181,9 @@ int Game::Execute(int argc, char*argv[])
 	Logic_->SetCredits(1000,online);
 	Sound_ = new Sound();
 	Sound_->Init(argc, argv);
+	Scene1_->LoadButtons();
+	Scene1_->LoadWords();
+	Scene1_->LoadNumbers();
 	Scene1_->LoadBorder();
 	draw_screen();
 #if _WIN32
