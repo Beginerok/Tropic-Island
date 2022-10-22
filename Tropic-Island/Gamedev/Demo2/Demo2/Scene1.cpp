@@ -199,12 +199,9 @@ void Scene1::ShowWelcome(bool show)
 	//glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	//glAlphaFunc(GL_GREATER, 0.0f);
 	int numb = FindTexture("welcome",welcomev);
-	glBindTexture(GL_TEXTURE_2D,welcomev[numb].IndexTexture);
 	EnableTexture(welcomev[numb],false,false);
 
-
 	numb = FindTexture("logo", welcomev);
-	glBindTexture(GL_TEXTURE_2D, welcomev[numb].IndexTexture);
 	EnableTexture(welcomev[numb],false,false);
 
 	if (AnimateBar>10)
@@ -216,7 +213,6 @@ void Scene1::ShowWelcome(bool show)
 	NameAnimateBar += out.str();
 	{
 		numb = FindTexture(NameAnimateBar, welcomev);
-		glBindTexture(GL_TEXTURE_2D, welcomev[numb].IndexTexture);
 		EnableTexture(welcomev[numb],false,false);
 	}
 	NameAnimateBar.clear();
@@ -226,6 +222,7 @@ void Scene1::ShowWelcome(bool show)
 }
 void Scene1::EnableTexture(Image_s im, bool third, bool alpha)
 {
+	glBindTexture(GL_TEXTURE_2D, im.IndexTexture);
 	if (alpha)
 	{
 		glEnable(GL_ALPHA_TEST);
@@ -259,24 +256,31 @@ void Scene1::EnableTexture(Image_s im, bool third, bool alpha)
 		glDisable(GL_BLEND);
 	}
 }
-void Scene1::LoadButtons()
+int Scene1::LoadButtons(int iter)
 {
-	std::ifstream in("buttons coordinats.txt");
-	Image_s im;
-	if (in.is_open())
+	if (iter == 17)
 	{
-		std::string path__;
-		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+		std::ifstream in("buttons coordinats.txt");
+		Image_s im;
+		if (in.is_open())
 		{
-			im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
-			path__ = path__.substr(path__.find_last_of("/\\") + 1);
-			size_t dot_i = path__.find_last_of('.');
-			im.Name = path__.substr(0, dot_i);
-			im.number = buttonsv.size();
-			buttonsv.push_back(im);
+			std::string path__;
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+			{
+				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+				path__ = path__.substr(path__.find_last_of("/\\") + 1);
+				size_t dot_i = path__.find_last_of('.');
+				im.Name = path__.substr(0, dot_i);
+				im.number = buttonsv.size();
+				buttonsv.push_back(im);
+			}
+			in.close();
 		}
-		in.close();
 	}
+	if (iter > 16)
+		return 0;
+	else
+		return 1;
 }
 void Scene1::ShowButtons()
 {
@@ -286,121 +290,128 @@ void Scene1::ShowButtons()
 	//glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	//glAlphaFunc(GL_GREATER, 0.0f);
 	for (int i = 0; i < buttonsv.size() / 2; i++)
-	{
-		glBindTexture(GL_TEXTURE_2D, buttonsv[i].IndexTexture);
 		EnableTexture(buttonsv[i],false,false);
-	}
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 }
-
-void Scene1::LoadWords()
+int Scene1::LoadWords(int iter)
 {
-	std::ifstream in("words coordinats.txt");
-	Image_s im;
-	if (in.is_open())
+	if (iter == 18)
 	{
-		std::string path__;
-		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+		std::ifstream in("words coordinats.txt");
+		Image_s im;
+		if (in.is_open())
 		{
-			im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
-			path__ = path__.substr(path__.find_last_of("/\\") + 1);
-			size_t dot_i = path__.find_last_of('.');
-			im.Name = path__.substr(0, dot_i);
-			im.number = wordsv.size();
-			wordsv.push_back(im);
+			std::string path__;
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+			{
+				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+				path__ = path__.substr(path__.find_last_of("/\\") + 1);
+				size_t dot_i = path__.find_last_of('.');
+				im.Name = path__.substr(0, dot_i);
+				im.number = wordsv.size();
+				wordsv.push_back(im);
+			}
+			in.close();
 		}
-		in.close();
 	}
+	if (iter > 17)
+		return 0;
+	else
+		return 1;
 }
-
-void Scene1::LoadNumbers()
+int Scene1::LoadNumbers(int iter)
 {
-	std::ofstream out;          // поток для записи
-	out.open("numbers coordinats.txt"); // окрываем файл для записи
-	if (out.is_open())
+	if (iter == 19)
 	{
-		out << "content//numbers_and_words//0.png" << std::endl;
-	vectornumbersandwords.push_back("0");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//0.png"));
+		std::ofstream out;          // поток для записи
+		out.open("numbers coordinats.txt"); // окрываем файл для записи
+		if (out.is_open())
+		{
+			out << "content//numbers_and_words//0.png" << std::endl;
+			vectornumbersandwords.push_back("0");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//0.png"));
 
-	image->Name[CountIndexTexture - 1] = "0";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			image->Name[CountIndexTexture - 1] = "0";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	out << "content//numbers_and_words//1.png" << std::endl;
-	vectornumbersandwords.push_back("1");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//1.png"));
+			out << "content//numbers_and_words//1.png" << std::endl;
+			vectornumbersandwords.push_back("1");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//1.png"));
 
-	image->Name[CountIndexTexture - 1] = "1";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			image->Name[CountIndexTexture - 1] = "1";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	out << "content//numbers_and_words//2.png" << std::endl;
-	vectornumbersandwords.push_back("2");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//2.png"));
+			out << "content//numbers_and_words//2.png" << std::endl;
+			vectornumbersandwords.push_back("2");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//2.png"));
 
-	image->Name[CountIndexTexture - 1] = "2";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			image->Name[CountIndexTexture - 1] = "2";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	out << "content//numbers_and_words//3.png" << std::endl;
-	vectornumbersandwords.push_back("3");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//3.png"));
+			out << "content//numbers_and_words//3.png" << std::endl;
+			vectornumbersandwords.push_back("3");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//3.png"));
 
-	image->Name[CountIndexTexture - 1] = "3";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			image->Name[CountIndexTexture - 1] = "3";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	vectornumbersandwords.push_back("4");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//4.png"));
+			vectornumbersandwords.push_back("4");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//4.png"));
 
-	out << "content//numbers_and_words//4.png" << std::endl;
-	image->Name[CountIndexTexture - 1] = "4";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			out << "content//numbers_and_words//4.png" << std::endl;
+			image->Name[CountIndexTexture - 1] = "4";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	vectornumbersandwords.push_back("5");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//5.png"));
+			vectornumbersandwords.push_back("5");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//5.png"));
 
-	out << "content//numbers_and_words//5.png" << std::endl;
-	image->Name[CountIndexTexture - 1] = "5";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			out << "content//numbers_and_words//5.png" << std::endl;
+			image->Name[CountIndexTexture - 1] = "5";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	vectornumbersandwords.push_back("6");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//6.png"));
+			vectornumbersandwords.push_back("6");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//6.png"));
 
-	out << "content//numbers_and_words//6.png" << std::endl;
-	image->Name[CountIndexTexture - 1] = "6";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			out << "content//numbers_and_words//6.png" << std::endl;
+			image->Name[CountIndexTexture - 1] = "6";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	vectornumbersandwords.push_back("7");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//7.png"));
+			vectornumbersandwords.push_back("7");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//7.png"));
 
-	out << "content//numbers_and_words//7.png" << std::endl;
-	image->Name[CountIndexTexture - 1] = "7";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			out << "content//numbers_and_words//7.png" << std::endl;
+			image->Name[CountIndexTexture - 1] = "7";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	vectornumbersandwords.push_back("8");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//8.png"));
+			vectornumbersandwords.push_back("8");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//8.png"));
 
-	out << "content//numbers_and_words//8.png" << std::endl;
-	image->Name[CountIndexTexture - 1] = "8";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			out << "content//numbers_and_words//8.png" << std::endl;
+			image->Name[CountIndexTexture - 1] = "8";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	vectornumbersandwords.push_back("9");
-	LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//9.png"));
+			vectornumbersandwords.push_back("9");
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//9.png"));
 
-	out << "content//numbers_and_words//9.png" << std::endl;
-	image->Name[CountIndexTexture - 1] = "9";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
+			out << "content//numbers_and_words//9.png" << std::endl;
+			image->Name[CountIndexTexture - 1] = "9";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
+			out << "content//cross.png" << std::endl;
+			vectornumbersandwords.push_back("cross");//1
+			LoadImage(reinterpret_cast<const ILstring>("content//cross.png"));
 
+			image->Name[CountIndexTexture - 1] = "cross";
+			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
-	out << "content//cross.png" << std::endl;
-	vectornumbersandwords.push_back("cross");//1
-	LoadImage(reinterpret_cast<const ILstring>("content//cross.png"));
-
-	image->Name[CountIndexTexture - 1] = "cross";
-	image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
-
-	out.close();
+			out.close();
+		}
 	}
+	if (iter > 18)
+		return 0;
+	else
+		return 1;
 }
 void Scene1::ShowNumbersAndWords(int credits, int win, int totalbet)
 {
@@ -410,10 +421,7 @@ void Scene1::ShowNumbersAndWords(int credits, int win, int totalbet)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	glAlphaFunc(GL_GREATER, 0.0f);
 	for (int i = 0; i < wordsv.size(); i++)
-	{
-		glBindTexture(GL_TEXTURE_2D, wordsv[i].IndexTexture);
 		EnableTexture(wordsv[i],false,false);
-	}
 	DrawNumbers(credits, 0);
 	DrawNumbers(win, 1);
 	DrawNumbers(totalbet, 2);
@@ -472,24 +480,31 @@ void Scene1::EnableTextureNumbers(int position,int numberword)
 		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y,1.0f);
 	glEnd();
 }
-void Scene1::LoadBorder()
+int Scene1::LoadBorder(int iter)
 {
-	std::ifstream in("help border coordinats.txt");
-	Image_s im;
-	if (in.is_open())
+	if (iter == 20)
 	{
-		std::string path__;
-		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown) && (in >> im.Z)&& (in >> im.alpha))
+		std::ifstream in("help border coordinats.txt");
+		Image_s im;
+		if (in.is_open())
 		{
-			im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
-			path__ = path__.substr(path__.find_last_of("/\\") + 1);
-			size_t dot_i = path__.find_last_of('.');
-			im.Name = path__.substr(0, dot_i);
-			im.number = borderhelpv.size();
-			borderhelpv.push_back(im);
+			std::string path__;
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown) && (in >> im.Z) && (in >> im.alpha))
+			{
+				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+				path__ = path__.substr(path__.find_last_of("/\\") + 1);
+				size_t dot_i = path__.find_last_of('.');
+				im.Name = path__.substr(0, dot_i);
+				im.number = borderhelpv.size();
+				borderhelpv.push_back(im);
+			}
+			in.close();
 		}
-		in.close();
 	}
+	if (iter > 19)
+		return 0;
+	else
+		return 1;
 }
 void Scene1::ShowBorder()
 {
@@ -503,7 +518,6 @@ void Scene1::ShowBorder()
 	glAlphaFunc(GL_GREATER, 0.0f);
 	*/
 	int numb = FindTexture("border", borderhelpv);
-	glBindTexture(GL_TEXTURE_2D, borderhelpv[numb].IndexTexture);
 	EnableTexture(borderhelpv[numb],true,false);
 
 	glDisable(GL_BLEND);
@@ -512,13 +526,9 @@ void Scene1::ShowBorder()
 //numbers
 void Scene1::ShowHelp()
 {
-	for (int i = 0; i < borderhelpv.size(); i++)
-	{
-		glBindTexture(GL_TEXTURE_2D, borderhelpv[i].IndexTexture);
-		EnableTexture(borderhelpv[i],true,borderhelpv[i].alpha);
-	}
+	for (int i = 1; i < borderhelpv.size(); i++)
+		EnableTexture(borderhelpv[i], true, borderhelpv[i].alpha);
 	/*
-
 	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("auto11")]);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(1.0f, 1.0f);
@@ -1556,7 +1566,6 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	glDisable(GL_ALPHA_TEST);
 	*/
 }
-
 //numbers
 void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float yup)
 {
@@ -1940,7 +1949,6 @@ void Scene1::StartRotate(int *upbutton)
 	}
 }
 //numbers
-
 void Scene1::LoadAnimatedAuto()
 {
 
@@ -1976,7 +1984,6 @@ void Scene1::LoadAnimatedAuto()
 	animation3 = new Animation(anim3);
 }
 //numbers
-
 Scene1::~Scene1()
 {
 	//for (int i = 0; i<CountTexture; i++)

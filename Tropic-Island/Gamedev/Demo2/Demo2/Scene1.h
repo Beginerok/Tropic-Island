@@ -69,22 +69,22 @@ public:
 	void Rotate();
 	void StartRotate(int *upbutoon);
 
-	void LoadButtons();//numbers
+	int LoadButtons(int iter);//numbers
 	void ShowButtons();
 	void EnableTextureButtons(int i);//numbers
 
-	void LoadWords();//numbers
+	int LoadWords(int iter);//numbers
 	void ShowNumbersAndWords(int credits,int win,int totalbet);
 	void EnableTextureNumbersAndWords(int i,int win);//numbers
 	void LoadAnimatedAuto();
 
 	void DrawNumbers(int number,int pos);//malloc free numbers
 	void EnableTextureNumbers(int position, int numberword);
-	void LoadBorder();//numbers
+	int LoadBorder(int iter);//numbers
 	void ShowBorder();
 	void ShowHelp();//numbers
 	void ShowLine(bool firstline,bool secondline, bool thirdline);//numbers
-	void LoadNumbers();
+	int LoadNumbers(int iter);
 	~Scene1();
 	int err;
 #ifndef _WIN32

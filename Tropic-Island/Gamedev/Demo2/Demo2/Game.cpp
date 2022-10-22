@@ -137,8 +137,16 @@ void Game::draw_screen()
 		run = !WindowsSDLApi_->getdone();
 #endif
 		loading = Scene1_->LoadDrum(++iter);
+		if (iter > 15)
+			loading = Scene1_->LoadButtons(++iter);
+		if (iter > 16)
+			loading = Scene1_->LoadWords(++iter);
 		if (iter > 17)
-			iter = 17;
+			loading = Scene1_->LoadNumbers(++iter);
+		if (iter > 18)
+			loading = Scene1_->LoadBorder(++iter);
+		if (iter > 19)
+			iter = 20;
 #if _WIN32
 		if (WindowsWinApi_->keyboard__->enablesound)
 			Sound_->Play(0);
@@ -181,10 +189,6 @@ int Game::Execute(int argc, char*argv[])
 	Logic_->SetCredits(1000,online);
 	Sound_ = new Sound();
 	Sound_->Init(argc, argv);
-	Scene1_->LoadButtons();
-	Scene1_->LoadWords();
-	Scene1_->LoadNumbers();
-	Scene1_->LoadBorder();
 	draw_screen();
 #if _WIN32
 	WindowsWinApi_->keyboard__->KillWindow();

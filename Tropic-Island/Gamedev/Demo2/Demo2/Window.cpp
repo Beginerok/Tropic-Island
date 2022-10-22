@@ -261,10 +261,11 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	ShowWindow(hwnd, SW_SHOW);
 	SetForegroundWindow(hwnd);
 	SetFocus(hwnd);
-
+	/*
 	ShowWindow(hwnd2, SW_SHOW);
 	SetForegroundWindow(hwnd2);
 	SetFocus(hwnd2);
+	*/
 	return true;
 }
 GLvoid Window::Show()
