@@ -57,7 +57,7 @@ public:
 	int FindTexture(std::string name);
 	int FindTexture(std::string name, std::vector<Image_s> vec);
 	int LoadDrum(int iter);//numbers
-	void ShowDrum(int countdrums, int counttextureondrums, std::vector<std::string> drum,
+	bool ShowDrum(int countdrums, int counttextureondrums, std::vector<std::string> drum,
 		bool* buttons, int pressbutton,int *upbutton);
 	void EnableTexture(int n, int m);//numbers
 	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
@@ -66,7 +66,7 @@ public:
 	void EnablePolygonBackUp(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonBackMiddle(float leftup, float leftdown, float rightdown, float rightup);
 	void EnablePolygonBackDown(float leftup, float leftdown, float rightdown, float rightup);
-	void Rotate();
+	bool Rotate();
 	void StartRotate(int *upbutoon);
 
 	int LoadButtons(int iter);//numbers

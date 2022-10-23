@@ -257,10 +257,11 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 	//вставляем подменю файл в главное меню
 	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hSubMenu, L"Settings");
 	SetMenu(hwnd, hMenu);
-
+	
 	ShowWindow(hwnd, SW_SHOW);
 	SetForegroundWindow(hwnd);
 	SetFocus(hwnd);
+	
 	/*
 	ShowWindow(hwnd2, SW_SHOW);
 	SetForegroundWindow(hwnd2);
@@ -302,7 +303,6 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 			//MessageBox(hwnd,itoa(y,dst,10)/*"Поздравляю, с мышью вы разобрались!"*/, "Yes-s-s!", MB_OK|MB_ICONINFORMATION);
 			//delete dst;
 		}
-
 		break;
 	}
 	case WM_RBUTTONDOWN:
@@ -316,7 +316,6 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 			//MessageBox(hwnd, itoa(x,dst,10)/*"Поздравляю, с мышью вы разобрались!"*/, "Yes-s-s!", MB_OK|MB_ICONINFORMATION);
 			//delete dst;
 		}
-
 		break;
 	}
 	case WM_ACTIVATE:
@@ -412,7 +411,6 @@ LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lpa
 			ShowWindow(hwnd2, SW_HIDE);
 		}
 		if (wparam == 1002) {
-
 			offline = true;
 			//std::cout << "offline!";
 		}

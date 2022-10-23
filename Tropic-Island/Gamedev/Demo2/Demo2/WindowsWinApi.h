@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include "Logic.h"
 #include "Window.h"
-
+#include <iostream>
 class WindowsWinApi
 {
 public:

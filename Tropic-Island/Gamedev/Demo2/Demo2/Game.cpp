@@ -63,6 +63,7 @@ void Game::draw_screen()
 			if (!WindowsSDLApi_->GetF()[2] && WindowsSDLApi_->pressbutton == 1 && WindowsSDLApi_->upbutton == 0)
 #endif
 			{
+				Sound_->Play(5);
 				if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
 				{
 					Logic_->firstline = false;
@@ -76,7 +77,7 @@ void Game::draw_screen()
 				Logic_->checkwin = false;
 			}
 #ifdef _WIN32
-			if (WindowsWinApi_->GetF()[1])
+			if (WindowsWinApi_->GetF()[1] && !bonus)
 #else
 			if (WindowsSDLApi_->GetF()[1])
 #endif
@@ -88,30 +89,55 @@ void Game::draw_screen()
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
 			}
-			
-			Scene1_->ShowDrum(countdrums, counttextureondrums,
-			Logic_->GetDrum(),
+			if (Logic_->GetWin() > 0 && !bonus && WindowsWinApi_->GetF()[3])
+			{
+				bonus = true;
+				WindowsWinApi_->setF(false, 3);
+				WindowsWinApi_->setF(false, 0);
+				WindowsWinApi_->setF(false, 1);
+				WindowsWinApi_->setF(false, 2);
+				WindowsWinApi_->setF(false, 4);
+				Logic_->SetRandom();
+			}
+			if ((Logic_->GetWin() > 0 && bonus && WindowsWinApi_->GetF()[1]) || (bonus && Logic_->GetWin() == 0))
+			{
+				bonus = false;
+				WindowsWinApi_->setF(false, 1);
+				WindowsWinApi_->setF(false, 0);
+				WindowsWinApi_->setF(false, 2);
+				WindowsWinApi_->setF(false, 3);
+				WindowsWinApi_->setF(false, 4);
+			}
+			if(bonus)
+				Scene2_->ShowBackGround(WindowsWinApi_->GetF(), Logic_->GetRandom(), Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
+			else
+			{
+				if (Scene1_->ShowDrum(countdrums, counttextureondrums,
+					Logic_->GetDrum(),
 #ifndef _WIN32
-				WindowsSDLApi_->GetF(),
-				WindowsSDLApi_->pressbutton,
-				&WindowsSDLApi_->upbutton
+					WindowsSDLApi_->GetF(),
+					WindowsSDLApi_->pressbutton,
+					&WindowsSDLApi_->upbutton
 
 #else
-				WindowsWinApi_->GetF(),
-				WindowsWinApi_->pressbutton,
-				&WindowsWinApi_->upbutton
+					WindowsWinApi_->GetF(),
+					WindowsWinApi_->pressbutton,
+					&WindowsWinApi_->upbutton
 #endif
-			);
-			Scene1_->ShowButtons();
-			Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(),Logic_->GetTotalBet());
-			Scene1_->ShowBorder();
-			Scene1_->ShowLine(Logic_->firstline,Logic_->secondline,Logic_->thirdline);
+				))
+					Sound_->Play(6);
+
+				Scene1_->ShowButtons();
+				Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
+				Scene1_->ShowBorder();
+				Scene1_->ShowLine(Logic_->firstline, Logic_->secondline, Logic_->thirdline);
+			}
 			if (Logic_->CheckWin())
 				Sound_->Play(3);
 #ifdef _WIN32
-			if (WindowsWinApi_->GetF()[0])
+			if (WindowsWinApi_->GetF()[0] && !bonus)
 #else
-			if (WindowsSDLApi_->GetF()[0])
+			if (WindowsSDLApi_->GetF()[0] && !bonus)
 #endif
 			{
 				Scene1_->ShowHelp();
@@ -175,6 +201,8 @@ int Game::Execute(int argc, char*argv[])
 	setup_opengl(700,500);
 	Scene1_ = new Scene1();
 	Scene1_->LoadWelcome();
+	Scene2_ = new Scene2();
+	Scene2_->SetData();
 #ifndef _WIN32
 	WindowsSDLApi_ = new WindowsSDLApi();
 #endif

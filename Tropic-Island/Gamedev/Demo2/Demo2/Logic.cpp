@@ -15,6 +15,7 @@ Logic::Logic()
 	drum.push_back("bonus");
 	drum.push_back("wild");
 	SetDrum();
+	random = new int[5];
 }
 void Logic::SetDrum()
 {
@@ -22,7 +23,7 @@ void Logic::SetDrum()
 	dbconn->Query();
 #else
 	vectordrum.clear();
-	int max_ = 6, min_ = 0;
+	int max_ = 1, min_ = 0;
 	srand(time(NULL));
 	int num = -1;
 	for (int i = 0; i < 30; i++)
@@ -33,6 +34,17 @@ void Logic::SetDrum()
 	}
 	//std::cout<<std::endl;
 #endif
+}
+int* Logic::GetRandom()
+{
+	return random;
+}
+void Logic::SetRandom()
+{
+	int min = 3, max = 54;
+	srand(time(0));
+	for (int i = 0; i < 5; i++)
+		random[i] = min + rand() % (max - min + 1);
 }
 std::vector<std::string> Logic::GetDrum()
 {
@@ -216,4 +228,5 @@ Logic::~Logic()
 #else
 	drum.clear();
 #endif
+	delete[] random;
 }

@@ -27,6 +27,8 @@ public:
 	void SetWin(float win);
 	void SetTotalBet(float totalbet);
 	bool CheckWin();
+	int* GetRandom();
+	void SetRandom();
 	~Logic();
 	int CountPosition;
 	float Credits, Win, TotalBet;
@@ -37,5 +39,6 @@ public:
 #endif
 	bool firstline, secondline, thirdline;
 	bool checkwin;
+	int* random;
 };
 #endif

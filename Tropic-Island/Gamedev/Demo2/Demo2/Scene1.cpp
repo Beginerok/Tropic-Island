@@ -1498,7 +1498,7 @@ int Scene1::LoadDrum(int iter)
 	else
 		return 1;
 }
-void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::string> drum,bool*buttons,int pressbutton,int *upbutton)
+bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::string> drum,bool*buttons,int pressbutton,int *upbutton)
 {
 	/*
 	glEnable(GL_ALPHA_TEST);
@@ -1509,7 +1509,7 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	*/
 	if (!buttons[2] && pressbutton == 1 && *upbutton==0)
 			StartRotate(upbutton);
-	Rotate();
+	bool stop = Rotate();
 	//glRotatef(0.05, 0, 1, 0);
 	int k = -1;
 	for (int i = 0; i<countdrums; i++)
@@ -1565,6 +1565,7 @@ void Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 	*/
+	return stop;
 }
 //numbers
 void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float yup)
@@ -1919,8 +1920,9 @@ void Scene1::EnableTexture(int n, int m)
     }
 	//back middle
 }
-void Scene1::Rotate()
+bool Scene1::Rotate()
 {
+	bool stop = false;
 	for (int i = 0; i<CountDrum; i++)
 	{
 		if (startrotate[i])
@@ -1930,9 +1932,11 @@ void Scene1::Rotate()
 			else
 			{
 				startrotate[i] = false;
+				stop = true;
 			}
 		}
 	}
+	return stop;
 }
 void Scene1::StartRotate(int *upbutton)
 {

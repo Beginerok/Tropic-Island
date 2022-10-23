@@ -1,5 +1,4 @@
 #include "WindowsWinApi.h"
-#include <iostream>
 
 WindowsWinApi::WindowsWinApi()
 {

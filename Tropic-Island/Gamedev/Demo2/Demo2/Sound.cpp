@@ -6,7 +6,7 @@
 
 Sound::Sound()
 {
-	CountSounds = 5;
+	CountSounds = 7;
 	sounds = new Sounds[CountSounds];
 	sounds->Name = new std::string[CountSounds];
 	for (int i = 0; i < CountSounds; i++)
@@ -31,6 +31,8 @@ int Sound::Init(int argc, char*argv[])
 	sounds->Name[2] = "content//internet.wav";
 	sounds->Name[3] = "content//winner.wav";
 	sounds->Name[4] = "content//coin.wav";
+	sounds->Name[5] = "content//fast.wav";
+	sounds->Name[6] = "content//stop.wav";
 	for (int j = 0; j < CountSounds; j++)
 	{
 #ifdef _WIN32
