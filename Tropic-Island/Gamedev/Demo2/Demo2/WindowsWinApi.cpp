@@ -78,22 +78,22 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 		{
 			GetButtonDownCoords();
 			std::cout << point.x << " " << point.y << std::endl;
-			if (point.y >460 && point.y<475)
+			if (point.y >290 && point.y<373)
 			{
-				if (point.x >123 && point.x<190)
+				if (point.x > 41 && point.x < 129)
 					setF(true, 0);
-				if (point.x >228 && point.x<296)
+				if (point.x > 176 && point.x < 260)
 					setF(true, 1);
-				if (point.x > 330 && point.x < 401)
+				if (point.x > 304 && point.x < 393)
 				{
 					upbutton += 1;
 					setF(true, 2);
 					pressbutton += 1;
 					std::cout << "press button:" << pressbutton << std::endl;
 				}
-				if (point.x > 436 && point.x < 506)
+				if (point.x > 438 && point.x < 527)
 					setF(true, 3);
-				if (point.x >543 && point.x<608)
+				if (point.x >568 && point.x<655)
 					setF(true, 4);
 			}
 			return true;
@@ -183,7 +183,7 @@ bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_)
 					if (getF(4))
 					{
 						setF(false, 4);
-						setdone(true);
+						//setdone(true);
 					}
 				}
 			}

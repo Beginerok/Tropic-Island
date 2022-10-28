@@ -117,14 +117,13 @@ unsigned int Scene1::LoadImage(const ILstring path)
 	copyData = ilGetData();
 	image->IndexTexture[CountIndexTexture] = 0;
 	glGenTextures(1, &image->IndexTexture[CountIndexTexture]);
-	iluFlipImage();
+	//iluFlipImage();
 
 	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[CountIndexTexture]);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//
 	gluBuild2DMipmaps(GL_TEXTURE_2D, type, width, height, type, GL_UNSIGNED_BYTE, copyData);
 	
 	return image->IndexTexture[CountIndexTexture++];
@@ -136,7 +135,7 @@ void Scene1::LoadWelcome()
 	if (in.is_open())
 	{
 		std::string path__;
-		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup) && (in >> im.Z) && (in >> im.alpha))
 		{
 			im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
 			path__ = path__.substr(path__.find_last_of("/\\") + 1);
@@ -199,10 +198,10 @@ void Scene1::ShowWelcome(bool show)
 	//glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 	//glAlphaFunc(GL_GREATER, 0.0f);
 	int numb = FindTexture("welcome",welcomev);
-	EnableTexture(welcomev[numb],false,false);
+	EnableTexture(welcomev[numb],true,true);
 
 	numb = FindTexture("logo", welcomev);
-	EnableTexture(welcomev[numb],false,false);
+	EnableTexture(welcomev[numb],true,true);
 
 	if (AnimateBar>10)
 		AnimateBar = 0;
@@ -213,7 +212,7 @@ void Scene1::ShowWelcome(bool show)
 	NameAnimateBar += out.str();
 	{
 		numb = FindTexture(NameAnimateBar, welcomev);
-		EnableTexture(welcomev[numb],false,false);
+		EnableTexture(welcomev[numb],true,true);
 	}
 	NameAnimateBar.clear();
 	AnimateBar++;
@@ -265,7 +264,7 @@ int Scene1::LoadButtons(int iter)
 		if (in.is_open())
 		{
 			std::string path__;
-			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup))
 			{
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
 				path__ = path__.substr(path__.find_last_of("/\\") + 1);
@@ -303,7 +302,7 @@ int Scene1::LoadWords(int iter)
 		if (in.is_open())
 		{
 			std::string path__;
-			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup))
 			{
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
 				path__ = path__.substr(path__.find_last_of("/\\") + 1);
@@ -471,13 +470,13 @@ void Scene1::EnableTextureNumbers(int position,int numberword)
 {
 	glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y + coor[numberword].height, 1.0f);
+		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y, 1.0f);
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(coor[numberword].x[position], coor[numberword].y + coor[numberword].height, 1.0f);
-		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(coor[numberword].x[position], coor[numberword].y, 1.0f);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(coor[numberword].x[position], coor[numberword].y + coor[numberword].height, 1.0f);
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y,1.0f);
+		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y + coor[numberword].height,1.0f);
 	glEnd();
 }
 int Scene1::LoadBorder(int iter)
@@ -489,7 +488,7 @@ int Scene1::LoadBorder(int iter)
 		if (in.is_open())
 		{
 			std::string path__;
-			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown) && (in >> im.Z) && (in >> im.alpha))
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup) && (in >> im.Z) && (in >> im.alpha))
 			{
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
 				path__ = path__.substr(path__.find_last_of("/\\") + 1);
@@ -1515,6 +1514,7 @@ bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	for (int i = 0; i<countdrums; i++)
 	{
 		glPushMatrix();
+		//glRotatef(180, 0, 0, 1);
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j < counttextureondrums; j++)
 		{

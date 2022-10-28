@@ -234,7 +234,7 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[0]]);
 	EnableTexture(NewTextureCoordinats[0],NewVertexCoordinats[1]);
 
-	if (GetFA[0] != true)
+	if (GetFA[1] != true)
 	{
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[2]);
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
@@ -289,7 +289,8 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[64]);
 	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);
 	*/
-	if (GetFA[1] != true)
+	
+	if (GetFA[0] != true)
 	{
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[55]);
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[1]);
@@ -299,7 +300,8 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[56]);
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[1]);
 	}
-	if (GetFA[0] != true)
+	
+	if (GetFA[1] != true)
 	{
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[57]);
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
@@ -339,7 +341,7 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[58]);
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);
 	}
-
+	
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[59]);
 	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[60]);
 

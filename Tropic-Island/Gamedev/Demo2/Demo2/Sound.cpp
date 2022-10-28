@@ -26,7 +26,7 @@ int Sound::Init(int argc, char*argv[])
 	alcMakeContextCurrent(ctx);
 	alGenBuffers(CountSounds, sounds->buffer);
 	alGenSources(CountSounds, sounds->source);
-	sounds->Name[0] = "content//test.wav";
+	sounds->Name[0] = "content//test2.wav";
 	sounds->Name[1] = "content//konga.wav";
 	sounds->Name[2] = "content//internet.wav";
 	sounds->Name[3] = "content//winner.wav";

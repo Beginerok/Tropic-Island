@@ -16,9 +16,9 @@ void Game::setup_opengl(int width, int height)
 	//glShadeModel(GL_SMOOTH);
 	//glCullFace(GL_BACK);
 	//glFrontFace(GL_CCW);
-	glMatrixMode(GL_MODELVIEW);
+	//glMatrixMode(GL_MODELVIEW);
 	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-	gluPerspective(189, 0.5, 0.6, 0.6);
+	//gluPerspective(189, 0.5, 0.6, 0.6);
 	glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, -1.0);
 	ilInit(); // Инициализация основной библиотеки
 	iluInit(); // Инициализация библиотеки утилит
@@ -28,6 +28,7 @@ void Game::setup_opengl(int width, int height)
 }
 void Game::draw_screen()
 {
+	glEnable(GL_DEPTH_TEST);
 	while (run)
 	{
 #ifdef _WIN32
@@ -58,9 +59,9 @@ void Game::draw_screen()
 		if (!loading)
 		{
 #ifdef _WIN32
-			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0)
+			if (!WindowsWinApi_->GetF()[2] && WindowsWinApi_->pressbutton == 1 && WindowsWinApi_->upbutton == 0 && !bonus)
 #else
-			if (!WindowsSDLApi_->GetF()[2] && WindowsSDLApi_->pressbutton == 1 && WindowsSDLApi_->upbutton == 0)
+			if (!WindowsSDLApi_->GetF()[2] && WindowsSDLApi_->pressbutton == 1 && WindowsSDLApi_->upbutton == 0 && !bonus)
 #endif
 			{
 				Sound_->Play(5);
@@ -79,7 +80,7 @@ void Game::draw_screen()
 #ifdef _WIN32
 			if (WindowsWinApi_->GetF()[1] && !bonus)
 #else
-			if (WindowsSDLApi_->GetF()[1])
+			if (WindowsSDLApi_->GetF()[1] && !bonus)
 #endif
 			{
 				Logic_->firstline = false;
@@ -92,24 +93,76 @@ void Game::draw_screen()
 			if (Logic_->GetWin() > 0 && !bonus && WindowsWinApi_->GetF()[3])
 			{
 				bonus = true;
+				/*
 				WindowsWinApi_->setF(false, 3);
 				WindowsWinApi_->setF(false, 0);
 				WindowsWinApi_->setF(false, 1);
 				WindowsWinApi_->setF(false, 2);
 				WindowsWinApi_->setF(false, 4);
+				*/
 				Logic_->SetRandom();
 			}
-			if ((Logic_->GetWin() > 0 && bonus && WindowsWinApi_->GetF()[1]) || (bonus && Logic_->GetWin() == 0))
+			if ((Logic_->GetWin() > 0 && bonus && WindowsWinApi_->GetF()[0]))
 			{
 				bonus = false;
+				/*
 				WindowsWinApi_->setF(false, 1);
 				WindowsWinApi_->setF(false, 0);
 				WindowsWinApi_->setF(false, 2);
 				WindowsWinApi_->setF(false, 3);
 				WindowsWinApi_->setF(false, 4);
+				*/
+				Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);//
+				Logic_->SetWin(0.0f);
+				Sound_->Play(4);
 			}
-			if(bonus)
+			if (bonus)
+			{
+				for (int i = 1; i < 5; i++)
+				{
+					if (WindowsWinApi_->GetF()[i])
+					{
+						if (Logic_->GetRandom()[0] < Logic_->GetRandom()[i])
+						{
+							/*
+							WindowsWinApi_->setF(false, 1);
+							WindowsWinApi_->setF(false, 0);
+							WindowsWinApi_->setF(false, 2);
+							WindowsWinApi_->setF(false, 3);
+							WindowsWinApi_->setF(false, 4);
+							*/
+							Logic_->SetWin(Logic_->GetWin() * 2);
+							Logic_->SetRandom();
+						}
+						else if (Logic_->GetRandom()[0] > Logic_->GetRandom()[i])
+						{
+							/*
+							WindowsWinApi_->setF(false, 1);
+							WindowsWinApi_->setF(false, 0);
+							WindowsWinApi_->setF(false, 2);
+							WindowsWinApi_->setF(false, 3);
+							WindowsWinApi_->setF(false, 4);
+							*/
+							Logic_->SetWin(0);
+							bonus = false;
+						}
+						else
+						{
+							/*
+							WindowsWinApi_->setF(false, 1);
+							WindowsWinApi_->setF(false, 0);
+							WindowsWinApi_->setF(false, 2);
+							WindowsWinApi_->setF(false, 3);
+							WindowsWinApi_->setF(false, 4);
+							*/
+							Logic_->SetRandom();
+						}
+					}
+				}
+				glDisable(GL_DEPTH_TEST);
 				Scene2_->ShowBackGround(WindowsWinApi_->GetF(), Logic_->GetRandom(), Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
+				glEnable(GL_DEPTH_TEST);
+			}
 			else
 			{
 				if (Scene1_->ShowDrum(countdrums, counttextureondrums,
@@ -130,7 +183,10 @@ void Game::draw_screen()
 				Scene1_->ShowButtons();
 				Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
 				Scene1_->ShowBorder();
+
+				glDisable(GL_DEPTH_TEST);
 				Scene1_->ShowLine(Logic_->firstline, Logic_->secondline, Logic_->thirdline);
+				glEnable(GL_DEPTH_TEST);
 			}
 			if (Logic_->CheckWin())
 				Sound_->Play(3);
@@ -140,7 +196,9 @@ void Game::draw_screen()
 			if (WindowsSDLApi_->GetF()[0] && !bonus)
 #endif
 			{
+				glDisable(GL_DEPTH_TEST);
 				Scene1_->ShowHelp();
+				glEnable(GL_DEPTH_TEST);
 				Sound_->Pause(0);
 				if(WindowsWinApi_->keyboard__->enablesound)
 					Sound_->Play(1);
@@ -149,7 +207,11 @@ void Game::draw_screen()
 				Sound_->Pause(1);
 		}
 		else
+		{
+			glDisable(GL_DEPTH_TEST);
 			Scene1_->ShowWelcome(loading);
+			glEnable(GL_DEPTH_TEST);
+		}
 		glDisable(GL_TEXTURE_2D);
 #if _WIN32
 		WindowsWinApi_->keyboard__->Show();
@@ -181,6 +243,7 @@ void Game::draw_screen()
 #else
         Sound_->Play(0);
 #endif
+		glFlush();
 	}
 	Exit();
 }
