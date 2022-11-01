@@ -23,7 +23,7 @@ void Logic::SetDrum()
 	dbconn->Query();
 #else
 	vectordrum.clear();
-	int max_ = 0, min_ = 0;//6
+	int max_ = 1, min_ = 0;//6
 	srand(time(NULL));
 	int num = -1;
 	for (int i = 0; i < 30; i++)

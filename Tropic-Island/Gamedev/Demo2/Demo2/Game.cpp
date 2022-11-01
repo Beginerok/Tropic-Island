@@ -8,6 +8,9 @@ Game::Game()
 	bonus = false;
 	firsttime = false;
 	online = false;
+	wait = false;
+	tmpcounter = 0;
+	number = -1;
 }
 void Game::setup_opengl(int width, int height)
 {
@@ -70,11 +73,11 @@ void Game::draw_screen()
 					Logic_->firstline = false;
 					Logic_->secondline = false;
 					Logic_->thirdline = false;
-					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);//
+					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
 				}
-				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(),online);//
+				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(),online);
 				Logic_->checkwin = false;
 			}
 #ifdef _WIN32
@@ -86,82 +89,82 @@ void Game::draw_screen()
 				Logic_->firstline = false;
 				Logic_->secondline = false;
 				Logic_->thirdline = false;
-				Logic_->SetCredits(Logic_->GetCredits()+Logic_->GetWin(),online);//
+				Logic_->SetCredits(Logic_->GetCredits()+Logic_->GetWin(),online);
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
 			}
 			if (Logic_->GetWin() > 0 && !bonus && WindowsWinApi_->GetF()[3])
 			{
 				bonus = true;
-				/*
-				WindowsWinApi_->setF(false, 3);
-				WindowsWinApi_->setF(false, 0);
-				WindowsWinApi_->setF(false, 1);
-				WindowsWinApi_->setF(false, 2);
-				WindowsWinApi_->setF(false, 4);
-				*/
 				Logic_->SetRandom();
 			}
-			if ((Logic_->GetWin() > 0 && bonus && WindowsWinApi_->GetF()[0]))
+			if (bonus || wait)
 			{
-				bonus = false;
-				/*
-				WindowsWinApi_->setF(false, 1);
-				WindowsWinApi_->setF(false, 0);
-				WindowsWinApi_->setF(false, 2);
-				WindowsWinApi_->setF(false, 3);
-				WindowsWinApi_->setF(false, 4);
-				*/
-				Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);//
-				Logic_->SetWin(0.0f);
-				Sound_->Play(4);
-			}
-			if (bonus)
-			{
-				for (int i = 1; i < 5; i++)
+				if ((Logic_->GetWin() > 0 && WindowsWinApi_->GetF()[5]))
 				{
-					if (WindowsWinApi_->GetF()[i])
+					bonus = false;
+					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
+					Logic_->SetWin(0.0f);
+					Sound_->Play(4);
+				}
+				for (int i = 6; i < 10; i++)
+				{
+					if (WindowsWinApi_->GetF()[i] && !wait)
 					{
-						if (Logic_->GetRandom()[0] < Logic_->GetRandom()[i])
-						{
-							/*
-							WindowsWinApi_->setF(false, 1);
-							WindowsWinApi_->setF(false, 0);
-							WindowsWinApi_->setF(false, 2);
-							WindowsWinApi_->setF(false, 3);
-							WindowsWinApi_->setF(false, 4);
-							*/
-							Logic_->SetWin(Logic_->GetWin() * 2);
-							Logic_->SetRandom();
-						}
-						else if (Logic_->GetRandom()[0] > Logic_->GetRandom()[i])
-						{
-							/*
-							WindowsWinApi_->setF(false, 1);
-							WindowsWinApi_->setF(false, 0);
-							WindowsWinApi_->setF(false, 2);
-							WindowsWinApi_->setF(false, 3);
-							WindowsWinApi_->setF(false, 4);
-							*/
-							Logic_->SetWin(0);
-							bonus = false;
-						}
-						else
-						{
-							/*
-							WindowsWinApi_->setF(false, 1);
-							WindowsWinApi_->setF(false, 0);
-							WindowsWinApi_->setF(false, 2);
-							WindowsWinApi_->setF(false, 3);
-							WindowsWinApi_->setF(false, 4);
-							*/
-							Logic_->SetRandom();
-						}
+						wait = true;
+						tmpcounter = 0;
+						//now = std::time(0);
+						//ltm = localtime(&now);
+						number = i;
 					}
 				}
 				glDisable(GL_DEPTH_TEST);
 				Scene2_->ShowBackGround(WindowsWinApi_->GetF(), Logic_->GetRandom(), Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
 				glEnable(GL_DEPTH_TEST);
+				Sound_->Pause(0);
+				Sound_->Play(7);
+				if (wait)
+				{
+					//std::time_t tmpnow = std::time(0);
+					//tm* tmpltm = localtime(&now);
+					//if (abs(ltm->tm_sec - tmpltm->tm_sec) > 2)
+					if (tmpcounter > 30)
+					{
+						/*
+						for(int i=2;i<54;i++)
+							std::cout <<(i - 2) % 13 << std::endl;*/
+						wait = false;
+						for (int i = number; i < number+1; i++)
+						{
+							//if (WindowsWinApi_->GetF()[i])
+							{
+								if (((Logic_->GetRandom()[0]-3) % 13) < ((Logic_->GetRandom()[i - 5] - 3) % 13))
+								{
+									//WindowsWinApi_->setF(false, 1);
+									Logic_->SetWin(Logic_->GetWin() * 2);
+									Sound_->Play(3);
+									//Sleep(1000);
+									Logic_->SetRandom();
+								}
+								else if (((Logic_->GetRandom()[0] - 3) % 13) > ((Logic_->GetRandom()[i - 5] - 3) % 13))
+								{
+									//WindowsWinApi_->setF(false, 1);
+									Logic_->SetWin(0);
+									Sound_->Play(8);
+									//Sleep(1000);
+									bonus = false;
+								}
+								else// if (((Logic_->GetRandom()[0] - 2) % 14) == ((Logic_->GetRandom()[i - 2] - 2) % 14))
+								{
+									//WindowsWinApi_->setF(false, 1);
+									//Sleep(1000);
+									Logic_->SetRandom();
+								}
+							}
+						}
+					}
+				}
+				tmpcounter++;
 			}
 			else
 			{
@@ -237,7 +240,10 @@ void Game::draw_screen()
 			iter = 20;
 #if _WIN32
 		if (WindowsWinApi_->keyboard__->enablesound)
+		{
 			Sound_->Play(0);
+			Sound_->Pause(7);
+		}
 		else
 			Sound_->StopAll();
 #else

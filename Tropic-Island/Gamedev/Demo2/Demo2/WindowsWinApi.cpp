@@ -2,7 +2,7 @@
 
 WindowsWinApi::WindowsWinApi()
 {
-	CountButtons = 5;
+	CountButtons = 10;
 	F = new bool[CountButtons];
 	for (int i = 0; i<CountButtons; i++)
 		setF(false, i);
@@ -14,7 +14,7 @@ WindowsWinApi::WindowsWinApi()
 }
 int WindowsWinApi::getAny()
 {
-	int retval = 5;
+	int retval = -1;//5
 	for (int i = 0; i<CountButtons; i++)
 		if (getF(i))
 			retval = i;
@@ -34,6 +34,8 @@ bool WindowsWinApi::getF(int n)
 }
 void WindowsWinApi::setF(bool status, int n)
 {
+	for (int i = 0; i < CountButtons; i++)
+		F[i] = false;
 	F[n] = status;
 }
 bool*WindowsWinApi::GetF()
@@ -50,8 +52,9 @@ void WindowsWinApi::Update(bool bonus, Logic *Logic_)
 }
 bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 {
-	if (keyboard__->msg_->message == WM_RBUTTONDOWN || keyboard__->msg_->message == WM_LBUTTONDOWN && !bonus)
+	if ((keyboard__->msg_->message == WM_RBUTTONDOWN || keyboard__->msg_->message == WM_LBUTTONDOWN) && !bonus)
 	{
+		//std::cout << "DOWN" << std::endl;
 		GetButtonDownCoords();
 		if (point.y >460 && point.y<475)
 		{
@@ -64,38 +67,34 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 				upbutton += 1;
 				setF(true, 2);
 				pressbutton += 1;
-				std::cout << "press button:" << pressbutton << std::endl;
 			}
 			if (point.x > 436 && point.x < 506)
 				setF(true, 3);
 			if (point.x >543 && point.x<608)
 				setF(true, 4);
 		}
+		keyboard__->msg_->message = WM_NULL;
 		return true;
 	}
 	else
-		if (keyboard__->msg_->message == WM_RBUTTONDOWN || keyboard__->msg_->message == WM_LBUTTONDOWN && bonus && !GetAny())
+		if ((keyboard__->msg_->message == WM_RBUTTONDOWN || keyboard__->msg_->message == WM_LBUTTONDOWN) && bonus)
 		{
+			//std::cout << "bonus_DOWN" << std::endl;
 			GetButtonDownCoords();
-			std::cout << point.x << " " << point.y << std::endl;
-			if (point.y >290 && point.y<373)
+			if ((point.y >290) && (point.y<373))
 			{
-				if (point.x > 41 && point.x < 129)
-					setF(true, 0);
-				if (point.x > 176 && point.x < 260)
-					setF(true, 1);
-				if (point.x > 304 && point.x < 393)
-				{
-					upbutton += 1;
-					setF(true, 2);
-					pressbutton += 1;
-					std::cout << "press button:" << pressbutton << std::endl;
-				}
-				if (point.x > 438 && point.x < 527)
-					setF(true, 3);
-				if (point.x >568 && point.x<655)
-					setF(true, 4);
+				if ((point.x > 41) && (point.x < 129) && !getF(5))
+					setF(true, 5);
+				if ((point.x > 176) && (point.x < 260) && !getF(6))
+					setF(true, 6);
+				if ((point.x > 304) && (point.x < 393) && !getF(7))
+					setF(true, 7);
+				if ((point.x > 438) && (point.x < 527) && !getF(8))
+					setF(true, 8);
+				if ((point.x > 568) && (point.x < 655) && !getF(9))
+					setF(true, 9);
 			}
+			keyboard__->msg_->message = WM_NULL;
 			return true;
 		}
 	if (VK_RBUTTON == key)
@@ -107,86 +106,57 @@ bool WindowsWinApi::IsMouseButtonDown(byte key, bool bonus)
 }
 bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_)
 {
-	if (keyboard__->msg_->message == WM_RBUTTONUP || keyboard__->msg_->message == WM_LBUTTONUP && !bonus)
+	if ((keyboard__->msg_->message == WM_RBUTTONUP || keyboard__->msg_->message == WM_LBUTTONUP) && !bonus)
 	{
 		GetButtonDownCoords();
-		//if (point.y >478 && point.y<496)
+		//std::cout << "UP" << std::endl;
+		if (getF(0))
+			setF(false, 0);
+		if (getF(1))
+			setF(false, 1);
+		if (getF(2))
 		{
-			//if (point.x >123 && point.x<190)
-			if (getF(0))
-				setF(false, 0);
-			//if (point.x >228 && point.x<296)
-			if (getF(1))
-				setF(false, 1);
-			//if (point.x >330 && point.x<401)
-			if (getF(2))
-			{
 #if DBAPI_ == 1
-				keyboard__->db->Query();
+			keyboard__->db->Query();
 #else
-				Logic_->SetDrum();
+			Logic_->SetDrum();
 #endif
-				pressbutton = 1;
-				upbutton = 0;
-				setF(false, 2);
-				std::cout << "press button:" << pressbutton << std::endl;
-			}
-			//if (point.x >436 && point.x<506)
-			{
-				if (getF(3))
-				{
-					SetBet_(GetBet_() + 1);
-					setF(false, 3);
-				}
-			}
-			//if (point.x >543 && point.x<608)
-			{
-				if (getF(4))
-				{
-					setF(false, 4);
-					setdone(true);
-				}
-			}
+			pressbutton = 1;
+			upbutton = 0;
+			setF(false, 2);
 		}
+		if (getF(3))
+		{
+			SetBet_(GetBet_() + 1);
+			setF(false, 3);
+		}
+		if (getF(4))
+		{
+			setF(false, 4);
+			setdone(true);
+		}
+		keyboard__->msg_->message = WM_NULL;
 		return true;
 	}
 	else
-		if (keyboard__->msg_->message == WM_RBUTTONUP || keyboard__->msg_->message == WM_LBUTTONUP && bonus && GetAny())
+		if ((keyboard__->msg_->message == WM_RBUTTONUP || keyboard__->msg_->message == WM_LBUTTONUP) && bonus)
 		{
+			//std::cout << "bonus_UP"<< std::endl;
 			GetButtonDownCoords();
-			//if (point.y >478 && point.y<496)
+			if (getF(5))
+				setF(false, 5);
+			if (getF(6))
+				setF(false, 6);
+			if (getF(7))
+				setF(false, 7);
+			if (getF(8))
 			{
-				//if (point.x >123 && point.x<190)
-				if (getF(0))
-					setF(false, 0);
-				//if (point.x >228 && point.x<296)
-				if (getF(1))
-					setF(false, 1);
-				//if (point.x >330 && point.x<401)
-				if (getF(2))
-				{
-					pressbutton = 1;
-					upbutton = 0;
-					setF(false, 2);
-					std::cout << "press button:" << pressbutton << std::endl;
-				}
-				//if (point.x >436 && point.x<506)
-				{
-					if (getF(3))
-					{
-						SetBet_(GetBet_() + 1);
-						setF(false, 3);
-					}
-				}
-				//if (point.x >543 && point.x<608)
-				{
-					if (getF(4))
-					{
-						setF(false, 4);
-						//setdone(true);
-					}
-				}
+				SetBet_(GetBet_() + 1);
+				setF(false, 8);
 			}
+			if (getF(9))
+				setF(false, 9);
+			keyboard__->msg_->message = WM_NULL;
 			return true;
 		}
 	if (VK_RBUTTON == key)
@@ -201,6 +171,11 @@ POINT WindowsWinApi::GetButtonDownCoords()
 	point.x = keyboard__->x;
 	point.y = keyboard__->y;
 	//std::cout << "Coordinats x:" << keyboard__->x << "y:"<< keyboard__->y << std::endl;
+	/*
+	for (int i = 0; i < CountButtons; i++)
+		if(F[i])
+			std::cout << "[" << i << "]=" << std::endl;
+			*/
 	return point;
 }
 bool WindowsWinApi::IsKeyDown(byte key, bool bonus)
