@@ -36,7 +36,7 @@ public:
 	bool bonus,firsttime,online;
 	~Game();
 	float xx;
-	bool wait;
+	bool wait,showline;
 	std::time_t now;
 	tm* ltm;
 	int tmpcounter;

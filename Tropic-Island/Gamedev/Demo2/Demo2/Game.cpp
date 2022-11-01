@@ -77,8 +77,9 @@ void Game::draw_screen()
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
 				}
-				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(),online);
+				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
 				Logic_->checkwin = false;
+				showline = false;
 			}
 #ifdef _WIN32
 			if (WindowsWinApi_->GetF()[1] && !bonus)
@@ -89,7 +90,7 @@ void Game::draw_screen()
 				Logic_->firstline = false;
 				Logic_->secondline = false;
 				Logic_->thirdline = false;
-				Logic_->SetCredits(Logic_->GetCredits()+Logic_->GetWin(),online);
+				Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
 			}
@@ -103,6 +104,9 @@ void Game::draw_screen()
 				if ((Logic_->GetWin() > 0 && WindowsWinApi_->GetF()[5]))
 				{
 					bonus = false;
+					Logic_->firstline = false;
+					Logic_->secondline = false;
+					Logic_->thirdline = false;
 					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
@@ -134,11 +138,11 @@ void Game::draw_screen()
 						for(int i=2;i<54;i++)
 							std::cout <<(i - 2) % 13 << std::endl;*/
 						wait = false;
-						for (int i = number; i < number+1; i++)
+						for (int i = number; i < number + 1; i++)
 						{
 							//if (WindowsWinApi_->GetF()[i])
 							{
-								if (((Logic_->GetRandom()[0]-3) % 13) < ((Logic_->GetRandom()[i - 5] - 3) % 13))
+								if (((Logic_->GetRandom()[0] - 3) % 13) < ((Logic_->GetRandom()[i - 5] - 3) % 13))
 								{
 									//WindowsWinApi_->setF(false, 1);
 									Logic_->SetWin(Logic_->GetWin() * 2);
@@ -153,6 +157,9 @@ void Game::draw_screen()
 									Sound_->Play(8);
 									//Sleep(1000);
 									bonus = false;
+									Logic_->firstline = false;
+									Logic_->secondline = false;
+									Logic_->thirdline = false;
 								}
 								else// if (((Logic_->GetRandom()[0] - 2) % 14) == ((Logic_->GetRandom()[i - 2] - 2) % 14))
 								{
@@ -181,18 +188,22 @@ void Game::draw_screen()
 					&WindowsWinApi_->upbutton
 #endif
 				))
+				{
 					Sound_->Play(6);
-
+					showline = true;
+				}
 				Scene1_->ShowButtons();
 				Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
 				Scene1_->ShowBorder();
-
-				glDisable(GL_DEPTH_TEST);
-				Scene1_->ShowLine(Logic_->firstline, Logic_->secondline, Logic_->thirdline);
-				glEnable(GL_DEPTH_TEST);
+				if (showline)
+				{
+					if (Logic_->CheckWin())
+						Sound_->Play(3);
+					glDisable(GL_DEPTH_TEST);
+					Scene1_->ShowLine(Logic_->firstline, Logic_->secondline, Logic_->thirdline);
+					glEnable(GL_DEPTH_TEST);
+				}
 			}
-			if (Logic_->CheckWin())
-				Sound_->Play(3);
 #ifdef _WIN32
 			if (WindowsWinApi_->GetF()[0] && !bonus)
 #else
