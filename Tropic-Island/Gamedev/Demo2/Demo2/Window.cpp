@@ -28,7 +28,7 @@ Window::Window()
 	db = new DataBaseConnection();
 	db->Connect(); 
 #endif
-	enablesound = true;
+	enablesound = false;
 }
 GLvoid Window::KillWindow()
 {

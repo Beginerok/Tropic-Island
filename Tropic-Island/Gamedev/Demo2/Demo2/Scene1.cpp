@@ -48,6 +48,13 @@ Scene1::Scene1(void)
 	coor = new Coor[3];
 	scale = 1.0f;
 	scaling = true;
+	drums = gluNewQuadric();
+	rt = new float[5];
+	rt[0] = -0.75;
+	rt[1] = -0.45;
+	rt[2] = -0.15;
+	rt[3] = 0.15;
+	rt[4] = 0.45;
 }
 unsigned int Scene1::LoadImage(const ILstring path)
 {
@@ -1499,72 +1506,36 @@ int Scene1::LoadDrum(int iter)
 }
 bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::string> drum,bool*buttons,int pressbutton,int *upbutton)
 {
-	/*
-	glEnable(GL_ALPHA_TEST);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-	glAlphaFunc(GL_GREATER, 0.0f);
-	*/
 	if (!buttons[2] && pressbutton == 1 && *upbutton==0)
 			StartRotate(upbutton);
 	bool stop = Rotate();
-	//glRotatef(0.05, 0, 1, 0);
 	int k = -1;
-	for (int i = 0; i<countdrums; i++)
+	for (int i = 0; i < countdrums; i++)
 	{
 		glPushMatrix();
-		//glRotatef(180, 0, 0, 1);
+/*
+		glRotated(90, 0, 1, 0);
+		glRotatef(rotate[i], 0, 0, 1);
+		gluQuadricDrawStyle(drums, GLU_FILL);
+		glTranslatef(0.0, 0.0, rt[i]);
+		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(drum[++k])]);
+		glMatrixMode(GL_TEXTURE);
+		glPushMatrix();
+		glLoadIdentity();
+		glRotated(90, 0, 0, 1);
+		gluCylinder(drums, 0.68f, 0.68f, 0.3f, 30, 30);
+		gluQuadricTexture(drums, true);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		*/
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j < counttextureondrums; j++)
 		{
 			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(drum[++k])]);
 			EnableTexture(i, j);
-			/*
-			++k;
-
-			if (speedchangeanimation[k] % 23 == 0)
-			{
-				drumanimation[0][k]++;
-				drumanimation[1][k]++;
-				drumanimation[2][k]++;
-			}
-			if (drumanimation[0][k] == animation->path.size())
-				drumanimation[0][k] = 0;
-			if (drumanimation[1][k] == animation2->path.size())
-				drumanimation[1][k] = 0;
-			if (drumanimation[2][k] == animation3->path.size())
-				drumanimation[2][k] = 0;
-			speedchangeanimation[k]++;
-
-			//image->IndexTexture[FindTexture(drum[++k])]
-
-			if (i == 0 || i == 1)
-			{
-				std::string str = "content//drum//animated auto//" + std::to_string(drumanimation[0][k]) + ".png";
-				glBindTexture(GL_TEXTURE_2D, animation->loader->image->IndexTexture[animation->loader->FindTexture(str)]);
-				EnableTexture(i, j);
-			}
-			if (i == 2)
-			{
-				std::string str = "content//drum//animated auto 2//" + std::to_string(drumanimation[1][k]) + ".png";
-				glBindTexture(GL_TEXTURE_2D, animation2->loader->image->IndexTexture[animation2->loader->FindTexture(str)]);
-				EnableTexture(i, j);
-			}
-			if (i == 3 || i == 4)
-			{
-				std::string str = "content//drum//animated auto 3//" + std::to_string(drumanimation[2][k]) + ".png";
-				glBindTexture(GL_TEXTURE_2D, animation3->loader->image->IndexTexture[animation3->loader->FindTexture(str)]);
-				EnableTexture(i, j);
-			}
-			*/
 		}
 		glPopMatrix();
 	}
-	/*
-	glDisable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);
-	*/
 	return stop;
 }
 //numbers

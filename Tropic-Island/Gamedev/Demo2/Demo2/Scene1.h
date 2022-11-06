@@ -134,4 +134,6 @@ public:
 	std::vector<Image_s>wordsv;
 
 	std::vector<Image_s>borderhelpv;
+	GLUquadricObj* drums;
+	float *rt;
 };
