@@ -41,5 +41,7 @@ public:
 	tm* ltm;
 	int tmpcounter;
 	int number;
+	bool isFirstDown;
+	int x, y,orgX,orgY,rotX,rotY,preRotX,preRotY;
 };
 

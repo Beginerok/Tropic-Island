@@ -247,7 +247,6 @@ GLboolean Window::CreateWindow_(wchar_t *title, GLint width, GLint height, GLint
 		MessageBox(0, L"can't context cur", L"ERROR", MB_OK | MB_ICONEXCLAMATION);
 		return false;
 	}
-	
 	hMenu = CreateMenu();
 	//ןמהלוםü פאיכ
 	hSubMenu = CreateMenu();

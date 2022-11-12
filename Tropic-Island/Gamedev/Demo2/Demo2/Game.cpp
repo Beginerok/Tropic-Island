@@ -175,6 +175,32 @@ void Game::draw_screen()
 			}
 			else
 			{
+				/*
+				x = WindowsWinApi_->keyboard__->x;
+				y = WindowsWinApi_->keyboard__->y;
+				glRotatef((preRotX + rotX/1000.0), 0.0f, 1.0f, 0.0f);
+				glRotatef((preRotY + rotY/1000.0), 1.0f, 0.0f, 0.0f);
+				if (isFirstDown && WindowsWinApi_->IsMouseButtonDown(WM_RBUTTONUP, false))
+				{
+					isFirstDown = false;
+					orgX = x;
+					orgY = y;
+				}
+				else
+				{
+					rotX = x - orgX;
+					rotY = y - orgY;
+					
+				}
+				if(WindowsWinApi_->IsMouseButtonUp(WM_RBUTTONUP,false,Logic_))
+				{
+					isFirstDown = true;
+					preRotX += rotX;
+					preRotY += rotY;
+					rotX = 0;
+					rotY = 0;
+				}
+				*/
 				if (Scene1_->ShowDrum(countdrums, counttextureondrums,
 					Logic_->GetDrum(),
 #ifndef _WIN32
@@ -297,6 +323,7 @@ int Game::Execute(int argc, char*argv[])
 	Logic_->SetCredits(1000,online);
 	Sound_ = new Sound();
 	Sound_->Init(argc, argv);
+	std::cout << glGetString(GL_VERSION)<<std::endl;
 	draw_screen();
 #if _WIN32
 	WindowsWinApi_->keyboard__->KillWindow();

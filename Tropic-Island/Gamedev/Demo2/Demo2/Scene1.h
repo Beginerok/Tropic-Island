@@ -136,4 +136,7 @@ public:
 	std::vector<Image_s>borderhelpv;
 	GLUquadricObj* drums;
 	float *rt;
+	bool b;
+	bool *ccc;
+	int nnn;
 };
