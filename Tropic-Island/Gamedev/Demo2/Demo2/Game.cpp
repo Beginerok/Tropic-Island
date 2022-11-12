@@ -22,12 +22,12 @@ void Game::setup_opengl(int width, int height)
 	//glMatrixMode(GL_MODELVIEW);
 	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	//gluPerspective(189, 0.5, 0.6, 0.6);
-	glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, -1.0);
+	//glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, -1.0);
 	ilInit(); // Инициализация основной библиотеки
 	iluInit(); // Инициализация библиотеки утилит
-	ilEnable(IL_CONV_PAL);
-	ilEnable(IL_ORIGIN_SET);
-	ilSetInteger(IL_ORIGIN_MODE, IL_ORIGIN_UPPER_LEFT);
+	//ilEnable(IL_CONV_PAL);
+	//ilEnable(IL_ORIGIN_SET);
+	//ilSetInteger(IL_ORIGIN_MODE, IL_ORIGIN_UPPER_LEFT);
 }
 void Game::draw_screen()
 {
@@ -178,8 +178,8 @@ void Game::draw_screen()
 				/*
 				x = WindowsWinApi_->keyboard__->x;
 				y = WindowsWinApi_->keyboard__->y;
-				glRotatef((preRotX + rotX/1000.0), 0.0f, 1.0f, 0.0f);
-				glRotatef((preRotY + rotY/1000.0), 1.0f, 0.0f, 0.0f);
+				glRotatef((preRotX + rotX/1000.0), 0.0f, 1.0f, 1.0f);
+				glRotatef((preRotY + rotY/1000.0), 1.0f, 0.0f, 1.0f);
 				if (isFirstDown && WindowsWinApi_->IsMouseButtonDown(WM_RBUTTONUP, false))
 				{
 					isFirstDown = false;
@@ -323,7 +323,7 @@ int Game::Execute(int argc, char*argv[])
 	Logic_->SetCredits(1000,online);
 	Sound_ = new Sound();
 	Sound_->Init(argc, argv);
-	std::cout << glGetString(GL_VERSION)<<std::endl;
+	//std::cout << glGetString(GL_VERSION)<<std::endl;
 	draw_screen();
 #if _WIN32
 	WindowsWinApi_->keyboard__->KillWindow();
