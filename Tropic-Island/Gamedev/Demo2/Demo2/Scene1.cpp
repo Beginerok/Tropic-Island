@@ -1571,21 +1571,21 @@ void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float 
 		int n = nnn;
 		for (int i = 0; i < n; i++)
 		{
-			glTexCoord2d(1.0f, (float)i / n);
-			glVertex3d(xleft, round(0.68f * sin((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100, (-0 == round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100) ? 0 : round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100);
-			glTexCoord2d(1.0f, (float)(i+1) / n);
-			glVertex3d(xleft, round(0.68f * sin((90.0 - 60.0 / n * (i+1)) * 0.0175) * 100) / 100, (-0 == round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100) ? 0 : round(0.68f * cos((90.0 - 60.0 / n * (i+1)) * 0.0175) * 100) / 100);
+			glTexCoord2f(1.0f, (float)i / n);
+			glVertex3f(xleft, 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175),0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
+			glTexCoord2f(1.0f, (float)(i+1) / n);
+			glVertex3f(xleft, 0.68f * sin((90.0 - 60.0 / n * (i+1)) * 0.0175), 0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
 
-			glTexCoord2d(0.0f, (float)(i+1) / n);
-			glVertex3d(xright, round(0.68f * sin((90.0 - 60.0 / n * (i+1)) * 0.0175) * 100) / 100, (-0 == round(0.68f * cos((90.0 - 60.0 / n * (i+1)) * 0.0175) * 100) / 100) ? 0 : round(0.68f * cos((90.0 - 60.0 / n * (i+1)) * 0.0175) * 100) / 100);
-			glTexCoord2d(0.0f, (float)i / n);
-			glVertex3d(xright, round(0.68f * sin((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100, (-0 == round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100) ? 0 : round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100);
+			glTexCoord2f(0.0f, (float)(i+1) / n);
+			glVertex3f(xright, 0.68f * sin((90.0 - 60.0 / n * (i+1)) * 0.0175),0.68f * cos((90.0 - 60.0 / n * (i+1)) * 0.0175));
+			glTexCoord2f(0.0f, (float)i / n);
+			glVertex3f(xright, 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175),0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
 
-			if (b)
-				std::cout << (float)i / n << " " << round(0.68f * sin((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100 << " " <<round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100 << std::endl;
+			//if (b)
+				//std::cout << (float)i / n << " " << round(0.68f * sin((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100 << " " <<round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100 << std::endl;
 		}
-		if (b)
-			std::cout << "------------" << std::endl;
+		//if (b)
+			//std::cout << "------------" << std::endl;
 		//glTexCoord2f(1.0f, 1.0f);
 		//glVertex3f(xleft, ydown, .6f);
 
