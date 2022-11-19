@@ -1,22 +1,47 @@
 #pragma once
-//#define _WINDOWS_2
+#define QTAPI_ 1
+#define SDLAPI_ 0
+#define WINAPI_ 0
 #ifdef __unix__
 #else
 	#include <Windows.h>
 #endif
-#define SDL_MAIN_HANDLED
-#include "SDL2/SDL.h"
-#include "Animation.h"
+#if SDLAPI_==1
+	#define SDL_MAIN_HANDLED
+	#include "SDL2/SDL.h"
+#endif
+#ifndef OGL
+#define OGL
+#endif
+#include <fstream>
+//#include <GL/gl.h>
+#include <GL/glu.h>
+#if SDLAPI_==1 || WINAPI_==1
+#include <IL/il.h>
+#include <IL/ilu.h>
+#endif
+#ifdef __unix__
+#include <cstring>
+#endif
 #include <string.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <QtWidgets/QtWidgets>
+//#pragma comment(lib,"OpenGL32.lib")
+//#pragma comment(lib,"Glu32.lib")
+//#pragma comment(lib,"ILU.lib")
+//#pragma comment(lib,"DevIl.lib")
+//#pragma comment(lib,"SDL2.lib")
 struct Image
 {
-	//float**TextureCoordinats;
 	float**VertexCoordinats;
+#if SDLAPI_==1 || WINAPI_==1
 	unsigned int*IndexTexture;
-	std::string *Name;
+#elif QTAPI_==1
+	QOpenGLTexture* IndexTexture;
+#endif
+	std::string Name;
 	int *number;
 };
 struct Image_s
@@ -26,12 +51,15 @@ struct Image_s
 	float Yup;
 	float Ydown;
 	float Z;
+#if SDLAPI_==1 || WINAPI_==1
 	unsigned int IndexTexture;
+#elif QTAPI_==1
+	QOpenGLTexture *IndexTexture;
+#endif
 	std::string Name;
 	int number;
 	bool alpha;
 };
-
 struct Coor
 {
 	std::vector<float> x;
@@ -50,11 +78,17 @@ class Scene1
 {
 public:
 	Scene1(void);
+#if QTAPI_==1
+	QOpenGLTexture* QTLoadImage(QString path);
+	QImage qtimage;
+	QOpenGLTexture *tmp;
+#elif SDLAPI_==1 || WINAPI_==1
 	unsigned int LoadImage(const ILstring path);
+#endif
 	void ShowWelcome(bool show);
 	void LoadWelcome();//numbers
 	void EnableTexture(Image_s im, bool third,bool alpha);
-	int FindTexture(std::string name);
+	int FindTexture(std::string name, std::vector<Image> v);
 	int FindTexture(std::string name, std::vector<Image_s> vec);
 	int LoadDrum(int iter);//numbers
 	bool ShowDrum(int countdrums, int counttextureondrums, std::vector<std::string> drum,
@@ -68,16 +102,12 @@ public:
 	void EnablePolygonBackDown(float leftup, float leftdown, float rightdown, float rightup);
 	bool Rotate();
 	void StartRotate(int *upbutoon);
-
 	int LoadButtons(int iter);//numbers
 	void ShowButtons();
 	void EnableTextureButtons(int i);//numbers
-
 	int LoadWords(int iter);//numbers
 	void ShowNumbersAndWords(int credits,int win,int totalbet);
 	void EnableTextureNumbersAndWords(int i,int win);//numbers
-	void LoadAnimatedAuto();
-
 	void DrawNumbers(int number,int pos);//malloc free numbers
 	void EnableTextureNumbers(int position, int numberword);
 	int LoadBorder(int iter);//numbers
@@ -89,19 +119,14 @@ public:
 	int err;
 #ifndef _WIN32
 	const char* strError;
-	//or  wchar_t*strError;
 #else
-	//or const char*strError;
 	wchar_t* strError;
 #endif
-	// Ширина изображения
 	int width;
-	// Высота изображения
 	int height;
-	// Тип хранения данных
 	unsigned int type;
 	unsigned char* copyData;
-	static const int CountTexture = 58;// 57;//40//53
+	static const int CountTexture = 58;
 	Image* image;
 	int CountIndexTexture;
 	int AnimateBar;
@@ -113,30 +138,15 @@ public:
 	static const int CountTextureOnDrum = 6;
 	std::vector<std::string>vectordrum;
 	std::vector<std::string>vectorbuttons;
-	bool start;
 	std::vector<std::string>vectornumbersandwords;
 	std::ofstream flogout;
-	std::vector<std::string>vectorboomer;
-	int animateboomer, slowlychangesprite;
-	Animation *animation,*animation2,*animation3;
-	int **drumanimation;
-	int *speedchangeanimation;
 	Coor* coor;
 	std::vector<std::string>vectorram;
-	float scale;
-	bool scaling;
-
-
 	std::vector<Image_s> welcomev;
-
 	std::vector<Image_s>buttonsv;
-
 	std::vector<Image_s>wordsv;
-
 	std::vector<Image_s>borderhelpv;
-	GLUquadricObj* drums;
-	float *rt;
-	bool b;
-	bool *ccc;
+	std::vector<Image> drumv;
+	std::vector<Image> numbersv;
 	int nnn;
 };

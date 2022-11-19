@@ -15,6 +15,8 @@
         float y;
     };
     #endif
+#else
+#pragma comment(lib,"SDL2.lib")
 #endif
 class WindowsSDLApi
 {

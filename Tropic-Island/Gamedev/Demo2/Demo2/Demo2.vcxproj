@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Qt\Qt5.12.10\5.12.10\msvc2017_64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Qt\Qt5.12.10\5.12.10\msvc2017_64\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,11 +154,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Loader.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="MD5.h" />
+    <ClInclude Include="MyWidget.h" />
     <ClInclude Include="Scene1.h" />
     <ClInclude Include="Scene2.h" />
     <ClInclude Include="Sound.h" />
@@ -167,12 +166,11 @@
     <ClInclude Include="WindowsWinApi.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MD5.cpp" />
+    <ClCompile Include="MyWidget.cpp" />
     <ClCompile Include="Scene1.cpp" />
     <ClCompile Include="Scene2.cpp" />
     <ClCompile Include="Sound.cpp" />

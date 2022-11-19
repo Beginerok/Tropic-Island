@@ -6,16 +6,18 @@
 Scene1::Scene1(void)
 {
 	image = new Image[CountTexture];
-	//image->TextureCoordinats = new float* [CountTexture];
 	image->VertexCoordinats = new float* [CountTexture];
-	image->Name = new std::string[CountTexture];
+	//image->Name = new std::string[CountTexture];
 	for (int i = 0; i < CountTexture; i++)
 	{
-		//image->TextureCoordinats[i] = new float[4];
 		image->VertexCoordinats[i] = new float[4];
-		image->Name[i] = "";
+		//image->Name[i] = "";
 	}
-	image->IndexTexture = new unsigned int[CountTexture];//02.03.2019
+#if SDLAPI_==1 || WINAPI_==1
+	image->IndexTexture = new unsigned int[CountTexture];
+#else
+	//image->IndexTexture = new QOpenGLTexture[CountTexture];
+#endif
 	image->number = new int[CountTexture];
 	CountIndexTexture = 0;
 	AnimateBar = 0;
@@ -25,54 +27,21 @@ Scene1::Scene1(void)
 		rotate[i] = 360.0f;
 		startrotate[i] = false;
 	}
-	//randommassive = new int[30];
-	start = true;
 	flogout.open("log.txt");
-	animateboomer = 0;
-	slowlychangesprite = 0;
-	animation = new Animation();
-	animation2 = new Animation();
-	animation3 = new Animation();
-	drumanimation = new int* [3];
-	drumanimation[0] = new int[CountDrum * CountTextureOnDrum];
-	drumanimation[1] = new int[CountDrum * CountTextureOnDrum];
-	drumanimation[2] = new int[CountDrum * CountTextureOnDrum];
-	speedchangeanimation = new int[CountDrum * CountTextureOnDrum];
-	for (int i = 0; i < CountDrum * CountTextureOnDrum; i++)
-	{
-		drumanimation[0][i] = 0;
-		drumanimation[1][i] = 0;
-		drumanimation[2][i] = 0;
-		speedchangeanimation[i] = 0;
-	}
 	coor = new Coor[3];
-	scale = 1.0f;
-	scaling = true;
-	drums = gluNewQuadric();
-	rt = new float[5];
-	rt[0] = -0.75;
-	rt[1] = -0.45;
-	rt[2] = -0.15;
-	rt[3] = 0.15;
-	rt[4] = 0.45;
-	b = true;
 	nnn = 20;
-	ccc = new bool[6];
-	ccc[0] = true;
-	ccc[1] = true;
-	ccc[2] = true;
-	ccc[3] = true;
-	ccc[4] = true;
-	ccc[5] = true;
-	/*
-	ccc[0] = false;
-	ccc[1] = false;
-	ccc[2] = false;
-	ccc[3] = false;
-	ccc[4] = false;
-	ccc[5] = false;
-	*/
 }
+#if QTAPI_==1
+QOpenGLTexture* Scene1::QTLoadImage(QString path)
+{
+	qtimage.load(path);
+	tmp = new QOpenGLTexture(qtimage.mirrored());
+	tmp->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+	tmp->setMagnificationFilter(QOpenGLTexture::Linear);
+	CountIndexTexture++;
+	return tmp;
+}
+#elif WINAPI_==1 || SDLAPI_==1
 unsigned int Scene1::LoadImage(const ILstring path)
 {
 	ILenum ext;
@@ -84,23 +53,17 @@ unsigned int Scene1::LoadImage(const ILstring path)
 		ext = IL_BMP;
 	if (strstr(reinterpret_cast<const char*>(path), "gif"))
 		ext = IL_GIF;
-
 	ilLoad(ext, reinterpret_cast<const ILstring>(path));
-	// Получение кода ошибки
 	err = ilGetError();
-	// Если код не равен нулю ошибка была
 	if (err != IL_NO_ERROR) {
-		// Получение строки с ошибкой
 #ifdef _WIN32
 		strError = (wchar_t *)iluErrorString(err);
-		// Выдаем сообщение об ошибке
 #else
 		strError = iluErrorString(err);
 #endif
 #ifdef _WIN32
 		MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
 #endif
-		// выход из программы
 		flogout << "Error loading image: " << reinterpret_cast<const char*>(path) << std::endl;
  		std::cout<< "Error loading image: " << reinterpret_cast<const char*>(path)<<std::endl;
 #ifndef _WIN32
@@ -114,44 +77,22 @@ unsigned int Scene1::LoadImage(const ILstring path)
 		flogout.close();
 		exit(EXIT_FAILURE);
 	}
-	// Ширина изображения
 	width = ilGetInteger(IL_IMAGE_WIDTH);
-	// Высота изображения
 	height = ilGetInteger(IL_IMAGE_HEIGHT);
-	// Число байт на пиксель
-	//int bpp = ilGetInteger(IL_IMAGE_BYTES_PER_PIXEL);
-	// Тип хранения данных
 	type = ilGetInteger(IL_IMAGE_FORMAT);
-	/*
-	unsigned int type;
-	// переопределить тип для OpenGL
-	switch (bpp) {
-	case 1:
-	type  = GL_RGB8;
-	break;
-	case 3:
-	type = GL_RGB;
-	break;
-	case 4:
-	type = GL_RGBA;
-	break;
-	}
-	*/
-	// Индекс текстуры
 	copyData = ilGetData();
 	image->IndexTexture[CountIndexTexture] = 0;
 	glGenTextures(1, &image->IndexTexture[CountIndexTexture]);
-	//iluFlipImage();
-
 	glBindTexture(GL_TEXTURE_2D, image->IndexTexture[CountIndexTexture]);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	gluBuild2DMipmaps(GL_TEXTURE_2D, type, width, height, type, GL_UNSIGNED_BYTE, copyData);
-	
 	return image->IndexTexture[CountIndexTexture++];
 };
+
+#endif
 void Scene1::LoadWelcome()
 {
 	std::ifstream in("welcome coordinats.txt");
@@ -159,9 +100,17 @@ void Scene1::LoadWelcome()
 	if (in.is_open())
 	{
 		std::string path__;
+#if SDLAPI_==1 || WINAPI_==1
 		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup) && (in >> im.Z) && (in >> im.alpha))
+#elif QTAPI_ == 1
+		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown) && (in >> im.Z) && (in >> im.alpha))
+#endif
 		{
-			im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+#if SDLAPI_==1 || WINAPI_==1
+			im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str())); 
+#elif QTAPI_ == 1
+			im.IndexTexture = QTLoadImage(path__.c_str());
+#endif
 			path__ = path__.substr(path__.find_last_of("/\\") + 1);
 			size_t dot_i = path__.find_last_of('.');
 			im.Name = path__.substr(0, dot_i);
@@ -193,12 +142,12 @@ void Scene1::LoadWelcome()
 	}
 	*/
 }
-int Scene1::FindTexture(std::string name)
+int Scene1::FindTexture(std::string name,std::vector<Image> v)
 {
 	int result = -1;
-	for (int i = 0; i < CountTexture; i++)
-		if (strcmp(image->Name[i].c_str(), name.c_str()) == 0)
-			result = image->number[i];
+	for (int i = 0; i < v.size(); i++)
+		if (strcmp(v[i].Name.c_str(), name.c_str()) == 0)
+			result = i;
 	return result;
 }
 int Scene1::FindTexture(std::string name, std::vector<Image_s> vec)
@@ -219,25 +168,18 @@ void Scene1::ShowWelcome(bool show)
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-	//glAlphaFunc(GL_GREATER, 0.0f);
 	int numb = FindTexture("welcome",welcomev);
 	EnableTexture(welcomev[numb],true,true);
-
 	numb = FindTexture("logo", welcomev);
 	EnableTexture(welcomev[numb],true,true);
-
 	if (AnimateBar>10)
 		AnimateBar = 0;
 	NameAnimateBar = "bar";
-
 	std::stringstream out;
 	out << AnimateBar;
 	NameAnimateBar += out.str();
-	{
-		numb = FindTexture(NameAnimateBar, welcomev);
-		EnableTexture(welcomev[numb],true,true);
-	}
+	numb = FindTexture(NameAnimateBar, welcomev);
+	EnableTexture(welcomev[numb],true,true);
 	NameAnimateBar.clear();
 	AnimateBar++;
 	glDisable(GL_BLEND);
@@ -245,7 +187,11 @@ void Scene1::ShowWelcome(bool show)
 }
 void Scene1::EnableTexture(Image_s im, bool third, bool alpha)
 {
+#if SDLAPI_==1 || WINAPI_==1
 	glBindTexture(GL_TEXTURE_2D, im.IndexTexture);
+#elif QTAPI_ == 1
+	im.IndexTexture->bind();
+#endif
 	if (alpha)
 	{
 		glEnable(GL_ALPHA_TEST);
@@ -290,7 +236,11 @@ int Scene1::LoadButtons(int iter)
 			std::string path__;
 			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup))
 			{
+#if SDLAPI_==1 || WINAPI_==1
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+#elif QTAPI_ == 1
+				im.IndexTexture = QTLoadImage(path__.c_str());
+#endif
 				path__ = path__.substr(path__.find_last_of("/\\") + 1);
 				size_t dot_i = path__.find_last_of('.');
 				im.Name = path__.substr(0, dot_i);
@@ -328,7 +278,11 @@ int Scene1::LoadWords(int iter)
 			std::string path__;
 			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup))
 			{
+#if SDLAPI_==1 || WINAPI_==1
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+#elif QTAPI_ == 1
+				im.IndexTexture = QTLoadImage(path__.c_str());
+#endif
 				path__ = path__.substr(path__.find_last_of("/\\") + 1);
 				size_t dot_i = path__.find_last_of('.');
 				im.Name = path__.substr(0, dot_i);
@@ -347,85 +301,154 @@ int Scene1::LoadNumbers(int iter)
 {
 	if (iter == 19)
 	{
+		Image tmp;
 		std::ofstream out;          // поток для записи
 		out.open("numbers coordinats.txt"); // окрываем файл для записи
 		if (out.is_open())
 		{
 			out << "content//numbers_and_words//0.png" << std::endl;
 			vectornumbersandwords.push_back("0");
-			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//0.png"));
 
-			image->Name[CountIndexTexture - 1] = "0";
+#if SDLAPI_==1 || WINAPI_==1
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//0.png"));
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "0";
+			tmp.IndexTexture=QTLoadImage("content//numbers_and_words//0.png");
+			numbersv.push_back(tmp);
+#endif
+			image[CountIndexTexture - 1].Name = "0";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			out << "content//numbers_and_words//1.png" << std::endl;
 			vectornumbersandwords.push_back("1");
-			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//1.png"));
 
-			image->Name[CountIndexTexture - 1] = "1";
+#if SDLAPI_==1 || WINAPI_==1
+			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//1.png"));
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "1";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//1.png");
+			numbersv.push_back(tmp);
+#endif
+			image[CountIndexTexture - 1].Name= "1";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			out << "content//numbers_and_words//2.png" << std::endl;
 			vectornumbersandwords.push_back("2");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//2.png"));
-
-			image->Name[CountIndexTexture - 1] = "2";
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "2";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//2.png");
+			numbersv.push_back(tmp);
+#endif
+			image[CountIndexTexture - 1].Name= "2";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			out << "content//numbers_and_words//3.png" << std::endl;
 			vectornumbersandwords.push_back("3");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//3.png"));
-
-			image->Name[CountIndexTexture - 1] = "3";
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "3";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//3.png");
+			numbersv.push_back(tmp);
+#endif
+			image[CountIndexTexture - 1].Name= "3";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			vectornumbersandwords.push_back("4");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//4.png"));
-
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "4";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//4.png");
+			numbersv.push_back(tmp);
+#endif
 			out << "content//numbers_and_words//4.png" << std::endl;
-			image->Name[CountIndexTexture - 1] = "4";
+			image[CountIndexTexture - 1].Name = "4";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			vectornumbersandwords.push_back("5");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//5.png"));
-
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "5";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//5.png");
+			numbersv.push_back(tmp);
+#endif
 			out << "content//numbers_and_words//5.png" << std::endl;
-			image->Name[CountIndexTexture - 1] = "5";
+			image[CountIndexTexture - 1].Name = "5";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			vectornumbersandwords.push_back("6");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//6.png"));
-
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "6";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//6.png");
+			numbersv.push_back(tmp);
+#endif
 			out << "content//numbers_and_words//6.png" << std::endl;
-			image->Name[CountIndexTexture - 1] = "6";
+			image[CountIndexTexture - 1].Name = "6";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			vectornumbersandwords.push_back("7");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//7.png"));
-
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "7";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//7.png");
+			numbersv.push_back(tmp);
+#endif
 			out << "content//numbers_and_words//7.png" << std::endl;
-			image->Name[CountIndexTexture - 1] = "7";
+			image[CountIndexTexture - 1].Name = "7";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			vectornumbersandwords.push_back("8");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//8.png"));
-
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "8";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//8.png");
+			numbersv.push_back(tmp);
+#endif
 			out << "content//numbers_and_words//8.png" << std::endl;
-			image->Name[CountIndexTexture - 1] = "8";
+			image[CountIndexTexture - 1].Name = "8";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			vectornumbersandwords.push_back("9");
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//numbers_and_words//9.png"));
-
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "9";
+			tmp.IndexTexture = QTLoadImage("content//numbers_and_words//9.png");
+			numbersv.push_back(tmp);
+#endif
 			out << "content//numbers_and_words//9.png" << std::endl;
-			image->Name[CountIndexTexture - 1] = "9";
+			image[CountIndexTexture - 1].Name = "9";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			out << "content//cross.png" << std::endl;
 			vectornumbersandwords.push_back("cross");//1
+#if SDLAPI_==1 || WINAPI_==1
 			LoadImage(reinterpret_cast<const ILstring>("content//cross.png"));
-
-			image->Name[CountIndexTexture - 1] = "cross";
+#elif QTAPI_==1
+			//tmp.Name = new std::string[10];
+			tmp.Name = "cross";
+			tmp.IndexTexture = QTLoadImage("content//cross.png");
+			numbersv.push_back(tmp);
+#endif
+			image[CountIndexTexture - 1].Name = "cross";
 			image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 			out.close();
@@ -484,7 +507,12 @@ void Scene1::DrawNumbers(int number,int pos)
 	for (int i = 0; i < strlen(word); i++) {
 		std::string str = "";
 		str+=word[i];
+
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(str)]);
+#elif QTAPI_==1
+		numbersv[FindTexture(str,numbersv)].IndexTexture->bind();
+#endif
 		EnableTextureNumbers(i,pos);
 		str.clear();
 	}
@@ -514,7 +542,11 @@ int Scene1::LoadBorder(int iter)
 			std::string path__;
 			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup) && (in >> im.Z) && (in >> im.alpha))
 			{
+#if SDLAPI_==1 || WINAPI_==1
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+#elif QTAPI_ == 1
+				im.IndexTexture = QTLoadImage(path__.c_str());
+#endif
 				path__ = path__.substr(path__.find_last_of("/\\") + 1);
 				size_t dot_i = path__.find_last_of('.');
 				im.Name = path__.substr(0, dot_i);
@@ -790,7 +822,11 @@ void Scene1::ShowLine(bool firstline, bool secondline, bool thirdline)
 {
 	if (firstline)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
+#elif QTAPI_==1
+		numbersv[FindTexture("cross",numbersv)].IndexTexture->bind();
+#endif
 		glBegin(GL_POLYGON);//up both line
 		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(.78f, 0.32f, 1.0f);
@@ -933,7 +969,12 @@ void Scene1::ShowLine(bool firstline, bool secondline, bool thirdline)
 	}
 	if (secondline)
 	{
-		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
+#if SDLAPI_==1 || WINAPI_==1
+		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]); 
+#elif QTAPI_ == 1
+		numbersv[FindTexture("cross", numbersv)].IndexTexture->bind();
+#endif
+
 		glBegin(GL_POLYGON);//up line
 		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(.78f, 0.29f, 1.0f);
@@ -1076,7 +1117,11 @@ void Scene1::ShowLine(bool firstline, bool secondline, bool thirdline)
 	}
 	if (thirdline)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture("cross")]);
+#elif QTAPI_==1
+		numbersv[FindTexture("cross", numbersv)].IndexTexture->bind();
+#endif
 		glBegin(GL_POLYGON);//up both line
 		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(.78f, -0.32f, 1.0f);
@@ -1221,10 +1266,18 @@ void Scene1::ShowLine(bool firstline, bool secondline, bool thirdline)
 //numbers
 int Scene1::LoadDrum(int iter)
 {
+	Image tmp;
 	if (iter == 0)
 	{
 		vectordrum.push_back("auto1");//1
+#if SDLAPI_==1 || WINAPI_==1
 		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto1.png"));
+#elif QTAPI_==1
+		//tmp.Name = new std::string[10];
+		tmp.Name = "auto1";
+		tmp.IndexTexture = QTLoadImage("content//drum//auto1.png");
+		drumv.push_back(tmp);
+#endif
 		/*
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
@@ -1236,13 +1289,21 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto1";
+		image[CountIndexTexture - 1].Name = "auto1";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 1)
 	{
 		vectordrum.push_back("auto2");//2
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto2.png"));/*
+#if SDLAPI_==1 || WINAPI_==1
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto2.png"));
+#elif QTAPI_==1
+		//tmp.Name = new std::string[10];
+		tmp.Name = "auto2";
+		tmp.IndexTexture = QTLoadImage("content//drum//auto2.png");
+		drumv.push_back(tmp);
+#endif
+		/*
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1253,14 +1314,22 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto2";
+		image[CountIndexTexture - 1].Name = "auto2";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 2)
 	{
 
 		vectordrum.push_back("auto3");//3
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto3.png"));/*
+#if SDLAPI_==1 || WINAPI_==1
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto3.png"));
+#elif QTAPI_==1
+		//tmp.Name = new std::string[10];
+		tmp.Name = "auto3";
+		tmp.IndexTexture = QTLoadImage("content//drum//auto3.png");
+		drumv.push_back(tmp);
+#endif
+		/*
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1271,13 +1340,21 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto3";
+		image[CountIndexTexture - 1].Name = "auto3";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 3)
 	{
 		vectordrum.push_back("auto4");//4
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto4.png"));/*
+#if SDLAPI_==1 || WINAPI_==1
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto4.png"));
+#elif QTAPI_==1
+		//tmp.Name = new std::string[10];
+		tmp.Name = "auto4";
+		tmp.IndexTexture = QTLoadImage("content//drum//auto4.png");
+		drumv.push_back(tmp);
+#endif
+		/*
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1288,13 +1365,21 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto4";
+		image[CountIndexTexture - 1].Name = "auto4";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 4)
 	{
 		vectordrum.push_back("auto5");//5
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto5.png"));/*
+#if SDLAPI_==1 || WINAPI_==1
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//auto5.png"));
+#elif QTAPI_==1
+		//tmp.Name = new std::string[10];
+		tmp.Name = "auto5";
+		tmp.IndexTexture = QTLoadImage("content//drum//auto5.png");
+		drumv.push_back(tmp);
+#endif
+		/*
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1305,7 +1390,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto5";
+		image[CountIndexTexture - 1].Name = "auto5";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	/*
@@ -1323,7 +1408,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto6";
+		image[CountIndexTexture - 1].Name = "auto6";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 6)
@@ -1340,7 +1425,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto7";
+		image[CountIndexTexture - 1].Name = "auto7";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 7)
@@ -1357,7 +1442,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto8";
+		image[CountIndexTexture - 1].Name = "auto8";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 8)
@@ -1374,7 +1459,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto9";
+		image[CountIndexTexture - 1].Name = "auto9";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 9)
@@ -1391,7 +1476,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto10";
+		image[CountIndexTexture - 1].Name = "auto10";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 10)
@@ -1408,7 +1493,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto11";
+		image[CountIndexTexture - 1].Name = "auto11";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 
@@ -1426,7 +1511,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto12";
+		image[CountIndexTexture - 1].Name = "auto12";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 12)
@@ -1443,7 +1528,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto13";
+		image[CountIndexTexture - 1].Name = "auto13";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 13)
@@ -1460,7 +1545,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto14";
+		image[CountIndexTexture - 1].Name = "auto14";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 14)
@@ -1477,14 +1562,22 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "auto15";
+		image[CountIndexTexture - 1].Name = "auto15";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	*/
 	if (iter == 15)
 	{
 		vectordrum.push_back("bonus");//16
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//bonus.png"));/*
+#if SDLAPI_==1 || WINAPI_==1
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//bonus.png"));
+#elif QTAPI_==1
+		//tmp.Name = new std::string[10];
+		tmp.Name = "bonus";
+		tmp.IndexTexture = QTLoadImage("content//drum//bonus.png");
+		drumv.push_back(tmp);
+#endif
+		/*
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1495,13 +1588,21 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "bonus";
+		image[CountIndexTexture - 1].Name = "bonus";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 	}
 	if (iter == 16)
 	{
 		vectordrum.push_back("wild");//17
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//wild.jpg"));/*
+#if SDLAPI_==1 || WINAPI_==1
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//wild.jpg"));
+#elif QTAPI_==1
+		//tmp.Name = new std::string[10];
+		tmp.Name = "wild";
+		tmp.IndexTexture = QTLoadImage("content//drum//wild.jpg");
+		drumv.push_back(tmp);
+#endif
+		/*
 		image->TextureCoordinats[CountIndexTexture - 1][0] = 1.f;
 		image->TextureCoordinats[CountIndexTexture - 1][1] = .0f;
 		image->TextureCoordinats[CountIndexTexture - 1][2] = 1.f;
@@ -1512,7 +1613,7 @@ int Scene1::LoadDrum(int iter)
 		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
 		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
 
-		image->Name[CountIndexTexture - 1] = "wild";
+		image[CountIndexTexture - 1].Name = "wild";
 		image->number[CountIndexTexture - 1] = CountIndexTexture - 1;
 
 	}
@@ -1551,7 +1652,11 @@ bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j < counttextureondrums; j++)
 		{
+#if SDLAPI_==1 || WINAPI_==1
 			glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(drum[++k])]);
+#elif QTAPI_==1
+			drumv[FindTexture(drum[++k],drumv)].IndexTexture->bind();
+#endif
 			EnableTexture(i, j);
 		}
 		
@@ -1560,9 +1665,9 @@ bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	return stop;
 }
 //numbers
-void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float yup)
+void Scene1::EnablePolygonFrontUp(float xright, float xleft, float ydown, float yup)
 {
-	if (ccc[0])
+	//if (ccc[0])
 	{
 		glBegin(GL_QUADS);
 
@@ -1600,7 +1705,7 @@ void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float 
 				std::cout << 1.0f - (float)i / n<<" "<< round(0.68f * sin((30.0 + 60.0 / n * i) * 0.0175) * 100) / 100 << " " <<  round(0.68f * cos((30.0 + 60.0 / n * i) * 0.0175) * 100) / 100 << std::endl;
 		}
 		*/
-		b = false;
+		//b = false;
 		//glTexCoord2f(0.0f, 0.0f);
 		//glVertex3f(xright, yup, 0.0f);
 
@@ -1608,9 +1713,9 @@ void Scene1::EnablePolygonFrontUp(float xleft, float xright, float ydown, float 
 
 	}
 }
-void Scene1::EnablePolygonFrontMiddle(float xleft, float xright, float ydown, float yup)
+void Scene1::EnablePolygonFrontMiddle(float xright, float xleft, float ydown, float yup)
 {
-	if (ccc[1])
+	//if (ccc[1])
 	{
 		glBegin(GL_QUADS);
 
@@ -1643,16 +1748,16 @@ void Scene1::EnablePolygonFrontMiddle(float xleft, float xright, float ydown, fl
 
 		}
 		*/
-		b = false;
+		//b = false;
 		//glTexCoord2f(0.0f, 0.0f);
 		//glVertex3f(xright, yup, .6f);
 
 		glEnd();
 	}
 }
-void Scene1::EnablePolygonFrontDown(float xleft, float xright, float ydown, float yup)
+void Scene1::EnablePolygonFrontDown(float xright, float xleft, float ydown, float yup)
 {
-	if (ccc[2])
+	//if (ccc[2])
 	{
 		glBegin(GL_QUADS);
 
@@ -1686,7 +1791,7 @@ void Scene1::EnablePolygonFrontDown(float xleft, float xright, float ydown, floa
 
 		}
 		*/
-		b = false;
+		//b = false;
 		//glTexCoord2f(0.0f, 0.0f);
 		//glVertex3f(xright, yup, .6f);
 
@@ -1694,9 +1799,9 @@ void Scene1::EnablePolygonFrontDown(float xleft, float xright, float ydown, floa
 	}
 	
 }
-void Scene1::EnablePolygonBackUp(float xleft, float xright, float ydown, float yup)
+void Scene1::EnablePolygonBackUp(float xright, float xleft, float ydown, float yup)
 {
-	if (ccc[3])
+	//if (ccc[3])
 	{
 		glBegin(GL_QUADS);
 
@@ -1729,7 +1834,7 @@ void Scene1::EnablePolygonBackUp(float xleft, float xright, float ydown, float y
 
 		}
 		*/
-		b = false;
+		//b = false;
 		//glTexCoord2f(0.0f, 0.0f);
 		//glVertex3f(xright, ydown, -.6f);
 
@@ -1737,9 +1842,9 @@ void Scene1::EnablePolygonBackUp(float xleft, float xright, float ydown, float y
 	}
 	
 }
-void Scene1::EnablePolygonBackMiddle(float xleft, float xright, float ydown, float yup)
+void Scene1::EnablePolygonBackMiddle(float xright, float xleft, float ydown, float yup)
 {
-	if (ccc[4])
+	//if (ccc[4])
 	{
 		glBegin(GL_QUADS);
 
@@ -1772,7 +1877,7 @@ void Scene1::EnablePolygonBackMiddle(float xleft, float xright, float ydown, flo
 
 		}
 		*/
-		b = false;
+		//b = false;
 		//glTexCoord2f(0.0f, 0.0f);
 		//glVertex3f(xright, ydown, -.6f);
 
@@ -1780,9 +1885,9 @@ void Scene1::EnablePolygonBackMiddle(float xleft, float xright, float ydown, flo
 	}
 	
 }
-void Scene1::EnablePolygonBackDown(float xleft, float xright, float ydown, float yup)
+void Scene1::EnablePolygonBackDown(float xright, float xleft, float ydown, float yup)
 {
-	if (ccc[5])
+	//if (ccc[5])
 	{
 		glBegin(GL_QUADS);
 
@@ -1816,7 +1921,7 @@ void Scene1::EnablePolygonBackDown(float xleft, float xright, float ydown, float
 
 		}
 		*/
-		b = false;
+		//b = false;
 		//glTexCoord2f(0.0f, 0.0f);
 		//glVertex3f(xright, ydown, 0.0f);
 
@@ -2098,57 +2203,19 @@ void Scene1::StartRotate(int *upbutton)
 	}
 }
 //numbers
-void Scene1::LoadAnimatedAuto()
-{
-
-	std::vector<std::string> anim;// = new std::vector<std::string>();
-	anim.push_back("content//drum//animated auto//0.png");
-	anim.push_back("content//drum//animated auto//1.png");
-	anim.push_back("content//drum//animated auto//2.png");
-	anim.push_back("content//drum//animated auto//3.png");
-	anim.push_back("content//drum//animated auto//4.png");
-	anim.push_back("content//drum//animated auto//5.png");
-	anim.push_back("content//drum//animated auto//6.png");
-	anim.push_back("content//drum//animated auto//7.png");
-	anim.push_back("content//drum//animated auto//8.png");
-	anim.push_back("content//drum//animated auto//9.png");
-	anim.push_back("content//drum//animated auto//10.png");
-	anim.push_back("content//drum//animated auto//11.png");
-	animation = new Animation(anim);
-
-	std::vector<std::string> anim2;// = new std::vector<std::string>();
-	anim2.push_back("content//drum//animated auto 2//0.png");
-	anim2.push_back("content//drum//animated auto 2//1.png");
-	animation2 = new Animation(anim2);
-
-	std::vector<std::string> anim3;// = new std::vector<std::string>();
-	anim3.push_back("content//drum//animated auto 3//0.png");
-	anim3.push_back("content//drum//animated auto 3//1.png");
-	anim3.push_back("content//drum//animated auto 3//2.png");
-	anim3.push_back("content//drum//animated auto 3//3.png");
-	anim3.push_back("content//drum//animated auto 3//4.png");
-	anim3.push_back("content//drum//animated auto 3//5.png");
-	anim3.push_back("content//drum//animated auto 3//6.png");
-	anim3.push_back("content//drum//animated auto 3//7.png");
-	animation3 = new Animation(anim3);
-}
-//numbers
 Scene1::~Scene1()
 {
-	//for (int i = 0; i<CountTexture; i++)
-		//delete[] image->TextureCoordinats[i];
-	//delete[] image->TextureCoordinats;
 	for (int i = 0; i<CountTexture; i++)
 		delete[] image->VertexCoordinats[i];
 	for (int i = 0; i<CountTexture; i++)
-		image->Name[i].clear();
+		image[i].Name.clear();
 	delete[] image->VertexCoordinats;
+#if WINAPI_==1 || SDLAPI_==1
 	delete image->IndexTexture;
-	delete image->Name;
+#endif
 	delete image->number;
 	delete image;
 	delete rotate;
 	delete startrotate;
 	flogout.close();
-	//delete randommassive;
 }
