@@ -1628,27 +1628,9 @@ bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 			StartRotate(upbutton);
 	bool stop = Rotate();
 	int k = -1;
-	
 	for (int i = 0; i < countdrums; i++)
 	{
 		glPushMatrix();
-		/*
-		glRotated(90, 0, 1, 0);
-		glRotatef(rotate[i], 0, 0, 1);
-		gluQuadricDrawStyle(drums, GLU_FILL);
-		glTranslatef(0.0, 0.0, rt[i]);
-		
-		glBindTexture(GL_TEXTURE_2D, image->IndexTexture[FindTexture(drum[++k])]);
-		glMatrixMode(GL_TEXTURE);
-		glPushMatrix();
-		glLoadIdentity();
-		glRotated(90, 0, 0, 1);
-		gluCylinder(drums, 0.68f, 0.68f, 0.3f, 30, 30);
-		gluQuadricTexture(drums, true);
-		glPopMatrix();
-		glMatrixMode(GL_MODELVIEW);
-		*/
-		//glRotatef(180, 0, 1, 0);
 		glRotatef(rotate[i], 1, 0, 0);
 		for (int j = 0; j < counttextureondrums; j++)
 		{
@@ -1659,276 +1641,154 @@ bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 #endif
 			EnableTexture(i, j);
 		}
-		
 		glPopMatrix();
 	}
 	return stop;
 }
-//numbers
-void Scene1::EnablePolygonFrontUp(float xright, float xleft, float ydown, float yup)
+void Scene1::EnablePolygonFrontUp(float xright, float xleft)
 {
-	//if (ccc[0])
+	glBegin(GL_QUADS);
+	int n = nnn;
+	for (int i = 0; i < n; i++)
 	{
-		glBegin(GL_QUADS);
-
-		//glTexCoord2f(1.0f, 0.0f);
-		//glVertex3f(xleft, yup, 0.0f);
-		int n = nnn;
-		for (int i = 0; i < n; i++)
-		{
-			glTexCoord2f(1.0f, (float)i / n);
-			glVertex3f(xleft, 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175),0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
-			glTexCoord2f(1.0f, (float)(i+1) / n);
-			glVertex3f(xleft, 0.68f * sin((90.0 - 60.0 / n * (i+1)) * 0.0175), 0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
-
-			glTexCoord2f(0.0f, (float)(i+1) / n);
-			glVertex3f(xright, 0.68f * sin((90.0 - 60.0 / n * (i+1)) * 0.0175),0.68f * cos((90.0 - 60.0 / n * (i+1)) * 0.0175));
-			glTexCoord2f(0.0f, (float)i / n);
-			glVertex3f(xright, 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175),0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
-
-			//if (b)
-				//std::cout << (float)i / n << " " << round(0.68f * sin((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100 << " " <<round(0.68f * cos((90.0 - 60.0 / n * i) * 0.0175) * 100) / 100 << std::endl;
-		}
-		//if (b)
-			//std::cout << "------------" << std::endl;
-		//glTexCoord2f(1.0f, 1.0f);
-		//glVertex3f(xleft, ydown, .6f);
-
-		//glTexCoord2f(0.0f, 1.0f);
-		//glVertex3f(xright, ydown, .6f);
-		/*
-		for (int i = 0; i < n+1; i++)
-		{
-			glTexCoord2d(0.0f, 1.0f - (float)i / n);
-			glVertex3d(xright, round(0.68f * sin((30.0 + 60.0 / n * i)*0.0175) * 100) / 100, (-0 == round(0.68f * cos((30.0 + 60.0 / n * i) * 0.0175) * 100) / 100) ? 0 : round(0.68f * cos((30.0 + 60.0 / n * i) * 0.0175) * 100) / 100);
-			if (b)
-				std::cout << 1.0f - (float)i / n<<" "<< round(0.68f * sin((30.0 + 60.0 / n * i) * 0.0175) * 100) / 100 << " " <<  round(0.68f * cos((30.0 + 60.0 / n * i) * 0.0175) * 100) / 100 << std::endl;
-		}
-		*/
-		//b = false;
-		//glTexCoord2f(0.0f, 0.0f);
-		//glVertex3f(xright, yup, 0.0f);
-
-		glEnd();
-
+#if SDLAPI_==1 || WINAPI_==1
+		float yTex = (float)i / n;
+		float yTex2 = (float)(i + 1) / n;
+#elif QTAPI_==1
+		float yTex = 1-(float)i / n;
+		float yTex2 = 1-(float)(i + 1) / n;
+#endif
+		glTexCoord2f(1.0f, yTex);
+		glVertex3f(xleft, 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
+		glTexCoord2f(1.0f, yTex2);
+		glVertex3f(xleft, 0.68f * sin((90.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((90.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex2);
+		glVertex3f(xright, 0.68f * sin((90.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((90.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex);
+		glVertex3f(xright, 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((90.0 - 60.0 / n * i) * 0.0175));
 	}
+	glEnd();
 }
-void Scene1::EnablePolygonFrontMiddle(float xright, float xleft, float ydown, float yup)
+void Scene1::EnablePolygonFrontMiddle(float xright, float xleft)
 {
-	//if (ccc[1])
+	glBegin(GL_QUADS);
+	int n = nnn;
+	for (int i = 0; i < n; i++)
 	{
-		glBegin(GL_QUADS);
-
-		//glTexCoord2f(1.0f, 0.0f);
-		//glVertex3f(xleft, yup, .6f);
-		int n = nnn;
-		for (int i = 0; i < n; i++)
-		{
-			glTexCoord2f(1.0f, (float)i / n);
-			glVertex3f(xleft, 0.68f * sin((30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * i) * 0.0175));
-			glTexCoord2f(1.0f, (float)(i + 1) / n);
-			glVertex3f(xleft, 0.68f * sin((30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, (float)(i + 1) / n);
-			glVertex3f(xright, 0.68f * sin((30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, (float)i / n);
-			glVertex3f(xright, 0.68f * sin((30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * i) * 0.0175));
-		}
-		//glTexCoord2f(1.0f, 1.0f);
-		//glVertex3f(xleft, ydown, .6f);
-
-		//glTexCoord2f(0.0f, 1.0f);
-		//glVertex3f(xright, ydown, .6f);
-		/*
-		for (int i = 0; i < n+1; i++)
-		{
-			glTexCoord2f(0.0f, 1.0f -(float) i / n);
-			glVertex3f(xright, 0.68f * sin((-30.0 + 60.0 / n * i) * 0.0175), 0.68f * cos((-30.0 + 60.0 / n * i) * 0.0175));
-			if (b)
-				std::cout << 0.68f * sin((90.0 + 60.0 / n * i) * 0.0175) << " " << 0.68f * cos((90.0 + 60.0 / n * i) * 0.0175) << std::endl;
-
-		}
-		*/
-		//b = false;
-		//glTexCoord2f(0.0f, 0.0f);
-		//glVertex3f(xright, yup, .6f);
-
-		glEnd();
+#if SDLAPI_==1 || WINAPI_==1
+		float yTex = (float)i / n;
+		float yTex2 =(float)(i + 1) / n;
+#elif QTAPI_==1
+		float yTex = 1-(float)i / n;
+		float yTex2 = 1- (float)(i + 1) / n;
+#endif
+		glTexCoord2f(1.0f, yTex);
+		glVertex3f(xleft, 0.68f * sin((30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * i) * 0.0175));
+		glTexCoord2f(1.0f, yTex2);
+		glVertex3f(xleft, 0.68f * sin((30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex2);
+		glVertex3f(xright, 0.68f * sin((30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex);
+		glVertex3f(xright, 0.68f * sin((30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((30.0 - 60.0 / n * i) * 0.0175));
 	}
+	glEnd();
 }
-void Scene1::EnablePolygonFrontDown(float xright, float xleft, float ydown, float yup)
+void Scene1::EnablePolygonFrontDown(float xright, float xleft)
 {
-	//if (ccc[2])
+	glBegin(GL_QUADS);
+	int n = nnn;
+	for (int i = 0; i < n; i++)
 	{
-		glBegin(GL_QUADS);
-
-		//glTexCoord2f(1.0f, 0.0f);
-		//glVertex3f(xleft, yup, .6f);
-		int n = nnn;
-		for (int i = 0; i < n; i++)
-		{
-			glTexCoord2f(1.0f, 0.0f + (float)i / n);
-			glVertex3f(xleft, 0.68f * sin((-30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * i) * 0.0175));
-			glTexCoord2f(1.0f, 0.0f + (float)(i + 1) / n);
-			glVertex3f(xleft, 0.68f * sin((-30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, 0.0f + (float)(i + 1) / n);
-			glVertex3f(xright, 0.68f * sin((-30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, 0.0f + (float)i / n);
-			glVertex3f(xright, 0.68f * sin((-30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * i) * 0.0175));
-		}
-
-		//glTexCoord2f(1.0f, 1.0f);
-		//glVertex3f(xleft, ydown, 0.0f);
-
-		//glTexCoord2f(0.0f, 1.0f);
-		//glVertex3f(xright, ydown, 0.0f);
-		/*
-		for (int i = 0; i < n+1; i++)
-		{
-			glTexCoord2f(0.0f, 1.0f - (float)i / n);
-			glVertex3f(xright, 0.68f * sin((-90.0 + 60.0 / n * i) * 0.0175), 0.68f * cos((-90.0 + 60.0 / n * i) * 0.0175));
-			if (b)
-				std::cout << 0.68f * sin((-90.0 + 60.0 / n * i) * 0.0175) << " " << 0.68f * cos((-90.0 + 60.0 / n * i) * 0.0175) << std::endl;
-
-		}
-		*/
-		//b = false;
-		//glTexCoord2f(0.0f, 0.0f);
-		//glVertex3f(xright, yup, .6f);
-
-		glEnd();
+#if SDLAPI_==1 || WINAPI_==1
+		float yTex = (float)i / n;
+		float yTex2 = (float)(i + 1) / n;
+#elif QTAPI_==1
+		float yTex = 1 - (float)i / n;
+		float yTex2 = 1 - (float)(i + 1) / n;
+#endif
+		glTexCoord2f(1.0f, yTex);
+		glVertex3f(xleft, 0.68f * sin((-30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * i) * 0.0175));
+		glTexCoord2f(1.0f, yTex2);
+		glVertex3f(xleft, 0.68f * sin((-30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex2);
+		glVertex3f(xright, 0.68f * sin((-30.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex);
+		glVertex3f(xright, 0.68f * sin((-30.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-30.0 - 60.0 / n * i) * 0.0175));
 	}
-	
+	glEnd();
 }
-void Scene1::EnablePolygonBackUp(float xright, float xleft, float ydown, float yup)
+void Scene1::EnablePolygonBackUp(float xright, float xleft)
 {
-	//if (ccc[3])
+	glBegin(GL_QUADS);
+	int n = nnn;
+	for (int i = 0; i < n; i++)
 	{
-		glBegin(GL_QUADS);
-
-		//glTexCoord2f(1.0f, 0.0f);
-		//glVertex3f(xleft, ydown, -.6f);
-		int n = nnn;
-		for (int i = 0; i < n; i++)
-		{
-			glTexCoord2f(1.0f, 0.0f + (float)i / n);
-			glVertex3f(xleft, 0.68f * sin((150.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * i) * 0.0175));
-			glTexCoord2f(1.0f, 0.0f + (float)(i + 1) / n);
-			glVertex3f(xleft, 0.68f * sin((150.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, 0.0f + (float)(i + 1) / n);
-			glVertex3f(xright, 0.68f * sin((150.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, 0.0f + (float)i / n);
-			glVertex3f(xright, 0.68f * sin((150.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * i) * 0.0175));
-		}
-		//glTexCoord2f(1.0f, 1.0f);
-		//glVertex3f(xleft, yup, 0.0f);
-
-		//glTexCoord2f(0.0f, 1.0f);
-		//glVertex3f(xright, yup, 0.0f);
-		/*
-		for (int i = 0; i < n+1; i++)
-		{
-			glTexCoord2f(0.0f, 1.0f - (float)i / n);
-			glVertex3f(xright, 0.68f * sin((90.0 + 60.0 / n * i) * 0.0175), 0.68f * cos((90.0 + 60.0 / n * i) * 0.0175));
-			if (b)
-				std::cout << 0.68f * sin((90.0 + 60.0 / n * i) * 0.0175) << " " << 0.68f * cos((90.0 + 60.0 / n * i) * 0.0175) << std::endl;
-
-		}
-		*/
-		//b = false;
-		//glTexCoord2f(0.0f, 0.0f);
-		//glVertex3f(xright, ydown, -.6f);
-
-		glEnd();
+#if SDLAPI_==1 || WINAPI_==1
+		float yTex = (float)i / n;
+		float yTex2 = (float)(i + 1) / n;
+#elif QTAPI_==1
+		float yTex = 1 - (float)i / n;
+		float yTex2 = 1 - (float)(i + 1) / n;
+#endif
+		glTexCoord2f(1.0f, yTex);
+		glVertex3f(xleft, 0.68f * sin((150.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * i) * 0.0175));
+		glTexCoord2f(1.0f, yTex2);
+		glVertex3f(xleft, 0.68f * sin((150.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex2);
+		glVertex3f(xright, 0.68f * sin((150.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex);
+		glVertex3f(xright, 0.68f * sin((150.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((150.0 - 60.0 / n * i) * 0.0175));
 	}
-	
+	glEnd();
 }
-void Scene1::EnablePolygonBackMiddle(float xright, float xleft, float ydown, float yup)
+void Scene1::EnablePolygonBackMiddle(float xright, float xleft)
 {
-	//if (ccc[4])
+	glBegin(GL_QUADS);
+	int n = nnn;
+	for (int i = 0; i < n; i++)
 	{
-		glBegin(GL_QUADS);
-
-		//glTexCoord2f(1.0f, 0.0f);
-		//glVertex3f(xleft, ydown, -.6f);
-		int n = nnn;
-		for (int i = 0; i < n; i++)
-		{
-			glTexCoord2f(1.0f, (float)i / n);
-			glVertex3f(xleft, 0.68f * sin((210.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * i) * 0.0175));
-			glTexCoord2f(1.0f, (float)(i + 1) / n);
-			glVertex3f(xleft, 0.68f * sin((210.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, (float)(i + 1) / n);
-			glVertex3f(xright, 0.68f * sin((210.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, (float)i / n);
-			glVertex3f(xright, 0.68f * sin((210.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * i) * 0.0175));
-		}
-		//glTexCoord2f(1.0f, 1.0f);
-		//glVertex3f(xleft, yup, -.6f);
-
-		//glTexCoord2f(0.0f, 1.0f);
-		//glVertex3f(xright, yup, -.6f);
-		/*
-		for (int i = 0; i < n+1; i++)
-		{
-			glTexCoord2f(0.0f, 1.0f - (float)i / n);
-			glVertex3f(xright, 0.68f * sin((150.0 + 60.0 / n * i) * 0.0175), 0.68f * cos((150.0 + 60.0 / n * i) * 0.0175));
-			if (b)
-				std::cout << 0.68f * sin((150.0 + 60.0 / n * i) * 0.0175) << " " << 0.68f * cos((150.0 + 60.0 / n * i) * 0.0175) << std::endl;
-
-		}
-		*/
-		//b = false;
-		//glTexCoord2f(0.0f, 0.0f);
-		//glVertex3f(xright, ydown, -.6f);
-
-		glEnd();
+#if SDLAPI_==1 || WINAPI_==1
+		float yTex = (float)i / n;
+		float yTex2 = (float)(i + 1) / n;
+#elif QTAPI_==1
+		float yTex = 1 - (float)i / n;
+		float yTex2 = 1 - (float)(i + 1) / n;
+#endif
+		glTexCoord2f(1.0f, yTex);
+		glVertex3f(xleft, 0.68f * sin((210.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * i) * 0.0175));
+		glTexCoord2f(1.0f, yTex2);
+		glVertex3f(xleft, 0.68f * sin((210.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex2);
+		glVertex3f(xright, 0.68f * sin((210.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex);
+		glVertex3f(xright, 0.68f * sin((210.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((210.0 - 60.0 / n * i) * 0.0175));
 	}
-	
+	glEnd();
 }
-void Scene1::EnablePolygonBackDown(float xright, float xleft, float ydown, float yup)
+void Scene1::EnablePolygonBackDown(float xright, float xleft)
 {
-	//if (ccc[5])
+	glBegin(GL_QUADS);
+	int n = nnn;
+	for (int i = 0; i < n; i++)
 	{
-		glBegin(GL_QUADS);
-
-		//glTexCoord2f(1.0f, 0.0f);
-		//glVertex3f(xleft, ydown, 0.0f);
-		int n = nnn;
-		for (int i = 0; i < n; i++)
-		{
-			glTexCoord2f(1.0f, 0.0f + (float)i / n);
-			glVertex3f(xleft, 0.68f * sin((-90.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * i) * 0.0175));
-			glTexCoord2f(1.0f, 0.0f + (float)(i + 1) / n);
-			glVertex3f(xleft, 0.68f * sin((-90.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, 0.0f + (float)(i + 1) / n);
-			glVertex3f(xright, 0.68f * sin((-90.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * (i + 1)) * 0.0175));
-			glTexCoord2f(0.0f, 0.0f + (float)i / n);
-			glVertex3f(xright, 0.68f * sin((-90.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * i) * 0.0175));
-		}
-		//glTexCoord2f(1.0f, 1.0f);
-		//glVertex3f(xleft, yup, -.6f);
-
-		//glTexCoord2f(0.0f, 1.0f);
-		//glVertex3f(xright, yup, -.6f);
-
-		/*
-		for (int i = 0; i < n+1; i++)
-		{
-			glTexCoord2f(0.0f, 1.0f - (float)i / n);
-			glVertex3f(xright, 0.68f * sin((-150.0 + 60.0 / n * i) * 0.0175), 0.68f * cos((-150.0 + 60.0 / n * i) * 0.0175));
-			if (b)
-				std::cout << 0.68f * sin((-150.0 + 60.0 / n * i) * 0.0175) << " " << 0.68f * cos((-150 + 60.0 / n * i) * 0.0175) << std::endl;
-
-		}
-		*/
-		//b = false;
-		//glTexCoord2f(0.0f, 0.0f);
-		//glVertex3f(xright, ydown, 0.0f);
-
-		glEnd();
+#if SDLAPI_==1 || WINAPI_==1
+		float yTex = (float)i / n;
+		float yTex2 = (float)(i + 1) / n;
+#elif QTAPI_==1
+		float yTex = 1 - (float)i / n;
+		float yTex2 = 1 - (float)(i + 1) / n;
+#endif
+		glTexCoord2f(1.0f, yTex);
+		glVertex3f(xleft, 0.68f * sin((-90.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * i) * 0.0175));
+		glTexCoord2f(1.0f, yTex2);
+		glVertex3f(xleft, 0.68f * sin((-90.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex2);
+		glVertex3f(xright, 0.68f * sin((-90.0 - 60.0 / n * (i + 1)) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * (i + 1)) * 0.0175));
+		glTexCoord2f(0.0f, yTex);
+		glVertex3f(xright, 0.68f * sin((-90.0 - 60.0 / n * i) * 0.0175), 0.68f * cos((-90.0 - 60.0 / n * i) * 0.0175));
 	}
+	glEnd();
 }
-//numbers
 void Scene1::EnableTexture(int n, int m)
 {
     if(n == 0)
@@ -1938,42 +1798,42 @@ void Scene1::EnableTexture(int n, int m)
         xr = -0.48f;
         yd = 0.3f;
         yu = 0.68;//09
-        EnablePolygonFrontUp(xl, xr, yd, yu);
+        EnablePolygonFrontUp(xl, xr);
         }
 		if (m == 1) {
 			xl = -0.78f;
 			xr = -0.48f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+			EnablePolygonFrontMiddle(xl, xr);
 		}
 		if (m == 2) {
 			xl = -0.78f;
 			xr = -0.48f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonFrontDown(xl, xr, yd, yu);
+			EnablePolygonFrontDown(xl, xr);
 		}
 		if (m == 3) {
 			xl = -0.78f;
 			xr = -0.48f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonBackUp(xl, xr, yd, yu);
+			EnablePolygonBackUp(xl, xr);
 		}
 		if (m == 4) {
 			xl = -0.78f;
 			xr = -0.48f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonBackMiddle(xl, xr, yd, yu);
+			EnablePolygonBackMiddle(xl, xr);
 		}
 		if (m == 5) {
 			xl = -0.78f;
 			xr = -0.48f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonBackDown(xl, xr, yd, yu);
+			EnablePolygonBackDown(xl, xr);
 		}
     }
 	//front up
@@ -1986,42 +1846,42 @@ void Scene1::EnableTexture(int n, int m)
 			xr = -0.16f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonFrontUp(xl, xr, yd, yu);
+			EnablePolygonFrontUp(xl, xr);
 		}
         if(m == 1){
         xl = -0.48f;
         xr = -0.16f;
         yd = -0.3f;
         yu = 0.3;
-        EnablePolygonFrontMiddle(xl, xr, yd, yu);
+        EnablePolygonFrontMiddle(xl, xr);
         }
 		if (m == 2) {
 			xl = -0.48f;
 			xr = -0.16f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonFrontDown(xl, xr, yd, yu);
+			EnablePolygonFrontDown(xl, xr);
 		}
 		if (m == 3) {
 			xl = -0.48f;
 			xr = -0.16f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonBackUp(xl, xr, yd, yu);
+			EnablePolygonBackUp(xl, xr);
 		}
 		if (m == 4) {
 			xl = -0.48f;
 			xr = -0.16f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonBackMiddle(xl, xr, yd, yu);
+			EnablePolygonBackMiddle(xl, xr);
 		}
 		if (m == 5) {
 			xl = -0.48f;
 			xr = -0.16f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonBackDown(xl, xr, yd, yu);
+			EnablePolygonBackDown(xl, xr);
 		}
     }
 	//front middle
@@ -2034,42 +1894,42 @@ void Scene1::EnableTexture(int n, int m)
 			xr = 0.16f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonFrontUp(xl, xr, yd, yu);
+			EnablePolygonFrontUp(xl, xr);
 		}
 		if (m == 1) {
 			xl = -0.16f;
 			xr = 0.16f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+			EnablePolygonFrontMiddle(xl, xr);
 		}
         if(m == 2){
         xl = -0.16f;
         xr = 0.16f;
         yd = -0.68f;
         yu = -0.3;
-        EnablePolygonFrontDown(xl, xr, yd, yu);
+        EnablePolygonFrontDown(xl, xr);
         }
 		if (m == 3) {
 			xl = -0.16f;
 			xr = 0.16f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonBackUp(xl, xr, yd, yu);
+			EnablePolygonBackUp(xl, xr);
 		}
 		if (m == 4) {
 			xl = -0.16f;
 			xr = 0.16f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonBackMiddle(xl, xr, yd, yu);
+			EnablePolygonBackMiddle(xl, xr);
 		}
 		if (m == 5) {
 			xl = -0.16f;
 			xr = 0.16f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonBackDown(xl, xr, yd, yu);
+			EnablePolygonBackDown(xl, xr);
 		}
     }
 	//front down
@@ -2082,42 +1942,42 @@ void Scene1::EnableTexture(int n, int m)
 			xr = 0.48f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonFrontUp(xl, xr, yd, yu);
+			EnablePolygonFrontUp(xl, xr);
 		}
 		if (m == 1) {
 			xl = 0.16f;
 			xr = 0.48f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+			EnablePolygonFrontMiddle(xl, xr);
 		}
 		if (m == 2) {
 			xl = 0.16f;
 			xr = 0.48f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonFrontDown(xl, xr, yd, yu);
+			EnablePolygonFrontDown(xl, xr);
 		}
         if(m == 3){
         xl = 0.16f;
         xr = 0.48f;
         yd = 0.3f;
         yu = 0.68;
-        EnablePolygonBackUp(xl, xr, yd, yu);
+        EnablePolygonBackUp(xl, xr);
         }
 		if (m == 4) {
 			xl = 0.16f;
 			xr = 0.48f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonBackMiddle(xl, xr, yd, yu);
+			EnablePolygonBackMiddle(xl, xr);
 		}
 		if (m == 5) {
 			xl = 0.16f;
 			xr = 0.48f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonBackDown(xl, xr, yd, yu);
+			EnablePolygonBackDown(xl, xr);
 		}
     }
 	//back up
@@ -2130,45 +1990,59 @@ void Scene1::EnableTexture(int n, int m)
 			xr = 0.78f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonFrontUp(xl, xr, yd, yu);
+			EnablePolygonFrontUp(xl, xr);
 		}
 		if (m == 1) {
 			xl = 0.48f;
 			xr = 0.78f;
 			yd = -0.3f;
 			yu = 0.3;
-			EnablePolygonFrontMiddle(xl, xr, yd, yu);
+			EnablePolygonFrontMiddle(xl, xr);
 		}
 		if (m == 2) {
 			xl = 0.48f;
 			xr = 0.78f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonFrontDown(xl, xr, yd, yu);
+			EnablePolygonFrontDown(xl, xr);
 		}
 		if (m == 3) {
 			xl = 0.48f;
 			xr = 0.78f;
 			yd = 0.3f;
 			yu = 0.68;
-			EnablePolygonBackUp(xl, xr, yd, yu);
+			EnablePolygonBackUp(xl, xr);
 		}
         if(m == 4){
         xl = 0.48f;
         xr = 0.78f;
         yd = -0.3f;
         yu = 0.3;
-        EnablePolygonBackMiddle(xl, xr, yd, yu);
+        EnablePolygonBackMiddle(xl, xr);
         }
 		if (m == 5) {
 			xl = 0.48f;
 			xr = 0.78f;
 			yd = -0.68f;
 			yu = -0.3;
-			EnablePolygonBackDown(xl, xr, yd, yu);
+			EnablePolygonBackDown(xl, xr);
 		}
     }
 	//back middle
+}
+void Scene1::StartRotate(int* upbutton)
+{
+	for (int i = 0; i < CountDrum; i++)
+	{
+		if (startrotate[i] && rotate[i] != 0.0f)
+			continue;
+		if (rotate[i] >= 360.0f)
+		{
+			*upbutton += 1;
+			startrotate[i] = true;
+			rotate[i] = 0.0f;
+		}
+	}
 }
 bool Scene1::Rotate()
 {
@@ -2188,21 +2062,6 @@ bool Scene1::Rotate()
 	}
 	return stop;
 }
-void Scene1::StartRotate(int *upbutton)
-{
-	for (int i = 0; i < CountDrum; i++)
-	{
-		if (startrotate[i] && rotate[i] != 0.0f)
-			continue;
-		if (rotate[i] >= 360.0f)
-		{
-			*upbutton += 1;
-			startrotate[i] = true;
-			rotate[i] = 0.0f;
-		}
-	}
-}
-//numbers
 Scene1::~Scene1()
 {
 	for (int i = 0; i<CountTexture; i++)

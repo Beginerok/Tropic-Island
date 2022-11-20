@@ -94,12 +94,12 @@ public:
 	bool ShowDrum(int countdrums, int counttextureondrums, std::vector<std::string> drum,
 		bool* buttons, int pressbutton,int *upbutton);
 	void EnableTexture(int n, int m);//numbers
-	void EnablePolygonFrontUp(float leftup, float leftdown, float rightdown, float rightup);
-	void EnablePolygonFrontMiddle(float leftup, float leftdown, float rightdown, float rightup);
-	void EnablePolygonFrontDown(float leftup, float leftdown, float rightdown, float rightup);
-	void EnablePolygonBackUp(float leftup, float leftdown, float rightdown, float rightup);
-	void EnablePolygonBackMiddle(float leftup, float leftdown, float rightdown, float rightup);
-	void EnablePolygonBackDown(float leftup, float leftdown, float rightdown, float rightup);
+	void EnablePolygonFrontUp(float leftup, float leftdown);
+	void EnablePolygonFrontMiddle(float leftup, float leftdown);
+	void EnablePolygonFrontDown(float leftup, float leftdown);
+	void EnablePolygonBackUp(float leftup, float leftdown);
+	void EnablePolygonBackMiddle(float leftup, float leftdown);
+	void EnablePolygonBackDown(float leftup, float leftdown);
 	bool Rotate();
 	void StartRotate(int *upbutoon);
 	int LoadButtons(int iter);//numbers

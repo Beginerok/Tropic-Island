@@ -18,6 +18,7 @@ public:
     void paintGL();
     void SetElements(Scene1*Scene1_,Scene1*Scene2_,Logic*Logic_,Sound*Sound_);
     void Show();
+    bool eventFilter(QObject* watched, QEvent* event);
 private slots:
     void change();
 private:

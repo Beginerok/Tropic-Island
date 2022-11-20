@@ -9,7 +9,7 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 {
 	timer = new QTimer;
 	connect(timer, &QTimer::timeout,this, &MyWidget::change);
-	timer->start(100);
+	timer->start(10);
 	rotate = 0;
 	loading = true;
 	iter = -1;
@@ -69,12 +69,14 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 			Sound_->Play(4);
 		}
         });
+
+	
     QObject::connect(m_button[2], &QPushButton::clicked, [=]() {
         // меняем текст
         m_button[2]->setText("Example3");
         // изменяем размер кнопки
        // m_button->resize(100, 100);
-		Logic_->SetDrum();
+	
 		F[2] = !F[2];
 		pressbutton += 1;
 		upbutton += 1;
@@ -95,6 +97,8 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 			showline = false;
 		}
         });
+
+	m_button[2]->installEventFilter(this);
     QObject::connect(m_button[3], &QPushButton::clicked, [=]() {
         // меняем текст
         m_button[3]->setText("Example4");
@@ -154,9 +158,20 @@ void MyWidget::resizeGL(int nWidth, int nHeight)
 	glMatrixMode(GL_MODELVIEW); // задаем модельно-видовую матрицу
 	glLoadIdentity();           // загрузка единичную матрицу
 	//glOrtho(-2, 2, -2, 2, -2, 2);
-	//gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
-
+bool MyWidget::eventFilter(QObject* watched, QEvent* event)
+{
+	if (event->type() == QEvent::MouseButtonRelease)
+	{
+		/*Mouse release button event */
+		qDebug() << tr("Monitor button event, mouse release button event");
+		pressbutton = 1;
+		upbutton = 0;	
+		Logic_->SetDrum();
+		return true;
+	}
+}
 void MyWidget::SetElements(Scene1* Scene1__, Scene1* Scene2__, Logic* Logic__, Sound* Sound__)
 {
 	//QOpenGLFunctions* f = QOpenGLContext::currentContext()->functions();
