@@ -219,12 +219,13 @@ void MyWidget::paintGL() // рисование
 		//Scene1_->ShowWelcome(loading);
 
 
-	
+	/*
 #if WINAPI_==1
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
 		online = !WindowsWinApi_->keyboard__->offline;
 #endif
+		*/
 		if (!firsttime
 #if DBAPI_ == 1
 			&& Logic_->dbconn->userid != -1

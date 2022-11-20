@@ -150,6 +150,14 @@ int Scene1::FindTexture(std::string name,std::vector<Image> v)
 			result = i;
 	return result;
 }
+int Scene1::FindTexture(std::string name)
+{
+	int result = -1;
+	for (int i = 0; i < CountIndexTexture; i++)
+		if (strcmp(image[i].Name.c_str(), name.c_str()) == 0)
+			result = i;
+	return result;
+}
 int Scene1::FindTexture(std::string name, std::vector<Image_s> vec)
 {
 	int result = -1,size = vec.size();

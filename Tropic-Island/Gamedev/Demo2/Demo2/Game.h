@@ -1,7 +1,7 @@
 #pragma once
-#define WINAPI_ 0
+#define WINAPI_ 1
 #define SDLAPI_ 0
-#define QTAPI_ 1
+#define QTAPI_ 0
 #define DBAPI_ 0
 #include "Scene1.h"
 //#include "Scene2.h"

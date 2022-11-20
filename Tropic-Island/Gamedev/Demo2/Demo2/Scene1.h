@@ -1,7 +1,7 @@
 #pragma once
-#define QTAPI_ 1
+#define QTAPI_ 0
 #define SDLAPI_ 0
-#define WINAPI_ 0
+#define WINAPI_ 1
 #ifdef __unix__
 #else
 	#include <Windows.h>
@@ -87,7 +87,8 @@ public:
 #endif
 	void ShowWelcome(bool show);
 	void LoadWelcome();//numbers
-	void EnableTexture(Image_s im, bool third,bool alpha);
+	void EnableTexture(Image_s im, bool third,bool alpha); 
+	int FindTexture(std::string name);
 	int FindTexture(std::string name, std::vector<Image> v);
 	int FindTexture(std::string name, std::vector<Image_s> vec);
 	int LoadDrum(int iter);//numbers
