@@ -119,7 +119,7 @@ bool WindowsWinApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_)
 #if DBAPI_ == 1
 			keyboard__->db->Query();
 #else
-			Logic_->SetDrum();
+			//Logic_->SetDrum();
 #endif
 			pressbutton = 1;
 			upbutton = 0;

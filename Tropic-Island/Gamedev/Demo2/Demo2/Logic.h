@@ -29,6 +29,7 @@ public:
 	bool CheckWin();
 	int* GetRandom();
 	void SetRandom();
+	void SetDrum(int line);
 	~Logic();
 	int CountPosition;
 	float Credits, Win, TotalBet;

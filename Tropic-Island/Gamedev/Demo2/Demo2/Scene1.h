@@ -1,7 +1,7 @@
 #pragma once
-#define QTAPI_ 0
+#define QTAPI_ 1
 #define SDLAPI_ 0
-#define WINAPI_ 1
+#define WINAPI_ 0
 #ifdef __unix__
 #else
 	#include <Windows.h>
@@ -150,4 +150,5 @@ public:
 	std::vector<Image> drumv;
 	std::vector<Image> numbersv;
 	int nnn;
+	bool *changedrum;
 };

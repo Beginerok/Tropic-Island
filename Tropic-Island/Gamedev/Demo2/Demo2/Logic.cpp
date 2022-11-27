@@ -17,13 +17,31 @@ Logic::Logic()
 	SetDrum();
 	random = new int[5];
 }
+void Logic::SetDrum(int line)
+{
+#if DBAPI_ == 1
+	dbconn->Query();
+#else
+	int max_ = 1, min_ = 0;//6
+	int num = -1;
+	for (int i = line; i < 30; i+=6)
+	{
+		num = min_ + rand() % (max_ - min_ + 1);
+		auto iter = vectordrum.cbegin();
+		vectordrum.erase(iter + i);
+		iter = vectordrum.cbegin();
+		vectordrum.insert(iter + i, drum[num]);
+	}
+//	std::cout << vectordrum.size() << std::endl;
+#endif
+}
 void Logic::SetDrum()
 {
 #if DBAPI_ == 1
 	dbconn->Query();
 #else
 	vectordrum.clear();
-	int max_ = 6, min_ = 0;//6
+	int max_ = 1, min_ = 0;//6
 	srand(time(NULL));
 	int num = -1;
 	for (int i = 0; i < 30; i++)

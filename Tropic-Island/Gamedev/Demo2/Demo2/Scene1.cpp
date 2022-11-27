@@ -30,6 +30,9 @@ Scene1::Scene1(void)
 	flogout.open("log.txt");
 	coor = new Coor[3];
 	nnn = 20;
+	changedrum = new bool[CountDrum];
+	for(int i=0;i<CountDrum;i++)
+		changedrum[i] = false;
 }
 #if QTAPI_==1
 QOpenGLTexture* Scene1::QTLoadImage(QString path)
@@ -1653,6 +1656,44 @@ bool Scene1::ShowDrum(int countdrums, int counttextureondrums,std::vector<std::s
 	}
 	return stop;
 }
+void Scene1::StartRotate(int* upbutton)
+{
+	for (int i = 0; i < CountDrum; i++)
+	{
+		if (startrotate[i] && rotate[i] != 0.0f)
+			continue;
+		if (rotate[i] >= 360.0f)
+		{
+			*upbutton += 1;
+			startrotate[i] = true;
+			rotate[i] = 0.0f;
+		}
+	}
+}
+bool Scene1::Rotate()
+{
+	bool stop = false;
+	for (int i = 0; i < CountDrum; i++)
+	{
+		if (startrotate[i])
+		{
+			if (rotate[i] < 1800.0f)
+			{
+				rotate[i] += 15.0f;
+				if ((rotate[i] >= 300.0f-i*60) && (rotate[i] < 315.0f - i * 60))
+					changedrum[i] = true;
+				else if (rotate[i] >= 315.0f - i * 60)
+					changedrum[i] = false;
+			}
+			else
+			{
+				startrotate[i] = false;
+				stop = true;
+			}
+		}
+	}
+	return stop;
+}
 void Scene1::EnablePolygonFrontUp(float xright, float xleft)
 {
 	glBegin(GL_QUADS);
@@ -1801,13 +1842,13 @@ void Scene1::EnableTexture(int n, int m)
 {
     if(n == 0)
     {
-        if(m == 0){
-        xl = -0.78f;//08
-        xr = -0.48f;
-        yd = 0.3f;
-        yu = 0.68;//09
-        EnablePolygonFrontUp(xl, xr);
-        }
+		if (m == 0) {
+			xl = -0.78f;
+			xr = -0.48f;
+			yd = 0.3f;
+			yu = 0.68;
+			EnablePolygonFrontUp(xl, xr);
+		}
 		if (m == 1) {
 			xl = -0.78f;
 			xr = -0.48f;
@@ -1856,13 +1897,13 @@ void Scene1::EnableTexture(int n, int m)
 			yu = 0.68;
 			EnablePolygonFrontUp(xl, xr);
 		}
-        if(m == 1){
-        xl = -0.48f;
-        xr = -0.16f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonFrontMiddle(xl, xr);
-        }
+		if (m == 1) {
+			xl = -0.48f;
+			xr = -0.16f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonFrontMiddle(xl, xr);
+		}
 		if (m == 2) {
 			xl = -0.48f;
 			xr = -0.16f;
@@ -1911,13 +1952,13 @@ void Scene1::EnableTexture(int n, int m)
 			yu = 0.3;
 			EnablePolygonFrontMiddle(xl, xr);
 		}
-        if(m == 2){
-        xl = -0.16f;
-        xr = 0.16f;
-        yd = -0.68f;
-        yu = -0.3;
-        EnablePolygonFrontDown(xl, xr);
-        }
+		if (m == 2) {
+			xl = -0.16f;
+			xr = 0.16f;
+			yd = -0.68f;
+			yu = -0.3;
+			EnablePolygonFrontDown(xl, xr);
+		}
 		if (m == 3) {
 			xl = -0.16f;
 			xr = 0.16f;
@@ -1966,13 +2007,13 @@ void Scene1::EnableTexture(int n, int m)
 			yu = -0.3;
 			EnablePolygonFrontDown(xl, xr);
 		}
-        if(m == 3){
-        xl = 0.16f;
-        xr = 0.48f;
-        yd = 0.3f;
-        yu = 0.68;
-        EnablePolygonBackUp(xl, xr);
-        }
+		if (m == 3) {
+			xl = 0.16f;
+			xr = 0.48f;
+			yd = 0.3f;
+			yu = 0.68;
+			EnablePolygonBackUp(xl, xr);
+		}
 		if (m == 4) {
 			xl = 0.16f;
 			xr = 0.48f;
@@ -2021,13 +2062,13 @@ void Scene1::EnableTexture(int n, int m)
 			yu = 0.68;
 			EnablePolygonBackUp(xl, xr);
 		}
-        if(m == 4){
-        xl = 0.48f;
-        xr = 0.78f;
-        yd = -0.3f;
-        yu = 0.3;
-        EnablePolygonBackMiddle(xl, xr);
-        }
+		if (m == 4) {
+			xl = 0.48f;
+			xr = 0.78f;
+			yd = -0.3f;
+			yu = 0.3;
+			EnablePolygonBackMiddle(xl, xr);
+		}
 		if (m == 5) {
 			xl = 0.48f;
 			xr = 0.78f;
@@ -2038,38 +2079,7 @@ void Scene1::EnableTexture(int n, int m)
     }
 	//back middle
 }
-void Scene1::StartRotate(int* upbutton)
-{
-	for (int i = 0; i < CountDrum; i++)
-	{
-		if (startrotate[i] && rotate[i] != 0.0f)
-			continue;
-		if (rotate[i] >= 360.0f)
-		{
-			*upbutton += 1;
-			startrotate[i] = true;
-			rotate[i] = 0.0f;
-		}
-	}
-}
-bool Scene1::Rotate()
-{
-	bool stop = false;
-	for (int i = 0; i<CountDrum; i++)
-	{
-		if (startrotate[i])
-		{
-			if (rotate[i]<1800.0f)
-				rotate[i] += 15.0f;
-			else
-			{
-				startrotate[i] = false;
-				stop = true;
-			}
-		}
-	}
-	return stop;
-}
+
 Scene1::~Scene1()
 {
 	for (int i = 0; i<CountTexture; i++)

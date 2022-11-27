@@ -161,6 +161,12 @@ void Game::draw_screen()
 					Sound_->Play(6);
 					showline = true;
 				}
+				else
+				{
+					for (int i = 0; i < Scene1_->CountDrum; i++)
+						if (Scene1_->changedrum[i])
+							Logic_->SetDrum(i);
+				}
 				Scene1_->ShowButtons();
 				Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
 				Scene1_->ShowBorder();

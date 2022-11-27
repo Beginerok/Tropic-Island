@@ -28,36 +28,30 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
     resize(700, 500); // задаем размеры окна
      // создаем кнопку
     //qw.setParent(&qw);
-	m_button.push_back(new QPushButton("My Button1", this));
-	m_button.push_back(new QPushButton("My Button2", this));
-	m_button.push_back(new QPushButton("My Button3", this));
-	m_button.push_back(new QPushButton("My Button4", this));
-	m_button.push_back(new QPushButton("My Button5", this));
+	m_button.push_back(new QPushButton("Help", this));
+	m_button.push_back(new QPushButton("Take", this));
+	m_button.push_back(new QPushButton("Spin", this));
+	m_button.push_back(new QPushButton("Risk", this));
+	m_button.push_back(new QPushButton("Exit", this));
+	/*
 	m_button.push_back(new QPushButton("My Button6", this));
 	m_button.push_back(new QPushButton("My Button7", this));
 	m_button.push_back(new QPushButton("My Button8", this));
 	m_button.push_back(new QPushButton("My Button9", this));
 	m_button.push_back(new QPushButton("My Button10", this));
-    // устанавливаем размер и положение кнопки
-    m_button[0]->setGeometry(QRect(QPoint(50, 400), QSize(100, 50)));
-    m_button[1]->setGeometry(QRect(QPoint(170, 400), QSize(100, 50)));
-    m_button[2]->setGeometry(QRect(QPoint(290, 400), QSize(100, 50)));
-    m_button[3]->setGeometry(QRect(QPoint(410, 400), QSize(100, 50)));
-    m_button[4]->setGeometry(QRect(QPoint(530, 400), QSize(100, 50)));
+    */
+	// устанавливаем размер и положение кнопки
+    m_button[0]->setGeometry(QRect(QPoint(50, 450), QSize(100, 50)));
+    m_button[1]->setGeometry(QRect(QPoint(170, 450), QSize(100, 50)));
+    m_button[2]->setGeometry(QRect(QPoint(290, 450), QSize(100, 50)));
+    m_button[3]->setGeometry(QRect(QPoint(410, 450), QSize(100, 50)));
+    m_button[4]->setGeometry(QRect(QPoint(530, 450), QSize(100, 50)));
     //connect(m_button, SIGNAL(released()), this, SLOT(handleButton()));
     QObject::connect(m_button[0], &QPushButton::clicked, [=]() {
-        // меняем текст
-        m_button[0]->setText("Example1");
-        // изменяем размер кнопки
-       // m_button->resize(100, 100);
 		F[0] = !F[0];
         });
 	
     QObject::connect(m_button[1], &QPushButton::clicked, [=]() {
-        // меняем текст
-        m_button[1]->setText("Example2");
-        // изменяем размер кнопки
-       // m_button->resize(100, 100);
 		F[1] = !F[1];
 		if (!bonus)
 		{
@@ -70,13 +64,7 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 		}
         });
 
-	
     QObject::connect(m_button[2], &QPushButton::clicked, [=]() {
-        // меняем текст
-        m_button[2]->setText("Example3");
-        // изменяем размер кнопки
-       // m_button->resize(100, 100);
-	
 		F[2] = !F[2];
 		pressbutton += 1;
 		upbutton += 1;
@@ -100,10 +88,6 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 
 	m_button[2]->installEventFilter(this);
     QObject::connect(m_button[3], &QPushButton::clicked, [=]() {
-        // меняем текст
-        m_button[3]->setText("Example4");
-        // изменяем размер кнопки
-       // m_button->resize(100, 100);
 		F[3] = !F[3];
 		if (Logic_->GetWin() > 0 && !bonus)
 		{
@@ -113,11 +97,8 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
         });
 
     QObject::connect(m_button[4], &QPushButton::clicked, [=]() {
-        // меняем текст
-        m_button[4]->setText("Example5");
-        // изменяем размер кнопки
-       // m_button->resize(100, 100);
 		F[4] = !F[4];
+		exit(0);
         });
 }
 void MyWidget::change()
@@ -159,17 +140,51 @@ void MyWidget::resizeGL(int nWidth, int nHeight)
 	glLoadIdentity();           // загрузка единичную матрицу
 	//glOrtho(-2, 2, -2, 2, -2, 2);
 	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+
+	m_button[0]->setGeometry(QRect(QPoint(0, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[1]->setGeometry(QRect(QPoint(0 + nWidth / 5, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[2]->setGeometry(QRect(QPoint(0 + nWidth / 5*2, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[3]->setGeometry(QRect(QPoint(0 + nWidth / 5*3, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[4]->setGeometry(QRect(QPoint(0 + nWidth / 5*4, nHeight - 50), QSize(nWidth / 5, 50)));
 }
 bool MyWidget::eventFilter(QObject* watched, QEvent* event)
 {
-	if (event->type() == QEvent::MouseButtonRelease)
+	if (watched == m_button[2])
 	{
-		/*Mouse release button event */
-		qDebug() << tr("Monitor button event, mouse release button event");
-		pressbutton = 1;
-		upbutton = 0;	
-		Logic_->SetDrum();
-		return true;
+		if (event->type() == QEvent::MouseButtonRelease)
+		{
+			F[2] = false;
+			/*Mouse release button event */
+			qDebug() << tr("Monitor button event, mouse release button event");
+			pressbutton = 1;
+			upbutton = 0;
+			return true;
+		}
+		else if (event->type() == QEvent::MouseButtonPress)
+		{
+			/*Mouse down button event */
+			qDebug() << tr("Monitor button event, button press event");
+			F[2] = true;
+			pressbutton += 1;
+			upbutton += 1;
+			if (!bonus)
+			{
+				Sound_->Play(5);
+				if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
+				{
+					Logic_->firstline = false;
+					Logic_->secondline = false;
+					Logic_->thirdline = false;
+					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
+					Logic_->SetWin(0.0f);
+					Sound_->Play(4);
+				}
+				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
+				Logic_->checkwin = false;
+				showline = false;
+			}
+			return true;
+		}
 	}
 }
 void MyWidget::SetElements(Scene1* Scene1__, Scene1* Scene2__, Logic* Logic__, Sound* Sound__)
@@ -208,24 +223,18 @@ void MyWidget::Show()
 }
 void MyWidget::paintGL() // рисование
 {
-	//std::cout<<rotate<<std::endl;
-	
 		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
 		//glEnable(GL_DEPTH_TEST);
 		//glEnable(GL_TEXTURE_2D);
-
 		//Show();
-
 		//Scene1_->ShowWelcome(loading);
-
-
-	/*
+/*
 #if WINAPI_==1
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
 		online = !WindowsWinApi_->keyboard__->offline;
 #endif
-		*/
+*/
 		if (!firsttime
 #if DBAPI_ == 1
 			&& Logic_->dbconn->userid != -1
@@ -310,6 +319,12 @@ void MyWidget::paintGL() // рисование
 					Sound_->Play(6);
 					showline = true;
 				}
+				else
+				{
+					for (int i = 0; i < Scene1_->CountDrum; i++)
+						if (Scene1_->changedrum[i])
+							Logic_->SetDrum(i);
+				}
 				Scene1_->ShowButtons();
 				Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
 				Scene1_->ShowBorder();
@@ -351,7 +366,8 @@ void MyWidget::paintGL() // рисование
 			loading = Scene1_->LoadBorder(++iter);
 		if (iter > 19)
 			iter = 20;
-		Sound_->Play(0);
+		if(!F[0])
+			Sound_->Play(0);
 		
-		glFlush();
+		//glFlush();
 }
