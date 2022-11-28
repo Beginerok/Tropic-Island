@@ -85,7 +85,6 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 			showline = false;
 		}
         });
-
 	m_button[2]->installEventFilter(this);
     QObject::connect(m_button[3], &QPushButton::clicked, [=]() {
 		F[3] = !F[3];

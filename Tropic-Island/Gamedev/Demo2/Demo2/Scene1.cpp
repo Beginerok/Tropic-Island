@@ -245,7 +245,11 @@ int Scene1::LoadButtons(int iter)
 		if (in.is_open())
 		{
 			std::string path__;
+#if SDLAPI_==1 || WINAPI_==1
 			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup))
+#elif QTAPI_ == 1
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+#endif
 			{
 #if SDLAPI_==1 || WINAPI_==1
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
@@ -287,7 +291,11 @@ int Scene1::LoadWords(int iter)
 		if (in.is_open())
 		{
 			std::string path__;
+#if SDLAPI_==1 || WINAPI_==1
 			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup))
+#elif QTAPI_ == 1
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown))
+#endif
 			{
 #if SDLAPI_==1 || WINAPI_==1
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
@@ -533,13 +541,30 @@ void Scene1::EnableTextureNumbers(int position,int numberword)
 {
 	glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 1.0f);
+#if SDLAPI_==1 || WINAPI_==1
 		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y, 1.0f);
+#elif QTAPI_==1
+		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y + coor[numberword].height, 1.0f);
+#endif
 		glTexCoord2f(0.0f, 1.0f);
+#if SDLAPI_==1 || WINAPI_==1
 		glVertex3f(coor[numberword].x[position], coor[numberword].y, 1.0f);
-		glTexCoord2f(0.0f, 0.0f);
+#elif QTAPI_==1
 		glVertex3f(coor[numberword].x[position], coor[numberword].y + coor[numberword].height, 1.0f);
+#endif
+		glTexCoord2f(0.0f, 0.0f);
+
+#if SDLAPI_==1 || WINAPI_==1
+		glVertex3f(coor[numberword].x[position], coor[numberword].y + coor[numberword].height, 1.0f);
+#elif QTAPI_==1
+		glVertex3f(coor[numberword].x[position], coor[numberword].y, 1.0f);
+#endif
 		glTexCoord2f(1.0f, 0.0f);
+#if SDLAPI_==1 || WINAPI_==1
 		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y + coor[numberword].height,1.0f);
+#elif QTAPI_==1
+		glVertex3f(coor[numberword].x[position] + coor[numberword].width, coor[numberword].y, 1.0f); 
+#endif
 	glEnd();
 }
 int Scene1::LoadBorder(int iter)
@@ -551,7 +576,11 @@ int Scene1::LoadBorder(int iter)
 		if (in.is_open())
 		{
 			std::string path__;
+#if SDLAPI_==1 || WINAPI_==1
 			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup) && (in >> im.Z) && (in >> im.alpha))
+#elif QTAPI_ == 1
+			while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown) && (in >> im.Z) && (in >> im.alpha))
+#endif
 			{
 #if SDLAPI_==1 || WINAPI_==1
 				im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
