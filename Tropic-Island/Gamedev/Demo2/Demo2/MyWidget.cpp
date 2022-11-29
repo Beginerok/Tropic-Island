@@ -185,6 +185,7 @@ bool MyWidget::eventFilter(QObject* watched, QEvent* event)
 			return true;
 		}
 	}
+	return false;
 }
 void MyWidget::SetElements(Scene1* Scene1__, Scene1* Scene2__, Logic* Logic__, Sound* Sound__)
 {
