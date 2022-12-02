@@ -1708,7 +1708,12 @@ bool Scene1::Rotate()
 		{
 			if (rotate[i] < 1800.0f)
 			{
-				rotate[i] += 15.0f;
+				if (rotate[i] < 600)
+					rotate[i] += 5.0f;
+				else if (rotate[i] <1200)
+					rotate[i] += 10.0f;
+				else if (rotate[i] < 1800)
+					rotate[i] += 5.0f;
 				if ((rotate[i] >= 300.0f-i*60) && (rotate[i] < 315.0f - i * 60))
 					changedrum[i] = true;
 				else if (rotate[i] >= 315.0f - i * 60)
