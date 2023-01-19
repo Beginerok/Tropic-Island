@@ -28,6 +28,7 @@
 #include <fstream>
 #include <sstream>
 #include <QtWidgets/QtWidgets>
+#include <QtOpenGL/qopengltexture.h>
 //#pragma comment(lib,"OpenGL32.lib")
 //#pragma comment(lib,"Glu32.lib")
 //#pragma comment(lib,"ILU.lib")

@@ -256,6 +256,7 @@ int Game::Execute(int argc, char*argv[])
 	SDL_GL_SetSwapInterval(1);
 	setup_opengl(700, 500);
 #elif QTAPI_==1
+	//QCoreApplication::addLibraryPath(".");
 	QApplication a(argc, argv);
 	QWidget qw;
 	MyWidget mw(&qw);

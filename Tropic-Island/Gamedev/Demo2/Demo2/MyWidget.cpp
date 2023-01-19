@@ -1,9 +1,12 @@
 #include "MyWidget.h"
-#pragma comment(lib,"Qt5Cored.lib")
-#pragma comment(lib,"Qt5Guid.lib")
-#pragma comment(lib,"Qt5Widgetsd.lib")
-#pragma comment(lib,"Qt5OpenGLd.lib")
-#pragma comment(lib,"Qt5OpenGLExtensionsd.lib")
+
+#pragma comment(lib,"Qt6Cored.lib")
+#pragma comment(lib,"Qt6Guid.lib")
+#pragma comment(lib,"Qt6Widgetsd.lib")
+#pragma comment(lib,"Qt6OpenGLd.lib")
+#pragma comment(lib,"Qt6OpenGLWidgetsd.lib")
+//#pragma comment(lib,"Qt6OpenGLExtensionsd.lib")
+
 #pragma comment(lib,"OpenGL32.lib")
 MyWidget::MyWidget(QWidget* parent) // конструктор
 {
