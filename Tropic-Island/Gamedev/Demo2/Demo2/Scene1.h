@@ -28,7 +28,7 @@
 #include <fstream>
 #include <sstream>
 #include <QtWidgets/QtWidgets>
-#include <QtOpenGL/qopengltexture.h>
+#include <QtGui/qopengltexture.h>//QtOpenGL
 //#pragma comment(lib,"OpenGL32.lib")
 //#pragma comment(lib,"Glu32.lib")
 //#pragma comment(lib,"ILU.lib")
@@ -88,7 +88,7 @@ public:
 #endif
 	void ShowWelcome(bool show);
 	void LoadWelcome();//numbers
-	void EnableTexture(Image_s im, bool third,bool alpha); 
+	void EnableTexture(Image_s im, bool third,bool alpha);
 	int FindTexture(std::string name);
 	int FindTexture(std::string name, std::vector<Image> v);
 	int FindTexture(std::string name, std::vector<Image_s> vec);

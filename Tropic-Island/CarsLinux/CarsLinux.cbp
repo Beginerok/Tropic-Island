@@ -30,31 +30,30 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-fPIC" />
 			<Add option="-fexceptions" />
+			<Add directory="../../../../../../usr/include" />
+			<Add directory="../../../../../../usr/include/qt5" />
 		</Compiler>
 		<Linker>
-			<Add library="../../../../../usr/lib/x86_64-linux-gnu/libGL.so" />
-			<Add library="../../../../../usr/lib/x86_64-linux-gnu/libGLU.so" />
-			<Add library="../../../../../usr/lib/x86_64-linux-gnu/libIL.so" />
-			<Add library="../../../../../usr/lib/x86_64-linux-gnu/libILU.so" />
-			<Add library="../../../../../usr/lib/x86_64-linux-gnu/libSDL2.so" />
-			<Add library="../../../../../usr/lib/x86_64-linux-gnu/libopenal.so" />
-			<Add library="../../../../../usr/lib/x86_64-linux-gnu/libalut.so" />
+			<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libGL.so" />
+			<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libGLU.so" />
+			<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libopenal.so" />
+			<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libalut.so" />
+			<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libQt5Core.so" />
+			<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libQt5Gui.so" />
+			<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libQt5Widgets.so" />
 		</Linker>
-		<Unit filename="../Gamedev/Demo2/Demo2/Animation.cpp" />
-		<Unit filename="../Gamedev/Demo2/Demo2/Animation.h" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Game.cpp" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Game.h" />
-		<Unit filename="../Gamedev/Demo2/Demo2/Loader.cpp" />
-		<Unit filename="../Gamedev/Demo2/Demo2/Loader.h" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Logic.cpp" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Logic.h" />
+		<Unit filename="../Gamedev/Demo2/Demo2/MyWidget.cpp" />
+		<Unit filename="../Gamedev/Demo2/Demo2/MyWidget.h" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Scene1.cpp" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Scene1.h" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Sound.cpp" />
 		<Unit filename="../Gamedev/Demo2/Demo2/Sound.h" />
-		<Unit filename="../Gamedev/Demo2/Demo2/WindowsSDLApi.cpp" />
-		<Unit filename="../Gamedev/Demo2/Demo2/WindowsSDLApi.h" />
 		<Unit filename="../Gamedev/Demo2/Demo2/main.cpp" />
 		<Extensions />
 	</Project>

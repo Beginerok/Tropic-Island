@@ -7,7 +7,7 @@
 //#include "Scene2.h"
 #include "Sound.h"
 #include <QtCore/QTimer>
-#include<QtOpenGLWidgets\qopenglwidget.h>
+#include<QtWidgets/qopenglwidget.h>//QtOpenGLWidgets
 class MyWidget
     :  public QOpenGLWidget
 {
