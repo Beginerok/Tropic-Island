@@ -190,7 +190,7 @@ bool MyWidget::eventFilter(QObject* watched, QEvent* event)
 	}
 	return false;
 }
-void MyWidget::SetElements(Scene1* Scene1__, Scene1* Scene2__, Logic* Logic__, Sound* Sound__)
+void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, Sound* Sound__)
 {
 	//QOpenGLFunctions* f = QOpenGLContext::currentContext()->functions();
 	this->Scene1_ = Scene1__;

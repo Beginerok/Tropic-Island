@@ -9,93 +9,38 @@ Scene2::Scene2()
 		NewTextureCoordinats[i]=new float[4];
 		NewVertexCoordinats[i]=new float[4];
 	}
+
+#if SDLAPI_==1 || WINAPI_==1
 	IndexTexture = new unsigned int[CountTexture];
+#endif
 	CountIndexTexture = 0;
 	//SetData();
 	num_ = new char[25];
 	loading = false;
+	image = new Image2(); 
+	image->VertexCoordinats = new float* [CountTexture];
+	for (int i = 0; i < CountTexture; i++)
+		image->VertexCoordinats[i] = new float[4];
 }
-void Scene2::LoadImage(const ILstring path)
+#if QTAPI_==1
+QOpenGLTexture* Scene2::QTLoadImage(QString path)
 {
-	ILenum ext;
-
-	if(strstr(reinterpret_cast<const char*>(path),"png"))
-	{
-		ext=IL_PNG;
-	}
-	if(strstr(reinterpret_cast<const char*>(path),"jpg") || strstr(reinterpret_cast<const char*>(path),"jpeg"))
-	{
-		ext=IL_JPG;
-	}
-	if(strstr(reinterpret_cast<const char*>(path),"bmp"))
-	{
-		ext=IL_BMP;
-	}
-//#ifdef _WINDOWS_2
-	ilLoad( ext, reinterpret_cast<const ILstring>(path));
-//#else
-	//ilLoad( ext, path);
-//#endif
-	// Получение кода ошибки
-	err = ilGetError();
-	// Если код не равен нулю ошибка была
-	if (err != IL_NO_ERROR) {
-	// Получение строки с ошибкой
-    strError = (wchar_t*)iluErrorString(err);
-        // Выдаем сообщение об ошибке
-    #ifdef _WIN32
-		std::cout << "\nNot find file: ";
-		std::wcout << path << std::endl;
-		MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
-    #endif
-        // выход из программы
-        exit(EXIT_FAILURE);
-	}
-
-	// Ширина изображения
-	width = ilGetInteger(IL_IMAGE_WIDTH);
-	// Высота изображения
-	height = ilGetInteger(IL_IMAGE_HEIGHT);
-	// Число байт на пиксель
-	//int bpp = ilGetInteger(IL_IMAGE_BYTES_PER_PIXEL);
-	// Тип хранения данных
-
-	type = ilGetInteger(IL_IMAGE_FORMAT);
-	/*
-	unsigned int type;
-	// переопределить тип для OpenGL
-	switch (bpp) {
-		case 1:
-			type  = GL_RGB8;
-			break;
-		case 3:
-			type = GL_RGB;
-			break;
-		case 4:
-			type = GL_RGBA;
-			break;
-	}
-	*/
-	// Индекс текстуры
-	copyData = ilGetData();
-	IndexTexture[CountIndexTexture] = 0;
-	glGenTextures(1, &IndexTexture[CountIndexTexture]);
-	iluFlipImage();
-
-
-	glBindTexture(GL_TEXTURE_2D, IndexTexture[CountIndexTexture]);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
-	//
-	gluBuild2DMipmaps(GL_TEXTURE_2D, type, width, height, type, GL_UNSIGNED_BYTE, copyData);
+	qtimage.load(path);
+	if (qtimage.isNull())
+		std::cout << path.toStdString() << std::endl;
+	tmp = new QOpenGLTexture(qtimage.mirrored());
+	tmp->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+	tmp->setMagnificationFilter(QOpenGLTexture::Linear);
 	CountIndexTexture++;
-};
+	return tmp;
+}
+#elif WINAPI_==1 || SDLAPI_==1
 void Scene2::SetData()
 {
+	
 	if(loading)
 		return;
+
 	CountIndexTexture++;
 
     LoadImage(reinterpret_cast<const ILstring>("content//woman.jpg"));
@@ -225,130 +170,279 @@ void Scene2::SetData()
 	NewVertexCoordinats[65][2] = .8f;
 	NewVertexCoordinats[65][3] = .6f;
 	loading = true;
+	
 }
+void Scene2::LoadImage(const ILstring path)
+{
+
+	std::ofstream out;          // поток для записи
+	out.open("scene2.txt", std::ios::app); // окрываем файл для записи
+	if (out.is_open())
+	{
+		out << reinterpret_cast<const char*>(path)<< std::endl;
+
+		image->VertexCoordinats[CountIndexTexture - 1][0] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][1] = -1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][2] = 1.f;
+		image->VertexCoordinats[CountIndexTexture - 1][3] = -1.f;
+		out << image->VertexCoordinats[CountIndexTexture - 1][0] << std::endl;
+		out << image->VertexCoordinats[CountIndexTexture - 1][1] << std::endl;
+		out << image->VertexCoordinats[CountIndexTexture - 1][2] << std::endl;
+		out << image->VertexCoordinats[CountIndexTexture - 1][3] << std::endl;
+		out << 0 << std::endl;
+		out << 0 << std::endl;
+		out.close();
+	}
+	ILenum ext;
+
+	if (strstr(reinterpret_cast<const char*>(path), "png"))
+	{
+		ext = IL_PNG;
+	}
+	if (strstr(reinterpret_cast<const char*>(path), "jpg") || strstr(reinterpret_cast<const char*>(path), "jpeg"))
+	{
+		ext = IL_JPG;
+	}
+	if (strstr(reinterpret_cast<const char*>(path), "bmp"))
+	{
+		ext = IL_BMP;
+	}
+	//#ifdef _WINDOWS_2
+	ilLoad(ext, reinterpret_cast<const ILstring>(path));
+	//#else
+		//ilLoad( ext, path);
+	//#endif
+		// Получение кода ошибки
+	err = ilGetError();
+	// Если код не равен нулю ошибка была
+	if (err != IL_NO_ERROR) {
+		// Получение строки с ошибкой
+		strError = (wchar_t*)iluErrorString(err);
+		// Выдаем сообщение об ошибке
+#ifdef _WIN32
+		std::cout << "\nNot find file: ";
+		std::wcout << path << std::endl;
+		MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
+#endif
+		// выход из программы
+		exit(EXIT_FAILURE);
+	}
+
+	// Ширина изображения
+	width = ilGetInteger(IL_IMAGE_WIDTH);
+	// Высота изображения
+	height = ilGetInteger(IL_IMAGE_HEIGHT);
+	// Число байт на пиксель
+	//int bpp = ilGetInteger(IL_IMAGE_BYTES_PER_PIXEL);
+	// Тип хранения данных
+
+	type = ilGetInteger(IL_IMAGE_FORMAT);
+	// Индекс текстуры
+	copyData = ilGetData();
+	IndexTexture[CountIndexTexture] = 0;
+	glGenTextures(1, &IndexTexture[CountIndexTexture]);
+	iluFlipImage();
+
+
+	glBindTexture(GL_TEXTURE_2D, IndexTexture[CountIndexTexture]);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//
+	gluBuild2DMipmaps(GL_TEXTURE_2D, type, width, height, type, GL_UNSIGNED_BYTE, copyData);
+	CountIndexTexture++;
+};
+#endif
+#if QTAPI_==1
+void Scene2::LoadQT()
+{
+
+	/*
+	std::ifstream in("scene2.txt");
+	Image_s im;
+	if (in.is_open())
+	{
+		std::string path__;
+#if SDLAPI_==1 || WINAPI_==1
+		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Ydown) && (in >> im.Yup) && (in >> im.Z) && (in >> im.alpha))
+#elif QTAPI_ == 1
+		while ((in >> path__) && (in >> im.Xright) && (in >> im.Xleft) && (in >> im.Yup) && (in >> im.Ydown) && (in >> im.Z) && (in >> im.alpha))
+#endif
+		{
+#if SDLAPI_==1 || WINAPI_==1
+			im.IndexTexture = LoadImage(reinterpret_cast<const ILstring>(path__.c_str()));
+#elif QTAPI_ == 1
+			im.IndexTexture = QTLoadImage(path__.c_str());
+#endif
+			path__ = path__.substr(path__.find_last_of("/\\") + 1);
+			size_t dot_i = path__.find_last_of('.');
+			im.Name = path__.substr(0, dot_i);
+			im.number = welcomev.size();
+			welcomev.push_back(im);
+		}
+	}
+	in.close();
+	*/
+}
+#endif
 void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin, int GetTotalBet)
 {
+#if SDLAPI_==1 || WINAPI_==1
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[1]);
+#endif
 	EnableTexture(NewTextureCoordinats[0],NewVertexCoordinats[0]);
 
+#if SDLAPI_==1 || WINAPI_==1
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[0]]);
+#endif
 	EnableTexture(NewTextureCoordinats[0],NewVertexCoordinats[1]);
 
 	if (GetFA[6] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[2]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[1]]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
 	}
 	if (GetFA[7] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[2]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[3]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[2]]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[3]);
 	}
 	if (GetFA[8] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[2]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[4]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[3]]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[4]);
 	}
 	if (GetFA[9] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[2]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[4]]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);
 	}
 
 	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
-	/*
-	glBindTexture(GL_TEXTURE_2D, IndexTexture[56]);
-	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[1]);
-	glBindTexture(GL_TEXTURE_2D, IndexTexture[58]);
-	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
-	glBindTexture(GL_TEXTURE_2D, IndexTexture[60]);
-	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[3]);
-	glBindTexture(GL_TEXTURE_2D, IndexTexture[62]);
-	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[4]);
-	glBindTexture(GL_TEXTURE_2D, IndexTexture[64]);
-	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);
-	*/
 	
 	if (GetFA[5] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[55]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[1]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[56]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[1]);
 	}
 	
 	if (GetFA[6] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[57]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[58]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
 	}
 	if (GetFA[7] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[57]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[3]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[58]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[3]);
 	}
 	if (GetFA[8] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[57]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[4]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[58]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[4]);
 	}
 	if (GetFA[9] != true)
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[57]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);
 	}
 	else
 	{
+#if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[58]);
+#endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);
 	}
-	
+
+#if SDLAPI_==1 || WINAPI_==1
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[59]);
+#endif
 	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[60]);
 
+#if SDLAPI_==1 || WINAPI_==1
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[60]);
+#endif
 	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[61]);
 
+#if SDLAPI_==1 || WINAPI_==1
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[61]);
+#endif
 	EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[62]);
 
 	DrawNumeric(GetCredits, 0);
@@ -359,25 +453,19 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 }
 void Scene2::DrawNumeric(int num,int position)
 {
-	//int j = -1;
 	std::string str = "";
-	//for (auto && v : std::to_string(num)) {
 #ifndef _WINDOWS_2
 	sprintf(num_,"%d",num);
 #else
 	sprintf_s(num_,25,"%d",num);
 #endif
 	int n = strlen(num_);
-	for (int j=0;j<n;j++) {
+	for (int j = 0; j < n; j++) {
 		str += num_[j];
-		//std::cout << v /*- '0'*/ << "|";
-		//str += v;
-		//++j;
-		//if (0 <= j && j <= 9)
-		{
-			glBindTexture(GL_TEXTURE_2D, IndexTexture[62 + str[j] - '0']);
-			EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[63 + position], j);
-		}
+#if SDLAPI_==1 || WINAPI_==1
+		glBindTexture(GL_TEXTURE_2D, IndexTexture[62 + str[j] - '0']);
+#endif
+		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[63 + position], j);
 	}
 }
 void Scene2::EnableTexture(float*texcoor, float*vercoor)
@@ -415,6 +503,15 @@ void Scene2::Destroy()
     for(int i=0;i<CountTexture;i++)
         delete[] NewVertexCoordinats[i];
     delete[] NewVertexCoordinats;
+#if QTAPI_==1
+
+#elif SDLAPI_==1 || WINAPI_==1
+	for (int i = 0; i < CountTexture; i++)
+		delete[] image->VertexCoordinats[i];
+	delete[] image->VertexCoordinats;
+	delete image->IndexTexture;
 	delete IndexTexture;
+#endif
 	delete num_;
+	delete image;
 }

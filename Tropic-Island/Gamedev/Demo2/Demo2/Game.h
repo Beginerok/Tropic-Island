@@ -4,7 +4,7 @@
 #define QTAPI_ 1
 #define DBAPI_ 0
 #include "Scene1.h"
-//#include "Scene2.h"
+#include "Scene2.h"
 #if WINAPI_ == 1
 	#include "WindowsWinApi.h"
 #elif SDLAPI_ == 1
@@ -21,7 +21,7 @@ class Game
 public:
 	Scene1 *Scene1_;
 	Sound* Sound_;
-	//Scene2* Scene2_;
+	Scene2* Scene2_;
 #if WINAPI_ == 1
 	WindowsWinApi *WindowsWinApi_;
 #elif SDLAPI_ == 1

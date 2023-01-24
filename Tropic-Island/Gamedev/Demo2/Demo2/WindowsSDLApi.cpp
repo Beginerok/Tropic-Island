@@ -2,7 +2,7 @@
 #include <iostream>
 WindowsSDLApi::WindowsSDLApi()
 {
-	CountButtons=5;
+	CountButtons=10;
 	F=new bool[CountButtons];
 	for(int i=0;i<CountButtons;i++)
 		setF(false,i);
@@ -14,7 +14,7 @@ WindowsSDLApi::WindowsSDLApi()
 }
 int WindowsSDLApi::getAny()
 {
-	int retval=5;
+	int retval=10;
 	for(int i=0;i<CountButtons;i++)
 		if(getF(i))
 			retval=i;
@@ -71,31 +71,33 @@ bool WindowsSDLApi::IsMouseButtonDown(byte key,bool bonus,SDL_Event event_)
 			if(point.x >543 && point.x<608)
 				setF(true, 4);
 		}
+		event_.type = 0;
 		return true;
 	}
 	else
-    if(event_.type == SDL_MOUSEBUTTONDOWN && bonus&&!GetAny())
+    if(event_.type == SDL_MOUSEBUTTONDOWN && bonus/* && !GetAny() */ )
 		{
 			GetButtonDownCoords(event_);
 			std::cout << point.x << " " << point.y<<std::endl;
 			if (point.y >478 && point.y<496)
 			{
 				if (point.x >123 && point.x<190)
-					setF(true, 0);
+					setF(true, 5);
 				if (point.x >228 && point.x<296)
-					setF(true, 1);
+					setF(true, 6);
 				if (point.x > 330 && point.x < 401)
 				{
                     upbutton+=1;
-					setF(true, 2);
+					setF(true, 7);
 					pressbutton += 1;
 					std::cout << "press button:" << pressbutton << std::endl;
 				}
 				if (point.x > 436 && point.x < 506)
-					setF(true, 3);
+					setF(true, 8);
 				if (point.x >543 && point.x<608)
-					setF(true, 4);
+					setF(true, 9);
 			}
+			event_.type = 0;
 			return true;
 		}
 
@@ -146,46 +148,48 @@ bool WindowsSDLApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_,SDL_Even
 				}
 			}
 		}
+		event_.type = 0;
 		return true;
 	}
 	else
-    if(event_.type == SDL_MOUSEBUTTONUP && bonus&&!GetAny() && event_.key.repeat == 0)
+    if(event_.type == SDL_MOUSEBUTTONUP && bonus&&/*!GetAny()  &&*/ event_.key.repeat == 0)
 		{
 			GetButtonDownCoords(event_);
 			//if (point.y >478 && point.y<496)
 			{
 				//if (point.x >123 && point.x<190)
-				if (getF(0))
-					setF(false, 0);
+				if (getF(5))
+					setF(false, 5);
 				//if (point.x >228 && point.x<296)
-				if (getF(1))
-					setF(false, 1);
+				if (getF(6))
+					setF(false, 6);
 				//if (point.x >330 && point.x<401)
-				if (getF(2))
+				if (getF(7))
 				{
 
-					setF(false, 2);
-                    upbutton=0;
-					pressbutton = 1;
-					std::cout << "press button:" << pressbutton << std::endl;
+					setF(false, 7);
+                  //  upbutton=0;
+					//pressbutton = 1;
+					//std::cout << "press button:" << pressbutton << std::endl;
 				}
 				//if (point.x >436 && point.x<506)
 				{
-					if (getF(3))
+					if (getF(8))
 					{
 						SetBet_(GetBet_() + 1);
-						setF(false, 3);
+						setF(false, 8);
 					}
 				}
 				//if (point.x >543 && point.x<608)
 				{
-					if (getF(4))
+					if (getF(9))
 					{
-						setF(false, 4);
+						setF(false, 9);
 						setdone(true);
 					}
 				}
 			}
+		event_.type = 0;
 			return true;
 		}
     if(event_.type == SDL_MOUSEBUTTONDOWN)
@@ -211,13 +215,13 @@ bool WindowsSDLApi::IsKeyDown(byte key, bool bonus,SDL_Event event_)
             case SDLK_F1:
             {
                 setF(true, 0);
-                //setF(false, 0);
+                //setF(true, 5);
                 break;
             }
             case SDLK_F2:
             {
                 setF(true, 1);
-                //setF(false, 1);
+                //setF(true, 6);
                 break;
             }
             case SDLK_F3:
@@ -225,20 +229,20 @@ bool WindowsSDLApi::IsKeyDown(byte key, bool bonus,SDL_Event event_)
                 setF(true, 2);
 				pressbutton += 1;
 				std::cout << "press button:" << pressbutton << std::endl;
-                //setF(false, 2);
+                //setF(true, 7);
                 break;
             }
             case SDLK_F4:
             {
                 //SetBet_(GetBet_()+1);
                 setF(true, 3);
-                //setF(false, 3);
+                //setF(true, 8);
                 break;
             }
             case SDLK_F5:
             {
                 setF(true, 4);
-                //setF(false, 4);
+                //setF(true, 9);
                 break;
             }
 		}
@@ -250,29 +254,29 @@ bool WindowsSDLApi::IsKeyDown(byte key, bool bonus,SDL_Event event_)
             {
                 case SDLK_F1:
                 {
-                    setF(true, 1);
+                    setF(true, 6);
                     break;
                 }
                 case SDLK_F2:
                 {
-                    setF(true, 0);
+                    setF(true, 5);
                     break;
                 }
                 case SDLK_F3:
                 {
-                    setF(true, 2);
+                    setF(true, 7);
 					pressbutton += 1;
 					std::cout << "press button:" << pressbutton << std::endl;
                     break;
                 }
                 case SDLK_F4:
                 {
-                    setF(true, 3);
+                    setF(true, 8);
                     break;
                 }
                 case SDLK_F5:
                 {
-                    setF(true, 4);
+                    setF(true, 9);
                     break;
                 }
 			}
@@ -331,17 +335,17 @@ bool WindowsSDLApi::IsKeyUp(byte key, bool bonus,Logic *Logic_, SDL_Event event_
         {
             case SDLK_F1:
 			{
-				setF(false, 1);
+				setF(false, 6);
 				break;
 			}
             case SDLK_F2:
 			{
-				setF(false, 0);
+				setF(false, 5);
 				break;
 			}
             case SDLK_F3:
 			{
-				setF(false, 2);
+				setF(false, 7);
 				pressbutton = 0;
 				upbutton = 1;
 				std::cout << "press button:" << pressbutton << std::endl;
@@ -351,12 +355,12 @@ bool WindowsSDLApi::IsKeyUp(byte key, bool bonus,Logic *Logic_, SDL_Event event_
 			}
             case SDLK_F4:
 			{
-				setF(false, 3);
+				setF(false, 8);
 				break;
 			}
             case SDLK_F5:
 			{
-				setF(false, 4);
+				setF(false, 9);
 				break;
 			}
 		}

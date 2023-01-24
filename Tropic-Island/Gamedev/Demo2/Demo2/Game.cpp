@@ -78,14 +78,22 @@ void Game::draw_screen()
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
 			}
+#if WINAPI_==1
 			if (Logic_->GetWin() > 0 && !bonus && WindowsWinApi_->GetF()[3])
+#elif SDLAPI_==1
+			if (Logic_->GetWin() > 0 && !bonus && WindowsSDLApi_->GetF()[3])
+#endif
 			{
 				bonus = true;
 				Logic_->SetRandom();
 			}
 			if (bonus || wait)
 			{
+#if WINAPI_==1
 				if ((Logic_->GetWin() > 0 && WindowsWinApi_->GetF()[5]))
+#elif SDLAPI_==1
+				if ((Logic_->GetWin() > 0 && WindowsSDLApi_->GetF()[5]))
+#endif
 				{
 					bonus = false;
 					Logic_->firstline = false;
@@ -97,7 +105,11 @@ void Game::draw_screen()
 				}
 				for (int i = 6; i < 10; i++)
 				{
+#if WINAPI_==1
 					if (WindowsWinApi_->GetF()[i] && !wait)
+#elif SDLAPI_==1
+					if (WindowsSDLApi_->GetF()[i] && !wait)
+#endif
 					{
 						wait = true;
 						tmpcounter = 0;
@@ -105,7 +117,11 @@ void Game::draw_screen()
 					}
 				}
 				glDisable(GL_DEPTH_TEST);
-				//Scene2_->ShowBackGround(WindowsWinApi_->GetF(), Logic_->GetRandom(), Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
+#if WINAPI_==1
+				Scene2_->ShowBackGround(WindowsWinApi_->GetF(), Logic_->GetRandom(), Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
+#elif SDLAPI_==1
+				Scene2_->ShowBackGround(WindowsSDLApi_->GetF(), Logic_->GetRandom(), Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
+#endif
 				glEnable(GL_DEPTH_TEST);
 				Sound_->Pause(0);
 				Sound_->Play(7);
@@ -189,7 +205,9 @@ void Game::draw_screen()
 				Scene1_->ShowHelp();
 				glEnable(GL_DEPTH_TEST);
 				Sound_->Pause(0);
+#if WINAPI_==1
 				if(WindowsWinApi_->keyboard__->enablesound)
+#endif
 					Sound_->Play(1);
 			}
 			else
@@ -265,12 +283,12 @@ int Game::Execute(int argc, char*argv[])
 	ilInit();
 	iluInit();
 	Scene1_ = new Scene1();
+	Scene2_ = new Scene2();
 #endif
 #if WINAPI_==1 || SDLAPI_==1
 	Scene1_->LoadWelcome();
+	Scene2_->SetData();
 #endif
-	//Scene2_ = new Scene2();
-	//Scene2_->SetData();
 	
 #if SDLAPI_==1
 	WindowsSDLApi_ = new WindowsSDLApi();
@@ -297,7 +315,7 @@ int Game::Execute(int argc, char*argv[])
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 #elif QTAPI_==1
-	mw.SetElements(Scene1_, Scene1_, Logic_, Sound_);
+	mw.SetElements(Scene1_, Scene2_, Logic_, Sound_);
 	mw.show();
 	a.exec();
 #endif

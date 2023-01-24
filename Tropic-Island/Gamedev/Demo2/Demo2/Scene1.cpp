@@ -38,6 +38,8 @@ Scene1::Scene1(void)
 QOpenGLTexture* Scene1::QTLoadImage(QString path)
 {
 	qtimage.load(path);
+	if (qtimage.isNull())
+		std::cout << path.toStdString() << std::endl;
 	tmp = new QOpenGLTexture(qtimage.mirrored());
 	tmp->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	tmp->setMagnificationFilter(QOpenGLTexture::Linear);

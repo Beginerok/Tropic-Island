@@ -27,13 +27,24 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <QtWidgets/QtWidgets>
-#include <QtGui/qopengltexture.h>//QtOpenGL
-//#pragma comment(lib,"OpenGL32.lib")
-//#pragma comment(lib,"Glu32.lib")
-//#pragma comment(lib,"ILU.lib")
-//#pragma comment(lib,"DevIl.lib")
-//#pragma comment(lib,"SDL2.lib")
+#if QTAPI_==1
+	#include <QtWidgets/QtWidgets>
+#endif
+#ifdef Q_OS_LINUX
+	#include <QtGui/qopengltexture.h>
+#endif
+#ifdef Q_OS_WIN
+	#include <QtOpenGL/qopengltexture.h>
+#endif
+#ifdef _WIN32
+	#pragma comment(lib,"OpenGL32.lib")
+	#pragma comment(lib,"Glu32.lib")
+	#pragma comment(lib,"ILU.lib")
+	#pragma comment(lib,"DevIl.lib")
+	#pragma comment(lib,"SDL2.lib")
+#endif
+#include <vector>
+
 struct Image
 {
 	float**VertexCoordinats;
