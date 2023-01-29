@@ -1,11 +1,11 @@
-content//woman.jpg
+content//woman.png
 1
 -1
 1
 -1
 0
 0
-content//background5.jpg
+content//background5.png
 1
 -1
 1

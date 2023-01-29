@@ -1637,11 +1637,11 @@ int Scene1::LoadDrum(int iter)
 	{
 		vectordrum.push_back("wild");//17
 #if SDLAPI_==1 || WINAPI_==1
-		LoadImage(reinterpret_cast<const ILstring>("content//drum//wild.jpg"));
+		LoadImage(reinterpret_cast<const ILstring>("content//drum//wild.png"));
 #elif QTAPI_==1
 		//tmp.Name = new std::string[10];
 		tmp.Name = "wild";
-		tmp.IndexTexture = QTLoadImage("content//drum//wild.jpg");
+		tmp.IndexTexture = QTLoadImage("content//drum//wild.png");
 		drumv.push_back(tmp);
 #endif
 		/*

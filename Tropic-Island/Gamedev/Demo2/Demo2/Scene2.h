@@ -33,7 +33,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-//#include <string>
+#include <vector>
 struct Image2
 {
 	float** VertexCoordinats;
@@ -44,6 +44,22 @@ struct Image2
 #endif
 	std::string Name;
 	int* number;
+};
+struct Image_s2
+{
+	float Xleft;
+	float Xright;
+	float Yup;
+	float Ydown;
+	float Z;
+#if SDLAPI_==1 || WINAPI_==1
+	unsigned int IndexTexture;
+#elif QTAPI_==1
+	QOpenGLTexture* IndexTexture;
+#endif
+	std::string Name;
+	int number;
+	bool alpha;
 };
 class Scene2
 {
@@ -92,5 +108,8 @@ protected:
 	char*num_;
 	bool loading;	
 	Image2* image;
+	std::vector<Image_s2> scene2v;
+	int FindTexture(std::string name, std::vector<Image_s2> vec);
+	void EnableTexture(Image_s2 im, bool third, bool alpha);
 };
 #endif
