@@ -1,5 +1,22 @@
 #include "MyWidget.h"
+/*
+// Window dimensions
+const GLuint WIDTH = 800, HEIGHT = 600;
 
+// Shaders
+const GLchar* vertexShaderSource = "#version 330 core\n"
+"layout (location = 0) in vec3 position;\n"
+"void main()\n"
+"{\n"
+"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+"}\0";
+const GLchar* fragmentShaderSource = "#version 330 core\n"
+"out vec4 color;\n"
+"void main()\n"
+"{\n"
+"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"}\n\0";
+*/
 #pragma comment(lib,"Qt6Cored.lib")
 #pragma comment(lib,"Qt6Guid.lib")
 #pragma comment(lib,"Qt6Widgetsd.lib")
@@ -37,11 +54,11 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	m_button.push_back(new QPushButton("Risk", this));
 	m_button.push_back(new QPushButton("Exit", this));
 	
-	m_button.push_back(new QPushButton("My Button6", this));
-	m_button.push_back(new QPushButton("My Button7", this));
-	m_button.push_back(new QPushButton("My Button8", this));
-	m_button.push_back(new QPushButton("My Button9", this));
-	m_button.push_back(new QPushButton("My Button10", this));
+	m_button.push_back(new QPushButton("Take", this));
+	m_button.push_back(new QPushButton("Risk", this));
+	m_button.push_back(new QPushButton("Risk", this));
+	m_button.push_back(new QPushButton("Risk", this));
+	m_button.push_back(new QPushButton("Risk", this));
 
 	// устанавливаем размер и положение кнопки
 	m_button[0]->setGeometry(QRect(QPoint(50, 450), QSize(100, 50)));
@@ -50,13 +67,19 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	m_button[3]->setGeometry(QRect(QPoint(410, 450), QSize(100, 50)));
 	m_button[4]->setGeometry(QRect(QPoint(530, 450), QSize(100, 50)));
 	// устанавливаем размер и положение кнопки
-	/*
+	
 	m_button[5]->setGeometry(QRect(QPoint(50, 450), QSize(100, 50)));
 	m_button[6]->setGeometry(QRect(QPoint(170, 450), QSize(100, 50)));
 	m_button[7]->setGeometry(QRect(QPoint(290, 450), QSize(100, 50)));
 	m_button[8]->setGeometry(QRect(QPoint(410, 450), QSize(100, 50)));
 	m_button[9]->setGeometry(QRect(QPoint(530, 450), QSize(100, 50)));
-    */
+    
+	m_button[5]->hide();
+	m_button[6]->hide();
+	m_button[7]->hide();
+	m_button[8]->hide();
+	m_button[9]->hide();
+
 	//connect(m_button, SIGNAL(released()), this, SLOT(handleButton()));
     QObject::connect(m_button[0], &QPushButton::clicked, [=]() {
 		F[0] = !F[0];
@@ -103,6 +126,8 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 		{
 			bonus = true;
 			Logic_->SetRandom();
+			SetShowHideButtons(true);
+			F[3] = false;
 		}
         });
 
@@ -110,6 +135,55 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 		F[4] = !F[4];
 		exit(0);
         });
+
+	QObject::connect(m_button[5], &QPushButton::clicked, [=]() {
+		F[5] = !F[5];
+		});
+	QObject::connect(m_button[6], &QPushButton::clicked, [=]() {
+		F[6] = !F[6];
+		});
+	QObject::connect(m_button[7], &QPushButton::clicked, [=]() {
+		F[7] = !F[7];
+		});
+	QObject::connect(m_button[8], &QPushButton::clicked, [=]() {
+		F[8] = !F[8];
+		});
+	QObject::connect(m_button[9], &QPushButton::clicked, [=]() {
+		F[9] = !F[9];
+		});
+
+
+}
+void MyWidget::SetShowHideButtons(bool set)
+{
+	if (set)
+	{
+		m_button[0]->hide();
+		m_button[1]->hide();
+		m_button[2]->hide();
+		m_button[3]->hide();
+		m_button[4]->hide();
+
+		m_button[5]->show();
+		m_button[6]->show();
+		m_button[7]->show();
+		m_button[8]->show();
+		m_button[9]->show();
+	}
+	else
+	{
+		m_button[0]->show();
+		m_button[1]->show();
+		m_button[2]->show();
+		m_button[3]->show();
+		m_button[4]->show();
+
+		m_button[5]->hide();
+		m_button[6]->hide();
+		m_button[7]->hide();
+		m_button[8]->hide();
+		m_button[9]->hide();
+	}
 }
 void MyWidget::change()
 {
@@ -118,8 +192,9 @@ void MyWidget::change()
 }
 void MyWidget::initializeGL()
 {
-	//QOpenGLContext* ctx = new QOpenGLContext();
-    //QOpenGLFunctions* f = QOpenGLContext::currentContext()->functions();
+	ctx = new QOpenGLContext();
+	f = QOpenGLContext::currentContext()->extraFunctions();
+	//f = QOpenGLContext::currentContext()->functions();
     glClearColor(0,0,0,0); // заполняем экран белым цветом
     //glEnable(GL_DEPTH_TEST); // задаем глубину проверки пикселей
     //glShadeModel(GL_FLAT); // убираем режим сглаживания цветов
@@ -143,6 +218,93 @@ void MyWidget::initializeGL()
 #if QTAPI_==1
 	Scene2_->LoadQT();
 #endif
+	/*
+	GLuint vertexShader = f->glCreateShader(GL_VERTEX_SHADER);
+	
+	f->glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	f->glCompileShader(vertexShader);
+	// Check for compile time errors
+	GLint success;
+	GLchar infoLog[512];
+	f->glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		f->glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
+	// Fragment shader
+	GLuint fragmentShader = f->glCreateShader(GL_FRAGMENT_SHADER);
+	f->glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	f->glCompileShader(fragmentShader);
+	// Check for compile time errors
+	f->glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		f->glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+	}
+	// Link shaders
+	shaderProgram = f->glCreateProgram();
+	f->glAttachShader(shaderProgram, vertexShader);
+	f->glAttachShader(shaderProgram, fragmentShader);
+	f->glLinkProgram(shaderProgram);
+	// Check for linking errors
+	f->glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	if (!success) {
+		f->glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+	}
+	f->glDeleteShader(vertexShader);
+	f->glDeleteShader(fragmentShader);
+
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	//GLfloat vertices[] = {
+	//  // First triangle
+	//   0.5f,  0.5f,  // Top Right
+	//   0.5f, -0.5f,  // Bottom Right
+	//  -0.5f,  0.5f,  // Top Left 
+	//  // Second triangle
+	//   0.5f, -0.5f,  // Bottom Right
+	//  -0.5f, -0.5f,  // Bottom Left
+	//  -0.5f,  0.5f   // Top Left
+	//}; 
+	GLfloat vertices[] = {
+		 0.5f,  0.5f, 0.0f,  // Top Right
+		 0.5f, -0.5f, 0.0f,  // Bottom Right
+		-0.5f, -0.5f, 0.0f,  // Bottom Left
+		-0.5f,  0.5f, 0.0f   // Top Left 
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3,  // First Triangle
+		1, 2, 3   // Second Triangle
+	};
+	GLuint VBO, EBO;
+	f->glGenVertexArrays(1, &VAO);
+	f->glGenBuffers(1, &VBO);
+	f->glGenBuffers(1, &EBO);
+	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+	f->glBindVertexArray(VAO);
+
+	f->glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	f->glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	f->glEnableVertexAttribArray(0);
+
+	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+
+	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
+
+
+	// Uncommenting this call will result in wireframe polygons.
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	*/
+	QPair<int, int> version = QOpenGLContext(ctx).format().version();
+	std::cout << version.first << " " << version.second << std::endl;
 }
 
 void MyWidget::resizeGL(int nWidth, int nHeight)
@@ -154,12 +316,17 @@ void MyWidget::resizeGL(int nWidth, int nHeight)
 	glLoadIdentity();           // загрузка единичную матрицу
 	//glOrtho(-2, 2, -2, 2, -2, 2);
 	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-
 	m_button[0]->setGeometry(QRect(QPoint(0, nHeight - 50), QSize(nWidth / 5, 50)));
 	m_button[1]->setGeometry(QRect(QPoint(0 + nWidth / 5, nHeight - 50), QSize(nWidth / 5, 50)));
 	m_button[2]->setGeometry(QRect(QPoint(0 + nWidth / 5*2, nHeight - 50), QSize(nWidth / 5, 50)));
 	m_button[3]->setGeometry(QRect(QPoint(0 + nWidth / 5*3, nHeight - 50), QSize(nWidth / 5, 50)));
 	m_button[4]->setGeometry(QRect(QPoint(0 + nWidth / 5*4, nHeight - 50), QSize(nWidth / 5, 50)));
+
+	m_button[5]->setGeometry(QRect(QPoint(0, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[6]->setGeometry(QRect(QPoint(0 + nWidth / 5, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[7]->setGeometry(QRect(QPoint(0 + nWidth / 5 * 2, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[8]->setGeometry(QRect(QPoint(0 + nWidth / 5 * 3, nHeight - 50), QSize(nWidth / 5, 50)));
+	m_button[9]->setGeometry(QRect(QPoint(0 + nWidth / 5 * 4, nHeight - 50), QSize(nWidth / 5, 50)));
 }
 bool MyWidget::eventFilter(QObject* watched, QEvent* event)
 {
@@ -210,8 +377,115 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 	this->Logic_ = Logic__;
 	this->Sound_ = Sound__;
 }
+
+void MyWidget::Lister()
+{
+	glColor3f(0.0, 0.5, 0.0);
+	glBegin(GL_QUADS);
+	for (float i = -0.8; i < 0.8; i += 0.1)
+	{
+		glVertex3f(0, i, 0);
+		glVertex3f(0.1, i + 0.1, 0);
+		glVertex3f(0.1, i + 0.2, 0);
+		glVertex3f(0, i + 0.1, 0);
+	}
+	glEnd();
+	
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0, 0.8, 0);
+	glVertex3f(0.1, 0.9, 0);
+	glVertex3f(0, 1.0, 0);
+	glEnd();
+	glColor3f(0, 1.0, 0);
+	glLineWidth((GLfloat)1);
+	glBegin(GL_LINES);
+	glVertex3f(0, -0.8, -0.01);
+	glVertex3f(0, 1, -0.01);
+	glVertex3f(0, -0.8, 0.01);
+	glVertex3f(0, 1, 0.01);
+	glEnd();
+	glBegin(GL_LINES);
+	for (float i = -0.8; i < 0.9; i += 0.1)
+	{
+		glVertex3f(0, i, -0.01);
+		glVertex3f(0.11, i + 0.1, -0.01);
+		glVertex3f(0, i, 0.01);
+		glVertex3f(0.11, i + 0.1, 0.01);
+	}
+	glEnd();
+}
+
+void MyWidget::FullLister()
+{
+	Lister();
+	glPushMatrix();
+	glRotatef(180, 0, 1, 0);
+	Lister();
+	glPopMatrix();
+}
 void MyWidget::Show()
 {
+	/*
+	// Draw our first triangle
+	f->glUseProgram(shaderProgram);
+	f->glBindVertexArray(VAO);
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
+	f->glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	f->glBindVertexArray(0);
+	*/
+	glRotatef(1, 0, 1, 0);
+	glPushMatrix();
+	glScalef(0.7, 0.7, 1);
+	glColor3f(0.0, 0.5, 0.0);
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0,-0.8,0);
+	glVertex3f(-0.01,-1,0);
+	glVertex3f(0.01, -1, 0);
+	glEnd();
+	FullLister();
+	
+	glPushMatrix();
+	glTranslatef(-0.2, -0.45, 0);
+	glRotatef(30, 0, 0, 1);
+	glScalef(0.6, 0.6, 1);
+	FullLister();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.2,-0.45, 0);
+	glRotatef(-30, 0, 0, 1);
+	glScalef(0.6, 0.6, 1);
+	FullLister();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-0.3, -0.7, 0);
+	glRotatef(60, 0, 0, 1);
+	glScalef(0.4, 0.4, 1);
+	FullLister();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.3, -0.7, 0);
+	glRotatef(-60, 0, 0, 1);
+	glScalef(0.4, 0.4, 1);
+	FullLister();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-0.15, -0.9, 0);
+	glRotatef(100, 0, 0, 1);
+	glScalef(0.2, 0.2, 1);
+	FullLister();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.15, -0.9, 0);
+	glRotatef(-100, 0, 0, 1);
+	glScalef(0.2, 0.2, 1);
+	FullLister();
+	glPopMatrix();
+	
+	glPopMatrix();
+
+/*
 	texture->bind();
 	//glColor4f(1,0,0,0); // задаем цвет
 	glBegin(GL_QUADS); // говорим, что рисовать будем прямоугольник
@@ -235,21 +509,24 @@ void MyWidget::Show()
 	glTexCoord2f(1, 0);
 	glVertex3f(0.5, -1, 1);
 	glEnd();
+	*/
 }
 void MyWidget::paintGL() // рисование
 {
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
+		glClear(GL_COLOR_BUFFER_BIT /**/ | GL_DEPTH_BUFFER_BIT); // очистка экрана
 		//glEnable(GL_DEPTH_TEST);
 		//glEnable(GL_TEXTURE_2D);
 		//Show();
+		
 		//Scene1_->ShowWelcome(loading);
-/*
+
 #if WINAPI_==1
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
 		online = !WindowsWinApi_->keyboard__->offline;
 #endif
-*/
+
+	
 		if (!firsttime
 #if DBAPI_ == 1
 			&& Logic_->dbconn->userid != -1
@@ -278,6 +555,8 @@ void MyWidget::paintGL() // рисование
 					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
+					F[5] = false;
+					SetShowHideButtons(false);
 				}
 				for (int i = 6; i < 10; i++)
 				{
@@ -286,6 +565,7 @@ void MyWidget::paintGL() // рисование
 						wait = true;
 						tmpcounter = 0;
 						number = i;
+						F[i] = false;
 					}
 				}
 				glDisable(GL_DEPTH_TEST);
@@ -315,6 +595,7 @@ void MyWidget::paintGL() // рисование
 									Logic_->firstline = false;
 									Logic_->secondline = false;
 									Logic_->thirdline = false;
+									SetShowHideButtons(false);
 								}
 								else
 								{

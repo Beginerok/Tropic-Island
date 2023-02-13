@@ -14,6 +14,8 @@
 #ifdef Q_OS_WIN
     #include<QtOpenGLWidgets/qopenglwidget.h>
 #endif
+
+#include <QtOpenGL/QOpenGLVersionProfile>
 class MyWidget
     :  public QOpenGLWidget
 {
@@ -26,6 +28,9 @@ public:
     void SetElements(Scene1*Scene1_,Scene2*Scene2_,Logic*Logic_,Sound*Sound_);
     void Show();
     bool eventFilter(QObject* watched, QEvent* event);
+    void Lister();
+    void FullLister();
+    void SetShowHideButtons(bool set);
 private slots:
     void change();
 private:
@@ -46,6 +51,11 @@ private:
     QImage image1;
     float rotate;
     QTimer* timer;
+
+    QOpenGLContext* ctx;
+    GLuint shaderProgram;
+    GLuint VAO;
+    QOpenGLExtraFunctions* f;
 };
 
 
