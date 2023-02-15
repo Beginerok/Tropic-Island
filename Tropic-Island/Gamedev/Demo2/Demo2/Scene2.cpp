@@ -379,7 +379,7 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 #if SDLAPI_==1 || WINAPI_==1
 	glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[0]]);
 #elif QTAPI_==1
-	numb = random_[0] + 2;
+	numb = random_[0] - 1;
 	scene2v[numb].IndexTexture->bind();
 #endif
 	EnableTexture(NewTextureCoordinats[0],NewVertexCoordinats[1]);
@@ -399,7 +399,7 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 #if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[1]]);
 #elif QTAPI_==1
-		numb = random_[1] + 2;
+		numb = random_[1] - 1;
 		scene2v[numb].IndexTexture->bind();
 #endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[2]);
@@ -420,7 +420,7 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 #if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[2]]);
 #elif QTAPI_==1
-		numb = random_[2] + 2;
+		numb = random_[2] - 1;
 		scene2v[numb].IndexTexture->bind();
 #endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[3]);
@@ -441,7 +441,7 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 #if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[3]]);
 #elif QTAPI_==1
-		numb = random_[3] + 2;
+		numb = random_[3] - 1;
 		scene2v[numb].IndexTexture->bind();
 #endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[4]);
@@ -462,7 +462,7 @@ void Scene2::ShowBackGround(bool *GetFA,int *random_,int GetCredits, int GetWin,
 #if SDLAPI_==1 || WINAPI_==1
 		glBindTexture(GL_TEXTURE_2D, IndexTexture[random_[4]]);
 #elif QTAPI_==1
-		numb = random_[4] + 2;
+		numb = random_[4] - 1;
 		scene2v[numb].IndexTexture->bind();
 #endif
 		EnableTexture(NewTextureCoordinats[0], NewVertexCoordinats[5]);

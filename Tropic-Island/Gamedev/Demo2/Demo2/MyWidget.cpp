@@ -546,8 +546,11 @@ void MyWidget::paintGL() // рисование
 			
 			if (bonus || wait)
 			{
+				Sound_->Pause(0);
+				Sound_->Play(7);
 				if ((Logic_->GetWin() > 0 && F[5]))
 				{
+					F[5] = false;
 					bonus = false;
 					Logic_->firstline = false;
 					Logic_->secondline = false;
@@ -555,7 +558,7 @@ void MyWidget::paintGL() // рисование
 					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
-					F[5] = false;
+					Sound_->Pause(7);
 					SetShowHideButtons(false);
 				}
 				for (int i = 6; i < 10; i++)
@@ -565,18 +568,17 @@ void MyWidget::paintGL() // рисование
 						wait = true;
 						tmpcounter = 0;
 						number = i;
-						F[i] = false;
+						//F[i] = false;
 					}
 				}
 				glDisable(GL_DEPTH_TEST);
 				Scene2_->ShowBackGround(F, Logic_->GetRandom(), Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
 				glEnable(GL_DEPTH_TEST);
-				Sound_->Pause(0);
-				Sound_->Play(7);
 				if (wait)
 				{
-					if (tmpcounter > 30)
+					if (tmpcounter > 100)
 					{
+						F[number] = false;
 						wait = false;
 						for (int i = number; i < number + 1; i++)
 						{
@@ -592,6 +594,7 @@ void MyWidget::paintGL() // рисование
 									Logic_->SetWin(0);
 									Sound_->Play(8);
 									bonus = false;
+									Sound_->Pause(7);
 									Logic_->firstline = false;
 									Logic_->secondline = false;
 									Logic_->thirdline = false;
@@ -662,7 +665,7 @@ void MyWidget::paintGL() // рисование
 			loading = Scene1_->LoadBorder(++iter);
 		if (iter > 19)
 			iter = 20;
-		if(!F[0])
+		if(!F[0] && !bonus)
 			Sound_->Play(0);
 		
 		//glFlush();
