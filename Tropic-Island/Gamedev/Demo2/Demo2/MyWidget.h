@@ -56,6 +56,7 @@ private:
     GLuint shaderProgram;
     GLuint VAO;
     QOpenGLExtraFunctions* f;
+    bool enablesound;
 };
 
 

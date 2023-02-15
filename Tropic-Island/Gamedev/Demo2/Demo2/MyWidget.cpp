@@ -74,11 +74,8 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	m_button[8]->setGeometry(QRect(QPoint(410, 450), QSize(100, 50)));
 	m_button[9]->setGeometry(QRect(QPoint(530, 450), QSize(100, 50)));
     
-	m_button[5]->hide();
-	m_button[6]->hide();
-	m_button[7]->hide();
-	m_button[8]->hide();
-	m_button[9]->hide();
+
+
 
 	//connect(m_button, SIGNAL(released()), this, SLOT(handleButton()));
     QObject::connect(m_button[0], &QPushButton::clicked, [=]() {
@@ -152,7 +149,18 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 		F[9] = !F[9];
 		});
 
+	enablesound = false;
+	m_button[0]->hide();
+	m_button[1]->hide();
+	m_button[2]->hide();
+	m_button[3]->hide();
+	m_button[4]->hide();
 
+	m_button[5]->hide();
+	m_button[6]->hide();
+	m_button[7]->hide();
+	m_button[8]->hide();
+	m_button[9]->hide();
 }
 void MyWidget::SetShowHideButtons(bool set)
 {
@@ -513,20 +521,14 @@ void MyWidget::Show()
 }
 void MyWidget::paintGL() // рисование
 {
-		glClear(GL_COLOR_BUFFER_BIT /**/ | GL_DEPTH_BUFFER_BIT); // очистка экрана
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
 		//glEnable(GL_DEPTH_TEST);
-		//glEnable(GL_TEXTURE_2D);
 		//Show();
-		
-		//Scene1_->ShowWelcome(loading);
-
 #if WINAPI_==1
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
 		online = !WindowsWinApi_->keyboard__->offline;
 #endif
-
-	
 		if (!firsttime
 #if DBAPI_ == 1
 			&& Logic_->dbconn->userid != -1
@@ -536,14 +538,12 @@ void MyWidget::paintGL() // рисование
 			firsttime = true;
 			Logic_->SetCredits();//
 		}
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_TEXTURE_2D);
-
 		int countdrums = 5;
 		int counttextureondrums = 6;
 		if (!loading)
 		{
-			
+			SetShowHideButtons(bonus);
 			if (bonus || wait)
 			{
 				Sound_->Pause(0);
@@ -559,7 +559,6 @@ void MyWidget::paintGL() // рисование
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
 					Sound_->Pause(7);
-					SetShowHideButtons(false);
 				}
 				for (int i = 6; i < 10; i++)
 				{
@@ -568,7 +567,6 @@ void MyWidget::paintGL() // рисование
 						wait = true;
 						tmpcounter = 0;
 						number = i;
-						//F[i] = false;
 					}
 				}
 				glDisable(GL_DEPTH_TEST);
@@ -582,28 +580,25 @@ void MyWidget::paintGL() // рисование
 						wait = false;
 						for (int i = number; i < number + 1; i++)
 						{
+							if (((Logic_->GetRandom()[0] - 3) % 13) < ((Logic_->GetRandom()[i - 5] - 3) % 13))
 							{
-								if (((Logic_->GetRandom()[0] - 3) % 13) < ((Logic_->GetRandom()[i - 5] - 3) % 13))
-								{
-									Logic_->SetWin(Logic_->GetWin() * 2);
-									Sound_->Play(3);
-									Logic_->SetRandom();
-								}
-								else if (((Logic_->GetRandom()[0] - 3) % 13) > ((Logic_->GetRandom()[i - 5] - 3) % 13))
-								{
-									Logic_->SetWin(0);
-									Sound_->Play(8);
-									bonus = false;
-									Sound_->Pause(7);
-									Logic_->firstline = false;
-									Logic_->secondline = false;
-									Logic_->thirdline = false;
-									SetShowHideButtons(false);
-								}
-								else
-								{
-									Logic_->SetRandom();
-								}
+								Logic_->SetWin(Logic_->GetWin() * 2);
+								Sound_->Play(3);
+								Logic_->SetRandom();
+							}
+							else if (((Logic_->GetRandom()[0] - 3) % 13) > ((Logic_->GetRandom()[i - 5] - 3) % 13))
+							{
+								Logic_->SetWin(0);
+								Sound_->Play(8);
+								bonus = false;
+								Sound_->Pause(7);
+								Logic_->firstline = false;
+								Logic_->secondline = false;
+								Logic_->thirdline = false;
+							}
+							else
+							{
+								Logic_->SetRandom();
 							}
 						}
 					}
@@ -611,7 +606,6 @@ void MyWidget::paintGL() // рисование
 				tmpcounter++;
 			}
 			else
-
 			{
 				if (Scene1_->ShowDrum(countdrums, counttextureondrums,Logic_->GetDrum(),F,pressbutton,&upbutton))
 				{
@@ -667,6 +661,7 @@ void MyWidget::paintGL() // рисование
 			iter = 20;
 		if(!F[0] && !bonus)
 			Sound_->Play(0);
-		
+		if (!enablesound)
+			Sound_->StopAll();
 		//glFlush();
 }
