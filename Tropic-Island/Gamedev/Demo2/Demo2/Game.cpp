@@ -302,6 +302,8 @@ int Game::Execute(int argc, char*argv[])
 	Logic_->SetTotalBet(1);
 	Logic_->SetWin(0);
 	Logic_->SetCredits(1000,online);
+	Logic_->SetMinMax(0,6);
+	Logic_->SetWin(5, 10, 15, 20, 25);
 	Sound_ = new Sound();
 	Sound_->Init(argc, argv);
 	//std::cout << glGetString(GL_VERSION)<<std::endl;

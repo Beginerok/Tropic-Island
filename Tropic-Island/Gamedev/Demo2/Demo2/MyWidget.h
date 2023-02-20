@@ -16,6 +16,7 @@
 #endif
 
 #include <QtOpenGL/QOpenGLVersionProfile>
+#include <QtWidgets/QWidget>
 class MyWidget
     :  public QOpenGLWidget
 {
@@ -57,6 +58,17 @@ private:
     GLuint VAO;
     QOpenGLExtraFunctions* f;
     bool enablesound;
+
+    QWidget windowsettings;
+
+    QLabel* labelmin, * labelmax;
+    QLabel* labelwin1, *labelwin2,* labelwin3,* labelwin4, *labelwin5;
+    QLabel* labelcredits, * labeltotalbet;
+    QTextEdit textEditmin, textEditmax;
+    QTextEdit textEditwin1, textEditwin2, textEditwin3, textEditwin4, textEditwin5;
+    QTextEdit textEditcredits, textEdittotalbet;
+    QPushButton setbutton;
+    QCheckBox* checkbox;
 };
 
 

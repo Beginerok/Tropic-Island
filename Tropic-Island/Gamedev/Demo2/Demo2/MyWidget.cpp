@@ -161,6 +161,8 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	m_button[7]->hide();
 	m_button[8]->hide();
 	m_button[9]->hide();
+
+
 }
 void MyWidget::SetShowHideButtons(bool set)
 {
@@ -384,6 +386,123 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 	this->Scene2_ = Scene2__;
 	this->Logic_ = Logic__;
 	this->Sound_ = Sound__;
+	windowsettings.setWindowTitle("Settings");
+	windowsettings.show();
+	labelmin = new QLabel();
+	labelmin->setParent(&windowsettings);
+	labelmin->setText("min(range 0-6)");
+	labelmin->setGeometry(QRect(QPoint(10, 10), QSize(100, 50)));
+	labelmin->show();
+	labelmax = new QLabel();
+	labelmax->setParent(&windowsettings);
+	labelmax->setText("max(range 0-6)");
+	labelmax->setGeometry(QRect(QPoint(10, 70), QSize(100, 50)));
+	labelmax->show();
+	textEditmin.setParent(&windowsettings);
+	textEditmin.setText("0");
+	textEditmin.setGeometry(QRect(QPoint(120, 10), QSize(100, 50)));
+	textEditmax.setParent(&windowsettings);
+	textEditmax.setText("6");
+	textEditmax.setGeometry(QRect(QPoint(120, 70), QSize(100, 50)));
+	textEditmin.show();
+	textEditmax.show();
+	Logic_->SetMinMax(textEditmin.toPlainText().toInt(), textEditmax.toPlainText().toInt());
+	setbutton.setParent(&windowsettings);
+	setbutton.setText("Change");
+	setbutton.setGeometry(QRect(QPoint(10, 130), QSize(100, 50)));
+	setbutton.show();
+	
+
+	labelwin1 = new QLabel();
+	labelwin1->setParent(&windowsettings);
+	labelwin1->setText("WIN1");
+	labelwin1->setGeometry(QRect(QPoint(230, 10), QSize(100, 50)));
+	labelwin1->show();
+	textEditwin1.setParent(&windowsettings);
+	textEditwin1.setText("5");
+	textEditwin1.setGeometry(QRect(QPoint(350, 10), QSize(100, 50)));
+	textEditwin1.show();
+
+
+	labelwin2 = new QLabel();
+	labelwin2->setParent(&windowsettings);
+	labelwin2->setText("WIN2");
+	labelwin2->setGeometry(QRect(QPoint(230, 70), QSize(100, 50)));
+	labelwin2->show();
+	textEditwin2.setParent(&windowsettings);
+	textEditwin2.setText("10");
+	textEditwin2.setGeometry(QRect(QPoint(350, 70), QSize(100, 50)));
+	textEditwin2.show();
+
+
+	labelwin3 = new QLabel();
+	labelwin3->setParent(&windowsettings);
+	labelwin3->setText("WIN3");
+	labelwin3->setGeometry(QRect(QPoint(230, 130), QSize(100, 50)));
+	labelwin3->show();
+	textEditwin3.setParent(&windowsettings);
+	textEditwin3.setText("15");
+	textEditwin3.setGeometry(QRect(QPoint(350, 130), QSize(100, 50)));
+	textEditwin3.show();
+
+
+	labelwin4 = new QLabel();
+	labelwin4->setParent(&windowsettings);
+	labelwin4->setText("WIN4");
+	labelwin4->setGeometry(QRect(QPoint(230, 200), QSize(100, 50)));
+	labelwin4->show();
+	textEditwin4.setParent(&windowsettings);
+	textEditwin4.setText("20");
+	textEditwin4.setGeometry(QRect(QPoint(350, 200), QSize(100, 50)));
+	textEditwin4.show();
+
+
+	labelwin5 = new QLabel();
+	labelwin5->setParent(&windowsettings);
+	labelwin5->setText("WIN5");
+	labelwin5->setGeometry(QRect(QPoint(230, 270), QSize(100, 50)));
+	labelwin5->show();
+	textEditwin5.setParent(&windowsettings);
+	textEditwin5.setText("25");
+	textEditwin5.setGeometry(QRect(QPoint(350, 270), QSize(100, 50)));
+	textEditwin5.show();
+
+	labelcredits = new QLabel();
+	labelcredits->setParent(&windowsettings);
+	labelcredits->setText("credits");
+	labelcredits->setGeometry(QRect(QPoint(470, 10), QSize(100, 50)));
+	labelcredits->show();
+	textEditcredits.setParent(&windowsettings);
+	textEditcredits.setText("1000");
+	textEditcredits.setGeometry(QRect(QPoint(580, 10), QSize(100, 50)));
+	textEditcredits.show();
+
+	labeltotalbet = new QLabel();
+	labeltotalbet->setParent(&windowsettings);
+	labeltotalbet->setText("totalbet");
+	labeltotalbet->setGeometry(QRect(QPoint(470, 70), QSize(100, 50)));
+	labeltotalbet->show();
+	textEdittotalbet.setParent(&windowsettings);
+	textEdittotalbet.setText("1");
+	textEdittotalbet.setGeometry(QRect(QPoint(580, 70), QSize(100, 50)));
+	textEdittotalbet.show();
+
+	checkbox = new QCheckBox("Enable Sound", &windowsettings);
+	checkbox->setCheckState(Qt::Unchecked);
+	checkbox->setGeometry(QRect(QPoint(10, 300), QSize(100, 50)));
+	checkbox->show();
+	QObject::connect(&setbutton, &QPushButton::clicked, [=]() {
+		Logic_->SetMinMax(textEditmin.toPlainText().toInt(), textEditmax.toPlainText().toInt());
+		Logic_->SetWin(textEditwin1.toPlainText().toInt(), textEditwin2.toPlainText().toInt(), textEditwin3.toPlainText().toInt(), textEditwin4.toPlainText().toInt(), textEditwin5.toPlainText().toInt());
+		Logic_->SetCredits(textEditcredits.toPlainText().toInt(),false);
+		Logic_->SetTotalBet(textEdittotalbet.toPlainText().toInt());
+		if (checkbox->checkState()==Qt::Unchecked)
+			enablesound = false;
+		else
+			enablesound = true;
+		});
+
+
 }
 
 void MyWidget::Lister()

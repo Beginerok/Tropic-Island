@@ -14,15 +14,31 @@ Logic::Logic()
 	drum.push_back("auto5");
 	drum.push_back("bonus");
 	drum.push_back("wild");
+	SetMinMax(0, 6);
 	SetDrum();
 	random = new int[5];
+}
+
+void Logic::SetMinMax(int min, int max)
+{
+	MIN = min;
+	MAX = max;
+}
+
+void Logic::SetWin(int W1, int W2, int W3, int W4, int W5)
+{
+	WIN1 = W1;
+	WIN2 = W2;
+	WIN3 = W3;
+	WIN4 = W4;
+	WIN5 = W5;
 }
 void Logic::SetDrum(int line)
 {
 #if DBAPI_ == 1
 	dbconn->Query();
 #else
-	int max_ = 0, min_ = 0;//6
+	int max_ = MAX, min_ = MIN;//6
 	int num = -1;
 	for (int i = line; i < 30; i+=6)
 	{
@@ -41,7 +57,7 @@ void Logic::SetDrum()
 	dbconn->Query();
 #else
 	vectordrum.clear();
-	int max_ = 0, min_ = 0;//6
+	int max_ = MAX, min_ = MIN;//6
 	srand(time(NULL));
 	int num = -1;
 	for (int i = 0; i < 30; i++)
@@ -193,41 +209,41 @@ bool Logic::CheckWin()
 	if (firstline)
 	{
 		if (vectordrum[0] == "auto1")
-			Win += 5;
+			Win += WIN1;
 		if (vectordrum[0] == "auto2")
-			Win += 10;
+			Win += WIN2;
 		if (vectordrum[0] == "auto3")
-			Win += 15;
+			Win += WIN3;
 		if (vectordrum[0] == "auto4")
-			Win += 20;
+			Win += WIN4;
 		if (vectordrum[0] == "auto5")
-			Win += 25;
+			Win += WIN5;
 	}
 	if (secondline)
 	{
 		if (vectordrum[1] == "auto1")
-			Win += 5;
+			Win += WIN1;
 		if (vectordrum[1] == "auto2")
-			Win += 10;
+			Win += WIN2;
 		if (vectordrum[1] == "auto3")
-			Win += 15;
+			Win += WIN3;
 		if (vectordrum[1] == "auto4")
-			Win += 20;
+			Win += WIN4;
 		if (vectordrum[1] == "auto5")
-			Win += 25;
+			Win += WIN5;
 	}
 	if (thirdline)
 	{
 		if (vectordrum[2] == "auto1")
-			Win += 5;
+			Win += WIN1;
 		if (vectordrum[2] == "auto2")
-			Win += 10;
+			Win += WIN2;
 		if (vectordrum[2] == "auto3")
-			Win += 15;
+			Win += WIN3;
 		if (vectordrum[2] == "auto4")
-			Win += 20;
+			Win += WIN4;
 		if (vectordrum[2] == "auto5")
-			Win += 25;
+			Win += WIN5;
 	}
 #endif
 	if(firstline || secondline || thirdline)
