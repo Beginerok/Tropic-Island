@@ -187,6 +187,7 @@ bool Logic::CheckWin()
 			Win += 25;
 	}
 #else
+	/*
 	if (vectordrum[0] == vectordrum[6] &&
 		vectordrum[6] == vectordrum[12] &&
 		vectordrum[12] == vectordrum[18] &&
@@ -206,6 +207,56 @@ bool Logic::CheckWin()
 		vectordrum[20] == vectordrum[26]
 		)
 		thirdline = true;
+	*/
+	std::pair<std::vector<int>,bool> tmp;
+	std::vector<int> tmptmp;
+	for (int i = 0; i < 3; i++)
+		for (int j = 6; j < 9; j++)
+			for (int k = 12; k < 15; k++)
+				for (int s = 18; s < 21; s++)
+					for (int t = 24; t < 27; t++)
+					{
+						tmptmp.push_back(i);
+						tmptmp.push_back(j);
+						tmptmp.push_back(k);
+						tmptmp.push_back(s);
+						tmptmp.push_back(t);
+						tmp.second = false;
+						tmp.first=tmptmp;
+						lines.push_back(tmp);
+						tmptmp.clear();
+					}
+	
+	for(int i=0;i<lines.size();i++)
+		if (vectordrum[lines[i].first[0]] == vectordrum[lines[i].first[1]] && vectordrum[lines[i].first[1]] == vectordrum[lines[i].first[2]] &&
+			vectordrum[lines[i].first[2]] == vectordrum[lines[i].first[3]] && vectordrum[lines[i].first[3]] == vectordrum[lines[i].first[4]])
+		{
+			lines[i].second = true;
+			if (lines[i].second)
+			{
+				if (vectordrum[lines[i].first[0]] == "auto1")
+					Win += WIN1;
+				if (vectordrum[lines[i].first[0]] == "auto2")
+					Win += WIN2;
+				if (vectordrum[lines[i].first[0]] == "auto3")
+					Win += WIN3;
+				if (vectordrum[lines[i].first[0]] == "auto4")
+					Win += WIN4;
+				if (vectordrum[lines[i].first[0]] == "auto5")
+					Win += WIN5;
+				checkwin = true;
+			}
+
+		}
+	lines.clear();
+	if (checkwin)
+	{
+		return 1;
+	}
+	else
+		return 0;
+
+	/*
 	if (firstline)
 	{
 		if (vectordrum[0] == "auto1")
@@ -245,7 +296,9 @@ bool Logic::CheckWin()
 		if (vectordrum[2] == "auto5")
 			Win += WIN5;
 	}
+	*/
 #endif
+	/*
 	if(firstline || secondline || thirdline)
 	{
 		checkwin = true;
@@ -253,6 +306,7 @@ bool Logic::CheckWin()
 	}
 	else
 		return 0;
+	*/
 }
 Logic::~Logic()
 {

@@ -44,5 +44,6 @@ public:
 	int MIN, MAX,WIN1,WIN2,WIN3,WIN4,WIN5;
 	void SetMinMax(int min, int max);
 	void SetWin(int WIN1,int WIN2,int WIN3,int WIN4,int WIN5);
+	std::vector<std::pair<std::vector<int>,bool>> lines;
 };
 #endif
