@@ -46,7 +46,7 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	pressbutton = 0;
 	upbutton = 1;
     this->setWindowTitle(QString("sosok"));
-    resize(700, 500); // задаем размеры окна
+   // resize(1920, 1000); // задаем размеры окна
      // создаем кнопку
     //qw.setParent(&qw);
 	m_button.push_back(new QPushButton("Help", this));
@@ -87,9 +87,6 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 		F[1] = !F[1];
 		if (!bonus)
 		{
-			Logic_->firstline = false;
-			Logic_->secondline = false;
-			Logic_->thirdline = false;
 			Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 			Logic_->SetWin(0.0f);
 			Sound_->Play(4);
@@ -105,9 +102,6 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 			Sound_->Play(5);
 			if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
 			{
-				Logic_->firstline = false;
-				Logic_->secondline = false;
-				Logic_->thirdline = false;
 				Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
@@ -162,8 +156,6 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	m_button[7]->hide();
 	m_button[8]->hide();
 	m_button[9]->hide();
-
-
 }
 void MyWidget::SetShowHideButtons(bool set)
 {
@@ -364,9 +356,6 @@ bool MyWidget::eventFilter(QObject* watched, QEvent* event)
 				Sound_->Play(5);
 				if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
 				{
-					Logic_->firstline = false;
-					Logic_->secondline = false;
-					Logic_->thirdline = false;
 					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
@@ -502,8 +491,6 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 		else
 			enablesound = true;
 		});
-
-
 }
 
 void MyWidget::Lister()
@@ -672,9 +659,6 @@ void MyWidget::paintGL() // рисование
 				{
 					F[5] = false;
 					bonus = false;
-					Logic_->firstline = false;
-					Logic_->secondline = false;
-					Logic_->thirdline = false;
 					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
@@ -712,9 +696,6 @@ void MyWidget::paintGL() // рисование
 								Sound_->Play(8);
 								bonus = false;
 								Sound_->Pause(7);
-								Logic_->firstline = false;
-								Logic_->secondline = false;
-								Logic_->thirdline = false;
 							}
 							else
 							{

@@ -323,7 +323,8 @@ int Game::Execute(int argc, char*argv[])
 	SDL_Quit();
 #elif QTAPI_==1
 	mw.SetElements(Scene1_, Scene2_, Logic_, Sound_);
-	mw.show();
+	mw.show();	
+	mw.showFullScreen();
 	a.exec();
 #endif
 	return 0;

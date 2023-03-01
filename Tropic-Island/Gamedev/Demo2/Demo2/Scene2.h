@@ -1,8 +1,8 @@
 
 #ifndef Scene2_H
 #define Scene2_H
-#define QTAPI_ 0
-#define SDLAPI_ 1
+#define QTAPI_ 1
+#define SDLAPI_ 0
 #define WINAPI_ 0
 #ifdef _WIN32
 #include <Windows.h>
