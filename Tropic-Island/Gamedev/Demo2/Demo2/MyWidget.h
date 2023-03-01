@@ -1,12 +1,13 @@
 #pragma once
-#include <QtCore/qglobal.h>
-#include <QtGui/QtGui>
-#include <QtWidgets/QtWidgets>
-#include <QtWidgets/QPushButton>
 #include "Logic.h"
 #include "Scene1.h"
 #include "Scene2.h"
 #include "Sound.h"
+#if QTAPI_==1
+#include <QtCore/qglobal.h>
+#include <QtGui/QtGui>
+#include <QtWidgets/QtWidgets>
+#include <QtWidgets/QPushButton>
 #include <QtCore/QTimer>
 #ifdef Q_OS_LINUX
     #include<QtWidgets/qopenglwidget.h>//QtOpenGLWidgets
@@ -70,5 +71,5 @@ private:
     QPushButton setbutton;
     QCheckBox* checkbox;
 };
-
+#endif
 

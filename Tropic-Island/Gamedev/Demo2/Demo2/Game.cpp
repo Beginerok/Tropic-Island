@@ -52,14 +52,11 @@ void Game::draw_screen()
 #endif
 			{
 				Sound_->Play(5);
-				if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
+				if (Logic_->GetWin()>0.0)
 				{
-					Logic_->firstline = false;
-					Logic_->secondline = false;
-					Logic_->thirdline = false;
+					Sound_->Play(4);
 					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
-					Sound_->Play(4);
 				}
 				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
 				Logic_->checkwin = false;
@@ -68,24 +65,28 @@ void Game::draw_screen()
 #if WINAPI_==1
 			if (WindowsWinApi_->GetF()[1] && !bonus)
 #elif SDLAPI_==1
-			if (WindowsSDLApi_->GetF()[1] && !bonus)
+			if (WindowsSDLApi_->GetF()[1] && Logic_->GetWin() > 0.0 && !bonus)
 #endif
 			{
-				Logic_->firstline = false;
-				Logic_->secondline = false;
-				Logic_->thirdline = false;
 				Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 				Logic_->SetWin(0.0f);
 				Sound_->Play(4);
+				Logic_->checkwin = false;
+				showline = false;
 			}
 #if WINAPI_==1
-			if (Logic_->GetWin() > 0 && !bonus && WindowsWinApi_->GetF()[3])
+			if (Logic_->GetWin() > 0.0 && !bonus && WindowsWinApi_->GetF()[3])
 #elif SDLAPI_==1
-			if (Logic_->GetWin() > 0 && !bonus && WindowsSDLApi_->GetF()[3])
+			if (Logic_->GetWin() > 0.0 && !bonus && WindowsSDLApi_->GetF()[3])
 #endif
 			{
 				bonus = true;
 				Logic_->SetRandom();
+#if WINAPI_==1
+				WindowsWinApi_->GetF()[3] = false;
+#elif SDLAPI_==1
+				WindowsSDLApi_->GetF()[3] = false;
+#endif
 			}
 			if (bonus || wait)
 			{
@@ -95,10 +96,12 @@ void Game::draw_screen()
 				if ((Logic_->GetWin() > 0 && WindowsSDLApi_->GetF()[5]))
 #endif
 				{
+#if WINAPI_==1
+					WindowsWinApi_->GetF()[5] = false;
+#elif SDLAPI_==1
+					WindowsSDLApi_->GetF()[5] = false;
+#endif
 					bonus = false;
-					Logic_->firstline = false;
-					Logic_->secondline = false;
-					Logic_->thirdline = false;
 					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
 					Logic_->SetWin(0.0f);
 					Sound_->Play(4);
@@ -127,8 +130,13 @@ void Game::draw_screen()
 				Sound_->Play(7);
 				if (wait)
 				{
-					if (tmpcounter > 30)
+					if (tmpcounter > 100)
 					{
+#if WINAPI_==1
+						WindowsWinApi_->GetF()[number] = false;
+#elif SDLAPI_==1
+						WindowsSDLApi_->GetF()[number] = false;
+#endif
 						wait = false;
 						for (int i = number; i < number + 1; i++)
 						{
@@ -144,9 +152,6 @@ void Game::draw_screen()
 									Logic_->SetWin(0);
 									Sound_->Play(8);
 									bonus = false;
-									Logic_->firstline = false;
-									Logic_->secondline = false;
-									Logic_->thirdline = false;
 								}
 								else
 								{
@@ -269,10 +274,10 @@ int Game::Execute(int argc, char*argv[])
 #elif SDLAPI_==1
 	SDL_GLContext context;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Cars", 10, 10,700 ,500, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Cars", 10, 10,1920 ,1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_FULLSCREEN);
 	context = SDL_GL_CreateContext(window);
 	SDL_GL_SetSwapInterval(1);
-	setup_opengl(700, 500);
+	setup_opengl(1920, 1080);
 #elif QTAPI_==1
 	//QCoreApplication::addLibraryPath(".");
 	QApplication a(argc, argv);
@@ -302,7 +307,7 @@ int Game::Execute(int argc, char*argv[])
 	Logic_->SetTotalBet(1);
 	Logic_->SetWin(0);
 	Logic_->SetCredits(1000,online);
-	Logic_->SetMinMax(0,6);
+	Logic_->SetMinMax(0, 1);//6
 	Logic_->SetWin(5, 10, 15, 20, 25);
 	Sound_ = new Sound();
 	Sound_->Init(argc, argv);

@@ -1,4 +1,5 @@
 #include "MyWidget.h"
+#if QTAPI_==1
 /*
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -784,3 +785,4 @@ void MyWidget::paintGL() // рисование
 			Sound_->StopAll();
 		//glFlush();
 }
+#endif

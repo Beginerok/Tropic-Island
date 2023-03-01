@@ -11,6 +11,8 @@ WindowsSDLApi::WindowsSDLApi()
 
 	pressbutton = 0;
     upbutton = 1;
+	width = 1920;
+	height = 1080;
 }
 int WindowsSDLApi::getAny()
 {
@@ -50,9 +52,26 @@ void WindowsSDLApi::Update(bool bonus, Logic *Logic_,SDL_Event event_)
 bool WindowsSDLApi::IsMouseButtonDown(byte key,bool bonus,SDL_Event event_)
 {
     SDL_PollEvent(&event_);
+	switch (event_.type) 
+	{
+
+	case SDL_WINDOWEVENT:
+		if (event_.window.event == /*SDL_WINDOWEVENT_RESIZED | */ SDL_WINDOWEVENT_SIZE_CHANGED) {
+			std::cout << "MESSAGE:Resizing window" << std::endl;
+			width = event_.window.data1;
+			height = event_.window.data2;
+
+			glViewport(0, 0, width, height);
+		}
+		break;
+	}
+	if (event_.type == SDL_QUIT) {
+		done = true;
+	}
     if(event_.type == SDL_MOUSEBUTTONDOWN && !bonus)
 	{
 		GetButtonDownCoords(event_);
+		/*
 		if(point.y >478 && point.y<496)
 		{
 			if(point.x >123 && point.x<190)
@@ -71,6 +90,25 @@ bool WindowsSDLApi::IsMouseButtonDown(byte key,bool bonus,SDL_Event event_)
 			if(point.x >543 && point.x<608)
 				setF(true, 4);
 		}
+		*/
+		if (point.y >1040  && point.y < 1063)
+		{
+			if (point.x > 351 && point.x < 508)
+				setF(true, 0);
+			if (point.x > 630 && point.x < 800)
+				setF(true, 1);
+			if (point.x > 923 && point.x < 1091)
+			{
+				upbutton += 1;
+				setF(true, 2);
+				pressbutton += 1;
+				std::cout << "press button:" << pressbutton << std::endl;
+			}
+			if (point.x > 1215 && point.x < 1377)
+				setF(true, 3);
+			if (point.x > 1500 && point.x < 1663)
+				setF(true, 4);
+		}
 		event_.type = 0;
 		return true;
 	}
@@ -79,24 +117,44 @@ bool WindowsSDLApi::IsMouseButtonDown(byte key,bool bonus,SDL_Event event_)
 		{
 			GetButtonDownCoords(event_);
 			std::cout << point.x << " " << point.y<<std::endl;
-			if (point.y >478 && point.y<496)
+			/*
+			if (point.y >253 && point.y<448)
 			{
-				if (point.x >123 && point.x<190)
+				if (point.x >37 && point.x<137)
 					setF(true, 5);
-				if (point.x >228 && point.x<296)
+				if (point.x >166 && point.x<270)
 					setF(true, 6);
-				if (point.x > 330 && point.x < 401)
+				if (point.x > 296 && point.x < 401)
 				{
                     upbutton+=1;
 					setF(true, 7);
 					pressbutton += 1;
 					std::cout << "press button:" << pressbutton << std::endl;
 				}
-				if (point.x > 436 && point.x < 506)
+				if (point.x > 430 && point.x < 532)
 					setF(true, 8);
-				if (point.x >543 && point.x<608)
+				if (point.x >560 && point.x<663)
 					setF(true, 9);
 			}
+			*/
+				if (point.y > 542 && point.y < 970)
+				{
+					if (point.x > 95 && point.x < 383)
+						setF(true, 5);
+					if (point.x > 453 && point.x < 742)
+						setF(true, 6);
+					if (point.x > 813 && point.x < 1103)
+					{
+						upbutton += 1;
+						setF(true, 7);
+						pressbutton += 1;
+						std::cout << "press button:" << pressbutton << std::endl;
+					}
+					if (point.x > 1172 && point.x < 1465)
+						setF(true, 8);
+					if (point.x > 1534 && point.x < 1823)
+						setF(true, 9);
+				}
 			event_.type = 0;
 			return true;
 		}
@@ -176,7 +234,7 @@ bool WindowsSDLApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_,SDL_Even
 				{
 					if (getF(8))
 					{
-						SetBet_(GetBet_() + 1);
+						//SetBet_(GetBet_() + 1);
 						setF(false, 8);
 					}
 				}
@@ -185,7 +243,7 @@ bool WindowsSDLApi::IsMouseButtonUp(byte key, bool bonus, Logic *Logic_,SDL_Even
 					if (getF(9))
 					{
 						setF(false, 9);
-						setdone(true);
+						//setdone(true);
 					}
 				}
 			}

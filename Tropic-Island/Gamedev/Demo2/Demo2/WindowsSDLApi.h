@@ -3,6 +3,7 @@
 #ifndef __unix__
 	#include <Windows.h>
 #endif
+#include <GL/gl.h>
 #include <SDL2/SDL.h>
 #include "Logic.h"
 #ifdef __unix__
@@ -51,5 +52,7 @@ protected:
     int CountButtons;
     int bet;
     POINT point;
+public:
+    int width, height;
 };
 #endif
