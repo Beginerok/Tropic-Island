@@ -38,12 +38,13 @@ public:
 #else
 	std::vector<std::string> vectordrum, drum;
 #endif
-	bool firstline, secondline, thirdline;
+	//bool firstline, secondline, thirdline;
 	bool checkwin;
 	int* random;
-	int MIN, MAX,WIN1,WIN2,WIN3,WIN4,WIN5;
+	int MIN, MAX,WIN1,WIN2,WIN3,WIN4,WIN5,BONUS,WILD;
 	void SetMinMax(int min, int max);
-	void SetWin(int WIN1,int WIN2,int WIN3,int WIN4,int WIN5);
+	void SetWin(int WIN1,int WIN2,int WIN3,int WIN4,int WIN5, int B, int W);
 	std::vector<std::pair<std::vector<int>,bool>> lines;
+	bool bonus;
 };
 #endif

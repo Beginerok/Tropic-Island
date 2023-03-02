@@ -5,7 +5,7 @@ Logic::Logic()
 #if DBAPI_ == 1
 	dbconn = new DataBaseConnection();
 #endif
-	thirdline = secondline = firstline = false;
+	//thirdline = secondline = firstline = false;
 	checkwin = false;
 	drum.push_back("auto1");
 	drum.push_back("auto2");
@@ -17,6 +17,7 @@ Logic::Logic()
 	SetMinMax(0, 6);
 	SetDrum();
 	random = new int[5];
+	bonus = false;
 }
 
 void Logic::SetMinMax(int min, int max)
@@ -25,13 +26,15 @@ void Logic::SetMinMax(int min, int max)
 	MAX = max;
 }
 
-void Logic::SetWin(int W1, int W2, int W3, int W4, int W5)
+void Logic::SetWin(int W1, int W2, int W3, int W4, int W5,int B,int W)
 {
 	WIN1 = W1;
 	WIN2 = W2;
 	WIN3 = W3;
 	WIN4 = W4;
 	WIN5 = W5;
+	BONUS = B;
+	WILD = W;
 }
 void Logic::SetDrum(int line)
 {
@@ -244,10 +247,17 @@ bool Logic::CheckWin()
 					Win += WIN4;
 				if (vectordrum[lines[i].first[0]] == "auto5")
 					Win += WIN5;
+				if (vectordrum[lines[i].first[0]] == "wild")
+					Win += WILD;
+				if (vectordrum[lines[i].first[0]] == "bonus")
+					bonus = true;
 				checkwin = true;
 			}
 
 		}
+	if(bonus)
+		Win *= BONUS;
+	bonus = false;
 	lines.clear();
 	if (checkwin)
 	{

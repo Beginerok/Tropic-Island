@@ -94,21 +94,24 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
         });
 
     QObject::connect(m_button[2], &QPushButton::clicked, [=]() {
-		F[2] = !F[2];
-		pressbutton += 1;
-		upbutton += 1;
-		if (!bonus)
+		if (Logic_->GetCredits() - Logic_->GetTotalBet() >= Logic_->GetTotalBet())
 		{
-			Sound_->Play(5);
-			if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
+			F[2] = !F[2];
+			pressbutton += 1;
+			upbutton += 1;
+			if (!bonus)
 			{
-				Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
-				Logic_->SetWin(0.0f);
-				Sound_->Play(4);
+				Sound_->Play(5);
+				if (Logic_->checkwin)
+				{
+					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
+					Logic_->SetWin(0.0f);
+					Sound_->Play(4);
+				}
+				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
+				Logic_->checkwin = false;
+				showline = false;
 			}
-			Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
-			Logic_->checkwin = false;
-			showline = false;
 		}
         });
 	m_button[2]->installEventFilter(this);
@@ -335,37 +338,45 @@ bool MyWidget::eventFilter(QObject* watched, QEvent* event)
 {
 	if (watched == m_button[2])
 	{
-		if (event->type() == QEvent::MouseButtonRelease)
-		{
-			F[2] = false;
-			/*Mouse release button event */
-			qDebug() << tr("Monitor button event, mouse release button event");
-			pressbutton = 1;
-			upbutton = 0;
-			return true;
-		}
-		else if (event->type() == QEvent::MouseButtonPress)
-		{
-			/*Mouse down button event */
-			qDebug() << tr("Monitor button event, button press event");
-			F[2] = true;
-			pressbutton += 1;
-			upbutton += 1;
-			if (!bonus)
+		
+			if (event->type() == QEvent::MouseButtonRelease)
 			{
-				Sound_->Play(5);
-				if (Logic_->firstline || Logic_->secondline || Logic_->thirdline)
+				if (Logic_->GetCredits() - Logic_->GetTotalBet() >= 0)
 				{
-					Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
-					Logic_->SetWin(0.0f);
-					Sound_->Play(4);
+					if (!bonus)
+						Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
+					F[2] = false;
+					/*Mouse release button event */
+					qDebug() << tr("Monitor button event, mouse release button event");
+					pressbutton = 1;
+					upbutton = 0;
+					return true;
 				}
-				Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
-				Logic_->checkwin = false;
-				showline = false;
 			}
-			return true;
-		}
+			else if (event->type() == QEvent::MouseButtonPress)
+			{
+				if (Logic_->GetCredits() - Logic_->GetTotalBet() >= 0)
+				{
+					/*Mouse down button event */
+					qDebug() << tr("Monitor button event, button press event");
+					F[2] = true;
+					pressbutton += 1;
+					upbutton += 1;
+					if (!bonus)
+					{
+						Sound_->Play(5);
+						if (Logic_->checkwin)
+						{
+							Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
+							Logic_->SetWin(0.0f);
+							Sound_->Play(4);
+						}
+						Logic_->checkwin = false;
+						showline = false;
+					}
+				}
+				return true;
+			}
 	}
 	return false;
 }
@@ -457,6 +468,26 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 	textEditwin5.setGeometry(QRect(QPoint(350, 270), QSize(100, 50)));
 	textEditwin5.show();
 
+	labelwild = new QLabel();
+	labelwild->setParent(&windowsettings);
+	labelwild->setText("WILD");
+	labelwild->setGeometry(QRect(QPoint(230, 340), QSize(100, 50)));
+	labelwild->show();
+	textEditwild.setParent(&windowsettings);
+	textEditwild.setText("50");
+	textEditwild.setGeometry(QRect(QPoint(350, 340), QSize(100, 50)));
+	textEditwild.show();
+
+	labelbonus = new QLabel();
+	labelbonus->setParent(&windowsettings);
+	labelbonus->setText("BONUS");
+	labelbonus->setGeometry(QRect(QPoint(230, 410), QSize(100, 50)));
+	labelbonus->show();
+	textEditbonus.setParent(&windowsettings);
+	textEditbonus.setText("10");
+	textEditbonus.setGeometry(QRect(QPoint(350, 410), QSize(100, 50)));
+	textEditbonus.show();
+
 	labelcredits = new QLabel();
 	labelcredits->setParent(&windowsettings);
 	labelcredits->setText("credits");
@@ -483,7 +514,7 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 	checkbox->show();
 	QObject::connect(&setbutton, &QPushButton::clicked, [=]() {
 		Logic_->SetMinMax(textEditmin.toPlainText().toInt(), textEditmax.toPlainText().toInt());
-		Logic_->SetWin(textEditwin1.toPlainText().toInt(), textEditwin2.toPlainText().toInt(), textEditwin3.toPlainText().toInt(), textEditwin4.toPlainText().toInt(), textEditwin5.toPlainText().toInt());
+		Logic_->SetWin(textEditwin1.toPlainText().toInt(), textEditwin2.toPlainText().toInt(), textEditwin3.toPlainText().toInt(), textEditwin4.toPlainText().toInt(), textEditwin5.toPlainText().toInt(), textEditwild.toPlainText().toInt(), textEditbonus.toPlainText().toInt());
 		Logic_->SetCredits(textEditcredits.toPlainText().toInt(),false);
 		Logic_->SetTotalBet(textEdittotalbet.toPlainText().toInt());
 		if (checkbox->checkState()==Qt::Unchecked)
@@ -727,7 +758,7 @@ void MyWidget::paintGL() // рисование
 					if (Logic_->CheckWin())
 						Sound_->Play(3);
 					glDisable(GL_DEPTH_TEST);
-					Scene1_->ShowLine(Logic_->firstline, Logic_->secondline, Logic_->thirdline);
+					//Scene1_->ShowLine(Logic_->firstline, Logic_->secondline, Logic_->thirdline);
 					glEnable(GL_DEPTH_TEST);
 				}
 			}

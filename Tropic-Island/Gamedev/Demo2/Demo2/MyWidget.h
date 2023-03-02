@@ -63,10 +63,10 @@ private:
     QWidget windowsettings;
 
     QLabel* labelmin, * labelmax;
-    QLabel* labelwin1, *labelwin2,* labelwin3,* labelwin4, *labelwin5;
+    QLabel* labelwin1, *labelwin2,* labelwin3, * labelwin4, * labelwin5, * labelwild, * labelbonus;
     QLabel* labelcredits, * labeltotalbet;
     QTextEdit textEditmin, textEditmax;
-    QTextEdit textEditwin1, textEditwin2, textEditwin3, textEditwin4, textEditwin5;
+    QTextEdit textEditwin1, textEditwin2, textEditwin3, textEditwin4, textEditwin5, textEditwild, textEditbonus;
     QTextEdit textEditcredits, textEdittotalbet;
     QPushButton setbutton;
     QCheckBox* checkbox;
