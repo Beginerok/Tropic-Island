@@ -387,31 +387,119 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 	this->Scene2_ = Scene2__;
 	this->Logic_ = Logic__;
 	this->Sound_ = Sound__;
+
 	windowsettings.setWindowTitle("Settings");
 	windowsettings.show();
+	QPixmap pix1("content\\drum\\auto1.png");
+	labelpic1.setParent(&windowsettings);
+	pix1 = pix1.scaled(50, 50, Qt::KeepAspectRatio);
+	labelpic1.setPixmap(pix1);
+	labelpic1.setGeometry(QRect(QPoint(10, 10), QSize(50, 50)));
+	labelpic1.show();
+	checkbox1 = new QCheckBox("auto1", &windowsettings);
+	checkbox1->setCheckState(Qt::Checked);
+	checkbox1->setGeometry(QRect(QPoint(65, 10), QSize(50, 30)));
+	checkbox1->show();
+
+	QPixmap pix2("content\\drum\\auto2.png");
+	labelpic2.setParent(&windowsettings);
+	pix2 = pix2.scaled(50, 50, Qt::KeepAspectRatio);
+	labelpic2.setPixmap(pix2);
+	labelpic2.setGeometry(QRect(QPoint(10, 40), QSize(50, 50)));
+	labelpic2.show();
+	checkbox2 = new QCheckBox("auto2", &windowsettings);
+	checkbox2->setCheckState(Qt::Checked);
+	checkbox2->setGeometry(QRect(QPoint(65, 40), QSize(50, 30)));
+	checkbox2->show();
+
+	QPixmap pix3("content\\drum\\auto3.png");
+	labelpic3.setParent(&windowsettings);
+	pix3 = pix3.scaled(50, 50, Qt::KeepAspectRatio);
+	labelpic3.setPixmap(pix3);
+	labelpic3.setGeometry(QRect(QPoint(10, 70), QSize(50, 50)));
+	labelpic3.show();
+	checkbox3 = new QCheckBox("auto3", &windowsettings);
+	checkbox3->setCheckState(Qt::Checked);
+	checkbox3->setGeometry(QRect(QPoint(65, 70), QSize(50, 30)));
+	checkbox3->show();
+
+	QPixmap pix4("content\\drum\\auto4.png");
+	labelpic4.setParent(&windowsettings);
+	pix4 = pix4.scaled(50, 50, Qt::KeepAspectRatio);
+	labelpic4.setPixmap(pix4);
+	labelpic4.setGeometry(QRect(QPoint(10, 100), QSize(50, 50)));
+	labelpic4.show();
+	checkbox4 = new QCheckBox("auto4", &windowsettings);
+	checkbox4->setCheckState(Qt::Checked);
+	checkbox4->setGeometry(QRect(QPoint(65, 100), QSize(50, 30)));
+	checkbox4->show();
+
+	QPixmap pix5("content\\drum\\auto5.png");
+	labelpic5.setParent(&windowsettings);
+	pix5 = pix5.scaled(50, 50, Qt::KeepAspectRatio);
+	labelpic5.setPixmap(pix5);
+	labelpic5.setGeometry(QRect(QPoint(10, 130), QSize(50, 50)));
+	labelpic5.show();
+	checkbox5 = new QCheckBox("auto5", &windowsettings);
+	checkbox5->setCheckState(Qt::Checked);
+	checkbox5->setGeometry(QRect(QPoint(65, 130), QSize(50, 30)));
+	checkbox5->show();
+
+	QPixmap pixwild("content\\drum\\wild.png");
+	labelpicwild.setParent(&windowsettings);
+	pixwild = pixwild.scaled(50, 50, Qt::KeepAspectRatio);
+	labelpicwild.setPixmap(pixwild);
+	labelpicwild.setGeometry(QRect(QPoint(10, 160), QSize(50, 50)));
+	labelpicwild.show();
+	checkboxwild = new QCheckBox("wild", &windowsettings);
+	checkboxwild->setCheckState(Qt::Checked);
+	checkboxwild->setGeometry(QRect(QPoint(65, 160), QSize(50, 30)));
+	checkboxwild->show();
+
+	QPixmap pixbonus("content\\drum\\bonus.png");
+	labelpicbonus.setParent(&windowsettings);
+	pixbonus = pixbonus.scaled(50, 50, Qt::KeepAspectRatio);
+	labelpicbonus.setPixmap(pixbonus);
+	labelpicbonus.setGeometry(QRect(QPoint(10, 190), QSize(50, 50)));
+	labelpicbonus.show();
+	checkboxbonus = new QCheckBox("bonus", &windowsettings);
+	checkboxbonus->setCheckState(Qt::Checked);
+	checkboxbonus->setGeometry(QRect(QPoint(65, 190), QSize(50, 30)));
+	checkboxbonus->show();
+
 	labelmin = new QLabel();
 	labelmin->setParent(&windowsettings);
 	labelmin->setText("min(range 0-6)");
-	labelmin->setGeometry(QRect(QPoint(10, 10), QSize(100, 50)));
+	labelmin->setGeometry(QRect(QPoint(120, 10), QSize(80, 50)));
 	labelmin->show();
+
 	labelmax = new QLabel();
 	labelmax->setParent(&windowsettings);
 	labelmax->setText("max(range 0-6)");
-	labelmax->setGeometry(QRect(QPoint(10, 70), QSize(100, 50)));
+	labelmax->setGeometry(QRect(QPoint(120, 70), QSize(80, 50)));
 	labelmax->show();
+
 	textEditmin.setParent(&windowsettings);
 	textEditmin.setText("0");
-	textEditmin.setGeometry(QRect(QPoint(120, 10), QSize(100, 50)));
+	textEditmin.setGeometry(QRect(QPoint(200, 10), QSize(30, 30)));
+	textEditmin.show();
+
 	textEditmax.setParent(&windowsettings);
 	textEditmax.setText("6");
-	textEditmax.setGeometry(QRect(QPoint(120, 70), QSize(100, 50)));
-	textEditmin.show();
+	textEditmax.setGeometry(QRect(QPoint(200, 70), QSize(30, 30)));
 	textEditmax.show();
 	Logic_->SetMinMax(textEditmin.toPlainText().toInt(), textEditmax.toPlainText().toInt());
+	
+	checkbox = new QCheckBox("Enable Sound", &windowsettings);
+	checkbox->setCheckState(Qt::Unchecked);
+	checkbox->setGeometry(QRect(QPoint(10, 250), QSize(100, 50)));
+	checkbox->show();
+
 	setbutton.setParent(&windowsettings);
 	setbutton.setText("Change");
-	setbutton.setGeometry(QRect(QPoint(10, 130), QSize(100, 50)));
+	setbutton.setGeometry(QRect(QPoint(10, 300), QSize(100, 50)));
 	setbutton.show();
+
 	
 
 	labelwin1 = new QLabel();
@@ -421,9 +509,10 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 	labelwin1->show();
 	textEditwin1.setParent(&windowsettings);
 	textEditwin1.setText("5");
-	textEditwin1.setGeometry(QRect(QPoint(350, 10), QSize(100, 50)));
+	textEditwin1.setGeometry(QRect(QPoint(350, 10), QSize(100, 20)));
 	textEditwin1.show();
 
+	
 
 	labelwin2 = new QLabel();
 	labelwin2->setParent(&windowsettings);
@@ -508,10 +597,7 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 	textEdittotalbet.setGeometry(QRect(QPoint(580, 70), QSize(100, 50)));
 	textEdittotalbet.show();
 
-	checkbox = new QCheckBox("Enable Sound", &windowsettings);
-	checkbox->setCheckState(Qt::Unchecked);
-	checkbox->setGeometry(QRect(QPoint(10, 300), QSize(100, 50)));
-	checkbox->show();
+	
 	QObject::connect(&setbutton, &QPushButton::clicked, [=]() {
 		Logic_->SetMinMax(textEditmin.toPlainText().toInt(), textEditmax.toPlainText().toInt());
 		Logic_->SetWin(textEditwin1.toPlainText().toInt(), textEditwin2.toPlainText().toInt(), textEditwin3.toPlainText().toInt(), textEditwin4.toPlainText().toInt(), textEditwin5.toPlainText().toInt(), textEditwild.toPlainText().toInt(), textEditbonus.toPlainText().toInt());
@@ -521,6 +607,23 @@ void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, S
 			enablesound = false;
 		else
 			enablesound = true;
+		std::vector<std::string> vecdrum;
+		vecdrum.clear();
+		if (checkbox1->checkState() == Qt::Checked)
+			vecdrum.push_back("auto1");
+		if (checkbox2->checkState() == Qt::Checked)
+			vecdrum.push_back("auto2");
+		if (checkbox3->checkState() == Qt::Checked)
+			vecdrum.push_back("auto3");
+		if (checkbox4->checkState() == Qt::Checked)
+			vecdrum.push_back("auto4");
+		if (checkbox5->checkState() == Qt::Checked)
+			vecdrum.push_back("auto5");
+		if (checkboxwild->checkState() == Qt::Checked)
+			vecdrum.push_back("wild");
+		if (checkboxbonus->checkState() == Qt::Checked)
+			vecdrum.push_back("bonus");
+		Logic_->SetDrum(vecdrum);
 		});
 }
 
@@ -657,6 +760,26 @@ void MyWidget::Show()
 	glEnd();
 	*/
 }
+
+void MyWidget::SetDisableBonusButton()
+{
+
+	m_button[5]->setEnabled(false);
+	m_button[6]->setEnabled(false);
+	m_button[7]->setEnabled(false);
+	m_button[8]->setEnabled(false);
+	m_button[9]->setEnabled(false);
+}
+
+void MyWidget::SetEnableBonusButton() 
+{
+
+	m_button[5]->setEnabled(true);
+	m_button[6]->setEnabled(true);
+	m_button[7]->setEnabled(true);
+	m_button[8]->setEnabled(true);
+	m_button[9]->setEnabled(true);
+}
 void MyWidget::paintGL() // рисование
 {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
@@ -702,6 +825,8 @@ void MyWidget::paintGL() // рисование
 						wait = true;
 						tmpcounter = 0;
 						number = i;
+						SetDisableBonusButton();
+						break;
 					}
 				}
 				glDisable(GL_DEPTH_TEST);
@@ -733,6 +858,7 @@ void MyWidget::paintGL() // рисование
 								Logic_->SetRandom();
 							}
 						}
+						SetEnableBonusButton();
 					}
 				}
 				tmpcounter++;

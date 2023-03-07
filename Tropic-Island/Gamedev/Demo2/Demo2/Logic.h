@@ -46,5 +46,6 @@ public:
 	void SetWin(int WIN1,int WIN2,int WIN3,int WIN4,int WIN5, int B, int W);
 	std::vector<std::pair<std::vector<int>,bool>> lines;
 	bool bonus;
+	void SetDrum(std::vector<std::string> vecd);
 };
 #endif

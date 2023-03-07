@@ -20,6 +20,12 @@ Logic::Logic()
 	bonus = false;
 }
 
+void Logic::SetDrum(std::vector<std::string> vecd)
+{
+	drum.clear();
+	for (int i = 0; i < vecd.size(); i++)
+		drum.push_back(vecd[i]);
+}
 void Logic::SetMinMax(int min, int max)
 {
 	MIN = min;
@@ -41,7 +47,7 @@ void Logic::SetDrum(int line)
 #if DBAPI_ == 1
 	dbconn->Query();
 #else
-	int max_ = MAX, min_ = MIN;//6
+	int max_ = drum.size()-1, min_ = 0;//6
 	int num = -1;
 	for (int i = line; i < 30; i+=6)
 	{
@@ -60,7 +66,7 @@ void Logic::SetDrum()
 	dbconn->Query();
 #else
 	vectordrum.clear();
-	int max_ = MAX, min_ = MIN;//6
+	int max_ = drum.size() - 1 , min_ = 0;//6
 	srand(time(NULL));
 	int num = -1;
 	for (int i = 0; i < 30; i++)

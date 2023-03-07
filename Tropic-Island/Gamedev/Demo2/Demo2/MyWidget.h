@@ -63,13 +63,16 @@ private:
     QWidget windowsettings;
 
     QLabel* labelmin, * labelmax;
-    QLabel* labelwin1, *labelwin2,* labelwin3, * labelwin4, * labelwin5, * labelwild, * labelbonus;
+    QLabel* labelwin1, *labelwin2,* labelwin3, * labelwin4, * labelwin5, * labelwild, * labelbonus, labelpic1, labelpic2, labelpic3, labelpic4, labelpic5, labelpicwild, labelpicbonus;
     QLabel* labelcredits, * labeltotalbet;
     QTextEdit textEditmin, textEditmax;
     QTextEdit textEditwin1, textEditwin2, textEditwin3, textEditwin4, textEditwin5, textEditwild, textEditbonus;
     QTextEdit textEditcredits, textEdittotalbet;
     QPushButton setbutton;
     QCheckBox* checkbox;
+    QCheckBox* checkbox1, *checkbox2,* checkbox3, *checkbox4, *checkbox5, *checkboxwild, *checkboxbonus;
+    void SetDisableBonusButton();
+    void SetEnableBonusButton();
 };
 #endif
 
