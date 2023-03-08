@@ -160,6 +160,52 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	m_button[8]->hide();
 	m_button[9]->hide();
 }
+bool MyWidget::eventFilter(QObject* watched, QEvent* event)
+{
+	if (watched == m_button[2])
+	{
+
+		if (event->type() == QEvent::MouseButtonRelease)
+		{
+			if (Logic_->GetCredits() - Logic_->GetTotalBet() >= 0)
+			{
+				if (!bonus)
+					Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
+				F[2] = false;
+				/*Mouse release button event */
+				qDebug() << tr("Monitor button event, mouse release button event");
+				pressbutton = 1;
+				upbutton = 0;
+				return true;
+			}
+		}
+		else if (event->type() == QEvent::MouseButtonPress)
+		{
+			if (Logic_->GetCredits() - Logic_->GetTotalBet() >= 0)
+			{
+				/*Mouse down button event */
+				qDebug() << tr("Monitor button event, button press event");
+				F[2] = true;
+				pressbutton += 1;
+				upbutton += 1;
+				if (!bonus)
+				{
+					Sound_->Play(5);
+					if (Logic_->checkwin)
+					{
+						Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
+						Logic_->SetWin(0.0f);
+						Sound_->Play(4);
+					}
+					Logic_->checkwin = false;
+					showline = false;
+				}
+			}
+			return true;
+		}
+	}
+	return false;
+}
 void MyWidget::SetShowHideButtons(bool set)
 {
 	if (set)
@@ -334,52 +380,7 @@ void MyWidget::resizeGL(int nWidth, int nHeight)
 	m_button[8]->setGeometry(QRect(QPoint(0 + nWidth / 5 * 3, nHeight - 50), QSize(nWidth / 5, 50)));
 	m_button[9]->setGeometry(QRect(QPoint(0 + nWidth / 5 * 4, nHeight - 50), QSize(nWidth / 5, 50)));
 }
-bool MyWidget::eventFilter(QObject* watched, QEvent* event)
-{
-	if (watched == m_button[2])
-	{
-		
-			if (event->type() == QEvent::MouseButtonRelease)
-			{
-				if (Logic_->GetCredits() - Logic_->GetTotalBet() >= 0)
-				{
-					if (!bonus)
-						Logic_->SetCredits(Logic_->GetCredits() - Logic_->GetTotalBet(), online);
-					F[2] = false;
-					/*Mouse release button event */
-					qDebug() << tr("Monitor button event, mouse release button event");
-					pressbutton = 1;
-					upbutton = 0;
-					return true;
-				}
-			}
-			else if (event->type() == QEvent::MouseButtonPress)
-			{
-				if (Logic_->GetCredits() - Logic_->GetTotalBet() >= 0)
-				{
-					/*Mouse down button event */
-					qDebug() << tr("Monitor button event, button press event");
-					F[2] = true;
-					pressbutton += 1;
-					upbutton += 1;
-					if (!bonus)
-					{
-						Sound_->Play(5);
-						if (Logic_->checkwin)
-						{
-							Logic_->SetCredits(Logic_->GetCredits() + Logic_->GetWin(), online);
-							Logic_->SetWin(0.0f);
-							Sound_->Play(4);
-						}
-						Logic_->checkwin = false;
-						showline = false;
-					}
-				}
-				return true;
-			}
-	}
-	return false;
-}
+
 void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, Sound* Sound__)
 {
 	//QOpenGLFunctions* f = QOpenGLContext::currentContext()->functions();
@@ -780,6 +781,27 @@ void MyWidget::SetEnableBonusButton()
 	m_button[8]->setEnabled(true);
 	m_button[9]->setEnabled(true);
 }
+void MyWidget::SetDisableButton()
+{
+
+	m_button[0]->setEnabled(false);
+	m_button[1]->setEnabled(false);
+	m_button[2]->setEnabled(false);
+	m_button[3]->setEnabled(false);
+	m_button[4]->setEnabled(false);
+	m_button[2]->removeEventFilter(this);
+}
+
+void MyWidget::SetEnableButton()
+{
+
+	m_button[0]->setEnabled(true);
+	m_button[1]->setEnabled(true);
+	m_button[2]->setEnabled(true);
+	m_button[3]->setEnabled(true);
+	m_button[4]->setEnabled(true);
+	m_button[2]->installEventFilter(this);
+}
 void MyWidget::paintGL() // рисование
 {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
@@ -869,12 +891,16 @@ void MyWidget::paintGL() // рисование
 				{
 					Sound_->Play(6);
 					showline = true;
+					SetEnableButton();
 				}
 				else
 				{
 					for (int i = 0; i < Scene1_->CountDrum; i++)
 						if (Scene1_->changedrum[i])
 							Logic_->SetDrum(i);
+
+					if ((Scene1_->rotate[0] < 1800.0f) && (Scene1_->rotate[0] >0.0f)&& (Scene1_->rotate[0] != 360.0f))
+						SetDisableButton();
 				}
 				Scene1_->ShowButtons();
 				Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());

@@ -73,6 +73,8 @@ private:
     QCheckBox* checkbox1, *checkbox2,* checkbox3, *checkbox4, *checkbox5, *checkboxwild, *checkboxbonus;
     void SetDisableBonusButton();
     void SetEnableBonusButton();
+    void SetDisableButton();
+    void SetEnableButton();
 };
 #endif
 
