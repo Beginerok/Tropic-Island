@@ -1,16 +1,42 @@
 #include "MyWidget.h"
 #if QTAPI_==1
-/*
+
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
 
+const GLchar* vertexShaderSource = "#version 330 core\n"
+"layout(location = 0) in vec3 position;\n"
+"layout(location = 1) in vec4 color;\n"
+"layout(location = 2) in vec2 texCoord;\n"
+"out vec4 ourColor;\n"
+"out vec2 TexCoord;\n"
+"uniform mat4 transform;\n"
+"void main()\n"
+"{\n"
+"gl_Position = transform*vec4(position, 1.0f);\n"
+"ourColor = color;\n"
+
+"TexCoord = texCoord;\n"
+"}\0";
+const GLchar* fragmentShaderSource = "#version 330 core\n"
+"in vec4 ourColor;\n"
+"in vec2 TexCoord;\n"
+"out vec4 color;\n"
+"uniform sampler2D ourTexture;\n"
+"void main()\n"
+"{\n"
+"color = texture(ourTexture, TexCoord);\n"
+"}\0";
 // Shaders
+/*
 const GLchar* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
 "void main()\n"
 "{\n"
 "gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
 "}\0";
+*/
+/*
 const GLchar* fragmentShaderSource = "#version 330 core\n"
 "out vec4 color;\n"
 "void main()\n"
@@ -28,6 +54,7 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 #pragma comment(lib,"OpenGL32.lib")
 MyWidget::MyWidget(QWidget* parent) // конструктор
 {
+
 	timer = new QTimer;
 	connect(timer, &QTimer::timeout,this, &MyWidget::change);
 	timer->start(10);
@@ -242,37 +269,14 @@ void MyWidget::change()
 	//rotate+=1;
 	update();
 }
+
 void MyWidget::initializeGL()
 {
 	ctx = new QOpenGLContext();
 	f = QOpenGLContext::currentContext()->extraFunctions();
-	//f = QOpenGLContext::currentContext()->functions();
-    glClearColor(0,0,0,0); // заполняем экран белым цветом
-    //glEnable(GL_DEPTH_TEST); // задаем глубину проверки пикселей
-    //glShadeModel(GL_FLAT); // убираем режим сглаживания цветов
-    //glEnable(GL_CULL_FACE); // говорим, что будем строить только внешние поверхности
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // фигуры будут закрашены с обеих сторон
-	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-	image1.load("content//drum//auto1.png"); // загружаем изображение в переменную image1
-	// конвертируем изображение в формат для работы с OpenGL:
-	texture = new QOpenGLTexture(image1.mirrored());
-	texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
-	texture->setMagnificationFilter(QOpenGLTexture::Linear);
-
-	image1.load("content//drum//auto2.png"); // загружаем изображение в переменную image1
-	// конвертируем изображение в формат для работы с OpenGL:
-	texture2 = new QOpenGLTexture(image1.mirrored());
-	texture2->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
-	texture2->setMagnificationFilter(QOpenGLTexture::Linear);
-	Scene1_ = new Scene1();
-	Scene1_->LoadWelcome();
-	Scene2_ = new Scene2();
-#if QTAPI_==1
-	Scene2_->LoadQT();
-#endif
-	/*
+	//Build and compile our shader program
+	//Vertex shader
 	GLuint vertexShader = f->glCreateShader(GL_VERTEX_SHADER);
-	
 	f->glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	f->glCompileShader(vertexShader);
 	// Check for compile time errors
@@ -296,7 +300,7 @@ void MyWidget::initializeGL()
 		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 	// Link shaders
-	shaderProgram = f->glCreateProgram();
+	/*GLuint */ shaderProgram = f->glCreateProgram();
 	f->glAttachShader(shaderProgram, vertexShader);
 	f->glAttachShader(shaderProgram, fragmentShader);
 	f->glLinkProgram(shaderProgram);
@@ -308,57 +312,18 @@ void MyWidget::initializeGL()
 	}
 	f->glDeleteShader(vertexShader);
 	f->glDeleteShader(fragmentShader);
-
-
-	// Set up vertex data (and buffer(s)) and attribute pointers
-	//GLfloat vertices[] = {
-	//  // First triangle
-	//   0.5f,  0.5f,  // Top Right
-	//   0.5f, -0.5f,  // Bottom Right
-	//  -0.5f,  0.5f,  // Top Left 
-	//  // Second triangle
-	//   0.5f, -0.5f,  // Bottom Right
-	//  -0.5f, -0.5f,  // Bottom Left
-	//  -0.5f,  0.5f   // Top Left
-	//}; 
-	GLfloat vertices[] = {
-		 0.5f,  0.5f, 0.0f,  // Top Right
-		 0.5f, -0.5f, 0.0f,  // Bottom Right
-		-0.5f, -0.5f, 0.0f,  // Bottom Left
-		-0.5f,  0.5f, 0.0f   // Top Left 
-	};
-	GLuint indices[] = {  // Note that we start from 0!
-		0, 1, 3,  // First Triangle
-		1, 2, 3   // Second Triangle
-	};
-	GLuint VBO, EBO;
-	f->glGenVertexArrays(1, &VAO);
-	f->glGenBuffers(1, &VBO);
-	f->glGenBuffers(1, &EBO);
-	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-	f->glBindVertexArray(VAO);
-
-	f->glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	f->glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	f->glEnableVertexAttribArray(0);
-
-	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
-	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
-
-
-	// Uncommenting this call will result in wireframe polygons.
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	*/
+	
+	Scene1_ = new Scene1();
+	Scene1_->LoadWelcome();
+	Scene1_->LoadDrum(f);
+	Scene1_->LoadBorder(f);
+	Scene2_ = new Scene2();
+#if QTAPI_==1
+	Scene2_->LoadQT();
+#endif
 	QPair<int, int> version = QOpenGLContext(ctx).format().version();
 	std::cout << version.first << " " << version.second << std::endl;
 }
-
 void MyWidget::resizeGL(int nWidth, int nHeight)
 {
     glViewport(0, 0, nHeight, nHeight); // установка точки обзора
@@ -367,7 +332,7 @@ void MyWidget::resizeGL(int nWidth, int nHeight)
 	glMatrixMode(GL_MODELVIEW); // задаем модельно-видовую матрицу
 	glLoadIdentity();           // загрузка единичную матрицу
 	//glOrtho(-2, 2, -2, 2, -2, 2);
-	gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+	//gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	m_button[0]->setGeometry(QRect(QPoint(0, nHeight - 50), QSize(nWidth / 5, 50)));
 	m_button[1]->setGeometry(QRect(QPoint(0 + nWidth / 5, nHeight - 50), QSize(nWidth / 5, 50)));
 	m_button[2]->setGeometry(QRect(QPoint(0 + nWidth / 5*2, nHeight - 50), QSize(nWidth / 5, 50)));
@@ -383,6 +348,7 @@ void MyWidget::resizeGL(int nWidth, int nHeight)
 
 void MyWidget::SetElements(Scene1* Scene1__, Scene2* Scene2__, Logic* Logic__, Sound* Sound__)
 {
+	newAPI();
 	//QOpenGLFunctions* f = QOpenGLContext::currentContext()->functions();
 	this->Scene1_ = Scene1__;
 	this->Scene2_ = Scene2__;
@@ -761,7 +727,15 @@ void MyWidget::Show()
 	glEnd();
 	*/
 }
-
+void MyWidget::newAPI()
+{
+	//f = QOpenGLContext::currentContext()->extraFunctions();
+}
+void MyWidget::newShow()
+{
+	Scene1_->ShowDrum(f, shaderProgram);
+	Scene1_->ShowBorder(f, shaderProgram);
+}
 void MyWidget::SetDisableBonusButton()
 {
 
@@ -806,7 +780,8 @@ void MyWidget::paintGL() // рисование
 {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
 		//glEnable(GL_DEPTH_TEST);
-		//Show();
+		newShow();
+			/*
 #if WINAPI_==1
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
@@ -948,5 +923,6 @@ void MyWidget::paintGL() // рисование
 		if (!enablesound)
 			Sound_->StopAll();
 		//glFlush();
+		*/
 }
 #endif

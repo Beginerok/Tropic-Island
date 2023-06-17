@@ -44,7 +44,7 @@
 	#pragma comment(lib,"SDL2.lib")
 #endif
 #include <vector>
-
+#include <set>
 struct Image
 {
 	float**VertexCoordinats;
@@ -129,6 +129,10 @@ public:
 	void ShowLine(bool firstline,bool secondline, bool thirdline);//numbers
 	int LoadNumbers(int iter);
 	~Scene1();
+	void LoadDrum(QOpenGLExtraFunctions* f);
+	void ShowDrum(QOpenGLExtraFunctions* f, GLuint shaderProgram);
+	void LoadBorder(QOpenGLExtraFunctions* f);
+	void ShowBorder(QOpenGLExtraFunctions* f, GLuint shaderProgram);
 	int err;
 #ifndef _WIN32
 	const char* strError;
@@ -163,4 +167,14 @@ public:
 	std::vector<Image> numbersv;
 	int nnn;
 	bool *changedrum;
+
+	GLuint vao, id, id2;
+	GLuint* indices;
+	GLfloat rotate__;
+	QOpenGLTexture* texture, * texture2,*texture3;
+	QImage image1,image2;
+	GLuint vao2, id3;
+	GLuint buffer2, buffer;
+	GLuint* indices_2;
+
 };

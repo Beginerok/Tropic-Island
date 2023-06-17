@@ -33,6 +33,8 @@ public:
     void Lister();
     void FullLister();
     void SetShowHideButtons(bool set);
+    void newAPI();
+    void newShow();
 private slots:
     void change();
 private:
@@ -49,14 +51,12 @@ private:
     int tmpcounter;
     int number;
     bool wait;
-    QOpenGLTexture* texture,*texture2;
-    QImage image1;
     float rotate;
     QTimer* timer;
 
     QOpenGLContext* ctx;
     GLuint shaderProgram;
-    GLuint VAO;
+    //GLuint VAO;
     QOpenGLExtraFunctions* f;
     bool enablesound;
 
@@ -75,6 +75,7 @@ private:
     void SetEnableBonusButton();
     void SetDisableButton();
     void SetEnableButton();
+
 };
 #endif
 

@@ -5,6 +5,7 @@
 #endif
 Scene1::Scene1(void)
 {
+	rotate__ = 0.0;
 	image = new Image[CountTexture];
 	image->VertexCoordinats = new float* [CountTexture];
 	//image->Name = new std::string[CountTexture];
@@ -2115,7 +2116,628 @@ void Scene1::EnableTexture(int n, int m)
     }
 	//back middle
 }
+void Scene1::LoadDrum(QOpenGLExtraFunctions* f)
+{
+	std::set<float> sleft, sright;
+	sleft.insert(-0.78);
+	sleft.insert(-0.48);
+	sleft.insert(-0.16);
+	sleft.insert(0.16);
+	sleft.insert(0.48);
+	sright.insert(-0.48);
+	sright.insert(-0.16);
+	sright.insert(0.16);
+	sright.insert(0.48);
+	sright.insert(0.78);
+	std::set<float>::iterator itr, itrright;
+	int jIter = 0, nn = 324;//288
+	int n = 10;
+	float* buf = new float[nn * n * 5];
+	indices = new GLuint[36 * n * 5];
+	// Displaying set elements
+	/* [] =
+	{// x,	y,	z,	r,	g,	b,	s,	t
+		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
+		0.0,1.0,1.0,0.0,1.0,0.0,0.0,0.0,
+		1.0,1.0,1.0,0.0,0.0,1.0,1.0,0.0,
+		1.0,1.0,1.0,0.0,1.0,1.0,1.0,0.0,
+		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
+		1.0,0.0,1.0,0.5,0.5,0.5,1.0,1.0,//
 
+		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
+		0.0,1.0,1.0,0.0,1.0,0.0,0.0,0.0,
+		-1.0,1.0,1.0,0.0,0.0,1.0,1.0,0.0,
+		-1.0,1.0,1.0,0.0,1.0,1.0,1.0,0.0,
+		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
+		-1.0,0.0,1.0,0.5,0.5,0.5,1.0,1.0
+	};
+	*/
+	for (itr = sleft.begin(), itrright = sright.begin();
+		itr != sleft.end(); itr++, itrright++)
+	{
+		float xleft = *itr;
+		float xright = *itrright;
+		for (int i = 0; i < n; i++)
+		{
+			//front up
+			float yTex = 1 - (float)i / n;
+			float yTex2 = 1 - (float)(i + 1) / n;
+			buf[(0 + i * nn) + jIter * n * nn] = xleft;
+			buf[(1 + i * nn) + jIter * n * nn] = 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175);
+			buf[(2 + i * nn) + jIter * n * nn] = 0.68f * cos((90.0 - 60.0 / n * i) * 0.0175);
+			buf[(3 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(4 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(5 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(6 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(7 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(8 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(9 + i * nn) + jIter * n * nn] = xleft;
+			buf[(10 + i * nn) + jIter * n * nn] = 0.68f * sin((90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(11 + i * nn) + jIter * n * nn] = 0.68f * cos((90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(12 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(13 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(14 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(15 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(16 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(17 + i * nn) + jIter * n * nn] = yTex2;//yTex2
+
+			buf[(18 + i * nn) + jIter * n * nn] = xright;
+			buf[(19 + i * nn) + jIter * n * nn] = 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175);
+			buf[(20 + i * nn) + jIter * n * nn] = 0.68f * cos((90.0 - 60.0 / n * i) * 0.0175);
+			buf[(21 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(22 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(23 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(24 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(25 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(26 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(27 + i * nn) + jIter * n * nn] = xright;
+			buf[(28 + i * nn) + jIter * n * nn] = 0.68f * sin((90.0 - 60.0 / n * i) * 0.0175);
+			buf[(29 + i * nn) + jIter * n * nn] = 0.68f * cos((90.0 - 60.0 / n * i) * 0.0175);
+			buf[(30 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(31 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(32 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(33 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(34 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(35 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(36 + i * nn) + jIter * n * nn] = xleft;
+			buf[(37 + i * nn) + jIter * n * nn] = 0.68f * sin((90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(38 + i * nn) + jIter * n * nn] = 0.68f * cos((90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(39 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(40 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(41 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(42 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(43 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(44 + i * nn) + jIter * n * nn] = yTex2;
+
+			buf[(45 + i * nn) + jIter * n * nn] = xright;
+			buf[(46 + i * nn) + jIter * n * nn] = 0.68f * sin((90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(47 + i * nn) + jIter * n * nn] = 0.68f * cos((90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(48 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(49 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(50 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(51 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(52 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(53 + i * nn) + jIter * n * nn] = yTex2;
+
+
+			//front middle
+			
+			yTex = 1 - (float)i / n;
+			yTex2 = 1 - (float)(i + 1) / n;
+			buf[(54 + i * nn) + jIter * n * nn] = xleft;
+			buf[(55 + i * nn) + jIter * n * nn] = 0.68f * sin((30.0 - 60.0 / n * i) * 0.0175);
+			buf[(56 + i * nn) + jIter * n * nn] = 0.68f * cos((30.0 - 60.0 / n * i) * 0.0175);
+			buf[(57 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(58 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(59 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(60 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(61 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(62 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(63 + i * nn) + jIter * n * nn] = xleft;
+			buf[(64 + i * nn) + jIter * n * nn] = 0.68f * sin((30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(65 + i * nn) + jIter * n * nn] = 0.68f * cos((30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(66 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(67 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(68 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(69 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(70 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(71 + i * nn) + jIter * n * nn] = yTex2;//yTex2
+
+			buf[(72 + i * nn) + jIter * n * nn] = xright;
+			buf[(73 + i * nn) + jIter * n * nn] = 0.68f * sin((30 - 60.0 / n * i) * 0.0175);
+			buf[(74 + i * nn) + jIter * n * nn] = 0.68f * cos((30.0 - 60.0 / n * i) * 0.0175);
+			buf[(75 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(76 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(77 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(78 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(79 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(80 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(81 + i * nn) + jIter * n * nn] = xright;
+			buf[(82 + i * nn) + jIter * n * nn] = 0.68f * sin((30.0 - 60.0 / n * i) * 0.0175);
+			buf[(83 + i * nn) + jIter * n * nn] = 0.68f * cos((30.0 - 60.0 / n * i) * 0.0175);
+			buf[(84 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(85 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(86 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(87 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(88 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(89 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(90 + i * nn) + jIter * n * nn] = xleft;
+			buf[(91 + i * nn) + jIter * n * nn] = 0.68f * sin((30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(92 + i * nn) + jIter * n * nn] = 0.68f * cos((30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(93 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(94 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(95 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(96 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(97 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(98 + i * nn) + jIter * n * nn] = yTex2;
+
+			buf[(99 + i * nn) + jIter * n * nn] = xright;
+			buf[(100 + i * nn) + jIter * n * nn] = 0.68f * sin((30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(101 + i * nn) + jIter * n * nn] = 0.68f * cos((30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(102 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(103 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(104 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(105 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(106 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(107 + i * nn) + jIter * n * nn] = yTex2;
+			
+			//front down
+			yTex = 1 - (float)i / n;
+			yTex2 = 1 - (float)(i + 1) / n;
+
+			buf[(108 + i * nn) + jIter * n * nn] = xleft;
+			buf[(109 + i * nn) + jIter * n * nn] = 0.68f * sin((-30.0 - 60.0 / n * i) * 0.0175);
+			buf[(110 + i * nn) + jIter * n * nn] = 0.68f * cos((-30.0 - 60.0 / n * i) * 0.0175);
+			buf[(111 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(112 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(113 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(114 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(115 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(116 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(117 + i * nn) + jIter * n * nn] = xleft;
+			buf[(118 + i * nn) + jIter * n * nn] = 0.68f * sin((-30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(119 + i * nn) + jIter * n * nn] = 0.68f * cos((-30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(120 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(121 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(122 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(123 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(124 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(125 + i * nn) + jIter * n * nn] = yTex2;//yTex2
+
+			buf[(126 + i * nn) + jIter * n * nn] = xright;
+			buf[(127 + i * nn) + jIter * n * nn] = 0.68f * sin((-30.0 - 60.0 / n * i) * 0.0175);
+			buf[(128 + i * nn) + jIter * n * nn] = 0.68f * cos((-30.0 - 60.0 / n * i) * 0.0175);
+			buf[(129 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(130 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(131 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(132 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(133 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(134 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(135 + i * nn) + jIter * n * nn] = xright;
+			buf[(136 + i * nn) + jIter * n * nn] = 0.68f * sin((-30.0 - 60.0 / n * i) * 0.0175);
+			buf[(137 + i * nn) + jIter * n * nn] = 0.68f * cos((-30.0 - 60.0 / n * i) * 0.0175);
+			buf[(138 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(139 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(140 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(141 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(142 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(143 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(144 + i * nn) + jIter * n * nn] = xleft;
+			buf[(145 + i * nn) + jIter * n * nn] = 0.68f * sin((-30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(146 + i * nn) + jIter * n * nn] = 0.68f * cos((-30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(147 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(148 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(149 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(150 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(151 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(152 + i * nn) + jIter * n * nn] = yTex2;
+
+			buf[(153 + i * nn) + jIter * n * nn] = xright;
+			buf[(154 + i * nn) + jIter * n * nn] = 0.68f * sin((-30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(155 + i * nn) + jIter * n * nn] = 0.68f * cos((-30.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(156 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(157 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(158 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(159 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(160 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(161 + i * nn) + jIter * n * nn] = yTex2;
+
+			//backup
+			yTex = 1 - (float)i / n;
+			yTex2 = 1 - (float)(i + 1) / n;
+
+			buf[(162 + i * nn) + jIter * n * nn] = xleft;
+			buf[(163 + i * nn) + jIter * n * nn] = 0.68f * sin((150.0 - 60.0 / n * i) * 0.0175);
+			buf[(164 + i * nn) + jIter * n * nn] = 0.68f * cos((150.0 - 60.0 / n * i) * 0.0175);
+			buf[(165 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(166 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(167 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(168 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(169 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(170 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(171 + i * nn) + jIter * n * nn] = xleft;
+			buf[(172 + i * nn) + jIter * n * nn] = 0.68f * sin((150.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(173 + i * nn) + jIter * n * nn] = 0.68f * cos((150.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(174 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(175 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(176 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(177 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(178 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(179 + i * nn) + jIter * n * nn] = yTex2;//yTex2
+
+			buf[(180 + i * nn) + jIter * n * nn] = xright;
+			buf[(181 + i * nn) + jIter * n * nn] = 0.68f * sin((150.0 - 60.0 / n * i) * 0.0175);
+			buf[(182 + i * nn) + jIter * n * nn] = 0.68f * cos((150.0 - 60.0 / n * i) * 0.0175);
+			buf[(183 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(184 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(185 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(186 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(187 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(188 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(189 + i * nn) + jIter * n * nn] = xright;
+			buf[(190 + i * nn) + jIter * n * nn] = 0.68f * sin((150.0 - 60.0 / n * i) * 0.0175);
+			buf[(191 + i * nn) + jIter * n * nn] = 0.68f * cos((150.0 - 60.0 / n * i) * 0.0175);
+			buf[(192 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(193 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(194 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(195 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(196 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(197 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(198 + i * nn) + jIter * n * nn] = xleft;
+			buf[(199 + i * nn) + jIter * n * nn] = 0.68f * sin((150.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(200 + i * nn) + jIter * n * nn] = 0.68f * cos((150.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(201 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(202 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(203 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(204 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(205 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(206 + i * nn) + jIter * n * nn] = yTex2;
+
+			buf[(207 + i * nn) + jIter * n * nn] = xright;
+			buf[(208 + i * nn) + jIter * n * nn] = 0.68f * sin((150.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(209 + i * nn) + jIter * n * nn] = 0.68f * cos((150.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(210 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(211 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(212 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(213 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(214 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(215 + i * nn) + jIter * n * nn] = yTex2;
+
+			//backmiddle
+
+			yTex = 1 - (float)i / n;
+			yTex2 = 1 - (float)(i + 1) / n;
+
+			buf[(216 + i * nn) + jIter * n * nn] = xleft;
+			buf[(217 + i * nn) + jIter * n * nn] = 0.68f * sin((210.0 - 60.0 / n * i) * 0.0175);
+			buf[(218 + i * nn) + jIter * n * nn] = 0.68f * cos((210.0 - 60.0 / n * i) * 0.0175);
+			buf[(219 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(220 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(221 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(222 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(223 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(224 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(225 + i * nn) + jIter * n * nn] = xleft;
+			buf[(226 + i * nn) + jIter * n * nn] = 0.68f * sin((210.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(227 + i * nn) + jIter * n * nn] = 0.68f * cos((210.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(228 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(229 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(230 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(231 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(232 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(233 + i * nn) + jIter * n * nn] = yTex2;//yTex2
+
+			buf[(234 + i * nn) + jIter * n * nn] = xright;
+			buf[(235 + i * nn) + jIter * n * nn] = 0.68f * sin((210.0 - 60.0 / n * i) * 0.0175);
+			buf[(236 + i * nn) + jIter * n * nn] = 0.68f * cos((210.0 - 60.0 / n * i) * 0.0175);
+			buf[(237 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(238 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(239 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(240 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(241 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(242 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(243 + i * nn) + jIter * n * nn] = xright;
+			buf[(244 + i * nn) + jIter * n * nn] = 0.68f * sin((210.0 - 60.0 / n * i) * 0.0175);
+			buf[(245 + i * nn) + jIter * n * nn] = 0.68f * cos((210.0 - 60.0 / n * i) * 0.0175);
+			buf[(246 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(247 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(248 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(249 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(250 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(251 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(252 + i * nn) + jIter * n * nn] = xleft;
+			buf[(253 + i * nn) + jIter * n * nn] = 0.68f * sin((210.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(254 + i * nn) + jIter * n * nn] = 0.68f * cos((210.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(255 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(256 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(257 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(258 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(259 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(260 + i * nn) + jIter * n * nn] = yTex2;
+
+			buf[(261 + i * nn) + jIter * n * nn] = xright;
+			buf[(262 + i * nn) + jIter * n * nn] = 0.68f * sin((210.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(263 + i * nn) + jIter * n * nn] = 0.68f * cos((210.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(264 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(265 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(266 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(267 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(268 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(269 + i * nn) + jIter * n * nn] = yTex2;
+
+			/*back down*/
+			yTex = 1 - (float)i / n;
+			yTex2 = 1 - (float)(i + 1) / n;
+
+			buf[(270 + i * nn) + jIter * n * nn] = xleft;
+			buf[(271 + i * nn) + jIter * n * nn] = 0.68f * sin((-90.0 - 60.0 / n * i) * 0.0175);
+			buf[(272 + i * nn) + jIter * n * nn] = 0.68f * cos((-90.0 - 60.0 / n * i) * 0.0175);
+			buf[(273 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(274 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(275 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(276 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(277 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(278 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(279 + i * nn) + jIter * n * nn] = xleft;
+			buf[(280 + i * nn) + jIter * n * nn] = 0.68f * sin((-90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(281 + i * nn) + jIter * n * nn] = 0.68f * cos((-90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(282 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(283 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(284 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(285 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(286 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(287 + i * nn) + jIter * n * nn] = yTex2;//yTex2
+
+			buf[(288 + i * nn) + jIter * n * nn] = xright;
+			buf[(289 + i * nn) + jIter * n * nn] = 0.68f * sin((-90.0 - 60.0 / n * i) * 0.0175);
+			buf[(290 + i * nn) + jIter * n * nn] = 0.68f * cos((-90.0 - 60.0 / n * i) * 0.0175);
+			buf[(291 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(292 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(293 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(294 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(295 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(296 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(297 + i * nn) + jIter * n * nn] = xright;
+			buf[(298 + i * nn) + jIter * n * nn] = 0.68f * sin((-90.0 - 60.0 / n * i) * 0.0175);
+			buf[(299 + i * nn) + jIter * n * nn] = 0.68f * cos((-90.0 - 60.0 / n * i) * 0.0175);
+			buf[(300 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(301 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(302 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(303 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(304 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(305 + i * nn) + jIter * n * nn] = yTex;
+
+			buf[(306 + i * nn) + jIter * n * nn] = xleft;
+			buf[(307 + i * nn) + jIter * n * nn] = 0.68f * sin((-90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(308 + i * nn) + jIter * n * nn] = 0.68f * cos((-90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(309 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(310 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(311 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(312 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(313 + i * nn) + jIter * n * nn] = 0.0;//1.0
+			buf[(314 + i * nn) + jIter * n * nn] = yTex2;
+
+			buf[(315 + i * nn) + jIter * n * nn] = xright;
+			buf[(316 + i * nn) + jIter * n * nn] = 0.68f * sin((-90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(317 + i * nn) + jIter * n * nn] = 0.68f * cos((-90.0 - 60.0 / n * (i + 1)) * 0.0175);
+			buf[(318 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(319 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(320 + i * nn) + jIter * n * nn] = 0.0;
+			buf[(321 + i * nn) + jIter * n * nn] = 1.0;
+			buf[(322 + i * nn) + jIter * n * nn] = 1.0;//0.0
+			buf[(323 + i * nn) + jIter * n * nn] = yTex2;//287
+		}
+		jIter++;
+	}
+	//GLuint buffer;
+	f->glGenVertexArrays(1, &vao);
+	f->glGenBuffers(1, &buffer);
+	f->glBindVertexArray(vao);
+	f->glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	//f->glBufferData(GL_ARRAY_BUFFER, sizeof(buf), buf, GL_STATIC_DRAW);
+	f->glBufferData(GL_ARRAY_BUFFER, sizeof(float) * nn * n * 5, buf, GL_STATIC_DRAW);
+
+	GLuint  indices_[] = {
+	0,1,2,
+	3,4,5,
+	6,7,8,
+	9,10,11
+	};// Note that we start from 0!
+	for (int i = 0; i < 36 * n; i++)
+		indices[i] = (GLuint)i;
+	GLuint EBO;
+	f->glGenBuffers(1, &EBO);
+	f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 60, indices, GL_STATIC_DRAW);
+	// Position attribute
+	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)0);
+	f->glEnableVertexAttribArray(0);
+	// Color attribute
+	f->glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	f->glEnableVertexAttribArray(1);
+	// TexCoord attribute
+	f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(7 * sizeof(GLfloat)));
+	f->glEnableVertexAttribArray(2);
+	f->glEnableVertexAttribArray(0);
+	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs
+	//Game loop
+	//f = QOpenGLContext::currentContext()->functions();
+	glClearColor(0, 0, 0, 0); // заполняем экран белым цветом
+	//glEnable(GL_DEPTH_TEST); // задаем глубину проверки пикселей
+	//glShadeModel(GL_FLAT); // убираем режим сглаживания цветов
+	//glEnable(GL_CULL_FACE); // говорим, что будем строить только внешние поверхности
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // фигуры будут закрашены с обеих сторон
+	//gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+	image1.load("content//drum//auto1.png"); // загружаем изображение в переменную image1
+	// конвертируем изображение в формат для работы с OpenGL:
+	texture = new QOpenGLTexture(image1.mirrored());
+	texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+	texture->setMagnificationFilter(QOpenGLTexture::Linear);
+	//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1.width(), image1.height(),
+		0, GL_RGBA, GL_UNSIGNED_BYTE, image1.bits());
+	image1.load("content//drum//auto2.png"); // загружаем изображение в переменную image1
+	// конвертируем изображение в формат для работы с OpenGL:
+	texture2 = new QOpenGLTexture(image1.mirrored());
+	texture2->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+	texture2->setMagnificationFilter(QOpenGLTexture::Linear);
+	glGenTextures(1, &id2);
+	glBindTexture(GL_TEXTURE_2D, id2);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1.width(), image1.height(),
+		0, GL_RGBA, GL_UNSIGNED_BYTE, image1.bits());
+	glBindTexture(GL_TEXTURE_2D, 0);
+	//
+	
+}
+void Scene1::ShowDrum(QOpenGLExtraFunctions* f, GLuint shaderProgram)
+{
+	glEnable(GL_DEPTH_TEST);
+	f->glUseProgram(shaderProgram);
+	//f->glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	f->glBindVertexArray(vao);
+	//f->glDrawArrays(GL_TRIANGLES, 0, 6);
+	GLfloat trans[16] =
+	{
+		1.0,0.0,0.0,0.0,
+		0.0,1.0 * cos(rotate__ * 0.0175),0.0 - sin(rotate__ * 0.0175),0.0,
+		0.0,0.0 + sin(rotate__ * 0.0175),1.0 * cos(rotate__ * 0.0175),0.0,
+		0.0,0.0,0.0,1.0
+	};
+	rotate__ += 1;
+	if (rotate__ >= 360)
+		rotate__ = 0;
+	unsigned int transformLoc = f->glGetUniformLocation(shaderProgram, "transform");
+	f->glUniformMatrix4fv(transformLoc, 1, GL_FALSE, trans);
+	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	for (int j = 0; j < 5; j++)
+	{
+		glBindTexture(GL_TEXTURE_2D, id);
+		for (int i = 0 + j * 10; i < 10 + j * 10; i++)
+			f->glDrawArrays(GL_TRIANGLES, 36 * i, 6/* 36 * 10 * 5*/);
+		glBindTexture(GL_TEXTURE_2D, id2);
+		for (int i = 0 + j * 10; i < 10 + j * 10; i++)
+			f->glDrawArrays(GL_TRIANGLES, 36 * i + 6, 6/* 36 * 10 * 5*/);
+		glBindTexture(GL_TEXTURE_2D, id);
+		for (int i = 0 + j * 10; i < 10 + j * 10; i++)
+			f->glDrawArrays(GL_TRIANGLES, 36 * i + 12, 6/* 36 * 10 * 5*/);
+		glBindTexture(GL_TEXTURE_2D, id2);
+		for (int i = 0 + j * 10; i < 10 + j * 10; i++)
+			f->glDrawArrays(GL_TRIANGLES, 36 * i + 18, 6/* 36 * 10 * 5*/);
+		glBindTexture(GL_TEXTURE_2D, id);
+		for (int i = 0 + j * 10; i < 10 + j * 10; i++)
+			f->glDrawArrays(GL_TRIANGLES, 36 * i + 24, 6/* 36 * 10 * 5*/);
+		glBindTexture(GL_TEXTURE_2D, id2);
+		for (int i = 0 + j * 10; i < 10 + j * 10; i++)
+			f->glDrawArrays(GL_TRIANGLES, 36 * i + 30, 6/* 36 * 10 * 5*/);
+	}
+	//glBindTexture(GL_TEXTURE_2D, id2);
+	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+	//f->glDrawArrays(GL_TRIANGLES, 6, 6);
+	//f->glBindVertexArray(0);
+	//glDisable(GL_DEPTH_TEST);
+	
+	f->glBindVertexArray(0);
+}
+
+void Scene1::LoadBorder(QOpenGLExtraFunctions* f)
+{
+	float buf2[] =
+	{// x,	y,	z,	r,	g,	b,	s,	t
+			-1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+			 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0
+	};
+	//	GLuint buffer2;
+	f->glGenVertexArrays(1, &vao2);
+	f->glGenBuffers(1, &buffer2);
+	f->glBindVertexArray(vao2);
+	f->glBindBuffer(GL_ARRAY_BUFFER, buffer2);
+	f->glBufferData(GL_ARRAY_BUFFER, sizeof(buf2), buf2, GL_STATIC_DRAW);
+	indices_2 = new GLuint[6];
+	for (int i = 0; i < 6; i++)
+		indices_2[i] = (GLuint)i;
+	GLuint EBO2;
+	f->glGenBuffers(1, &EBO2);
+	f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO2);
+	f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_2), indices_2, GL_STATIC_DRAW);
+	// Position attribute
+	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+	f->glEnableVertexAttribArray(0);
+	// Color attribute
+	f->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	f->glEnableVertexAttribArray(1);
+	// TexCoord attribute
+	f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	f->glEnableVertexAttribArray(2);
+	f->glEnableVertexAttribArray(0);
+	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs
+	image2.load("content//border.png"); // загружаем изображение в переменную image1
+	// конвертируем изображение в формат для работы с OpenGL:
+	texture3 = new QOpenGLTexture(image2.mirrored());
+	texture3->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+	texture3->setMagnificationFilter(QOpenGLTexture::Linear);
+	glGenTextures(1, &id3);
+	glBindTexture(GL_TEXTURE_2D, id3);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image2.width(), image2.height(),
+		0, GL_RGBA, GL_UNSIGNED_BYTE, image2.bits());
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+void Scene1::ShowBorder(QOpenGLExtraFunctions* f, GLuint shaderProgram)
+{
+	f->glUseProgram(shaderProgram);
+	//f->glBindBuffer(GL_ARRAY_BUFFER, buffer2);
+	glEnable(GL_ALPHA_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	f->glBindVertexArray(vao2);
+	glBindTexture(GL_TEXTURE_2D, id3);
+
+	//glEnable(GL_BLEND);
+
+	//glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_BLEND);
+	f->glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
+	f->glBindVertexArray(0);
+}
 Scene1::~Scene1()
 {
 	for (int i = 0; i<CountTexture; i++)
