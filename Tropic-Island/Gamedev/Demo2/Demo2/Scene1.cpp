@@ -5,6 +5,7 @@
 #endif
 Scene1::Scene1(void)
 {
+	b = true;
 	rotate__ = 0.0;
 	image = new Image[CountTexture];
 	image->VertexCoordinats = new float* [CountTexture];
@@ -2631,9 +2632,13 @@ void Scene1::ShowDrum(QOpenGLExtraFunctions* f, GLuint shaderProgram)
 		0.0,0.0 + sin(rotate__ * 0.0175),1.0 * cos(rotate__ * 0.0175),0.0,
 		0.0,0.0,0.0,1.0
 	};
-	rotate__ += 1;
+	if(b)
+		rotate__ += 1;
 	if (rotate__ >= 360)
+	{
 		rotate__ = 0;
+		b = false;
+	}
 	unsigned int transformLoc = f->glGetUniformLocation(shaderProgram, "transform");
 	f->glUniformMatrix4fv(transformLoc, 1, GL_FALSE, trans);
 	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -2664,7 +2669,14 @@ void Scene1::ShowDrum(QOpenGLExtraFunctions* f, GLuint shaderProgram)
 	//f->glDrawArrays(GL_TRIANGLES, 6, 6);
 	//f->glBindVertexArray(0);
 	//glDisable(GL_DEPTH_TEST);
-	
+	GLfloat trans2[16] =
+	{
+		1.0,0.0,0.0,0.0,
+		0.0,1.0 /** cos(-rotate__ * 0.0175)*/,0.0/* - sin(-rotate__ * 0.0175)*/,0.0,
+		0.0,0.0 /* + sin(-rotate__ * 0.0175) */ ,1.0/* * cos(-rotate__ * 0.0175)*/,0.0,
+		0.0,0.0,0.0,1.0
+	};
+	f->glUniformMatrix4fv(transformLoc, 1, GL_FALSE, trans2);
 	f->glBindVertexArray(0);
 }
 

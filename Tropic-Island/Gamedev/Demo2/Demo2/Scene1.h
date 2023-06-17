@@ -176,5 +176,5 @@ public:
 	GLuint vao2, id3;
 	GLuint buffer2, buffer;
 	GLuint* indices_2;
-
+	bool b;
 };
