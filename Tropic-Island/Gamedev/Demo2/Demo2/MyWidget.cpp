@@ -323,6 +323,8 @@ void MyWidget::initializeGL()
 #endif
 	QPair<int, int> version = QOpenGLContext(ctx).format().version();
 	std::cout << version.first << " " << version.second << std::endl;
+	//glClearColor(0, 0, 0, 0);
+	//gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
 void MyWidget::resizeGL(int nWidth, int nHeight)
 {

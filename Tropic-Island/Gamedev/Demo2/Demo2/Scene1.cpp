@@ -2131,28 +2131,10 @@ void Scene1::LoadDrum(QOpenGLExtraFunctions* f)
 	sright.insert(0.48);
 	sright.insert(0.78);
 	std::set<float>::iterator itr, itrright;
-	int jIter = 0, nn = 324;//288
+	int jIter = 0, nn = 324;
 	int n = 10;
 	float* buf = new float[nn * n * 5];
 	indices = new GLuint[36 * n * 5];
-	// Displaying set elements
-	/* [] =
-	{// x,	y,	z,	r,	g,	b,	s,	t
-		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
-		0.0,1.0,1.0,0.0,1.0,0.0,0.0,0.0,
-		1.0,1.0,1.0,0.0,0.0,1.0,1.0,0.0,
-		1.0,1.0,1.0,0.0,1.0,1.0,1.0,0.0,
-		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
-		1.0,0.0,1.0,0.5,0.5,0.5,1.0,1.0,//
-
-		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
-		0.0,1.0,1.0,0.0,1.0,0.0,0.0,0.0,
-		-1.0,1.0,1.0,0.0,0.0,1.0,1.0,0.0,
-		-1.0,1.0,1.0,0.0,1.0,1.0,1.0,0.0,
-		0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,
-		-1.0,0.0,1.0,0.5,0.5,0.5,1.0,1.0
-	};
-	*/
 	for (itr = sleft.begin(), itrright = sright.begin();
 		itr != sleft.end(); itr++, itrright++)
 	{
@@ -2547,62 +2529,39 @@ void Scene1::LoadDrum(QOpenGLExtraFunctions* f)
 		}
 		jIter++;
 	}
-	//GLuint buffer;
 	f->glGenVertexArrays(1, &vao);
 	f->glGenBuffers(1, &buffer);
 	f->glBindVertexArray(vao);
 	f->glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	//f->glBufferData(GL_ARRAY_BUFFER, sizeof(buf), buf, GL_STATIC_DRAW);
 	f->glBufferData(GL_ARRAY_BUFFER, sizeof(float) * nn * n * 5, buf, GL_STATIC_DRAW);
-
-	GLuint  indices_[] = {
-	0,1,2,
-	3,4,5,
-	6,7,8,
-	9,10,11
-	};// Note that we start from 0!
 	for (int i = 0; i < 36 * n; i++)
 		indices[i] = (GLuint)i;
 	GLuint EBO;
 	f->glGenBuffers(1, &EBO);
 	f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 60, indices, GL_STATIC_DRAW);
-	// Position attribute
 	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)0);
 	f->glEnableVertexAttribArray(0);
-	// Color attribute
 	f->glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	f->glEnableVertexAttribArray(1);
-	// TexCoord attribute
 	f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(7 * sizeof(GLfloat)));
 	f->glEnableVertexAttribArray(2);
 	f->glEnableVertexAttribArray(0);
-	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs
-	//Game loop
-	//f = QOpenGLContext::currentContext()->functions();
-	glClearColor(0, 0, 0, 0); // заполняем экран белым цветом
-	//glEnable(GL_DEPTH_TEST); // задаем глубину проверки пикселей
-	//glShadeModel(GL_FLAT); // убираем режим сглаживания цветов
-	//glEnable(GL_CULL_FACE); // говорим, что будем строить только внешние поверхности
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // фигуры будут закрашены с обеих сторон
-	//gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-	image1.load("content//drum//auto1.png"); // загружаем изображение в переменную image1
-	// конвертируем изображение в формат для работы с OpenGL:
+	f->glBindBuffer(GL_ARRAY_BUFFER, 0);
+	f->glBindVertexArray(0);
+	image1.load("content//drum//auto1.png");
 	texture = new QOpenGLTexture(image1.mirrored());
 	texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture->setMagnificationFilter(QOpenGLTexture::Linear);
-	//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1.width(), image1.height(),
-		0, GL_RGBA, GL_UNSIGNED_BYTE, image1.bits());
-	image1.load("content//drum//auto2.png"); // загружаем изображение в переменную image1
-	// конвертируем изображение в формат для работы с OpenGL:
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1.width(), image1.height(),0, GL_RGBA, GL_UNSIGNED_BYTE, image1.bits());
+
+	image1.load("content//drum//auto2.png");
 	texture2 = new QOpenGLTexture(image1.mirrored());
 	texture2->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture2->setMagnificationFilter(QOpenGLTexture::Linear);
@@ -2612,11 +2571,8 @@ void Scene1::LoadDrum(QOpenGLExtraFunctions* f)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1.width(), image1.height(),
-		0, GL_RGBA, GL_UNSIGNED_BYTE, image1.bits());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1.width(), image1.height(),0, GL_RGBA, GL_UNSIGNED_BYTE, image1.bits());
 	glBindTexture(GL_TEXTURE_2D, 0);
-	//
-	
 }
 void Scene1::ShowDrum(QOpenGLExtraFunctions* f, GLuint shaderProgram)
 {
