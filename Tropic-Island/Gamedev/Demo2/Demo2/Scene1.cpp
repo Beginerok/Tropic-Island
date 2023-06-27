@@ -2549,10 +2549,10 @@ void Scene1::LoadDrum(QOpenGLExtraFunctions* f)
 	f->glEnableVertexAttribArray(0);
 	f->glBindBuffer(GL_ARRAY_BUFFER, 0);
 	f->glBindVertexArray(0);
-	image1.load("content//drum//auto1.png");
+	image1.load("content//drum//auto1.png"); 
 	texture = new QOpenGLTexture(image1.mirrored());
 	texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
-	texture->setMagnificationFilter(QOpenGLTexture::Linear);
+	texture->setMagnificationFilter(QOpenGLTexture::Linear); std::cout << image1.format() << std::endl;
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -2561,10 +2561,10 @@ void Scene1::LoadDrum(QOpenGLExtraFunctions* f)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image1.width(), image1.height(),0, GL_RGBA, GL_UNSIGNED_BYTE, image1.bits());
 
-	image1.load("content//drum//auto2.png");
+	image1.load("content//drum//auto2.png"); 
 	texture2 = new QOpenGLTexture(image1.mirrored());
 	texture2->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
-	texture2->setMagnificationFilter(QOpenGLTexture::Linear);
+	texture2->setMagnificationFilter(QOpenGLTexture::Linear); std::cout << image1.format() << std::endl;
 	glGenTextures(1, &id2);
 	glBindTexture(GL_TEXTURE_2D, id2);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -2635,17 +2635,16 @@ void Scene1::ShowDrum(QOpenGLExtraFunctions* f, GLuint shaderProgram)
 	f->glUniformMatrix4fv(transformLoc, 1, GL_FALSE, trans2);
 	f->glBindVertexArray(0);
 }
-
 void Scene1::LoadBorder(QOpenGLExtraFunctions* f)
 {
 	float buf2[] =
-	{// x,	y,	z,	r,	g,	b,	s,	t
-			-1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
-			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
-			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
-			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
-			 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0
+	{		// x,	y,	z,	 r,	  g,	b,   a,	  s,	t
+			-1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+			 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0
 	};
 	//	GLuint buffer2;
 	f->glGenVertexArrays(1, &vao2);
@@ -2661,13 +2660,13 @@ void Scene1::LoadBorder(QOpenGLExtraFunctions* f)
 	f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO2);
 	f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_2), indices_2, GL_STATIC_DRAW);
 	// Position attribute
-	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)0);
 	f->glEnableVertexAttribArray(0);
 	// Color attribute
-	f->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	f->glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	f->glEnableVertexAttribArray(1);
 	// TexCoord attribute
-	f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+	f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(7 * sizeof(GLfloat)));
 	f->glEnableVertexAttribArray(2);
 	f->glEnableVertexAttribArray(0);
 	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
@@ -2683,25 +2682,128 @@ void Scene1::LoadBorder(QOpenGLExtraFunctions* f)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image2.width(), image2.height(),
-		0, GL_RGBA, GL_UNSIGNED_BYTE, image2.bits());
+	glTexImage2D(GL_TEXTURE_2D, 0,  GL_RGBA , image2.width(), image2.height(),
+		0, GL_BGRA , GL_UNSIGNED_BYTE, image2.bits());
+	std::cout << image2.format() << std::endl;
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 void Scene1::ShowBorder(QOpenGLExtraFunctions* f, GLuint shaderProgram)
 {
 	f->glUseProgram(shaderProgram);
 	//f->glBindBuffer(GL_ARRAY_BUFFER, buffer2);
-	glEnable(GL_ALPHA_TEST);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	
 	f->glBindVertexArray(vao2);
 	glBindTexture(GL_TEXTURE_2D, id3);
-
-	//glEnable(GL_BLEND);
-
-	//glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_BLEND);
+	GLfloat trans2[16] =
+	{
+		1.0,0.0,0.0,0.0,
+		0.0,1.0 /** cos(-rotate__ * 0.0175)*/,0.0/* - sin(-rotate__ * 0.0175)*/,0.0,
+		0.0,0.0 /* + sin(-rotate__ * 0.0175) */ ,1.0/* * cos(-rotate__ * 0.0175)*/,0.0,
+		0.0,0.0,0.0,1.0
+	};
+	unsigned int transformLoc = f->glGetUniformLocation(shaderProgram, "transform");
+	f->glUniformMatrix4fv(transformLoc, 1, GL_FALSE, trans2);
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_BLEND);
 	f->glDrawArrays(GL_TRIANGLES, 0, 6);
 
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
+	f->glBindVertexArray(0);
+}
+void Scene1::LoadNewAPI(QOpenGLExtraFunctions* f)
+{
+	natmp.nbuf = 54;
+	float* buf = new float[natmp.nbuf];
+	std::ifstream in("border.txt");
+	int i = 0;
+	if (in.is_open())
+	{
+		std::string path__;
+		while (
+			(in >> buf[i]) && (in >> buf[i+1]) && (in >> buf[i+2]) && (in >> buf[i+3]) && (in >> buf[i+4]) && 
+			(in >> buf[i+5]) && (in >> buf[i+6]) && (in >> buf[i+7]) && (in >> buf[i+8])
+			)
+		{
+			std::cout <<buf[i] << " " << buf[i + 1] << " " << buf[i + 2] << " " << buf[i + 3] << " " << buf[i + 4]
+				<< " " << buf[i + 5] << " " << buf[i + 6] << " " << buf[i + 7]<<" "<< buf[i + 8] << std::endl;
+
+			i += 9;
+		}
+		in.close();
+	}
+/*
+	float buf[] =
+	{		// x,	y,	z,	 r,	  g,	b,   a,	  s,	t
+			-1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+			 1.0,  1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+			-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+			 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0
+	};
+*/
+	f->glGenVertexArrays(1, &natmp.vao);
+	f->glGenBuffers(1, &natmp.buffer);
+	f->glBindVertexArray(natmp.vao);
+	f->glBindBuffer(GL_ARRAY_BUFFER, natmp.buffer);
+	f->glBufferData(GL_ARRAY_BUFFER, sizeof(float)*natmp.nbuf, buf, GL_STATIC_DRAW);
+	natmp.indices = new GLuint[6];
+	for (int i = 0; i < 6; i++)
+		natmp.indices[i] = (GLuint)i;
+	GLuint EBO;
+	f->glGenBuffers(1, &EBO);
+	f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(natmp.indices), natmp.indices, GL_STATIC_DRAW);
+	// Position attribute
+	f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)0);
+	f->glEnableVertexAttribArray(0);
+	// Color attribute
+	f->glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	f->glEnableVertexAttribArray(1);
+	// TexCoord attribute
+	f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(GLfloat), (GLvoid*)(7 * sizeof(GLfloat)));
+	f->glEnableVertexAttribArray(2);
+	f->glEnableVertexAttribArray(0);
+	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs
+	natmp.image.load("content//border.png"); // загружаем изображение в переменную image1
+	// конвертируем изображение в формат для работы с OpenGL:
+	natmp.texture = new QOpenGLTexture(natmp.image.mirrored());
+	natmp.texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+	natmp.texture->setMagnificationFilter(QOpenGLTexture::Linear);
+	glGenTextures(1, &natmp.id);
+	glBindTexture(GL_TEXTURE_2D, natmp.id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, natmp.image.width(), natmp.image.height(),
+		0, GL_BGRA, GL_UNSIGNED_BYTE, natmp.image.bits());
+	glBindTexture(GL_TEXTURE_2D, 0);
+	vnewapi.push_back(natmp);
+}
+void Scene1::ShowNewAPI(QOpenGLExtraFunctions* f, GLuint shaderProgram)
+{
+	f->glUseProgram(shaderProgram);
+	f->glBindVertexArray(vnewapi[0].vao);
+	glBindTexture(GL_TEXTURE_2D, vnewapi[0].id);
+	GLfloat trans2[16] =
+	{
+		1.0,0.0,0.0,0.0,
+		0.0,1.0 /** cos(-rotate__ * 0.0175)*/,0.0/* - sin(-rotate__ * 0.0175)*/,0.0,
+		0.0,0.0 /* + sin(-rotate__ * 0.0175) */ ,1.0/* * cos(-rotate__ * 0.0175)*/,0.0,
+		0.0,0.0,0.0,1.0
+	};
+	unsigned int transformLoc = f->glGetUniformLocation(shaderProgram, "transform");
+	f->glUniformMatrix4fv(transformLoc, 1, GL_FALSE, trans2);
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_BLEND);
+	f->glDrawArrays(GL_TRIANGLES, 0, 6);
 	glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 	f->glBindVertexArray(0);

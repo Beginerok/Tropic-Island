@@ -86,6 +86,14 @@ struct Image_d
 	std::string Name;
 	int number;
 };
+struct NewAPI
+{
+	float *buf;
+	int nbuf,nindeces;
+	GLuint vao, id, *indices,buffer;
+	QOpenGLTexture *texture;
+	QImage image;
+};
 class Scene1
 {
 public:
@@ -133,7 +141,11 @@ public:
 	void ShowDrum(QOpenGLExtraFunctions* f, GLuint shaderProgram);
 	void LoadBorder(QOpenGLExtraFunctions* f);
 	void ShowBorder(QOpenGLExtraFunctions* f, GLuint shaderProgram);
+	void LoadNewAPI(QOpenGLExtraFunctions* f);
+	void ShowNewAPI(QOpenGLExtraFunctions* f, GLuint shaderProgram);
 	int err;
+	std::vector<NewAPI> vnewapi;
+	NewAPI natmp;
 #ifndef _WIN32
 	const char* strError;
 #else

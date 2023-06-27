@@ -1,9 +1,5 @@
 #include "MyWidget.h"
 #if QTAPI_==1
-
-// Window dimensions
-const GLuint WIDTH = 800, HEIGHT = 600;
-
 const GLchar* vertexShaderSource = "#version 330 core\n"
 "layout(location = 0) in vec3 position;\n"
 "layout(location = 1) in vec4 color;\n"
@@ -15,7 +11,6 @@ const GLchar* vertexShaderSource = "#version 330 core\n"
 "{\n"
 "gl_Position = transform*vec4(position, 1.0f);\n"
 "ourColor = color;\n"
-
 "TexCoord = texCoord;\n"
 "}\0";
 const GLchar* fragmentShaderSource = "#version 330 core\n"
@@ -27,30 +22,12 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 "{\n"
 "color = texture(ourTexture, TexCoord);\n"
 "}\0";
-// Shaders
-/*
-const GLchar* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 position;\n"
-"void main()\n"
-"{\n"
-"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-"}\0";
-*/
-/*
-const GLchar* fragmentShaderSource = "#version 330 core\n"
-"out vec4 color;\n"
-"void main()\n"
-"{\n"
-"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-"}\n\0";
-*/
 #pragma comment(lib,"Qt6Cored.lib")
 #pragma comment(lib,"Qt6Guid.lib")
 #pragma comment(lib,"Qt6Widgetsd.lib")
 #pragma comment(lib,"Qt6OpenGLd.lib")
 #pragma comment(lib,"Qt6OpenGLWidgetsd.lib")
 //#pragma comment(lib,"Qt6OpenGLExtensionsd.lib")
-
 #pragma comment(lib,"OpenGL32.lib")
 MyWidget::MyWidget(QWidget* parent) // конструктор
 {
@@ -317,6 +294,7 @@ void MyWidget::initializeGL()
 	Scene1_->LoadWelcome();
 	Scene1_->LoadDrum(f);
 	Scene1_->LoadBorder(f);
+	Scene1_->LoadNewAPI(f);
 	Scene2_ = new Scene2();
 #if QTAPI_==1
 	Scene2_->LoadQT();
@@ -735,8 +713,9 @@ void MyWidget::newAPI()
 }
 void MyWidget::newShow()
 {
-	Scene1_->ShowDrum(f, shaderProgram);
-	Scene1_->ShowBorder(f, shaderProgram);
+	Scene1_->ShowNewAPI(f, shaderProgram);
+	//Scene1_->ShowBorder(f, shaderProgram);
+	//Scene1_->ShowDrum(f, shaderProgram);
 }
 void MyWidget::SetDisableBonusButton()
 {
