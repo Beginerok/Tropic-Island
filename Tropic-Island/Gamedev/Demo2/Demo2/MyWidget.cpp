@@ -29,7 +29,7 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 #pragma comment(lib,"Qt6OpenGLWidgetsd.lib")
 //#pragma comment(lib,"Qt6OpenGLExtensionsd.lib")
 #pragma comment(lib,"OpenGL32.lib")
-MyWidget::MyWidget(QWidget* parent) // конструктор
+MyWidget::MyWidget(QWidget* parent) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 {
 
 	timer = new QTimer;
@@ -49,9 +49,9 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 		F[i] = false;
 	pressbutton = 0;
 	upbutton = 1;
-    this->setWindowTitle(QString("sosok"));
-   // resize(1920, 1000); // задаем размеры окна
-     // создаем кнопку
+    this->setWindowTitle(QString("Cars"));
+   // resize(1920, 1000); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     //qw.setParent(&qw);
 	m_button.push_back(new QPushButton("Help", this));
 	m_button.push_back(new QPushButton("Take", this));
@@ -65,13 +65,13 @@ MyWidget::MyWidget(QWidget* parent) // конструктор
 	m_button.push_back(new QPushButton("Risk", this));
 	m_button.push_back(new QPushButton("Risk", this));
 
-	// устанавливаем размер и положение кнопки
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	m_button[0]->setGeometry(QRect(QPoint(50, 450), QSize(100, 50)));
 	m_button[1]->setGeometry(QRect(QPoint(170, 450), QSize(100, 50)));
 	m_button[2]->setGeometry(QRect(QPoint(290, 450), QSize(100, 50)));
 	m_button[3]->setGeometry(QRect(QPoint(410, 450), QSize(100, 50)));
 	m_button[4]->setGeometry(QRect(QPoint(530, 450), QSize(100, 50)));
-	// устанавливаем размер и положение кнопки
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	
 	m_button[5]->setGeometry(QRect(QPoint(50, 450), QSize(100, 50)));
 	m_button[6]->setGeometry(QRect(QPoint(170, 450), QSize(100, 50)));
@@ -306,11 +306,11 @@ void MyWidget::initializeGL()
 }
 void MyWidget::resizeGL(int nWidth, int nHeight)
 {
-    glViewport(0, 0, nHeight, nHeight); // установка точки обзора
-    glMatrixMode(GL_PROJECTION); // установка режима матрицы
-    glLoadIdentity(); // загрузка матрицы
-	glMatrixMode(GL_MODELVIEW); // задаем модельно-видовую матрицу
-	glLoadIdentity();           // загрузка единичную матрицу
+    glViewport(0, 0, nHeight, nHeight); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    glMatrixMode(GL_PROJECTION); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    glLoadIdentity(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	glMatrixMode(GL_MODELVIEW); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	glLoadIdentity();           // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	//glOrtho(-2, 2, -2, 2, -2, 2);
 	//gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	m_button[0]->setGeometry(QRect(QPoint(0, nHeight - 50), QSize(nWidth / 5, 50)));
@@ -683,9 +683,9 @@ void MyWidget::Show()
 
 /*
 	texture->bind();
-	//glColor4f(1,0,0,0); // задаем цвет
-	glBegin(GL_QUADS); // говорим, что рисовать будем прямоугольник
-	// задаем вершины многоугольника
+	//glColor4f(1,0,0,0); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	glBegin(GL_QUADS); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	glTexCoord2f(1, 1);
 	glVertex3f(1, 1,-1);
 	glTexCoord2f(0, 1);
@@ -714,8 +714,9 @@ void MyWidget::newAPI()
 void MyWidget::newShow()
 {
 	Scene1_->ShowNewAPI(f, shaderProgram);
-	//Scene1_->ShowBorder(f, shaderProgram);
-	//Scene1_->ShowDrum(f, shaderProgram);
+	Scene1_->ShowBorder(f, shaderProgram);
+	Scene1_->ShowDrum(f, shaderProgram);
+	SetShowHideButtons(false);
 }
 void MyWidget::SetDisableBonusButton()
 {
@@ -757,12 +758,12 @@ void MyWidget::SetEnableButton()
 	m_button[4]->setEnabled(true);
 	m_button[2]->installEventFilter(this);
 }
-void MyWidget::paintGL() // рисование
+void MyWidget::paintGL() // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // очистка экрана
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		//glEnable(GL_DEPTH_TEST);
 		newShow();
-			/*
+		/*
 #if WINAPI_==1
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);

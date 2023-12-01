@@ -38,8 +38,8 @@ QOpenGLTexture* Scene2::QTLoadImage(QString path)
 void Scene2::LoadImage(const ILstring path)
 {
 	/*
-	std::ofstream out;          // поток для записи
-	out.open("scene2.txt", std::ios::app); // окрываем файл для записи
+	std::ofstream out;          // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	out.open("scene2.txt", std::ios::app); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	if (out.is_open())
 	{
 		out << reinterpret_cast<const char*>(path)<< std::endl;
@@ -76,32 +76,32 @@ void Scene2::LoadImage(const ILstring path)
 	//#else
 		//ilLoad( ext, path);
 	//#endif
-		// Получение кода ошибки
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	err = ilGetError();
-	// Если код не равен нулю ошибка была
+	// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	if (err != IL_NO_ERROR) {
-		// Получение строки с ошибкой
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		strError = (wchar_t*)iluErrorString(err);
-		// Выдаем сообщение об ошибке
+		// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 #ifdef _WIN32
 		std::cout << "\nNot find file: ";
 		std::wcout << path << std::endl;
-		MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
+		MessageBox(NULL, NULL, L"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ il!", MB_OK);
 #endif
-		// выход из программы
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		exit(EXIT_FAILURE);
 	}
 
-	// Ширина изображения
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	width = ilGetInteger(IL_IMAGE_WIDTH);
-	// Высота изображения
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	height = ilGetInteger(IL_IMAGE_HEIGHT);
-	// Число байт на пиксель
+	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	//int bpp = ilGetInteger(IL_IMAGE_BYTES_PER_PIXEL);
-	// Тип хранения данных
+	// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 	type = ilGetInteger(IL_IMAGE_FORMAT);
-	// Индекс текстуры
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	copyData = ilGetData();
 	IndexTexture[CountIndexTexture] = 0;
 	glGenTextures(1, &IndexTexture[CountIndexTexture]);
@@ -195,8 +195,8 @@ void Scene2::SetData()
     NewVertexCoordinats[0][2]=1.f;
     NewVertexCoordinats[0][3]=-1.f;
 	/*
-	std::ofstream out;          // поток для записи
-	out.open("scene2.txt", std::ios::app); // окрываем файл для записи
+	std::ofstream out;          // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	out.open("scene2.txt", std::ios::app); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	if (out.is_open())
 	{
 

@@ -69,7 +69,7 @@ unsigned int Scene1::LoadImage(const ILstring path)
 		strError = iluErrorString(err);
 #endif
 #ifdef _WIN32
-		MessageBox(NULL, NULL, L"Ошибка при загрузке il!", MB_OK);
+		MessageBox(NULL, NULL, L"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ il!", MB_OK);
 #endif
 		flogout << "Error loading image: " << reinterpret_cast<const char*>(path) << std::endl;
  		std::cout<< "Error loading image: " << reinterpret_cast<const char*>(path)<<std::endl;
@@ -127,8 +127,8 @@ void Scene1::LoadWelcome()
 	}
 	in.close();
 	/*
-	std::ofstream out;          // поток для записи
-	out.open("coordinats.txt"); // окрываем файл для записи
+	std::ofstream out;          // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	out.open("coordinats.txt"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	if (out.is_open())
 	{
 		out <<"content//welcome.jpg" << std::endl;
@@ -325,8 +325,8 @@ int Scene1::LoadNumbers(int iter)
 	if (iter == 19)
 	{
 		Image tmp;
-		std::ofstream out;          // поток для записи
-		out.open("numbers coordinats.txt"); // окрываем файл для записи
+		std::ofstream out;          // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+		out.open("numbers coordinats.txt"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		if (out.is_open())
 		{
 			out << "content//numbers_and_words//0.png" << std::endl;
@@ -2671,8 +2671,8 @@ void Scene1::LoadBorder(QOpenGLExtraFunctions* f)
 	f->glEnableVertexAttribArray(0);
 	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
 	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs
-	image2.load("content//border.png"); // загружаем изображение в переменную image1
-	// конвертируем изображение в формат для работы с OpenGL:
+	image2.load("content//border.png"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ image1
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ OpenGL:
 	texture3 = new QOpenGLTexture(image2.mirrored());
 	texture3->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture3->setMagnificationFilter(QOpenGLTexture::Linear);
@@ -2769,8 +2769,8 @@ void Scene1::LoadNewAPI(QOpenGLExtraFunctions* f)
 	f->glEnableVertexAttribArray(0);
 	f->glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
 	f->glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs
-	natmp.image.load("content//border.png"); // загружаем изображение в переменную image1
-	// конвертируем изображение в формат для работы с OpenGL:
+	natmp.image.load("content//border.png"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ image1
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ OpenGL:
 	natmp.texture = new QOpenGLTexture(natmp.image.mirrored());
 	natmp.texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	natmp.texture->setMagnificationFilter(QOpenGLTexture::Linear);
