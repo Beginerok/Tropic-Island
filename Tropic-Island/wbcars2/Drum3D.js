@@ -23,11 +23,13 @@ var FSHADER_SOURCE =
   '}\n';
 var ANGLE_STEP = -720.0;
 var startRotate = 0;
-var texturesVec=[],Drum=[];
-var n = 1;
+var texturesVec = [], Drum = [], texturefon_;
+
+var ready1 = false, ready2 = false, ready3 = false, ready4 = false, ready5 = false, ready6 = false, ready7 = false, ready8 = false;
+var n = 5;
 function main() {
   var min=0;
-  var max=0;
+  var max=6;
   for(var i=0;i<30;i++)
   {
     min = Math.ceil(min);
@@ -50,7 +52,6 @@ function main() {
     console.log('Failed to set the vertex information');
     return;
   }
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
   var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
   if (!u_ModelMatrix) {
     console.log('Failed to get the storage location of u_ModelMatrix');
@@ -68,7 +69,8 @@ function main() {
   if (!initTextures(gl)) {
     console.log('Failed to intialize the texture.');
     return;
-  }
+	}
+	gl.clearColor(0.0, 0.0, 0.0, 1.0);
   var tick = function() {
     currentAngle = animate(currentAngle);
     if (currentAngle>=1820 ) {
@@ -97,7 +99,7 @@ function click(ev, gl, canvas) {
   setTimeout(function(){
   Drum=[];
   var min=0;
-  var max=0;
+  var max=6;
   for(var i=0;i<30;i++)
   {
     min = Math.ceil(min);
@@ -608,51 +610,220 @@ function requestCORSIfNotSameOrigin(img, url) {
   }
 }
 function initTextures(gl) {
-  var texture = gl.createTexture();
-  if (!texture) {
-    console.log('Failed to create the texture object');
-    return false;
-  }
-  var u_Sampler = gl.getUniformLocation(gl.program, 'u_Sampler');
-  if (!u_Sampler) {
-    console.log('Failed to get the storage location of u_Sampler');
-    return false;
-  }
-  var image = new Image();
-  if (!image) {
-    console.log('Failed to create the image object');
-    return false;
-  }
   var texturefon = gl.createTexture();
   if (!texturefon) {
     console.log('Failed to create the texture object');
     return false;
-  }
+	}
+	var u_Sampler = gl.getUniformLocation(gl.program, 'u_Sampler');
+	if (!u_Sampler) {
+		console.log('Failed to get the storage location of u_Sampler');
+		return false;
+	}
   var fon = new Image();
   if (!fon) {
     console.log('Failed to create the image object');
     return false;
   }
-  requestCORSIfNotSameOrigin(image, 'auto1-2.png');
-  requestCORSIfNotSameOrigin(fon,'border.png');
-  image.onload = function(){ loadTexture(gl, texture, u_Sampler, image); };
-  image.src = 'auto1-2.png';
-  fon.onload = function(){ loadTexture(gl, texturefon, u_Sampler, fon); };
-  fon.src ='border.png';
-  return true;
+	requestCORSIfNotSameOrigin(fon, 'https://s6.imgcdn.dev/WSTpv.png');
+	fon.crossOrigin = "anonymous";
+	fon.onload = function () { loadTexture(gl, texturefon, u_Sampler, fon,0); };
+	fon.src = 'https://s6.imgcdn.dev/WSTpv.png';
+	LoadDrum(gl);
+	return true;
 }
-function loadTexture(gl, texture, u_Sampler, image) {
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
-  gl.activeTexture(gl.TEXTURE0);
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  texturesVec.push(texture);
+function LoadDrum(gl) {
+	var texturesdrum1, texturesdrum2, texturesdrum3, texturesdrum4, texturesdrum5, texturesdrum6, texturesdrum7,
+		u_Sampler1, u_Sampler2, u_Sampler3, u_Sampler4, u_Sampler5, u_Sampler6, u_Sampler7
+		, images1, images2, images3, images4, images5, images6, images7,
+		paths1, paths2, paths3, paths4, paths5, paths6, paths7;
+	paths1 = "https://s6.imgcdn.dev/WSkIV.png";//"auto1.png";//auto1
+	paths2 = "https://s6.imgcdn.dev/WSQXh.png";//'auto2.png';//auto2
+	paths3 = "https://s6.imgcdn.dev/WSsLo.png";//'auto3.png';//auto3
+	paths4 = "https://s6.imgcdn.dev/WSnBK.png";//"auto4.png";//auto4
+	paths5 = "https://s6.imgcdn.dev/WS56O.png";//"auto5.png";//auto5
+	paths6 = "https://s6.imgcdn.dev/WSKln.png";//"bonus.png";//bonus
+	paths7 = "https://s6.imgcdn.dev/WSPVg.png";//"wild.jpg";//wild
+
+	texturesdrum1 = gl.createTexture();
+	u_Sampler1 = gl.getUniformLocation(gl.program, 'u_Sampler');
+	images1 = new Image();
+	requestCORSIfNotSameOrigin(images1, paths1);
+	images1.crossOrigin = "anonymous";
+	images1.onload = function () { loadTexture(gl, texturesdrum1, u_Sampler1, images1, 1); };
+	images1.src = paths1;
+
+
+
+	texturesdrum2 = gl.createTexture();
+	u_Sampler2 = gl.getUniformLocation(gl.program, 'u_Sampler');
+	images2 = new Image();
+	requestCORSIfNotSameOrigin(images2, paths2);
+	images2.crossOrigin = "anonymous";
+	images2.onload = function () { loadTexture(gl, texturesdrum2, u_Sampler2, images2, 2); };
+	images2.src = paths2;
+
+
+
+	texturesdrum3 = gl.createTexture();
+	u_Sampler3 = gl.getUniformLocation(gl.program, 'u_Sampler');
+	images3 = new Image();
+	requestCORSIfNotSameOrigin(images3, paths3);
+	images3.crossOrigin = "anonymous";
+	images3.onload = function () { loadTexture(gl, texturesdrum3, u_Sampler3, images3, 3); };
+	images3.src = paths3;
+
+
+
+	texturesdrum4 = gl.createTexture();
+	u_Sampler4 = gl.getUniformLocation(gl.program, 'u_Sampler');
+	images4 = new Image();
+	requestCORSIfNotSameOrigin(images4, paths4);
+	images4.crossOrigin = "anonymous";
+	images4.onload = function () { loadTexture(gl, texturesdrum4, u_Sampler4, images4, 4); };
+	images4.src = paths4;
+
+
+	texturesdrum5 = gl.createTexture();
+	u_Sampler5 = gl.getUniformLocation(gl.program, 'u_Sampler');
+	images5 = new Image();
+	requestCORSIfNotSameOrigin(images5, paths5);
+	images5.crossOrigin = "anonymous";
+	images5.onload = function () { loadTexture(gl, texturesdrum5, u_Sampler5, images5, 5); };
+	images5.src = paths5;
+
+
+	texturesdrum6 = gl.createTexture();
+	u_Sampler6 = gl.getUniformLocation(gl.program, 'u_Sampler');
+	images6 = new Image();
+	requestCORSIfNotSameOrigin(images6, paths6);
+	images6.crossOrigin = "anonymous";
+	images6.onload = function () { loadTexture(gl, texturesdrum6, u_Sampler6, images6, 6); };
+	images6.src = paths6;
+
+
+	texturesdrum7 = gl.createTexture();
+	u_Sampler7 = gl.getUniformLocation(gl.program, 'u_Sampler');
+	images7 = new Image();
+	requestCORSIfNotSameOrigin(images7, paths7);
+	images7.crossOrigin = "anonymous";
+	images7.onload = function () { loadTexture(gl, texturesdrum7, u_Sampler7, images7, 7); };
+	images7.src = paths7;
+}
+function loadTexture(gl, texture, u_Sampler, image,num) {
+	gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+	switch (num) {
+		case 0:
+			{
+				gl.activeTexture(gl.TEXTURE0);
+				break;
+			}
+		case 1:
+			{
+				gl.activeTexture(gl.TEXTURE1);
+				break;
+			}
+		case 2:
+			{
+				gl.activeTexture(gl.TEXTURE2);
+				break;
+			}
+		case 3:
+			{
+				gl.activeTexture(gl.TEXTURE3);
+				break;
+			}
+		case 4:
+			{
+				gl.activeTexture(gl.TEXTURE4);
+				break;
+			}
+		case 5:
+			{
+				gl.activeTexture(gl.TEXTURE5);
+				break;
+			}
+		case 6:
+			{
+				gl.activeTexture(gl.TEXTURE6);
+				break;
+			}
+		case 7:
+			{
+				gl.activeTexture(gl.TEXTURE7);
+				break;
+			}
+		default:
+			{
+				break;
+			}
+	}
+	//gl.activeTexture(gl.TEXTURE0);
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+ 
   
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
   
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
-  gl.uniform1i(u_Sampler, 0);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
+	if (gl.getError())
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imageID);
+	if (gl.getError())
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGBA, gl.UNSIGNED_BYTE, imageID);
+	if (gl.getError())
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGB, gl.UNSIGNED_BYTE, imageID);
+	gl.uniform1i(u_Sampler, num);
+	if (num > 0)
+		texturesVec.push(texture);
+	else
+		texturefon_ = texture;
+	switch (num) {
+		case 0:
+			{
+				ready1 = true;
+				break;
+			}
+		case 1:
+			{
+				ready2 = true;
+				break;
+			}
+		case 2:
+			{
+				ready3 = true;
+				break;
+			}
+		case 3:
+			{
+				ready4 = true;
+				break;
+			}
+		case 4:
+			{
+				ready5 = true;
+				break;
+			}
+		case 5:
+			{
+				ready6 = true;
+				break;
+			}
+		case 6:
+			{
+				ready7 = true;
+				break;
+			}
+		case 7:
+			{
+				ready8 = true;
+				break;
+			}
+		default:
+			{
+				break;
+			}
+	}
 }
 function draw(gl, currentAngle, modelMatrix, u_ModelMatrix, u_ProjMatrix,projMatrix, nf) {
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -685,6 +856,7 @@ function draw(gl, currentAngle, modelMatrix, u_ModelMatrix, u_ProjMatrix,projMat
 	}
     modelMatrix.setRotate(0/*-currentAngle*/, 1, 0, 0);
     gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
-		gl.bindTexture(gl.TEXTURE_2D, texturesVec[texturesVec.length-1]);
+	gl.bindTexture(gl.TEXTURE_2D, texturefon_);
+	if (ready1 && ready2 && ready3 && ready4 && ready5 && ready6 && ready7 && ready8)
 		gl.drawArrays(gl.TRIANGLES, 36*5*n, 6);
   }

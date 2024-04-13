@@ -1,4 +1,4 @@
-body {
+/*body {
   margin: 0;
 }
 canvas {
@@ -15,3 +15,22 @@ button{
 		font-family: Arial,Helvetica,sans-serif;
 		font-size: 100px;
 	}
+*/
+body {
+	display: flex;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+canvas {
+	width: 90%;
+}
+
+button {
+	width: 20%;
+	height: 8%;
+	margin-top: 2%;
+}
