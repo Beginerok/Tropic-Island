@@ -760,10 +760,8 @@ void MyWidget::SetEnableButton()
 }
 void MyWidget::paintGL() // ���������
 {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // ������� ������
-		//glEnable(GL_DEPTH_TEST);
-		newShow();
-		/*
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//newShow();
 #if WINAPI_==1
 		if (!WindowsWinApi_->keyboard__->offline && !online)
 			Sound_->Play(2);
@@ -776,7 +774,7 @@ void MyWidget::paintGL() // ���������
 			)
 		{
 			firsttime = true;
-			Logic_->SetCredits();//
+			Logic_->SetCredits();
 		}
 		glEnable(GL_TEXTURE_2D);
 		int countdrums = 5;
@@ -844,6 +842,9 @@ void MyWidget::paintGL() // ���������
 			}
 			else
 			{
+
+				glPushMatrix();
+				glRotatef(180, 0, 1, 0);
 				if (Scene1_->ShowDrum(countdrums, counttextureondrums,Logic_->GetDrum(),F,pressbutton,&upbutton))
 				{
 					Sound_->Play(6);
@@ -859,6 +860,7 @@ void MyWidget::paintGL() // ���������
 					if ((Scene1_->rotate[0] < 1800.0f) && (Scene1_->rotate[0] >0.0f)&& (Scene1_->rotate[0] != 360.0f))
 						SetDisableButton();
 				}
+				glPopMatrix();
 				Scene1_->ShowButtons();
 				Scene1_->ShowNumbersAndWords(Logic_->GetCredits(), Logic_->GetWin(), Logic_->GetTotalBet());
 				Scene1_->ShowBorder();
@@ -904,7 +906,5 @@ void MyWidget::paintGL() // ���������
 			Sound_->Play(0);
 		if (!enablesound)
 			Sound_->StopAll();
-		//glFlush();
-		*/
 }
 #endif
