@@ -76,9 +76,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Qt\Qt5.12.10\5.12.10\msvc2017_64\include;C:\Qt\Qt-6.4.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Qt\Qt5.12.10\5.12.10\msvc2017_64\lib;C:\Qt\Qt-6.4.1\lib;$(LibraryPath)</LibraryPath>
-    <ExecutablePath>C:\Users\Eugene\Desktop\Tropic-Island\Tropic-Island\Gamedev\Demo2\Demo2\lib;C:\Program Files\MySQL\MySQL Server 8.0\lib;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(ProjectDir)\;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Qt\Qt5.12.10\5.12.10\msvc2017_64\include;C:\Qt\Qt-6.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib\;C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Qt\Qt5.12.10\5.12.10\msvc2017_64\lib;C:\Qt\Qt-6.4.1\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <ReferencePath>$(ProjectDir)\lib\;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -118,6 +119,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy  "$(ProjectDir)\lib\*.dll" "$(TargetDir)"
+mkdir  "$(TargetDir)\platforms\"
+copy  "$(ProjectDir)\lib\platforms\" "$(TargetDir)\platforms\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
