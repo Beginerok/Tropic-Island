@@ -152,6 +152,9 @@ public class Cars implements GLEventListener {
       
       frame.getContentPane().add(glcanvas);
       frame.setSize(frame.getContentPane().getPreferredSize());
+      /*
+      --add-exports=java.desktop/sun.awt=ALL-UNNAMED
+      */
       frame.setVisible(true);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       glcanvas.addMouseListener(new MouseAdapter()
