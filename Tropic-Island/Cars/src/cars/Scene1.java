@@ -12,6 +12,7 @@ import com.jogamp.opengl.util.texture.TextureIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
+import javax.swing.Timer;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Scene1 {
     static final int CountDrum = 5;
     static final int CountTextureOnDrum = 6;
     static final int CountTexture = 8;
+    long startTime,endTime;
     public Vector<String> vectordrum;
     
     int CountIndexTexture;
@@ -163,7 +165,7 @@ public class Scene1 {
                 }
         }
     }
-    void StartRotate()
+    void StartRotate(int ms)
     {
 	for (int i = 0; i < CountDrum; i++)
 	{
@@ -171,9 +173,16 @@ public class Scene1 {
 			continue;
 		if (rotate[i] >= 360.0f)
 		{
-			startrotate[i] = true;
-			rotate[i] = 0.0f;
-		}
+                    final int index = i;
+                    final int delay = ms * (i + 1); // Каждый следующий с большей задержкой
+            
+                    Timer timer = new Timer(delay, e -> {
+                        startrotate[index] = true;
+                        rotate[index] = 0.0f;
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+		}       
 	}
     }
     void ShowDrum(int countdrums, int counttextureondrums,Vector<String> drum,final GL2 gl)
@@ -183,7 +192,7 @@ public class Scene1 {
 	for (int i = 0; i<countdrums; i++)
 	{
 		gl.glPushMatrix();
-		gl.glRotatef(rotate[i], 1, 0, 0);
+		gl.glRotatef(-rotate[i], 1, 0, 0);
 		for (int j = 0; j < counttextureondrums; j++)
 		{
 			gl.glBindTexture(GL2.GL_TEXTURE_2D, image[FindTexture(drum.get(++k))].IndexTexture);

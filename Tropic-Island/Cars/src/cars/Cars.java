@@ -200,7 +200,7 @@ public class Cars implements GLEventListener {
             
              //  b=true;
               //if(b)
-                  scene.StartRotate();
+                  scene.StartRotate(100);
               System.out.println(e.getX() + " " + e.getY());
           }
       });
