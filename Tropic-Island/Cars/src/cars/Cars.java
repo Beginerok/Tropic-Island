@@ -62,9 +62,9 @@ public class Cars implements GLEventListener {
       final GL2 gl = drawable.getGL().getGL2();
       gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
       gl.glLoadIdentity(); // Reset The View
-      gl.glTranslatef(0f, 0f, -3.0f);
+      //gl.glTranslatef(0f, 0f, -3.0f);
       gl.glPushMatrix();
-      gl.glScalef(1.15f, 1.5f, 1.f);
+      gl.glRotatef(180.0f, 0, 1, 0);
       scene.ShowDrum(5, 6, drum, gl);
       gl.glPopMatrix();
       scene.ShowBorder(gl);
@@ -82,13 +82,12 @@ public class Cars implements GLEventListener {
 	
       final GL2 gl = drawable.getGL().getGL2();
 		
-      gl.glShadeModel(GL2.GL_SMOOTH);
+      //gl.glShadeModel(GL2.GL_SMOOTH);
       gl.glClearColor(0f, 0f, 0f, 0f);
       gl.glClearDepth(1.0f);
       gl.glEnable(GL2.GL_DEPTH_TEST);
-      gl.glDepthFunc(GL2.GL_LEQUAL);
-      gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST);
-      
+      //gl.glDepthFunc(GL2.GL_LEQUAL);
+      //gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST);
       gl.glEnable(GL2.GL_TEXTURE_2D);
       
       try {
@@ -127,12 +126,12 @@ public class Cars implements GLEventListener {
     
     gl.glMatrixMode(GL2.GL_PROJECTION);
     gl.glLoadIdentity();
-    glu.gluPerspective(50.0f, /*aspect*/1, 0.1f, 100.0f);
+    //glu.gluPerspective(50.0f, /*aspect*/1, 0.1f, 100.0f);
     
     gl.glMatrixMode(GL2.GL_MODELVIEW);
     gl.glLoadIdentity();
     
-    glu.gluLookAt(0.f, 0.f, -1.f,  // Позиция
+    glu.gluLookAt(0.f, 0.f, 1.f,  // Позиция
                   0.0f, 0.0f, 0.0f,  // Цель
                   0.0f, 1.0f, 0.0f); // Верх
     
@@ -205,7 +204,7 @@ public class Cars implements GLEventListener {
               System.out.println(e.getX() + " " + e.getY());
           }
       });
-      final FPSAnimator animator = new FPSAnimator(glcanvas, 300, true);
+      final FPSAnimator animator = new FPSAnimator(glcanvas, 60, true);
       animator.start();
 
     }
