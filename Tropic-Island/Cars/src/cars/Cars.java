@@ -28,12 +28,14 @@ import javax.media.opengl.glu.GLU;
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.glu.*;
 
 
 import javax.swing.JFrame;
 
 import com.jogamp.opengl.util.FPSAnimator;
+import java.awt.Dimension;
 import java.security.SecureRandom;
 
 import java.util.ArrayList;
@@ -61,7 +63,10 @@ public class Cars implements GLEventListener {
       gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
       gl.glLoadIdentity(); // Reset The View
       gl.glTranslatef(0f, 0f, -3.0f);
+      gl.glPushMatrix();
+      gl.glScalef(1.15f, 1.5f, 1.f);
       scene.ShowDrum(5, 6, drum, gl);
+      gl.glPopMatrix();
       scene.ShowBorder(gl);
       
       gl.glFlush();
@@ -96,7 +101,7 @@ public class Cars implements GLEventListener {
       
    @Override
    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-   
+   /*
       // TODO Auto-generated method stub
       final GL2 gl = drawable.getGL().getGL2();
       if(height <= 0)
@@ -107,11 +112,30 @@ public class Cars implements GLEventListener {
       //gl.glMatrixMode(GL2.GL_MODELVIEW);
       gl.glMatrixMode(GL2.GL_PROJECTION);
       gl.glLoadIdentity();
-      //gl.glOrtho(1, -1, -1, 1, -3, 3);
+      gl.glOrtho(1.0, -1.0, 1.0, 1.0, -1.0, -1.0);
       glu.gluLookAt(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
       glu.gluPerspective(45.0f, h, 1.0, 20.0);
       gl.glMatrixMode(GL2.GL_MODELVIEW);
       gl.glLoadIdentity();
+      */
+      
+      final GL2 gl = drawable.getGL().getGL2();
+    if (height <= 0) height = 1;
+    
+    final float aspect = (float) width / (float) height;
+    gl.glViewport(0, 0, width, height);
+    
+    gl.glMatrixMode(GL2.GL_PROJECTION);
+    gl.glLoadIdentity();
+    glu.gluPerspective(50.0f, /*aspect*/1, 0.1f, 100.0f);
+    
+    gl.glMatrixMode(GL2.GL_MODELVIEW);
+    gl.glLoadIdentity();
+    
+    glu.gluLookAt(0.f, 0.f, -1.f,  // Позиция
+                  0.0f, 0.0f, 0.0f,  // Цель
+                  0.0f, 1.0f, 0.0f); // Верх
+    
    }
    static int Random(ArrayList<String> vector)
    {
@@ -119,6 +143,10 @@ public class Cars implements GLEventListener {
         return min + random.nextInt(max - min + 1);
    }
    public static void main(String[] args) {
+       
+      System.setProperty("jogl.disable.opengl", "true");
+      System.setProperty("sun.java2d.noddraw", "true");
+      System.setProperty("sun.awt.noerasebackground", "true");
       ArrayList<String> vector = new ArrayList<String>();
       vector.add("auto1");
       vector.add("auto2");
@@ -141,12 +169,13 @@ public class Cars implements GLEventListener {
       GLCapabilities capabilities = new GLCapabilities(profile);
       
       // The canvas
-      final GLCanvas glcanvas = new GLCanvas(capabilities);
-      
+      //final GLCanvas glcanvas = new GLCanvas(capabilities);
+      GLJPanel glcanvas = new GLJPanel(capabilities);
 		
       glcanvas.addGLEventListener(r);
       
-      glcanvas.setSize(400, 400);
+      //glcanvas.setSize(400, 400);
+      glcanvas.setPreferredSize(new Dimension(1024, 768));
 		
       final JFrame frame = new JFrame ("Cars");
       
