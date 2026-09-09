@@ -46,6 +46,7 @@ public class Scene1 {
     float[] rotate;
     volatile boolean[] startrotate;
     Vector<String> vectorram;
+    boolean start_shake=false;
     int Scene()
     {
 	image = new Image[CountTexture];
@@ -158,10 +159,13 @@ public class Scene1 {
 	{
 		if (startrotate[i])
 		{
-			if (rotate[i]<1800.0f)
+			if (rotate[i]<3600.0f)
                             rotate[i] += 50.0f;       
                         else
+                        {
                             startrotate[i]=false;   
+                            start_shake=true;
+                        }
                 }
         }
     }
@@ -575,16 +579,16 @@ public class Scene1 {
 	gl.glBegin(GL2.GL_POLYGON);
 
 	gl.glTexCoord2f(1.0f, 1.0f);
-	gl.glVertex3f(1.0f, 1.0f, 0.9f);
+	gl.glVertex3f(1.0f, 1.0f, 0.0f);
 
 	gl.glTexCoord2f(1.f, 0.0f);
-	gl.glVertex3f(1.0f, -1.0f, 0.9f);
+	gl.glVertex3f(1.0f, -1.0f, 0.0f);
 
 	gl.glTexCoord2f(0.0f, 0.0f);
-	gl.glVertex3f(-1.0f, -1.0f, 0.9f);
+	gl.glVertex3f(-1.0f, -1.0f, 0.0f);
 
 	gl.glTexCoord2f(0.0f, 1.0f);
-	gl.glVertex3f(-1.0f, 1.0f, 0.9f);
+	gl.glVertex3f(-1.0f, 1.0f, 0.0f);
 
 	gl.glEnd();
 
